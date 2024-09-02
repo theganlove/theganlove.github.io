@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>隐写系列 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="有时候会遇见需要改宽高的情况，一般会根据图片的crc值爆破出正确的宽高。  1234567891011121314import binasciiimport structCRC&#x3D;0x6D7C7135with open(&quot;dabai.png&quot;, &quot;rb&quot;) as f:    crcbp&#x3D;f.read()for i in range(2000):    for">
+<meta property="og:type" content="article">
+<meta property="og:title" content="隐写系列">
+<meta property="og:url" content="https://theganlove.github.io/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="有时候会遇见需要改宽高的情况，一般会根据图片的crc值爆破出正确的宽高。  1234567891011121314import binasciiimport structCRC&#x3D;0x6D7C7135with open(&quot;dabai.png&quot;, &quot;rb&quot;) as f:    crcbp&#x3D;f.read()for i in range(2000):    for">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:/Users/a1348/Desktop/NoobCTF-main/%E7%AC%94%E8%AE%B0/images/hanxin_code.png">
+<meta property="og:image" content="c:/Users/a1348/Desktop/NoobCTF-main/%E7%AC%94%E8%AE%B0/images/hexahue.png">
+<meta property="og:image" content="c:/Users/a1348/Desktop/NoobCTF-main/%E7%AC%94%E8%AE%B0/images/npiet.png">
+<meta property="article:published_time" content="2024-09-01T13:50:13.000Z">
+<meta property="article:modified_time" content="2024-09-01T13:52:36.439Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/a1348/Desktop/NoobCTF-main/%E7%AC%94%E8%AE%B0/images/hanxin_code.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://theganlove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-隐写系列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/" class="article-date">
+  <time class="dt-published" datetime="2024-09-01T13:50:13.000Z" itemprop="datePublished">2024-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      隐写系列
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>有时候会遇见需要改宽高的情况，一般会根据图片的crc值爆破出正确的宽高。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">CRC=<span class="number">0x6D7C7135</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;dabai.png&quot;</span>, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    crcbp=f.read()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2000</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2000</span>):</span><br><span class="line">        data = crcbp[<span class="number">12</span>:<span class="number">16</span>] + \</span><br><span class="line">            struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, i)+struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, j)+crcbp[<span class="number">24</span>:<span class="number">29</span>]</span><br><span class="line">        crc32 = binascii.crc32(data) &amp; <span class="number">0xffffffff</span></span><br><span class="line">        <span class="keyword">if</span>(crc32 == CRC):</span><br><span class="line">            <span class="built_in">print</span>(i, j)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;hex:&#x27;</span>, <span class="built_in">hex</span>(i), <span class="built_in">hex</span>(j))</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以考虑下面这个脚本自动改宽高并生成文件(仅限png):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">file = <span class="string">&#x27;/Users/constellation/Downloads/misc26.png&#x27;</span></span><br><span class="line">fr = <span class="built_in">open</span>(file,<span class="string">&#x27;rb&#x27;</span>).read()</span><br><span class="line">data = <span class="built_in">bytearray</span>(fr[<span class="number">12</span>:<span class="number">29</span>])</span><br><span class="line"><span class="comment">#crc32key = str(fr[29:33]).replace(&#x27;\\x&#x27;,&#x27;&#x27;).replace(&quot;b&#x27;&quot;,&#x27;0x&#x27;).replace(&quot;&#x27;&quot;,&#x27;&#x27;)</span></span><br><span class="line">crc32key = <span class="number">0xEC9CCBC6</span> <span class="comment">#补上0x，copy hex value</span></span><br><span class="line"><span class="comment">#data = bytearray(b&#x27;\x49\x48\x44\x52\x00\x00\x01\xF4\x00\x00\x01\xF1\x08\x06\x00\x00\x00&#x27;)  #hex下copy grep hex</span></span><br><span class="line">n = <span class="number">4095</span> <span class="comment">#理论上0xffffffff,但考虑到屏幕实际，0x0fff就差不多了</span></span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">range</span>(n):<span class="comment">#高和宽一起爆破</span></span><br><span class="line">    width = <span class="built_in">bytearray</span>(struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, w))<span class="comment">#q为8字节，i为4字节，h为2字节</span></span><br><span class="line">    <span class="keyword">for</span> h <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        height = <span class="built_in">bytearray</span>(struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, h))</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">            data[x+<span class="number">4</span>] = width[x]</span><br><span class="line">            data[x+<span class="number">8</span>] = height[x]</span><br><span class="line">            <span class="comment">#print(data)</span></span><br><span class="line">        crc32result = zlib.crc32(data)</span><br><span class="line">        <span class="keyword">if</span> crc32result == crc32key:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;width:<span class="subst">&#123;width.<span class="built_in">hex</span>()&#125;</span>\nheight:<span class="subst">&#123;height.<span class="built_in">hex</span>()&#125;</span>&quot;</span>)</span><br><span class="line">            newpic = <span class="built_in">bytearray</span>(fr)</span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">                newpic[x+<span class="number">16</span>] = width[x]</span><br><span class="line">                newpic[x+<span class="number">20</span>] = height[x]</span><br><span class="line">            fw = <span class="built_in">open</span>(<span class="string">f&quot;<span class="subst">&#123;file&#125;</span>.png&quot;</span>,<span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">            fw.write(newpic)</span><br><span class="line">            fw.close()</span><br><span class="line">            exit()</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>遇见webshell查杀题直接用D盾扫。例题:<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges#webshell%E5%90%8E%E9%97%A8">webshell后门</a></li>
+<li>音频隐写题首先考虑audacity打开看波形图和频谱图。发现可疑的线索时多缩放。今天就看见了一道藏摩斯电码然而默认缩放比例下无法展示完全的题：<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges#%E6%9D%A5%E9%A6%96%E6%AD%8C%E5%90%A7">来首歌吧</a></li>
+<li>从宽带备份文件出恢复账户名密码名等信息：使用工具<a target="_blank" rel="noopener" href="https://www.nirsoft.net/utils/router_password_recovery.html">RouterPassView</a>。</li>
+<li>vmdk后缀文件可以在linux下直接用7z解压。例题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45485719/article/details/107417878">面具下的flag</a></li>
+<li>隐写工具：</li>
+</ol>
+<ul>
+<li>zsteg</li>
+</ul>
+<blockquote>
+<p>zsteg xxx.png(仅图片)<br>如果zsteg输出类似这样的东西：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extradata:0         .. file: Zip archive data, at least v2.0 to extract, compression method=AES Encrypted</span><br></pre></td></tr></table></figure>
+
+<p>说明这里有文件可以提取。记住开始的字符串，使用以下命令提取：</p>
+<ul>
+<li>zsteg -E “extradata:0” ctf.png &gt; res.zip</li>
+<li>binwalk<ul>
+<li>binwalk xxx(支持任何类型，加上-e可以提取，不过有时候提取不出来，下方的foremost补充使用)</li>
+<li>binwalk可能会提取出一些Zlib compressed data，有时候flag会藏在里面。</li>
+</ul>
+</li>
+<li>foremost(有时候即使binwalk没有提示任何文件，foremost也能提取出东西。所以binwalk提示没有问题时，也不要忘记试foremost)</li>
+<li>outguess，例题：<a target="_blank" rel="noopener" href="https://github.com/C0nstellati0n/NoobCTF/blob/main/CTF/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/4%E7%BA%A7/Misc/Avatar.md">Avatar</a>。注意有时候outguess会需要密码，密码可能藏在exif里。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/108936734">[ACTF新生赛2020]outguess</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/matthewgao/F5-steganography">F5隐写</a>，例题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/destiny1507/article/details/102079695">刷新过的图片</a>。另一个更详细的F5隐写变种题:<a target="_blank" rel="noopener" href="https://github.com/Aryvd/Aryvd/tree/main/Refresh!">Refresh!</a></li>
+<li>stegsolve</li>
+<li>NtfsStreamsEditor,用于处理NTFS流隐藏文件。例题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/108934265">[SWPU2019]我有一只马里奥</a>。当题目涉及到NTFS流时，题目文件都需要用Win RAR解压。</li>
+<li><a target="_blank" rel="noopener" href="https://achorein.github.io/silenteye/">SilentEye</a>（音频隐写工具）</li>
+<li>steghide（多类型文件隐写工具）</li>
+</ul>
+<blockquote>
+<p>steghide有时需要密码，可以用<a target="_blank" rel="noopener" href="https://github.com/RickdeJager/stegseek">stegseek</a>破解。</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/AngelKitty/stegosaurus">Stegosaurus</a>(pyc文件隐写工具)</li>
+<li><a target="_blank" rel="noopener" href="http://jpinsoft.net/deepsound/overview.aspx">DeepSound</a>（音频隐写工具）</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ragibson/Steganography">stegolsb</a>.</li>
+</ul>
+<blockquote>
+<p>LSB隐写工具，音频图片都可以。</p>
+</blockquote>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://holloway.nz/steg/">Twitter Secret Messages</a>。这个工具的密文很好辨认，例如<code>I hａtｅ tｈis flｙiｎｇ ｂⅰrｄ aｐp... Peοpｌe saｙ ｏnｅ thіngｂutyoｕ ａｌｗayｓ gοtta reａd bｅtｗeen thｅliｎeｓ ｔο interpret them right ://</code>。推特&#x2F;蓝鸟是出题人的提示关键词。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.petitcolas.net/steganography/mp3stego/">mp3stego</a>.mp3带密码的隐写工具。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/AdamNiederer/base100">base100</a>。将文字与emoji互相转换的编码工具。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/JavDomGom/videostego">videostego</a></p>
+<blockquote>
+<p>视频文件的LSB隐写工具。若没有后续改动的话，被隐写后的视频的exif的Writer栏为JavDomGom</p>
+</blockquote>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.openstego.com/">OpenStego</a></p>
+<ul>
+<li>bmp&#x2F;png文件隐写工具，需要密码</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Byxs20/PuzzleSolver">PuzzleSolver</a></p>
+<ul>
+<li>能干的事情很多，不止隐写。不过我认识到这个工具是因为里面有个python3频率盲水印，用其他的脚本提取不出来</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://dothidden.xyz/la_ctf_2024/discord_events/">discord events</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stegcloak.surge.sh/">Steg Cloak</a>的解码。被Steg Cloak加密的文字会包含不可见字符</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/RJCyber1/VishwaCTF-2024-Writeups/blob/main/Steg/Professor's%20Inheritance.md">Professor’s Inheritance</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/osde8info/stegosuite">Stegosuite</a></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://berliangabriel.github.io/post/shakti-ctf-2024-foren">Aqua Gaze</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/lukechampine/jsteg">jsteg</a></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/LazyTitan33/CTF-Writeups/blob/main/Unbreakable-Individual-2024/secrets-of-winter.md">secrets-of-winter</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/bannsec/stegoVeritas">StegoVeritas</a></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://warlocksmurf.github.io/posts/sdctf2024/#watch-the-waves-forensics">Watch the Waves</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://directmusic.me/wav2png/">wav2png</a></li>
+<li>如果png转出来的wav听不清，可尝试在stegsolve里换一下bit planes</li>
+<li>这题的第二部分有sstv命令使用例子</li>
+<li>官方的脚本： <a target="_blank" rel="noopener" href="https://github.com/acmucsd/sdctf-2024/tree/main/forensics">https://github.com/acmucsd/sdctf-2024/tree/main/forensics</a></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>当遇见单独加密的压缩包时，首先确认是不是<a target="_blank" rel="noopener" href="https://github.com/C0nstellati0n/NoobCTF/blob/main/CTF/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/1%E7%BA%A7/Misc/fakezip.md">伪加密</a>。不同版本的zip加密位不一样,例如有些zip需要将第7个字节的09改成00。如果不是，考虑到没有其它提示的因素，可以尝试直接ARCHPR爆破，常见的爆破掩码为4位数字。</li>
+<li>010Editor自带很多文件类型模板，把常用的例如png装上，鼠标悬浮在数据上就能得到那些数据代表的内容。修改单个字节可以鼠标选中要修改的字节，然后菜单栏-&gt;编辑-&gt;插入&#x2F;覆盖-&gt;插入字节</li>
+<li>numpy.loadtxt读取坐标文件+基本matplotlib图像绘制。例题:<a target="_blank" rel="noopener" href="https://github.com/C0nstellati0n/NoobCTF/blob/main/CTF/BUUCTF/Misc/%E6%A2%85%E8%8A%B1%E9%A6%99%E4%B9%8B%E8%8B%A6%E5%AF%92%E6%9D%A5.md">梅花香之苦寒来</a></li>
+<li>audacity打开文件发现有两个声道且其中一个声道没用时，可以在最左侧调节左右声道的音量，然后菜单栏-&gt;文件-&gt;导出。</li>
+<li>morse2ascii工具可以解码音频摩斯电码。例题：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tac2664/p/13861595.html">穿越时空的思念</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.dcode.fr/braille-alphabet">盲文解密</a>（Braille Alphabet），形如<code>⡇⡓⡄⡖⠂⠀⠂⠀⡋⡉⠔⠀⠔⡅⡯⡖⠔⠁⠔⡞⠔⡔⠔⡯⡽⠔⡕⠔⡕⠔⡕⠔⡕⠔⡕⡍=</code>。</li>
+<li>当题目文件出现大量无特征、无规律字符时，考虑是不是字频统计。例题:<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges#[GXYCTF2019]gakki">[GXYCTF2019]gakki</a></li>
+<li>010Editor可以更改阅读文本文件时的编码。菜单栏-&gt;视图-&gt;字符集。</li>
+<li>福尔摩斯跳舞的小人密码。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109387134">[SWPU2019]伟大的侦探</a></li>
+<li>音符密码，形如<code>♭♯♪‖¶♬♭♭♪♭‖‖♭♭♬‖♫♪‖♩♬‖♬♬♭♭♫‖♩♫‖♬♪♭♭♭‖¶∮‖‖‖‖♩♬‖♬♪‖♩♫♭♭♭♭♭§‖♩♩♭♭♫♭♭♭‖♬♭‖¶§♭♭♯‖♫∮‖♬¶‖¶∮‖♬♫‖♫♬‖♫♫§=</code>。可在<a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=yinyue">此处</a>直接解密。</li>
+<li>AAEncode，特征是颜文字，是将js代码转换为颜文字的编码。可用<a target="_blank" rel="noopener" href="http://www.atoolbox.net/Tool.php?Id=703">网站</a>在线解码。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109481013">[SUCTF2018]single dog</a>。</li>
+<li>敲击码。类似棋盘密码，只不过与平时的棋盘排版不同，C和K在一个格，形如下方展示，&#x2F;表示分割。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">..... ../... ./... ./... ../</span><br><span class="line">  5,2     3,1    3,1    3,2</span><br></pre></td></tr></table></figure>
+
+<p>例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109449494">[SWPU2019]你有没有好好看网课?</a></p>
+<ol start="22">
+<li>不要忘记查看压缩包注释。不装软件的情况下似乎看不到，可以安装Bandzip工具。</li>
+<li>遇见docx文件时，粗略看一遍看不出来线索就改后缀名为rar后解压查看里面是否有东西，或者直接binwalk -e提取内容。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/livz/cloacked-pixel">lsb隐写工具</a>（不是stegsolve可以提取的那种lsb隐写，可以加密码的另外一种）</li>
+<li>视频题粗略看一遍后最好放慢来看有没有漏掉的信息，可用<a target="_blank" rel="noopener" href="https://www.kinovea.org/">Kinovea</a>。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109461931">[RoarCTF2019]黄金6年</a></li>
+<li>磁盘、映像题，比如iso文件，打开后注意勾选上“隐藏的项目”，这种藏文件的方法不能漏掉了。</li>
+<li>pdf文件可以用photoshop等软件打开，能找到里面隐藏的图片等内容。</li>
+<li>crc值爆破恢复文件内容。zip加密的文件内容不应过小，因为此时攻击者可以通过爆破crc值的形式恢复文件内容。例题:<a target="_blank" rel="noopener" href="https://github.com/C0nstellati0n/NoobCTF/blob/main/CTF/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/4%E7%BA%A7/Misc/crc.md">crc</a>。下方脚本可以通过crc值破解多个zip，并将zip的内容写入一个文件中。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">CrackCrc</span>(<span class="params">crc</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> dic:</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">			<span class="keyword">for</span> k <span class="keyword">in</span> dic:</span><br><span class="line">				<span class="keyword">for</span> h <span class="keyword">in</span> dic:</span><br><span class="line">					s = i + j + k + h</span><br><span class="line">					<span class="keyword">if</span> crc == (binascii.crc32(s.encode())):</span><br><span class="line">						f.write(s)</span><br><span class="line">						<span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">CrackZip</span>():</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">68</span>):</span><br><span class="line">		file = <span class="string">&#x27;out&#x27;</span>+<span class="built_in">str</span>(i)+<span class="string">&#x27;.zip&#x27;</span></span><br><span class="line">		crc = zipfile.ZipFile(file,<span class="string">&#x27;r&#x27;</span>).getinfo(<span class="string">&#x27;data.txt&#x27;</span>).CRC</span><br><span class="line">		CrackCrc(crc)</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&#x27;\r&#x27;</span>+<span class="string">&quot;loading：&#123;:%&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">float</span>((i+<span class="number">1</span>)/<span class="number">68</span>)),end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">dic = string.ascii_letters + string.digits + <span class="string">&#x27;+/=&#x27;</span></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;out.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\nCRC32begin&quot;</span>)</span><br><span class="line">CrackZip()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\nCRC32finished&quot;</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<ol start="29">
+<li>中文电码+五笔编码。例题:<a href="../../CTF/BUUCTF/Crypto/%E4%BF%A1%E6%81%AF%E5%8C%96%E6%97%B6%E4%BB%A3%E7%9A%84%E6%AD%A5%E4%BC%90.md">信息化时代的步伐</a></li>
+<li>DTMF拨号音识别+手机键盘密码。DTMF拨号音就像平时座机拨号的声音，手机键盘密码就是9键。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/105412940">[WUSTCTF2020]girlfriend</a>，使用工具<a target="_blank" rel="noopener" href="http://hl.altervista.org/split.php?http://aluigi.altervista.org/mytoolz/dtmf2num.zip">dtmf2num</a></li>
+<li>mimikatz可分析dmp后缀文件并获取密码。例题：<a href="../../CTF/BUUCTF/Misc/%5B%E5%AE%89%E6%B4%B5%E6%9D%AF%202019%5DAttack.md">[安洵杯 2019]Attack</a></li>
+<li>当一串base64解码后是<code>Salted__</code>，可能的密文格式为AES，3DES或者Rabbit。</li>
+<li>usb流量包数据提取。例题:<a href="../../CTF/moectf/2022/Misc/usb.md">usb</a></li>
+<li>rar文件可以通过更改文件结构隐藏文件，效果是让rar里有的文件解压不出来。用010 Editor打开rar文件，注意用文件名的区域开头是否是74（在<a target="_blank" rel="noopener" href="https://www.freebuf.com/column/199854.html">RAR文件结构</a>中，文件块的位置应该是74并不是7A，74让文件可以被解压出来，7A则不能），如果不是要改成74让文件被解压出来。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109632626">USB</a></li>
+<li>python3 单字节16进制异或结果写入文件。今天遇到一道题，文本文件里的内容需要需要单字节与5异或后转为16进制写入文件。不知道为啥大佬们的脚本我用不了，可能是版本的问题，故自己写了一个python3的简陋玩意。题目:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/105367979">[GUET-CTF2019]虚假的压缩包</a></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">original = <span class="built_in">open</span>(<span class="string">&quot;亦真亦假&quot;</span>,<span class="string">&#x27;r&#x27;</span>).read()</span><br><span class="line">flag = <span class="built_in">open</span>(<span class="string">&quot;ctf&quot;</span>,<span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">res=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> original:</span><br><span class="line">	tmp = <span class="built_in">int</span>(i,<span class="number">16</span>)^<span class="number">5</span></span><br><span class="line">	res+=<span class="built_in">hex</span>(tmp)[<span class="number">2</span>:]</span><br><span class="line">flag.write(long_to_bytes(<span class="built_in">int</span>(res,<span class="number">16</span>)))</span><br></pre></td></tr></table></figure>
+
+<ol start="36">
+<li>ttl隐写脚本。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109633675">[SWPU2019]Network</a></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;attachment.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    a=fp.readlines()</span><br><span class="line">    p=[]</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)):</span><br><span class="line">       p.append(<span class="built_in">int</span>(a[x])) </span><br><span class="line">    s=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> p:</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">63</span>):</span><br><span class="line">            b=<span class="string">&#x27;00&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span>(i==<span class="number">127</span>):</span><br><span class="line">            b=<span class="string">&#x27;01&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span>(i==<span class="number">191</span>):</span><br><span class="line">            b=<span class="string">&#x27;10&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            b=<span class="string">&#x27;11&#x27;</span></span><br><span class="line">        s +=b</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(s),<span class="number">8</span>):</span><br><span class="line">    flag += <span class="built_in">chr</span>(<span class="built_in">int</span>(s[i:i+<span class="number">8</span>],<span class="number">2</span>))</span><br><span class="line">flag = binascii.unhexlify(flag)</span><br><span class="line">wp = <span class="built_in">open</span>(<span class="string">&#x27;ans&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">wp.write(flag)</span><br><span class="line">wp.close()</span><br></pre></td></tr></table></figure>
+
+<ol start="37">
+<li>logo编程语言，可用于绘画，形如：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cs pu lt 90 fd 500 rt 90 pd fd 100 rt 90 repeat 18[fd 5 rt 10] lt 135 fd 50 lt 135 pu bk 100 pd setcolor pick [ red orange yellow green blue violet ] repeat 18[fd 5 rt 10] rt 90 fd 60 rt 90 bk 30 rt 90 fd 60 pu lt 90 fd 100 pd rt 90 fd 50 bk 50 setcolor pick [ red orange yellow green blue violet ] lt 90 fd 50 rt 90 fd 50 pu fd 50 pd fd 25 bk 50 fd 25 rt 90 fd 50 pu setcolor pick [ red orange yellow green blue violet ] fd 100 rt 90 fd 30 rt 45 pd fd 50 bk 50 rt 90 fd 50 bk 100 fd 50 rt 45 pu fd 50 lt 90 pd fd 50 bk 50 rt 90 setcolor pick [ red orange yellow green blue violet ] fd 50 pu lt 90 fd 100 pd fd 50 rt 90 fd 25 bk 25 lt 90 bk 25 rt 90 fd 25 setcolor pick [ red orange yellow green blue violet ] pu fd 25 lt 90 bk 30 pd rt 90 fd 25 pu fd 25 lt 90 pd fd 50 bk 25 rt 90 fd 25 lt 90 fd 25 bk 50 pu bk 100 lt 90 setcolor pick [ red orange yellow green blue violet ] fd 100 pd rt 90 arc 360 20 pu rt 90 fd 50 pd arc 360 15 pu fd 15 setcolor pick [ red orange yellow green blue violet ] lt 90 pd bk 50 lt 90 fd 25 pu home bk 100 lt 90 fd 100 pd arc 360 20 pu home</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.calormen.com/jslogo/">在线解释器</a></p>
+<ol start="38">
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LEOGG321/p/14493327.html">zip明文攻击</a>，<a target="_blank" rel="noopener" href="https://www.aloxaf.com/2019/04/zip_plaintext_attack/">原理</a>。明文攻击可以用<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43778378/article/details/106077774">archpr</a>跑。archpr里面选好加密的zip文件后攻击类型选明文，然后点到明文，明文文件路径选择包含明文内容的zip（没错是zip，不是写有明文的txt，是装有明文的txt的zip）。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46230755/article/details/112108707">[ACTF新生赛2020]明文攻击</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/87919817">零宽字符隐写</a>。<a target="_blank" rel="noopener" href="http://330k.github.io/misc_tools/unicode_steganography.html">解密网站</a></li>
+<li>010Editor找到工具-&gt;十六进制运算-&gt;二进制异或，可以直接对整个文件异或。</li>
+<li>gaps+montage工具自动拼图。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109649446">[MRCTF2020]不眠之夜</a></li>
+<li>汉信码，形如：</li>
+</ol>
+<p><img src="C:/Users/a1348/Desktop/NoobCTF-main/笔记/images/hanxin_code.png" alt="hanxin_code"></p>
+<p>可用<a target="_blank" rel="noopener" href="https://tuzim.net/hxdecode/">网站</a>解码。</p>
+<ol start="43">
+<li><a target="_blank" rel="noopener" href="https://lazzzaro.github.io/2020/06/20/misc-%E6%96%87%E4%BB%B6%E9%9A%90%E5%86%99/">snow隐写</a>，有<a target="_blank" rel="noopener" href="http://fog.misty.com/perry/ccs/snow/snow/snow.html">网页版</a>和<a target="_blank" rel="noopener" href="https://darkside.com.au/snow/">exe版</a>。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_53105813/article/details/127896201">看雪看雪看雪</a>。如果不知道密码，还可以尝试爆破，使用工具:<a target="_blank" rel="noopener" href="https://github.com/0xHasanM/SnowCracker">SnowCracker</a>。例题:<a target="_blank" rel="noopener" href="https://github.com/daffainfo/ctf-writeup/tree/main/GREP%20CTF%202023/Arctic%20Penguin">Arctic Penguin</a></li>
+<li>图片隐写工具<a target="_blank" rel="noopener" href="https://github.com/dhsdshdhk/stegpy">stegpy</a>。</li>
+<li>ppt文档密码爆破工具。可用<a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-82569-1-1.html">Accent OFFICE Password Recovery</a>工具，也能用<a target="_blank" rel="noopener" href="https://fossies.org/linux/john/run/office2john.py">ffice2john.py</a>或者john。</li>
+<li>电动车钥匙信号PT224X解码。例题:<a href="../../CTF/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/3%E7%BA%A7/Misc/%E6%89%93%E5%BC%80%E7%94%B5%E5%8A%A8%E8%BD%A6.md">打开电动车</a>。类似的还有PT226x。例题:<a target="_blank" rel="noopener" href="https://www.onctf.com/posts/d228f8e5.html#%E4%B8%80%E7%99%BE%E5%9B%9B%E5%8D%81%E5%85%AD%E3%80%81-HDCTF2019-%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90">[HDCTF2019]信号分析</a></li>
+<li>TSL协议需要私钥（RSA）解密才能追踪。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45699846/article/details/123529342">[DDCTF2018]流量分析</a></li>
+<li>VoIP——基于IP的语音传输（英语：Voice over Internet Protocol，缩写为VoIP）是一种语音通话技术，经由网际协议（IP）来达成语音通话与多媒体会议，也就是经由互联网来进行通信。其他非正式的名称有IP电话（IP telephony）、互联网电话（Internet telephony）、宽带电话（broadband telephony）以及宽带电话服务（broadband phone service）。在wireshark中可以根据数据包还原语音。菜单栏-&gt;Telephony-&gt;VoIP Calls。</li>
+<li>SSTV音频解码。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109882441">[UTCTF2020]sstv</a></li>
+<li>图片缺少IDAT标识时,在010 Editor中将缺少标识的chunk的union CTYPE type的位置补上IDAT十六进制标识49 44 41 54即可。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/107737687">[湖南省赛2019]Findme</a></li>
+<li>BPG图片可用<a target="_blank" rel="noopener" href="https://en.bandisoft.com/honeyview/">honeyview</a>打开。</li>
+<li>内存取证工具<a target="_blank" rel="noopener" href="https://github.com/volatilityfoundation/volatility">Volatility</a>。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109853022">[HDCTF2019]你能发现什么蛛丝马迹吗</a></li>
+<li>某些思路邪门的题里，图片的颜色十六进制号可能是flag的十六进制编码。</li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/G%E4%BB%A3%E7%A0%81/2892251">GCode</a>,形如：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">M73 P0 R2</span><br><span class="line">M201 X9000 Y9000 Z500 E10000</span><br><span class="line">M203 X500 Y500 Z12 E120</span><br><span class="line">M204 P2000 R1500 T2000</span><br><span class="line">M205 X10.00 Y10.00 Z0.20 E2.50</span><br><span class="line">M205 S0 T0</span><br><span class="line">M107</span><br><span class="line">M115 U3.1.0</span><br><span class="line">M83</span><br><span class="line">M204 S2000 T1500</span><br><span class="line">M104 S215</span><br><span class="line">M140 S60</span><br><span class="line">M190 S60</span><br><span class="line">M109 S215</span><br><span class="line">G28 W</span><br><span class="line">G80</span><br><span class="line">G1 Y-3.0 F1000.0</span><br><span class="line">G92 E0.0</span><br><span class="line">G1 X60.0 E9.0  F1000.0</span><br><span class="line">M73 P4 R1</span><br><span class="line">G1 X100.0 E12.5  F1000.0</span><br><span class="line">G92 E0.0</span><br><span class="line">M900 K30</span><br><span class="line">G21</span><br><span class="line">G90</span><br><span class="line">M83</span><br><span class="line">G92 E0.0</span><br><span class="line">G1 E-0.80000 F2100.00000</span><br><span class="line">G1 Z0.600 F10800.000</span><br><span class="line">G1 X89.987 Y95.416</span><br><span class="line">G1 Z0.200</span><br><span class="line">G1 E0.80000 F2100.00000</span><br></pre></td></tr></table></figure>
+
+<ol start="55">
+<li>FAT文件可以使用<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/veracrypt/">VeraCrypt</a>进行挂载</li>
+<li>FAT文件在挂载输入密码的时候，不同的密码可以进入不同的文件系统</li>
+<li>遇见vmdk文件，可以试试使用7z这个压缩软件打开，里面可能藏着其他文件。</li>
+<li>邮件协议：POP、SMTP、IMAP</li>
+<li>火狐浏览器的登陆凭证文件可用<a target="_blank" rel="noopener" href="https://github.com/lclevy/firepwd">Firepwd</a>破解。</li>
+<li>ext4文件系统可用<a target="_blank" rel="noopener" href="https://extundelete.sourceforge.net/">extundelete</a>恢复被删除的目录或文件。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/110004817">[XMAN2018排位赛]file</a></li>
+<li>文件类型识别工具TrID（可识别Python Pickle序列号数据）。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/wangjin7356/article/details/122471475">我爱Linux</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cgsecurity.org/wiki/TestDisk_CN">TestDisk</a>磁盘恢复工具。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/110079540">[BSidesSF2019]diskimage</a></li>
+<li>usb数据提取+autokey爆破。例题:<a target="_blank" rel="noopener" href="https://ctf-wiki.org/en/misc/traffic/protocols/usb/#_2">[XMAN2018排位赛]AutoKey</a></li>
+<li><a target="_blank" rel="noopener" href="https://eprint.iacr.org/2020/301.pdf">toy加密</a>。例题:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/vuclw/p/16424799.html">[羊城杯 2020]signin</a></li>
+<li>ALPHUCK一种 Programming Language ,只由 a,c,e,i,j,o,p,s 这 8 个小写字母组成。</li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%89%E5%88%86%E5%AF%86%E7%A0%81/2250183">三分密码</a>+veracrypt挂载被加密磁盘。例题:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/vuclw/p/16428558.html">[GKCTF 2021]0.03</a></li>
+<li>条形码修复。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/zippo1234/article/details/109249593">[BSidesSF2020]barcoder</a></li>
+<li>TLS协议需要解密才能追踪。菜单栏-&gt;Wireshark-&gt;Preferences-&gt;Protocols-&gt;TLS。有RSA私钥选RSA key list，有sslkey的log文件在下方log filename选择log文件。log文件里的格式不一定相同，注意后缀名log。</li>
+<li>TCP-IP数据报的Identification字段隐写。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45699846/article/details/123833160">[羊城杯 2020]TCP_IP</a></li>
+<li>小米手机的备份文件实际也是ANDROID BACKUP文件，去掉小米的header后即可使用<a target="_blank" rel="noopener" href="https://github.com/nelenkov/android-backup-extractor">脚本</a>解压。</li>
+<li>rpg maker修改游戏。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_49354488/article/details/115655115">[*CTF2019]She</a></li>
+<li>ARCHPR无法爆破RAR5，可以用rar2john提取hash后利用hashcat爆破密码。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/118422921">[羊城杯 2020]image_rar</a></li>
+<li>字符串经过brainfuck加密后应该是++++++++[开头的，所以遇见解出来是乱码的brainfuck可以看看开头是否正确。</li>
+<li>空格+tab隐写过滤脚本</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv14000314">例题及来源</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_file_list</span>(<span class="params">dir_path</span>):</span><br><span class="line">    _file_list = os.listdir(dir_path)</span><br><span class="line">    file_list = []</span><br><span class="line">    <span class="keyword">for</span> file_str <span class="keyword">in</span> _file_list:</span><br><span class="line">        new_dir_path = dir_path+<span class="string">&#x27;/&#x27;</span>+file_str</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(new_dir_path):</span><br><span class="line">            file_list.extend(get_file_list(new_dir_path))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            file_list.append(new_dir_path)</span><br><span class="line">    <span class="keyword">return</span> file_list</span><br><span class="line">file_list = get_file_list(<span class="string">r&#x27;/Users/constellation/Desktop/source_code&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> file_str <span class="keyword">in</span> file_list:</span><br><span class="line">    f = <span class="built_in">open</span>(file_str, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = f.read()</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27; \t \t&#x27;</span> <span class="keyword">in</span> data:</span><br><span class="line">            <span class="built_in">print</span>(file_str)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<ol start="75">
+<li>swf文件是flash文件，可用<a target="_blank" rel="noopener" href="https://github.com/jindrapetrik/jpexs-decompiler">JPEXS Free Flash Decompiler</a>反编译。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/115833842">[*CTF2019]babyflash</a></li>
+<li>音频lsb提取。例题将一张bmp图片通过lsb的形式写入音频，需要知道正确的宽高才能恢复原来的图片。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45699846/article/details/123847848">静静听这么好听的歌</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pos-shop.ru/upload/iblock/ebd/ebd9bed075d1b925be892b297590fc18.pdf">TSPL&#x2F;TSPL2 Programming Language</a>，用于打印机。例题:<a target="_blank" rel="noopener" href="https://tobatu.gitee.io/blog/2020/10/06/BUUCTF-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-9/#RCTF2019-printer">[RCTF2019]printer</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%97%E7%BA%A6%E9%9F%B3%E6%A0%87%E5%AD%97%E6%AF%8D">北约音标字母</a>，Alfa，Bravo之类的，其实就是每个单词的首字母。</li>
+<li>pgp加密，使用<a target="_blank" rel="noopener" href="https://pgptool.github.io/">PGPTool</a>解密。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/115856882">[BSidesSF2019]bWF0cnlvc2hrYQ</a></li>
+<li>镜像FTK挂载仿真，使用<a target="_blank" rel="noopener" href="https://iowin.net/en/ftk-imager/?download=true">AccessData FTK Imager</a>。例题:<a target="_blank" rel="noopener" href="https://shimo.im/docs/6hyIjGkLoRc43JRs">[NPUCTF2020]回收站</a></li>
+<li>利用<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/418787">dig</a>命令分析dns shell。例题:<a target="_blank" rel="noopener" href="https://meowmeowxw.gitlab.io/ctf/utctf-2020-do-not-stop/">[UTCTF2020]dns-shell</a></li>
+<li>乐高ev3机器人分析（蓝牙协议）。基本的4个协议为HCI、L2CAP、SDP、RFCOMM。对比于英特网五层结构来说：HCI相当于与物理层打交道的协议，L2CAP协议则是链路层相关协议，SDP和RFCOMM则是运输层相关协议，当然其上也有对应的应用层相关的一些协议。SDP用来发现周围蓝牙服务，然后由L2CAP来建立信道链接，然后传输由上层RFCOMM给予的数据分组。如果只是提取数据的话，只需要关心：RFCOMM协议。例题:<a target="_blank" rel="noopener" href="https://www.youncyb.cn/?p=493">[HITCON2018]ev3basic</a></li>
+<li>使用<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-e2fsck.html">e2fsck</a>命令修复超级块损坏的ext2文件。例题:<a target="_blank" rel="noopener" href="http://www.ga1axy.top/index.php/archives/17/">[BSidesSF2020]mpfrag</a></li>
+<li>压感数位板usb协议分析+emoji aes密码。例题:<a target="_blank" rel="noopener" href="http://www.ga1axy.top/index.php/archives/43/">[RoarCTF2019]davinci_cipher</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.rmnof.com/article/exiftool-introduction/">exiftool</a>使用。当用exiftool发现有<code>ThumbnailImage	(Binary data 215571 bytes, use -b option to extract)</code>一项时，可以用<code>exiftool -b -ThumbnailImage attachment.jpg &gt; flag.jpg</code>提取出缩略图。例题:<a target="_blank" rel="noopener" href="https://www.shawroot.cc/142.html">[BSidesSF2019]delta</a>，这题还有条形码分析。</li>
+<li>Discord服务器link泄露。可用下方的代码插入一个iframe，强制加入服务器。</li>
+</ol>
+<p>例题及来源:<a target="_blank" rel="noopener" href="https://github.com/uclaacm/lactf-archive/tree/main/2023/misc/discord-leak">discord l34k</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 1. Copy Discord embed iframe template (visit any server Server Settings -&gt; Widget -&gt; Premade Widget). --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 2. Replace id with id from prompt. --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 3. Open this file up in a browser. --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 4. Click &quot;Join Discord&quot; to access the server. --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;https://discord.com/widget?id=1060030874722259057&amp;theme=dark&quot;</span> <span class="attr">width</span>=<span class="string">&quot;350&quot;</span> <span class="attr">height</span>=<span class="string">&quot;500&quot;</span> <span class="attr">allowtransparency</span>=<span class="string">&quot;true&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;0&quot;</span> <span class="attr">sandbox</span>=<span class="string">&quot;allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="87">
+<li>利用Google Sheets API获取被保护、隐藏的sheet内容。需要在<a target="_blank" rel="noopener" href="https://www.google.com/script/start/">这里</a>运行。</li>
+</ol>
+<p>例题及来源:<a target="_blank" rel="noopener" href="https://github.com/uclaacm/lactf-archive/tree/main/2023/misc/hidden-in-plain-sheets">hidden in plain sheets</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> sheet = <span class="title class_">SpreadsheetApp</span>.<span class="title function_">openById</span>(<span class="string">&quot;1ULdm_KCOYCWuf6gqpg6tm0t-wnWySX_Bf3yUYOfZ2tw&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> sheets = sheet.<span class="title function_">getSheets</span>();</span><br><span class="line">  <span class="keyword">const</span> secret = sheets.<span class="title function_">find</span>(<span class="function"><span class="params">x</span> =&gt;</span> x.<span class="title function_">getName</span>() == <span class="string">&quot;flag&quot;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(secret.<span class="title function_">getDataRange</span>().<span class="title function_">getValues</span>().<span class="title function_">map</span>(<span class="function"><span class="params">l</span> =&gt;</span> l.<span class="title function_">join</span>(<span class="string">&quot;&quot;</span>)).<span class="title function_">join</span>(<span class="string">&quot;\n&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="88">
+<li>智能汽车协议分析+arm可执行文件逆向。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/Breeze_CAT/article/details/106156567">[网鼎杯 2020 青龙组]Teslaaaaa</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/BCACTF/bcactf-4.0/tree/main/ow">ow</a> &amp; <a target="_blank" rel="noopener" href="https://blog.csdn.net/u011297466/article/details/81059248">[QCTF2018]Noise</a></li>
+</ol>
+<ul>
+<li>利用相位抵消分离特殊信号。具体步骤如下：<ul>
+<li>将想要分离的噪音与有用的音频分开。有些题会给出噪音的原音频（不包含有用信息，这样可以直接相位反转后抵消），有的题则是分声道：噪音与音频分别为左右声道。audacity如何分离声道：在切换频谱图同样的菜单栏里有“分割立体声轨道选项”，点击后即能看到左右声道</li>
+<li>左右两声道的的平移滑块都滑到“置中”</li>
+<li>选中噪音声道，菜单栏效果-&gt;Special-&gt;倒转（上下）即可翻转噪音相位</li>
+<li>将反转后的噪音声道与混合噪音的音频声道同时播放，即可获取原音频</li>
+</ul>
+</li>
+<li>不用audacity而是使用<a target="_blank" rel="noopener" href="https://github.com/jiaaro/pydub">pydub</a>模块：</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pydub <span class="keyword">import</span> AudioSegment</span><br><span class="line">song = AudioSegment.from_mp3(<span class="string">&quot;./ow.mp3&quot;</span>)</span><br><span class="line"><span class="comment"># Extract left and right channels from stereo mp3</span></span><br><span class="line">left_channel = song.split_to_mono()[<span class="number">0</span>]</span><br><span class="line">right_channel = song.split_to_mono()[<span class="number">1</span>]</span><br><span class="line"><span class="comment"># Invert phase of the Right channel</span></span><br><span class="line">inverted_right_channel = right_channel.invert_phase()</span><br><span class="line"><span class="comment"># Merge left and inverted right channels</span></span><br><span class="line">flag = left_channel.overlay(inverted_right_channel)</span><br><span class="line">flag.export(<span class="string">&quot;./flag.mp3&quot;</span>, <span class="built_in">format</span>=<span class="string">&quot;mp3&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>直接用audacity自带的除噪功能（效果没有前两个好，但是能听到）：<a target="_blank" rel="noopener" href="https://github.com/m4karoni/CTF/tree/main/BCACTF/2023/Forensics#owvolume-warning">https://github.com/m4karoni/CTF/tree/main/BCACTF/2023/Forensics#owvolume-warning</a></li>
+</ul>
+<ol start="90">
+<li>Wireshark菜单栏-&gt;Statistics-&gt;Conversations可以看到抓到的包的所有通信的ip和端口号，有时候是流量题找ip的捷径。</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Whitespace_(programming_language)">WHITESPACES LANGUAGE</a>，由空格，tab键等字符组成，不可见。</li>
+<li><a target="_blank" rel="noopener" href="https://www.dcode.fr/hexahue-cipher">hexahue cipher</a>，形如：</li>
+</ol>
+<p><img src="C:/Users/a1348/Desktop/NoobCTF-main/笔记/images/hexahue.png" alt="hexahue"></p>
+<ol start="93">
+<li>windows powershell历史记录文件路径：<code>%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt</code>。</li>
+<li>对于未经改动过的linux vmem dump，可以直接用strings+grep过滤出操作系统（operating system）和内核版本（kernel version）：</li>
+</ol>
+<ul>
+<li>strings PVE.vmem | grep -i “Linux version”</li>
+<li>grep -a “BOOT_IMAGE” dump.mem （更详细的内核版本）</li>
+</ul>
+<p>操作系统版本号：</p>
+<ul>
+<li>grep -a “Linux release” dump.mem</li>
+</ul>
+<ol start="95">
+<li><p>遇到volatility不默认支持的image时，可以通过94条的方法手动获得版本，然后去官网下载对应的镜像，存到<code>volatility\plugins\overlays\linux</code>中。现在再用插件就能获取到信息了。例题:<a target="_blank" rel="noopener" href="https://xelessaway.medium.com/0xl4ugh-ctf-2023-c86b0421fd23">PVE</a>，这题也介绍了volatility的初步使用方法。补充更多例题：<a target="_blank" rel="noopener" href="https://hackmd.io/@TuX-/BkWQh8a6i#ForensicsWanna-1">Wanna</a></p>
+</li>
+<li><p>403 bypass的特殊技巧。一般是在路径上做手脚，例如：</p>
+</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://20.121.121.120/*/secret.php">http://20.121.121.120/*/secret.php</a></li>
+<li><a target="_blank" rel="noopener" href="http://20.121.121.120/secret.php">http://20.121.121.120/./secret.php</a></li>
+<li><a target="_blank" rel="noopener" href="http://20.121.121.120/%2f/secret.php">http://20.121.121.120/%2f/secret.php</a></li>
+</ul>
+<p>等。一个局限性较大的技巧是去<a target="_blank" rel="noopener" href="https://archive.org/web/">Wayback Machine</a>搜对应网址。要求题目网址提前上线过。</p>
+<ol start="97">
+<li><a target="_blank" rel="noopener" href="https://osintframework.com/">OSINT思维导图</a>。</li>
+<li>某些电子邮件的密码可能在<a target="_blank" rel="noopener" href="https://pastebin.com/">pastebin</a>泄露。</li>
+<li><a target="_blank" rel="noopener" href="https://esolangs.org/wiki/Fish">Fish</a>编程语言+<a target="_blank" rel="noopener" href="https://gist.github.com/anonymous/6392418">解释器</a>。例题:<a target="_blank" rel="noopener" href="https://github.com/ZorzalG/the-big-MHSCTF2023-writeups/blob/main/Flowers.md">Flowers</a></li>
+<li>Powershell命令历史存储于ConsoleHost_history.txt。</li>
+<li>volatility3使用。关于volatility的教程大多都是volatility2的，记录一些平时看到的命令。注意镜像（如img后缀）和内存（如mem）后缀是不同的，工具不能混用。比如volatility就不能用来分析镜像。(volatility3似乎没有找profile的插件，只能用volatility2找：<code>python2 vol.py -f ctf.raw imageinfo</code>)</li>
+</ol>
+<ul>
+<li>python3 vol.py -f Memdump.raw windows.filescan.FileScan<ul>
+<li>搜寻Memdump.raw中的文件,会给出文件对应的偏移</li>
+</ul>
+</li>
+<li>python3 vol.py -f Memdump.raw windows.dumpfiles.DumpFiles –virtaddr(<code>--physaddr</code>) 0xc88f21961af0<ul>
+<li>根据文件偏移提取文件</li>
+</ul>
+</li>
+<li>python3 vol.py -f mem.raw windows.cmdline.CmdLine<ul>
+<li>cmd中运行的命令</li>
+</ul>
+</li>
+<li>python3 vol.py -f mem.raw windows.info<ul>
+<li>显示windows镜像信息。用例： <a target="_blank" rel="noopener" href="https://j-0k3r.github.io/2024/01/23/KnightCTF%202024/">https://j-0k3r.github.io/2024/01/23/KnightCTF%202024/</a></li>
+</ul>
+</li>
+<li>python3 vol.py -f mem.raw windows.netstat<ul>
+<li>查看网络连接状况（可用于获取本机ip）</li>
+</ul>
+</li>
+<li>python3 vol.py -f mem.raw windows.registry.hivelist.HiveList<ul>
+<li>查看注册表</li>
+</ul>
+</li>
+<li>python3 vol.py -f mem.raw windows.registry.printkey.PrintKey –offset 0xf8a0000212d0<ul>
+<li>通过上一步获取到注册表后，根据获得的偏移进一步获取键名信息。</li>
+</ul>
+</li>
+<li>python3 vol.py -f mem.raw windows.registry.printkey.PrintKey –offset 0xf8a0000212d0 –key “ControlSet001\Control\ComputerName\ComputerName”  <ul>
+<li>可以一直沿着获取的键名走下去。上面的命令用于获取主机名。详情见<a target="_blank" rel="noopener" href="https://www.bnessy.com/archives/%E7%94%B5%E5%AD%90%E6%95%B0%E6%8D%AE%E5%8F%96%E8%AF%81-volatility">此处</a>,内含基础例题。</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/project-sekai-ctf/sekaictf-2023/tree/main/forensics/dumpster-dive">Dumpster Dive</a><ul>
+<li>linux.bash for bash history</li>
+<li>linux.pslist to get pid of processes</li>
+<li>linux.proc has a dump option, <code>linux.proc --pid &lt;pid&gt; --dump</code></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://pakcyberbot.github.io/CTF-Writeups/posts/BHME-NotSupported/">Not supported</a><ul>
+<li><code>vol -f file.mem windows.memmap.Memmap --pid &lt;num&gt; --dump</code>:dump pid为num的进程的内容。有意思的地方在于，Memdumps are essentially RAM moment captures，可以将dump出来的文件后缀改成.data放进GIMP，能看到内存的图片，包括字符串形式的flag。参考 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=-E3VTblFkKg">https://www.youtube.com/watch?v=-E3VTblFkKg</a></li>
+<li>另一道使用这个技巧的题的图文wp：<a target="_blank" rel="noopener" href="https://warlocksmurf.github.io/posts/l3akctf2024">Pixelated</a>和<a target="_blank" rel="noopener" href="https://w00tsec.blogspot.com/2015/02/extracting-raw-pictures-from-memory.html">参考文章</a>，更详细一点</li>
+<li>另外，如果要grep dump出来的memory，记得用<code>strings * -e l</code>，因为dump出来的内容都是小端的(但有的时候直接grep也行)</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/daffainfo/ctf-writeup/tree/main/2023/niteCTF%202023/conqueror">conqueror</a><ul>
+<li><code>vol -f ctf.mem windows.hashdump.Hashdump</code>:dump用户及其md5 hash</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://odintheprotector.github.io/2024/02/17/bitsctf2024-dfir.html">Bypassing Transport Layer</a><ul>
+<li><code>vol.py -f ctf.mem windows.netscan</code>:查看网络连接情况</li>
+<li>TLS流的requests和responses都是加密的，解密需要密钥。若找到类似keylog.pcapng的文件也可以解密</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://blog.bi0s.in/2024/02/27/Forensics/BatmanInvestigationII-GothamUndergroundCorruption-bi0sCTF2024/">Batman Investigation II</a><ul>
+<li><code>vol -f ctf.raw windows.pslist.PsList</code>:List active process list</li>
+<li><code>vol -f ctf.raw windows.mftscan.MFTScan</code>:获取<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/master-file-table">MFT</a>文件</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Tokeii0/LovelyMem">LovelyMem</a>:一个图形界面取证工具</li>
+</ul>
+<ol start="102">
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Huffman_coding">Huffman coding</a>，例题:<a target="_blank" rel="noopener" href="https://medium.com/@vj35.cool/the-bytebandits-ctf-2023-449a2d64c7b4">Tree of Secrets</a>,例题是文件夹形式的Huffman coding。动图解释：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/63362804">https://zhuanlan.zhihu.com/p/63362804</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/5t0n3/ctf-writeups/blob/main/2023-lactf/misc/private-bin/README.md">private-bin</a></li>
+</ol>
+<ul>
+<li>分析end to end（e2e）加密（HTTPS，TLS）pcapng</li>
+<li>TLS的握手报文会传输hostname信息（<a target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/learning/ssl/what-is-sni/">SNI</a>），可用<code>tls.handshake.extensions_server_name</code>过滤。</li>
+<li>获取TLS密钥后，可用<code>tls and (http or http2)</code>过滤出解密后的报文。</li>
+<li>AES-256的密钥长度为32字节。</li>
+</ul>
+<ol start="104">
+<li>git命令更改config，使用制定用户的身份推送远程库。例题:<a href="../../CTF/LA%20CTF/Misc/new-challenge.md">new-challenge</a></li>
+<li>MSB（most signficant bit）隐写。将信息藏在RGB颜色分量二进制值的最高位。与<a target="_blank" rel="noopener" href="https://3gstudent.github.io/%E9%9A%90%E5%86%99%E6%8A%80%E5%B7%A7-PNG%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84LSB%E9%9A%90%E5%86%99">LSB</a>不同的是，这种隐写会使图片颜色失真（损坏）。例题:<a target="_blank" rel="noopener" href="https://ctftime.org/writeup/16174">msb</a>，里面有图片颜色失真的例子。可在<a target="_blank" rel="noopener" href="https://stegonline.georgeom.net/extract">stegonline</a>提取。选项设置如下：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">R:7</span><br><span class="line">G:7</span><br><span class="line">B:7</span><br><span class="line">Pixel Order:Row</span><br><span class="line">Bit Order:MSB</span><br><span class="line">Bit Plane Order:RGB</span><br><span class="line">Trim Trailing Bits:No</span><br></pre></td></tr></table></figure>
+
+<ol start="106">
+<li>linux 使用mount挂载img镜像。</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhou-yuxin.github.io/articles/2015/Linux%E6%8C%82%E8%BD%BDimg%E7%A3%81%E7%9B%98%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/index.html">Linux挂载img磁盘镜像文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_3823536/2501563">Linux如何挂载img镜像</a></li>
+</ul>
+<p>偏移可用<code>binwalk xxx.img</code>(或者<code>fdisk -l disk.img</code>)获得。挂载镜像后，输入<code>sudo su</code>来获取root权限。分析镜像时，<code>tree</code>命令可帮助查看目录的结构。挂载镜像后,<code>.ash_history</code>文件将不会存储原本镜像的命令，而是挂载者在镜像里输入的命令。因此挂载是无法获取命令历史的。</p>
+<ol start="107">
+<li><a target="_blank" rel="noopener" href="https://github.com/Dhanush-T/PCTF23-writeups/blob/main/Forensics/Nuclearophine/writeup.md">Nuclearophine</a></li>
+</ol>
+<ul>
+<li>使用python Scapy库提取udp包数据</li>
+<li>WAV文件修复。WAV文件的第37-40个字节应为data。</li>
+<li>stegolsb提取WAV文件内容。</li>
+<li><a target="_blank" rel="noopener" href="https://rfmw.em.keysight.com/rfcomms/refdocs/cdma2k/cdma2000_meas_dtmf_desc.html">DTMF tones</a>分析。</li>
+</ul>
+<ol start="108">
+<li>audacity可以分析一段特定音频的频率情况。在audacity里选中一个范围的音频后，去Analyze –&gt; Plot Spectrum即可查看该段音频的频率情况。例题:<a target="_blank" rel="noopener" href="https://github.com/jdabtieu/wxmctf-2023-public/blob/main/foren2/writeup.md">Sneaky Spying</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.osdev.org/USB_Human_Interface_Devices">usb mouse</a>&#x2F;usb鼠标流量包(如Microsoft Paint)分析。可直接用<a target="_blank" rel="noopener" href="https://github.com/WangYihang/UsbMiceDataHacker/tree/master">脚本</a>提取数据并matplotlib.pyplot绘制数据。例题:<a target="_blank" rel="noopener" href="https://github.com/jdabtieu/wxmctf-2023-public/blob/main/foren4/writeup.md">Paint</a></li>
+<li>一张png的文件结构包含下列字符串：<code>PNG</code>,<code>IHDR</code>,<code>sRGB</code>,<code>pHYs</code>,<code>IDAT</code>。只有第一个，第二个和第五个损坏会导致图片无法打开。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jdabtieu/wxmctf-2023-public/blob/main/misc2/writeup.md">Broken Telephone</a></li>
+</ol>
+<ul>
+<li>根据svg图片数据写入svg图片文件</li>
+<li>svg图片文件头+<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/svg/svg_path.asp"><path></a>标签的数据特征（hex颜色格式+路径数据MCZ等）。</li>
+</ul>
+<ol start="112">
+<li><a target="_blank" rel="noopener" href="https://github.com/jrspruitt/ubi_reader">UBI Reader</a>可用于提取UBIfs镜像数据内的文件。</li>
+<li>终端的whois命令不仅可以查询domain，还可以查询ip地址。</li>
+<li><a target="_blank" rel="noopener" href="https://workmanlayout.org/">workman</a>等键盘布局（layout）相互转换<a target="_blank" rel="noopener" href="https://awsm-tools.com/keyboard-layout">网站</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/BlackAnon22/BlackAnon22.github.io/blob/main/posts/CTF%20Competitions/picoCTF_2023.md#unforgottenbits-500-points">UnforgottenBits</a></li>
+</ol>
+<ul>
+<li>linux img镜像分析。</li>
+<li>使用mount命令挂载镜像，autospy(ui版tsk)获取被删除的邮件。因为邮件一定有“subject”，于是在“keyword search”处搜索subject，即可看到文件。</li>
+<li><a target="_blank" rel="noopener" href="https://www.wikiwand.com/en/Golden_ratio_base">golden ratio base</a>解码脚本。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define the Base-Phi constant</span></span><br><span class="line">PHI = (<span class="number">1</span> + math.sqrt(<span class="number">5</span>)) / <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define a function to perform Base-Phi decoding</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">base_phi_decode</span>(<span class="params">encoded_string</span>):</span><br><span class="line">    <span class="comment"># Split the encoded string into segments separated by periods</span></span><br><span class="line">    segments = encoded_string.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize the result string</span></span><br><span class="line">    result = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Iterate over each segment</span></span><br><span class="line">    <span class="keyword">for</span> segment <span class="keyword">in</span> segments:</span><br><span class="line">        <span class="comment"># Initialize the decoded value for this segment to 0</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">len</span>(segment))</span><br><span class="line">        value = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Iterate over each character in the segment</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(segment)):</span><br><span class="line">            <span class="comment"># If the character is &#x27;1&#x27;, add PHI to the decoded value</span></span><br><span class="line">            <span class="keyword">if</span> segment[i] == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                value += PHI**(<span class="built_in">len</span>(segment) - i - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Append the decoded character to the result string</span></span><br><span class="line">        result += <span class="built_in">str</span>(<span class="built_in">int</span>(value))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Return the result string</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="comment"># Test the function with the given encoded string</span></span><br><span class="line">encoded_string = <span class="string">&quot;01010010100.01001001000100.01001010000100&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">eeee = encoded_string.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">out = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(eeee)-<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> i ==<span class="number">0</span>:</span><br><span class="line">        out.append(eeee[i]+<span class="string">&#x27;.&#x27;</span>+eeee[i+<span class="number">1</span>][:<span class="number">3</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        out.append(eeee[i][<span class="number">3</span>:]+<span class="string">&#x27;.&#x27;</span>+eeee[i+<span class="number">1</span>][:<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(out)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># decoded_string = base_phi_decode(encoded_string)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(decoded_string)</span></span><br><span class="line"></span><br><span class="line">key = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> out:</span><br><span class="line"></span><br><span class="line">    integer_part, fractional_part = p.split(<span class="string">&quot;.&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Convert the integer part to decimal</span></span><br><span class="line">    decimal_value = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(integer_part)):</span><br><span class="line">        decimal_value += <span class="built_in">int</span>(integer_part[i]) * (PHI ** (<span class="built_in">len</span>(integer_part) - i - <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Convert the fractional part to decimal</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(fractional_part) &gt; <span class="number">0</span>:</span><br><span class="line">        fractional_value = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(fractional_part)):</span><br><span class="line">            fractional_value += <span class="built_in">int</span>(fractional_part[i]) * (<span class="number">2</span> ** -(i + <span class="number">1</span>))</span><br><span class="line">        decimal_value += fractional_value</span><br><span class="line"></span><br><span class="line">    key += <span class="built_in">chr</span>(<span class="built_in">round</span>(decimal_value))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(key)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(out))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>openssl解密aes密文。<code>openssl enc -aes-256-cbc -d -in flag.enc -out res -salt -iv xxx -K xxx</code></li>
+</ul>
+<ol start="116">
+<li>盲水印。分两种，一种会给两张一样的图，另一种只给一张图。例题:<a target="_blank" rel="noopener" href="https://ctf-show.feishu.cn/docx/UpC6dtDqgo7VuoxXlcvcLwzKnqh#Es84dUM2CoIAI4xGI8Ac6ugvncc">flag一分为二</a></li>
+<li>010Editor菜单栏-&gt;工具-&gt;比较文件可以找到两个文件的不同点。另外，工具栏里还有很多其他工具，都可以试试。</li>
+<li><a target="_blank" rel="noopener" href="https://merricx.github.io/qrazybox/">QRazyBox</a>可以扫描一些其他工具扫描不出来的内容。有的时候，将纠错区涂白还能看见额外内容。例题:<a target="_blank" rel="noopener" href="https://ctf-show.feishu.cn/docx/UpC6dtDqgo7VuoxXlcvcLwzKnqh#ZaIsdcqYOoIEmExxqMEcVopaniv">迅疾响应</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.bertnase.de/npiet/npiet-execute.php">npiet</a>图片编程语言。程序大概长这样：</li>
+</ol>
+<p><img src="C:/Users/a1348/Desktop/NoobCTF-main/笔记/images/npiet.png" alt="npiet"></p>
+<ol start="120">
+<li><a target="_blank" rel="noopener" href="https://www.qsl.net/on6mu/rxsstv.htm">RX-SSTV</a>。sstv音频解密工具。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/daffainfo/ctf-writeup/tree/main/GREP%20CTF%202023/Royal%20Steg">Royal Steg</a></li>
+</ol>
+<ul>
+<li>使用John the Ripper（zip2john+john）<a target="_blank" rel="noopener" href="https://secnhack.in/crack-zip-files-password-using-john-the-ripper/">爆破</a>加密zip密码。</li>
+<li>stegseek爆破steghide密码。</li>
+</ul>
+<ol start="122">
+<li><a target="_blank" rel="noopener" href="https://github.com/CybercellVIIT/VishwaCTF-23_Official_Writeups/blob/main/Digital%20Forensics/DigitalForensics_CrackingTheBadVault.pdf">CrackingTheBadVault</a></li>
+</ol>
+<ul>
+<li>dcfldd命令从veracrypt partition volume header中提取hashcat爆破所需的hash。一般在第一个sector，通常一个sector 512字节。<code>sudo dcfldd if=image.img of=header.tc bs=1 count=512</code></li>
+<li>hashcat爆破Veracrypt+sha512：<code>sudo hashcat -a 3 -m 13721 &lt;hash-path&gt; &lt;word-list&gt;</code>。爆破内部隐藏partition密码（已知pim或者大致爆破范围和keyfiles）：<code>sudo hashcat -a 3 -m 13721 --veracrypt-keyfiles=key.png --veracrypt-pim-start=900 --veracrypt-pim-start=901 hidden-vol.tc &lt;word-list&gt;</code>，<code>hashcat --force --status --hash-type=13721 --veracrypt-pim-start=start --veracrypt-pim-stop=end -S -w 3 --workload-profile=&quot;2&quot; vol rockyou.txt</code></li>
+<li>可在veracrypt volume中隐藏partition。提取隐藏partition的volume header的命令:<code>sudo dcfldd if=image.img of=hidden-vol.tc bs=1 skip=65536 count=512</code></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://theganlove.github.io/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/" data-id="cm0kwqyt4001u64dk8ht29lkj" data-title="隐写系列" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">脚本工具</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/">CTF-web</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">php代码审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E5%AE%A1%E8%AE%A1/">php审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/rce/">rce</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">文件操作</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF/">艺术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A9%E5%91%BD%E6%8B%82%E6%99%93/">革命拂晓</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-php/" rel="tag">web php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" rel="tag">文字感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" rel="tag">自己的艺术</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/web-php/" style="font-size: 20px;">web php</a> <a href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" style="font-size: 10px;">文字感悟</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">环境</a> <a href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" style="font-size: 10px;">自己的艺术</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/">隐写系列</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/">脚本工具</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/ssrf/">ssrf</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/">jwt等认证went</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/js%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">js原型链污染</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

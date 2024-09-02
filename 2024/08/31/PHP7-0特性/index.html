@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>PHP7.0特性 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="函数变更参考：  https:&#x2F;&#x2F;www.php.net&#x2F;manual&#x2F;zh&#x2F;appendices.php http:&#x2F;&#x2F;xiaoze.club&#x2F;  关于list处理方式的变更list不再以反向的顺序来进行赋值 list现在会按照变量定义的顺序来给他们进行赋值，而非反过来的顺序。 通常来说，这只会影响list与数组的[]操作符一起使用的案例，如下所示： 1234&lt;?phplist($a[],">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP7.0特性">
+<meta property="og:url" content="https://theganlove.github.io/2024/08/31/PHP7-0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="函数变更参考：  https:&#x2F;&#x2F;www.php.net&#x2F;manual&#x2F;zh&#x2F;appendices.php http:&#x2F;&#x2F;xiaoze.club&#x2F;  关于list处理方式的变更list不再以反向的顺序来进行赋值 list现在会按照变量定义的顺序来给他们进行赋值，而非反过来的顺序。 通常来说，这只会影响list与数组的[]操作符一起使用的案例，如下所示： 1234&lt;?phplist($a[],">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://theganlove.github.io/Users/j7ur8/WebBook/BookBuild/images/19-7-22_PHP_PHP7%E5%92%8CPHP5%E7%9A%84%E5%8C%BA%E5%88%AB_%E5%87%BD%E6%95%B0%E6%96%B9%E9%9D%A2_2.png">
+<meta property="og:image" content="https://theganlove.github.io/Users/j7ur8/WebBook/BookBuild/images/19-7-22_PHP_PHP7%E5%92%8CPHP5%E7%9A%84%E5%8C%BA%E5%88%AB_%E5%87%BD%E6%95%B0%E6%96%B9%E9%9D%A2_1.png">
+<meta property="og:image" content="https://theganlove.github.io/Users/j7ur8/WebBook/BookBuild/images/19-7-22_PHP_PHP7%E5%92%8CPHP5%E7%9A%84%E5%8C%BA%E5%88%AB_%E8%AF%AD%E6%B3%95%E4%BF%AE%E6%94%B9_1.png">
+<meta property="article:published_time" content="2024-08-31T05:47:40.000Z">
+<meta property="article:modified_time" content="2024-08-31T05:52:09.413Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="web php">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://theganlove.github.io/Users/j7ur8/WebBook/BookBuild/images/19-7-22_PHP_PHP7%E5%92%8CPHP5%E7%9A%84%E5%8C%BA%E5%88%AB_%E5%87%BD%E6%95%B0%E6%96%B9%E9%9D%A2_2.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://theganlove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-PHP7-0特性" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/08/31/PHP7-0%E7%89%B9%E6%80%A7/" class="article-date">
+  <time class="dt-published" datetime="2024-08-31T05:47:40.000Z" itemprop="datePublished">2024-08-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTF-web/">CTF-web</a>►<a class="article-category-link" href="/categories/CTF-web/php%E5%AE%A1%E8%AE%A1/">php审计</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      PHP7.0特性
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="函数变更"><a href="#函数变更" class="headerlink" title="函数变更"></a>函数变更</h1><p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/appendices.php">https://www.php.net/manual/zh/appendices.php</a></li>
+<li><a target="_blank" rel="noopener" href="http://xiaoze.club/">http://xiaoze.club/</a></li>
+</ul>
+<h2 id="关于list处理方式的变更"><a href="#关于list处理方式的变更" class="headerlink" title="关于list处理方式的变更"></a>关于list处理方式的变更</h2><p><strong>list不再以反向的顺序来进行赋值</strong></p>
+<p><code>list</code>现在会按照变量定义的顺序来给他们进行赋值，而非反过来的顺序。 通常来说，这只会影响<code>list</code>与数组的<code>[]</code>操作符一起使用的案例，如下所示：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">list</span>(<span class="variable">$a</span>[], <span class="variable">$a</span>[], <span class="variable">$a</span>[]) = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$a</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">PHP5</span><br><span class="line"><span class="keyword">array</span>(<span class="number">3</span>) &#123;</span><br><span class="line">  [<span class="number">0</span>]=&gt;</span><br><span class="line">  <span class="keyword">int</span>(<span class="number">3</span>)</span><br><span class="line">  [<span class="number">1</span>]=&gt;</span><br><span class="line">  <span class="keyword">int</span>(<span class="number">2</span>)</span><br><span class="line">  [<span class="number">2</span>]=&gt;</span><br><span class="line">  <span class="keyword">int</span>(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PHP7</span><br><span class="line"><span class="keyword">array</span>(<span class="number">3</span>) &#123;</span><br><span class="line">  [<span class="number">0</span>]=&gt;</span><br><span class="line">  <span class="keyword">int</span>(<span class="number">1</span>)</span><br><span class="line">  [<span class="number">1</span>]=&gt;</span><br><span class="line">  <span class="keyword">int</span>(<span class="number">2</span>)</span><br><span class="line">  [<span class="number">2</span>]=&gt;</span><br><span class="line">  <span class="keyword">int</span>(<span class="number">3</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>推荐不要依赖l<code>ist</code>的赋值顺序，因为这是一个在未来也许会变更的实现细节。</p>
+<p><strong>list 结构现在不再能是空的</strong></p>
+<p>list结构现在不再能是空的。如下的例子不再被允许：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="keyword">list</span>() = <span class="variable">$a</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="keyword">list</span>(,,) = <span class="variable">$a</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="keyword">list</span>(<span class="variable">$x</span>, <span class="keyword">list</span>(), <span class="variable">$y</span>) = <span class="variable">$a</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$x</span>)</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>list不再能解开string</strong></p>
+<p><code>list</code>不再能解开字符串（string）变量。 你可以使用<code>str_split</code>来代替它</p>
+<h2 id="foreach的变化"><a href="#foreach的变化" class="headerlink" title="foreach的变化"></a>foreach的变化</h2><p><code>foreach</code>发生了细微的变化，控制结构， 主要围绕阵列的内部数组指针和迭代处理的修改。</p>
+<p><strong>foreach不再改变内部数组指针</strong></p>
+<p>在PHP7之前，当数组通过<code>foreach</code>迭代时，数组指针会移动。现在开始，不再如此，见下面代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$array</span> = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$array</span> <span class="keyword">as</span> &amp;<span class="variable">$val</span>) &#123;</span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">current</span>(<span class="variable">$array</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PHP5</span><br><span class="line"><span class="keyword">int</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">int</span>(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">bool</span>(<span class="literal">false</span>)</span><br><span class="line">    </span><br><span class="line">PHP7</span><br><span class="line"><span class="keyword">int</span>(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">int</span>(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">int</span>(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>foreach通过值遍历时，操作的值为数组的副本</strong></p>
+<p>当默认使用通过值遍历数组时，<code>foreach</code>实际操作的是数组的迭代副本，而非数组本身。这就意味着，<code>foreach</code> 中的操作不会修改原数组的值。</p>
+<p><strong>foreach通过引用遍历时，有更好的迭代特性</strong></p>
+<p>当使用引用遍历数组时，现在 <code>foreach</code>在迭代中能更好的跟踪变化。例如，在迭代中添加一个迭代值到数组中，参考下面的代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$array</span> = [<span class="number">0</span>];</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$array</span> <span class="keyword">as</span> &amp;<span class="variable">$val</span>) &#123;</span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$val</span>);</span><br><span class="line">    <span class="variable">$array</span>[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PHP5</span><br><span class="line">int(0)</span><br><span class="line"></span><br><span class="line">PHP7</span><br><span class="line">int(0)</span><br><span class="line">int(1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="filter-var转换十六进制数字"><a href="#filter-var转换十六进制数字" class="headerlink" title="filter_var转换十六进制数字"></a>filter_var转换十六进制数字</h2><p><code>filter_var</code> 函数可以用于检查一个 <code>string</code> 是否含有十六进制数字,并将其转换为<code>integer</code>:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&quot;0xffff&quot;</span>;</span><br><span class="line"><span class="variable">$int</span> = <span class="title function_ invoke__">filter_var</span>(<span class="variable">$str</span>, FILTER_VALIDATE_INT, FILTER_FLAG_ALLOW_HEX);</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">false</span> === <span class="variable">$int</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&quot;Invalid integer!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$int</span>); <span class="comment">// int(65535)</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="通过-define-定义常量数组"><a href="#通过-define-定义常量数组" class="headerlink" title="通过 define 定义常量数组"></a>通过 define 定义常量数组</h2><p>Array 类型的常量现在可以通过 <code>define()</code> 来定义。在 PHP5.6 中仅能通过 <code>const</code> 定义。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>define(<span class="string">&#x27;ANIMALS&#x27;</span>, [    <span class="string">&#x27;dog&#x27;</span>,    <span class="string">&#x27;cat&#x27;</span>,    <span class="string">&#x27;bird&#x27;</span>]);<span class="keyword">echo</span> ANIMALS[<span class="number">1</span>]; <span class="comment">// 输出 &quot;cat&quot;?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="为unserialize-提供过滤"><a href="#为unserialize-提供过滤" class="headerlink" title="为unserialize()提供过滤"></a>为unserialize()提供过滤</h2><p>这个特性旨在提供更安全的方式解包不可靠的数据。它通过白名单的方式来防止潜在的代码注入。</p>
+<p>可选白名单参数也可以是布尔数据，如果是FALSE就会将所有的对象都转换为<code>__PHP_Incomplete_Class</code>对象。TRUE是无限制。也可以传入类名实现白名单。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span><span class="keyword">class</span> a&#123;	<span class="keyword">public</span> <span class="variable">$a</span>=<span class="string">&#x27;123&#x27;</span>;&#125;<span class="variable">$b</span> = <span class="keyword">new</span> <span class="title function_ invoke__">a</span>();<span class="variable">$ser</span>=<span class="title function_ invoke__">serialize</span>(<span class="variable">$b</span>);<span class="variable">$unse</span>=<span class="title function_ invoke__">unserialize</span>(<span class="variable">$ser</span>,[<span class="string">&quot;allowed_classes&quot;</span> =&gt; <span class="literal">false</span>]);<span class="title function_ invoke__">print_r</span>(<span class="variable">$unse</span>);<span class="variable">$unse</span>=<span class="title function_ invoke__">unserialize</span>(<span class="variable">$ser</span>,[<span class="string">&quot;allowed_classes&quot;</span> =&gt; <span class="literal">true</span>]);<span class="title function_ invoke__">print_r</span>(<span class="variable">$unse</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/j7ur8/WebBook/BookBuild/images/19-7-22_PHP_PHP7%E5%92%8CPHP5%E7%9A%84%E5%8C%BA%E5%88%AB_%E5%87%BD%E6%95%B0%E6%96%B9%E9%9D%A2_2.png"></p>
+<h2 id="session-start可以加入一个数组"><a href="#session-start可以加入一个数组" class="headerlink" title="session_start可以加入一个数组"></a>session_start可以加入一个数组</h2><p><code>session_start()</code> 可以接受一个 <code>array</code> 作为参数， 用来覆盖 php.ini 文件中设置的 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/session.configuration.php">会话配置选项</a>。</p>
+<p>在调用 <code>session_start()</code> 的时候， 传入的选项参数中也支持 <code>session.lazy_write</code> 行为， 默认情况下这个配置项是打开的。它的作用是控制 PHP 只有在会话中的数据发生变化的时候才 写入会话存储文件，如果会话中的数据没有发生改变，那么 PHP 会在读取完会话数据之后， 立即关闭会话存储文件，不做任何修改，可以通过设置 <code>read_and_close</code>来实现。</p>
+<p>例如，下列代码设置 <code>session.cache_limiter</code> 为 <em>private</em>，并且在读取完毕会话数据之后马上关闭会话存储文件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>session_start([    <span class="string">&#x27;cache_limiter&#x27;</span> =&gt; <span class="string">&#x27;private&#x27;</span>,    <span class="string">&#x27;read_and_close&#x27;</span> =&gt; <span class="literal">true</span>,]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="preg-replaces不再支持-e修饰符"><a href="#preg-replaces不再支持-e修饰符" class="headerlink" title="preg_replaces不再支持&#x2F;e修饰符"></a>preg_replaces不再支持&#x2F;e修饰符</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span><span class="variable">$_GET</span>[<span class="string">&quot;h&quot;</span>]=<span class="title function_ invoke__">phpinfo</span>();<span class="title function_ invoke__">preg_replace_callback</span>(<span class="string">&quot;/.*/&quot;</span>,function (<span class="variable">$a</span>)&#123;@<span class="keyword">eval</span>(<span class="variable">$a</span>[<span class="number">0</span>]);&#125;,<span class="variable">$_GET</span>[<span class="string">&quot;h&quot;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/j7ur8/WebBook/BookBuild/images/19-7-22_PHP_PHP7%E5%92%8CPHP5%E7%9A%84%E5%8C%BA%E5%88%AB_%E5%87%BD%E6%95%B0%E6%96%B9%E9%9D%A2_1.png"></p>
+<p>但是有新的函数<code>preg_replace_callback</code></p>
+<h2 id="dirname增加了参数"><a href="#dirname增加了参数" class="headerlink" title="dirname增加了参数"></a>dirname增加了参数</h2><p><code>dirname()</code> 增加了可选的第二个参数, <code>depth</code>, 获取当前目录向上 <code>depth</code> 级父目录的名称</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span><span class="variable">$a</span>=<span class="title function_ invoke__">dirname</span>(<span class="string">&#x27;c:/a/b/c/d&#x27;</span>,<span class="number">1</span>);<span class="title function_ invoke__">print_r</span>(<span class="variable">$a</span>);<span class="comment">#结果/*c:/a/b/c*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="system等函数对NULL增加了保护"><a href="#system等函数对NULL增加了保护" class="headerlink" title="system等函数对NULL增加了保护."></a>system等函数对NULL增加了保护.</h2><p><code>exec()</code>, <code>system()</code> and <code>passthru()</code> 函数对 NULL 增加了保护（我也不知道啥意思。</p>
+<h2 id="增加整数除法函数-intdiv"><a href="#增加整数除法函数-intdiv" class="headerlink" title="增加整数除法函数 intdiv"></a>增加整数除法函数 intdiv</h2><p>新加的函数 <code>intdiv()</code> 用来进行 整数的除法运算。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>var_dump(<span class="title function_ invoke__">intdiv</span>(<span class="number">10</span>, <span class="number">3</span>));<span class="comment">// int(3)?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="增加preg-replace-callback-array"><a href="#增加preg-replace-callback-array" class="headerlink" title="增加preg_replace_callback_array"></a>增加preg_replace_callback_array</h2><p>在 PHP 7 之前，当使用 <code>preg_replace_callback()</code> 函数的时候， 由于针对每个正则表达式都要执行回调函数，可能导致过多的分支代码。 而使用新加的 <code>preg_replace_callback_array()</code> 函数， 可以使得代码更加简洁。</p>
+<p>现在，可以使用一个关联数组来对每个正则表达式注册回调函数， 正则表达式本身作为关联数组的键， 而对应的回调函数就是关联数组的值。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span><span class="variable">$subject</span> = <span class="string">&#x27;Aaaaaa Bbb&#x27;</span>;<span class="title function_ invoke__">preg_replace_callback_array</span>(    [        <span class="string">&#x27;~[a]+~i&#x27;</span> =&gt; function (<span class="variable">$match</span>) &#123;            <span class="keyword">echo</span> <span class="title function_ invoke__">strlen</span>(<span class="variable">$match</span>[<span class="number">0</span>]), <span class="string">&#x27; matches for &quot;a&quot; found&#x27;</span>, PHP_EOL;        &#125;,        <span class="string">&#x27;~[b]+~i&#x27;</span> =&gt; <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$match</span></span>) </span>&#123;            <span class="keyword">echo</span> <span class="title function_ invoke__">strlen</span>(<span class="variable">$match</span>[<span class="number">0</span>]), <span class="string">&#x27; matches for &quot;b&quot; found&#x27;</span>, PHP_EOL;        &#125;    ],    <span class="variable">$subject</span>);    <span class="comment">/*6 matches for &quot;a&quot; found3 matches for &quot;b&quot; found*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="增加Closure-call"><a href="#增加Closure-call" class="headerlink" title="增加Closure::call()"></a>增加Closure::call()</h2><p><strong>Closure::call()</strong> 现在有着更好的性能，简短干练的暂时绑定一个方法到对象上闭包并调用它。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span><span class="keyword">class</span> A &#123;<span class="keyword">private</span> <span class="variable">$x</span> = <span class="number">1</span>;&#125;<span class="comment">// PHP 7 之前版本的代码$getXCB = function() &#123;return $this-&gt;x;&#125;;$getX = $getXCB-&gt;bindTo(new A, &#x27;A&#x27;); // 中间层闭包echo $getX();// PHP 7+ 及更高版本的代码$getX = function() &#123;return $this-&gt;x;&#125;;echo $getX-&gt;call(new A);#结果/*11*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="被移除的函数"><a href="#被移除的函数" class="headerlink" title="被移除的函数"></a>被移除的函数</h2><ul>
+<li><p><code>call_user_method</code>和<code>call_user_method_array</code></p>
+</li>
+<li><p>所有的<code>ereg*</code>函数</p>
+</li>
+<li><p><code>mcrypt</code>的一部分废弃函数</p>
+</li>
+<li><p>所有<code>ext/mysql</code>函数</p>
+</li>
+<li><p>所有<code>ext/mssql</code>函数</p>
+</li>
+<li><p>dl in PHP-FPM</p>
+<p>dl()在 PHP-FPM 不再可用，在 CLI 和 embed SAPIs 中仍可用。</p>
+</li>
+</ul>
+<h1 id="语法变更"><a href="#语法变更" class="headerlink" title="语法变更"></a>语法变更</h1><h2 id="关于变量处理的变化"><a href="#关于变量处理的变化" class="headerlink" title="关于变量处理的变化"></a>关于变量处理的变化</h2><p>PHP 7 现在使用了抽象语法树来解析源代码。这使得许多由于之前的PHP的解释器的限制所不可能实现的改进得以实现。 但出于一致性的原因导致了一些特殊例子的变动，而这些变动打破了向后兼容。 在这一章中将详细介绍这些例子。</p>
+<h2 id="关于间接使用变量、属性和方法的变化"><a href="#关于间接使用变量、属性和方法的变化" class="headerlink" title="关于间接使用变量、属性和方法的变化"></a>关于间接使用变量、属性和方法的变化</h2><p>对变量、属性和方法的间接调用现在将严格遵循从左到右的顺序来解析，而不是之前的混杂着几个特殊案例的情况。 下面这张表说明了这个解析顺序的变化。</p>
+<p>​										<strong>间接调用的表达式的新旧解析顺序</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">PHP 5 的解析方式</th>
+<th align="left">PHP 7 的解析方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>$$foo[&#39;bar&#39;][&#39;baz&#39;]</code></td>
+<td align="left"><code>$&#123;$foo[&#39;bar&#39;][&#39;baz&#39;]&#125;</code></td>
+<td align="left"><code>($$foo)[&#39;bar&#39;][&#39;baz&#39;]</code></td>
+</tr>
+<tr>
+<td align="left"><code>$foo-&gt;$bar[&#39;baz&#39;]</code></td>
+<td align="left"><code>$foo-&gt;&#123;$bar[&#39;baz&#39;]&#125;</code></td>
+<td align="left"><code>($foo-&gt;$bar)[&#39;baz&#39;]</code></td>
+</tr>
+<tr>
+<td align="left"><code>$foo-&gt;$bar[&#39;baz&#39;]()</code></td>
+<td align="left"><code>$foo-&gt;&#123;$bar[&#39;baz&#39;]&#125;()</code></td>
+<td align="left"><code>($foo-&gt;$bar)[&#39;baz&#39;]()</code></td>
+</tr>
+<tr>
+<td align="left"><code>Foo::$bar[&#39;baz&#39;]()</code></td>
+<td align="left"><code>Foo::&#123;$bar[&#39;baz&#39;]&#125;()</code></td>
+<td align="left"><code>(Foo::$bar)[&#39;baz&#39;]()</code></td>
+</tr>
+</tbody></table>
+<p>使用了旧的从右到左的解析顺序的代码必须被重写，明确的使用大括号来表明顺序（参见上表中间一列）。 这样使得代码既保持了与PHP 7.x的前向兼容性，又保持了与PHP 5.x的后向兼容性。</p>
+<p>这同样影响了<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.variables.scope.php#language.variables.scope.global"><strong>global</strong></a> 关键字。如果需要的话可以使用大括号来模拟之前的行为。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Valid in PHP 5 only.</span></span><br><span class="line">    <span class="keyword">global</span> <span class="variable">$$foo</span>-&gt;bar;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Valid in PHP 5 and 7.</span></span><br><span class="line">    <span class="keyword">global</span> $&#123;<span class="variable">$foo</span>-&gt;bar&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8进制字符容错率降低"><a href="#8进制字符容错率降低" class="headerlink" title="8进制字符容错率降低"></a>8进制字符容错率降低</h2><p>在php5版本，如果一个八进制字符如果含有无效数字，该无效数字将被静默删节。但是在php7.0.0里面会触发一个解析错误。同样在php7.0.0以后被改回去。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 在php5和php7.0.0之外的版本测试结果应该如下</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">octdec</span>( <span class="string">&#x27;012999999999999&#x27;</span> ) . <span class="string">&quot;\n&quot;</span>;    <span class="comment">// 10</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">octdec</span>( <span class="string">&#x27;012&#x27;</span> ) . <span class="string">&quot;\n&quot;</span>;                <span class="comment">// 10</span></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">octdec</span>( <span class="string">&#x27;012999999999999&#x27;</span> )==<span class="title function_ invoke__">octdec</span>( <span class="string">&#x27;012&#x27;</span> ))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;: )&quot;</span>. <span class="string">&quot;\n&quot;</span>;                   <span class="comment">// : )</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="负位移运算"><a href="#负位移运算" class="headerlink" title="负位移运算"></a>负位移运算</h2><p>以负数形式进行的位移运算将会抛出一个 <strong>ArithmeticError</strong>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="number">1</span> &gt;&gt; -<span class="number">1</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PHP5</span><br><span class="line">int(0)</span><br><span class="line"></span><br><span class="line">PHP7</span><br><span class="line">Fatal error: Uncaught ArithmeticError: Bit shift by negative number in /tmp/test.php:2</span><br><span class="line">Stack trace:</span><br><span class="line">#0 &#123;main&#125;</span><br><span class="line">  thrown in /tmp/test.php on line 2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="超范围后产生位移"><a href="#超范围后产生位移" class="headerlink" title="超范围后产生位移"></a>超范围后产生位移</h2><p>超出 <code>integer</code>位宽的位移操作（无论哪个方向）将始终得到 0 作为结果。在从前，这一操作是结构依赖的</p>
+<h2 id="十六进制字符串规范"><a href="#十六进制字符串规范" class="headerlink" title="十六进制字符串规范"></a>十六进制字符串规范</h2><p>十六进制字符串不再被认为是数字</p>
+<p>目前截至最新的PHP7.3版本依然没有改回去的征兆，官方称不会在改了。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;0x123&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;0x123&quot;</span> == <span class="string">&quot;291&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">is_numeric</span>(<span class="string">&quot;0x123&quot;</span>));</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;0xe&quot;</span> + <span class="string">&quot;0x1&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">substr</span>(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;0x1&quot;</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p>左边php5.6，右边php7.2</p>
+<p><img src="/Users/j7ur8/WebBook/BookBuild/images/19-7-22_PHP_PHP7%E5%92%8CPHP5%E7%9A%84%E5%8C%BA%E5%88%AB_%E8%AF%AD%E6%B3%95%E4%BF%AE%E6%94%B9_1.png"></p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.filter-var.php">filter_var()</a> 函数可以用于检查一个 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.string.php">string</a> 是否含有十六进制数字,并将其转换为<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.integer.php">integer</a>:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&quot;0xffff&quot;</span>;</span><br><span class="line"><span class="variable">$int</span> = <span class="title function_ invoke__">filter_var</span>(<span class="variable">$str</span>, FILTER_VALIDATE_INT, FILTER_FLAG_ALLOW_HEX);</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">false</span> === <span class="variable">$int</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&quot;Invalid integer!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$int</span>); <span class="comment">// int(65535)</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>由于新的 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.new-features.php#migration70.new-features.unicode-codepoint-escape-syntax">Unicode codepoint escape syntax</a>语法， 紧连着无效序列并包含<em>\u{</em> 的字串可能引起致命错误。 为了避免这一报错，应该避免反斜杠开头。</p>
+<h2 id="移除了-ASP-和-script-PHP-标签"><a href="#移除了-ASP-和-script-PHP-标签" class="headerlink" title="移除了 ASP 和 script PHP 标签"></a>移除了 ASP 和 script PHP 标签</h2><p>使用类似 ASP 的标签，以及 script 标签来区分 PHP 代码的方式被移除。 受到影响的标签有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">开标签</th>
+<th align="left">闭标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;%</code></td>
+<td align="left"><code>%&gt;</code></td>
+</tr>
+<tr>
+<td align="left"><code>&lt;%=</code></td>
+<td align="left"><code>%&gt;</code></td>
+</tr>
+<tr>
+<td align="left"><code>&lt;script language=&quot;php&quot;&gt;</code></td>
+<td align="left"><code>&lt;/script&gt;</code></td>
+</tr>
+</tbody></table>
+<h2 id="yield-变更为右联接运算符"><a href="#yield-变更为右联接运算符" class="headerlink" title="yield 变更为右联接运算符"></a>yield 变更为右联接运算符</h2><p>在使用 <code>yield</code> 关键字的时候，不再需要括号， 并且它变更为右联接操作符，其运算符优先级介于 <em>print</em> 和 <em>&#x3D;&gt;</em> 之间。 这可能导致现有代码的行为发生改变：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="keyword">yield</span> -<span class="number">1</span>;</span><br><span class="line"><span class="comment">// 在之前版本中会被解释为：</span></span><br><span class="line"><span class="keyword">echo</span> (<span class="keyword">yield</span>) - <span class="number">1</span>;</span><br><span class="line"><span class="comment">// 现在，它将被解释为：</span></span><br><span class="line"><span class="keyword">echo</span> <span class="keyword">yield</span> (-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">yield</span> <span class="variable">$foo</span> <span class="keyword">or</span> <span class="keyword">die</span>;</span><br><span class="line"><span class="comment">// 在之前版本中会被解释为：</span></span><br><span class="line"><span class="keyword">yield</span> (<span class="variable">$foo</span> <span class="keyword">or</span> <span class="keyword">die</span>);</span><br><span class="line"><span class="comment">// 现在，它将被解释为：</span></span><br><span class="line">(<span class="keyword">yield</span> <span class="variable">$foo</span>) <span class="keyword">or</span> <span class="keyword">die</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以通过使用括号来消除歧义。</p>
+<h2 id="关于对引用数组元素创建的变量的顺序变化"><a href="#关于对引用数组元素创建的变量的顺序变化" class="headerlink" title="关于对引用数组元素创建的变量的顺序变化"></a>关于对引用数组元素创建的变量的顺序变化</h2><p>有如下代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$array</span> = [];</span><br><span class="line"><span class="variable">$array</span>[<span class="string">&quot;a&quot;</span>] =&amp; <span class="variable">$array</span>[<span class="string">&quot;b&quot;</span>];</span><br><span class="line"><span class="variable">$array</span>[<span class="string">&quot;b&quot;</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$array</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">PHP5</span><br><span class="line">array(2) &#123;</span><br><span class="line">  [&quot;b&quot;]=&gt;</span><br><span class="line">  &amp;int(1)</span><br><span class="line">  [&quot;a&quot;]=&gt;</span><br><span class="line">  &amp;int(1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PHP7</span><br><span class="line">array(2) &#123;</span><br><span class="line">  [&quot;a&quot;]=&gt;</span><br><span class="line">  &amp;int(1)</span><br><span class="line">  [&quot;b&quot;]=&gt;</span><br><span class="line">  &amp;int(1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="NULL合并运算符"><a href="#NULL合并运算符" class="headerlink" title="NULL合并运算符"></a>NULL合并运算符</h2><p>由于日常使用中存在大量同时使用三元表达式和 <code>isset()</code>的情况， 我们添加了null合并运算符 (<em>??</em>) 这个语法糖。如果变量存在且值不为<strong>NULL</strong>， 它就会返回自身的值，否则返回它的第二个操作数。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$sss</span>=<span class="literal">NULL</span>;</span><br><span class="line"><span class="variable">$username</span>=<span class="variable">$sss</span> ?? <span class="string">&#x27;aaa&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$username</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$sss</span>= <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$username</span>=<span class="variable">$sss</span> ?? <span class="string">&#x27;aaa&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$username</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$username</span>=<span class="variable">$bbb</span> ?? <span class="string">&#x27;aaa&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$username</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">aaa</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">aaa</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="太空船操作符（组合比较符）"><a href="#太空船操作符（组合比较符）" class="headerlink" title="太空船操作符（组合比较符）"></a>太空船操作符（组合比较符）</h2><p>太空船操作符用于比较两个表达式。当$a小于、等于或大于$b时它分别返回-1、0或1。 比较的原则是沿用 PHP 的<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/types.comparisons.php"><strong>常规比较规则</strong></a>进行的。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 整数</span></span><br><span class="line"><span class="keyword">echo</span> <span class="number">1</span> &lt;=&gt; <span class="number">1</span>; <span class="comment">// 0</span></span><br><span class="line"><span class="keyword">echo</span> <span class="number">1</span> &lt;=&gt; <span class="number">2</span>; <span class="comment">// -1</span></span><br><span class="line"><span class="keyword">echo</span> <span class="number">2</span> &lt;=&gt; <span class="number">1</span>; <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 浮点数</span></span><br><span class="line"><span class="keyword">echo</span> <span class="number">1.5</span> &lt;=&gt; <span class="number">1.5</span>; <span class="comment">// 0</span></span><br><span class="line"><span class="keyword">echo</span> <span class="number">1.5</span> &lt;=&gt; <span class="number">2.5</span>; <span class="comment">// -1</span></span><br><span class="line"><span class="keyword">echo</span> <span class="number">2.5</span> &lt;=&gt; <span class="number">1.5</span>; <span class="comment">// 1</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 字符串</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;a&quot;</span> &lt;=&gt; <span class="string">&quot;a&quot;</span>; <span class="comment">// 0</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;a&quot;</span> &lt;=&gt; <span class="string">&quot;b&quot;</span>; <span class="comment">// -1</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;b&quot;</span> &lt;=&gt; <span class="string">&quot;a&quot;</span>; <span class="comment">// 1</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="匿名类"><a href="#匿名类" class="headerlink" title="匿名类"></a>匿名类</h2><p>现在支持通过<em>new class</em> 来实例化一个匿名类，这可以用来替代一些“用后即焚”的完整类定义。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Logger</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params"><span class="keyword">string</span> <span class="variable">$msg</span></span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$logger</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getLogger</span>(<span class="params"></span>): <span class="title">Logger</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;logger;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setLogger</span>(<span class="params">Logger <span class="variable">$logger</span></span>) </span>&#123;</span><br><span class="line">         <span class="variable language_">$this</span>-&gt;logger = <span class="variable">$logger</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$app</span> = <span class="keyword">new</span> <span class="title class_">Application</span>;</span><br><span class="line"><span class="variable">$app</span>-&gt;<span class="title function_ invoke__">setLogger</span>(<span class="keyword">new</span> <span class="keyword">class</span> <span class="keyword">implements</span> Logger &#123;</span><br><span class="line">    <span class="keyword">public</span> function <span class="title function_ invoke__">log</span>(<span class="keyword">string</span> <span class="variable">$msg</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$msg</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$app</span>-&gt;<span class="title function_ invoke__">getLogger</span>());</span><br><span class="line"></span><br><span class="line"><span class="comment">#结果</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">object(class<span class="doctag">@anonymous</span>)#2 (0) &#123;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Unicode-codepoint-转译语法"><a href="#Unicode-codepoint-转译语法" class="headerlink" title="Unicode codepoint 转译语法"></a>Unicode codepoint 转译语法</h2><p>这接受一个以16进制形式的 Unicode codepoint，并打印出一个双引号或heredoc包围的 UTF-8 编码格式的字符串。 可以接受任何有效的 codepoint，并且开头的 0 是可以省略的。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;\u&#123;aa&#125;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;\u&#123;0000aa&#125;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;\u&#123;9999&#125;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="导入use声名组"><a href="#导入use声名组" class="headerlink" title="导入use声名组"></a>导入use声名组</h2><p>从同一 <code>namespace</code> 导入的类、函数和常量现在可以通过单个 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.namespaces.importing.php"><em>use</em></a> 语句 一次性导入了。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// PHP 7 之前的代码</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ClassA</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ClassB</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ClassC</span> <span class="keyword">as</span> <span class="title">C</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="keyword">function</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">fn_a</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="keyword">function</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">fn_b</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="keyword">function</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">fn_c</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="keyword">const</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ConstA</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="keyword">const</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ConstB</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="keyword">const</span> <span class="title">some</span>\<span class="title">namespace</span>\<span class="title">ConstC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// PHP 7+ 及更高版本的代码</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">some</span>\<span class="title">namespace</span>\&#123;<span class="title">ClassA</span>, <span class="title">ClassB</span>, <span class="title">ClassC</span> <span class="keyword">as</span> <span class="title">C</span>&#125;;</span><br><span class="line"><span class="keyword">use</span> <span class="keyword">function</span> <span class="title">some</span>\<span class="title">namespace</span>\&#123;<span class="title">fn_a</span>, <span class="title">fn_b</span>, <span class="title">fn_c</span>&#125;;</span><br><span class="line"><span class="keyword">use</span> <span class="keyword">const</span> <span class="title">some</span>\<span class="title">namespace</span>\&#123;<span class="title">ConstA</span>, <span class="title">ConstB</span>, <span class="title">ConstC</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="放宽了保留词限制"><a href="#放宽了保留词限制" class="headerlink" title="放宽了保留词限制"></a>放宽了保留词限制</h2><p>现在允许全局保留词用于类&#x2F;接口&#x2F;Trait 中的属性、常量和方法名。 在引入新关键词时，此变更减少了对向后兼容的破坏，避免了 API 命名的限制。</p>
+<p>使用流畅的接口实现内部 DSL 时，这非常有用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 以前不能用  &#x27;new&#x27;、&#x27;private&#x27; 和 &#x27;for&#x27;</span></span><br><span class="line"><span class="title class_">Project</span>::<span class="keyword">new</span>(<span class="string">&#x27;Project Name&#x27;</span>)-&gt;<span class="keyword">private</span>()-&gt;<span class="keyword">for</span>(<span class="string">&#x27;purpose here&#x27;</span>)-&gt;<span class="title function_ invoke__">with</span>(<span class="string">&#x27;username here&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>唯一的限制是： <em>class</em>关键词不能用于常量名，否则会和 类名解析语法冲突 (<em>ClassName::class</em>)。</p>
+<h2 id="（弃用）PHP4-风格的构造函数"><a href="#（弃用）PHP4-风格的构造函数" class="headerlink" title="（弃用）PHP4 风格的构造函数"></a>（弃用）PHP4 风格的构造函数</h2><p>PHP4 风格的构造函数（方法名和类名一样）将被弃用，并在将来移除。 如果在类中仅使用了 PHP4 风格的构造函数，PHP7 会产生 <strong>E_DEPRECATED</strong> 警告。 如果还定义了 <strong>__construct()</strong> 方法则不受影响。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">foo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;I am the constructor&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="（弃用）静态调用非静态的方法"><a href="#（弃用）静态调用非静态的方法" class="headerlink" title="（弃用）静态调用非静态的方法"></a>（弃用）静态调用非静态的方法</h2><p>废弃了<strong>静态</strong>调用未声明成 <strong>static</strong> 的方法，未来可能会彻底移除该功能。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">foo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;I am not static!&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo::<span class="title function_ invoke__">bar</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><h2 id="错误和异常处理相关的变更-¶"><a href="#错误和异常处理相关的变更-¶" class="headerlink" title="错误和异常处理相关的变更 ¶"></a>错误和异常处理相关的变更<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.error-handling"> ¶</a></h2><h2 id="HTTP-RAW-POST-DATA-被移除-¶"><a href="#HTTP-RAW-POST-DATA-被移除-¶" class="headerlink" title="$HTTP_RAW_POST_DATA 被移除 ¶"></a>$HTTP_RAW_POST_DATA 被移除<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.http-raw-post-data"> ¶</a></h2><h2 id="从不匹配的上下文发起调用-¶"><a href="#从不匹配的上下文发起调用-¶" class="headerlink" title="从不匹配的上下文发起调用 ¶"></a>从不匹配的上下文发起调用<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.incompatible-this"> ¶</a></h2><h2 id="函数定义不可以包含多个同名参数-¶"><a href="#函数定义不可以包含多个同名参数-¶" class="headerlink" title="函数定义不可以包含多个同名参数 ¶"></a>函数定义不可以包含多个同名参数<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.func-parameters"> ¶</a></h2><h2 id="在函数中检视参数值会返回-当前-的值-¶"><a href="#在函数中检视参数值会返回-当前-的值-¶" class="headerlink" title="在函数中检视参数值会返回 当前 的值 ¶"></a>在函数中检视参数值会返回 <em>当前</em> 的值<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.func-parameter-modified"> ¶</a></h2><h2 id="INI-文件中-注释格式被移除-¶"><a href="#INI-文件中-注释格式被移除-¶" class="headerlink" title="INI 文件中 # 注释格式被移除 ¶"></a>INI 文件中 <em>#</em> 注释格式被移除<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.ini-comments"> ¶</a></h2><h2 id="Switch-语句不可以包含多个-default-块-¶"><a href="#Switch-语句不可以包含多个-default-块-¶" class="headerlink" title="Switch 语句不可以包含多个 default 块 ¶"></a>Switch 语句不可以包含多个 default 块<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.multiple-default"> ¶</a></h2><h2 id="JSON-扩展已经被-JSOND-取代-¶"><a href="#JSON-扩展已经被-JSOND-取代-¶" class="headerlink" title="JSON 扩展已经被 JSOND 取代 ¶"></a>JSON 扩展已经被 JSOND 取代<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.json-to-jsond"> ¶</a></h2><h2 id="在数值溢出的时候，内部函数将会失败-¶"><a href="#在数值溢出的时候，内部函数将会失败-¶" class="headerlink" title="在数值溢出的时候，内部函数将会失败 ¶"></a>在数值溢出的时候，内部函数将会失败<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.internal-function-failure-overflow"> ¶</a></h2><h2 id="自定义会话处理器的返回值修复-¶"><a href="#自定义会话处理器的返回值修复-¶" class="headerlink" title="自定义会话处理器的返回值修复 ¶"></a>自定义会话处理器的返回值修复<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.fixes-custom-session-handler"> ¶</a></h2><h2 id="相等的元素在排序时的顺序问题-¶"><a href="#相等的元素在排序时的顺序问题-¶" class="headerlink" title="相等的元素在排序时的顺序问题 ¶"></a>相等的元素在排序时的顺序问题<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.sort-order"> ¶</a></h2><h2 id="错误的使用-break-和-switch-语句-¶"><a href="#错误的使用-break-和-switch-语句-¶" class="headerlink" title="错误的使用 break 和 switch 语句 ¶"></a>错误的使用 break 和 switch 语句<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.break-continue"> ¶</a></h2><h2 id="Mhash-不再是一个单独的扩展了-¶"><a href="#Mhash-不再是一个单独的扩展了-¶" class="headerlink" title="Mhash 不再是一个单独的扩展了 ¶"></a>Mhash 不再是一个单独的扩展了<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.incompatible.php#migration70.incompatible.other.mhash"> ¶</a></h2><h2 id="标量类型声明-¶"><a href="#标量类型声明-¶" class="headerlink" title="标量类型声明 ¶"></a>标量类型声明<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.new-features.php#migration70.new-features.scalar-type-declarations"> ¶</a></h2><h2 id="返回值类型声明-¶"><a href="#返回值类型声明-¶" class="headerlink" title="返回值类型声明 ¶"></a>返回值类型声明<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.new-features.php#migration70.new-features.return-type-declarations"> ¶</a></h2><h2 id="生成器可以返回表达式-¶"><a href="#生成器可以返回表达式-¶" class="headerlink" title="生成器可以返回表达式 ¶"></a>生成器可以返回表达式<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration70.new-features.php#migration70.new-features.generator-return-expressions"> ¶</a></h2><h2 id="允许在克隆表达式上访问对象成员-¶"><a href="#允许在克隆表达式上访问对象成员-¶" class="headerlink" title="允许在克隆表达式上访问对象成员[ ¶]("></a>允许在克隆表达式上访问对象成员[ ¶](</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://theganlove.github.io/2024/08/31/PHP7-0%E7%89%B9%E6%80%A7/" data-id="cm0kwqysp000364dk6rg91fw4" data-title="PHP7.0特性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web-php/" rel="tag">web php</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/08/31/PHP7-1%E7%89%B9%E6%80%A7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          PHP7.1特性
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/08/31/%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E5%87%BD%E6%95%B0GetShell/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">循环嵌套函数GetShell</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/">CTF-web</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">php代码审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E5%AE%A1%E8%AE%A1/">php审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/rce/">rce</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">文件操作</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF/">艺术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A9%E5%91%BD%E6%8B%82%E6%99%93/">革命拂晓</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-php/" rel="tag">web php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" rel="tag">文字感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" rel="tag">自己的艺术</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/web-php/" style="font-size: 20px;">web php</a> <a href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" style="font-size: 10px;">文字感悟</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">环境</a> <a href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" style="font-size: 10px;">自己的艺术</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/">隐写系列</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/">脚本工具</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/ssrf/">ssrf</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/">jwt等认证went</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/js%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">js原型链污染</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

