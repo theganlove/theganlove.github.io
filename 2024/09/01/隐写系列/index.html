@@ -1,109 +1,291 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>隐写系列 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="有时候会遇见需要改宽高的情况，一般会根据图片的crc值爆破出正确的宽高。  1234567891011121314import binasciiimport structCRC&#x3D;0x6D7C7135with open(&quot;dabai.png&quot;, &quot;rb&quot;) as f:    crcbp&#x3D;f.read()for i in range(2000):    for">
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="uert">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="有时候会遇见需要改宽高的情况，一般会根据图片的crc值爆破出正确的宽高。  1234567891011121314import binasciiimport structCRC&#x3D;0x6D7C7135with open(&quot;dabai.png&quot;, &quot;rb&quot;) as f:    crcbp&#x3D;f.read()for i in range(2000):    for">
 <meta property="og:type" content="article">
 <meta property="og:title" content="隐写系列">
 <meta property="og:url" content="https://theganlove.github.io/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="有时候会遇见需要改宽高的情况，一般会根据图片的crc值爆破出正确的宽高。  1234567891011121314import binasciiimport structCRC&#x3D;0x6D7C7135with open(&quot;dabai.png&quot;, &quot;rb&quot;) as f:    crcbp&#x3D;f.read()for i in range(2000):    for">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:/Users/a1348/Desktop/NoobCTF-main/%E7%AC%94%E8%AE%B0/images/hanxin_code.png">
 <meta property="og:image" content="c:/Users/a1348/Desktop/NoobCTF-main/%E7%AC%94%E8%AE%B0/images/hexahue.png">
 <meta property="og:image" content="c:/Users/a1348/Desktop/NoobCTF-main/%E7%AC%94%E8%AE%B0/images/npiet.png">
 <meta property="article:published_time" content="2024-09-01T13:50:13.000Z">
 <meta property="article:modified_time" content="2024-09-01T13:52:36.439Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
+<meta property="article:author" content="uert">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="c:/Users/a1348/Desktop/NoobCTF-main/%E7%AC%94%E8%AE%B0/images/hanxin_code.png">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+  <title>隐写系列 - Hexo</title>
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"theganlove.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 7.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>主题</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="隐写系列"></span>
+          
+        </div>
+
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-01 21:50" pubdate>
+          2024年9月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          5.9k 字
         
-      </nav>
-      <nav id="sub-nav">
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
         
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://theganlove.github.io"></form>
+          50 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
   </div>
-</header>
+</div>
 
-      <div class="outer">
-        <section id="main"><article id="post-隐写系列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/" class="article-date">
-  <time class="dt-published" datetime="2024-09-01T13:50:13.000Z" itemprop="datePublished">2024-09-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      隐写系列
-    </h1>
-  
+</div>
 
-      </header>
+  </header>
+
+  <main>
     
-    <div class="e-content article-entry" itemprop="articleBody">
       
-        <ol>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">隐写系列</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <ol>
 <li>有时候会遇见需要改宽高的情况，一般会根据图片的crc值爆破出正确的宽高。</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">CRC=<span class="number">0x6D7C7135</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;dabai.png&quot;</span>, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    crcbp=f.read()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2000</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2000</span>):</span><br><span class="line">        data = crcbp[<span class="number">12</span>:<span class="number">16</span>] + \</span><br><span class="line">            struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, i)+struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, j)+crcbp[<span class="number">24</span>:<span class="number">29</span>]</span><br><span class="line">        crc32 = binascii.crc32(data) &amp; <span class="number">0xffffffff</span></span><br><span class="line">        <span class="keyword">if</span>(crc32 == CRC):</span><br><span class="line">            <span class="built_in">print</span>(i, j)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;hex:&#x27;</span>, <span class="built_in">hex</span>(i), <span class="built_in">hex</span>(j))</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> binascii<br><span class="hljs-keyword">import</span> struct<br>CRC=<span class="hljs-number">0x6D7C7135</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;dabai.png&quot;</span>, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    crcbp=f.read()<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2000</span>):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2000</span>):<br>        data = crcbp[<span class="hljs-number">12</span>:<span class="hljs-number">16</span>] + \<br>            struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>, i)+struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>, j)+crcbp[<span class="hljs-number">24</span>:<span class="hljs-number">29</span>]<br>        crc32 = binascii.crc32(data) &amp; <span class="hljs-number">0xffffffff</span><br>        <span class="hljs-keyword">if</span>(crc32 == CRC):<br>            <span class="hljs-built_in">print</span>(i, j)<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hex:&#x27;</span>, <span class="hljs-built_in">hex</span>(i), <span class="hljs-built_in">hex</span>(j))<br>            <span class="hljs-keyword">break</span><br></code></pre></td></tr></table></figure>
 
 <p>也可以考虑下面这个脚本自动改宽高并生成文件(仅限png):</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">file = <span class="string">&#x27;/Users/constellation/Downloads/misc26.png&#x27;</span></span><br><span class="line">fr = <span class="built_in">open</span>(file,<span class="string">&#x27;rb&#x27;</span>).read()</span><br><span class="line">data = <span class="built_in">bytearray</span>(fr[<span class="number">12</span>:<span class="number">29</span>])</span><br><span class="line"><span class="comment">#crc32key = str(fr[29:33]).replace(&#x27;\\x&#x27;,&#x27;&#x27;).replace(&quot;b&#x27;&quot;,&#x27;0x&#x27;).replace(&quot;&#x27;&quot;,&#x27;&#x27;)</span></span><br><span class="line">crc32key = <span class="number">0xEC9CCBC6</span> <span class="comment">#补上0x，copy hex value</span></span><br><span class="line"><span class="comment">#data = bytearray(b&#x27;\x49\x48\x44\x52\x00\x00\x01\xF4\x00\x00\x01\xF1\x08\x06\x00\x00\x00&#x27;)  #hex下copy grep hex</span></span><br><span class="line">n = <span class="number">4095</span> <span class="comment">#理论上0xffffffff,但考虑到屏幕实际，0x0fff就差不多了</span></span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">range</span>(n):<span class="comment">#高和宽一起爆破</span></span><br><span class="line">    width = <span class="built_in">bytearray</span>(struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, w))<span class="comment">#q为8字节，i为4字节，h为2字节</span></span><br><span class="line">    <span class="keyword">for</span> h <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        height = <span class="built_in">bytearray</span>(struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, h))</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">            data[x+<span class="number">4</span>] = width[x]</span><br><span class="line">            data[x+<span class="number">8</span>] = height[x]</span><br><span class="line">            <span class="comment">#print(data)</span></span><br><span class="line">        crc32result = zlib.crc32(data)</span><br><span class="line">        <span class="keyword">if</span> crc32result == crc32key:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;width:<span class="subst">&#123;width.<span class="built_in">hex</span>()&#125;</span>\nheight:<span class="subst">&#123;height.<span class="built_in">hex</span>()&#125;</span>&quot;</span>)</span><br><span class="line">            newpic = <span class="built_in">bytearray</span>(fr)</span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">                newpic[x+<span class="number">16</span>] = width[x]</span><br><span class="line">                newpic[x+<span class="number">20</span>] = height[x]</span><br><span class="line">            fw = <span class="built_in">open</span>(<span class="string">f&quot;<span class="subst">&#123;file&#125;</span>.png&quot;</span>,<span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">            fw.write(newpic)</span><br><span class="line">            fw.close()</span><br><span class="line">            exit()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> zlib<br><span class="hljs-keyword">import</span> struct<br>file = <span class="hljs-string">&#x27;/Users/constellation/Downloads/misc26.png&#x27;</span><br>fr = <span class="hljs-built_in">open</span>(file,<span class="hljs-string">&#x27;rb&#x27;</span>).read()<br>data = <span class="hljs-built_in">bytearray</span>(fr[<span class="hljs-number">12</span>:<span class="hljs-number">29</span>])<br><span class="hljs-comment">#crc32key = str(fr[29:33]).replace(&#x27;\\x&#x27;,&#x27;&#x27;).replace(&quot;b&#x27;&quot;,&#x27;0x&#x27;).replace(&quot;&#x27;&quot;,&#x27;&#x27;)</span><br>crc32key = <span class="hljs-number">0xEC9CCBC6</span> <span class="hljs-comment">#补上0x，copy hex value</span><br><span class="hljs-comment">#data = bytearray(b&#x27;\x49\x48\x44\x52\x00\x00\x01\xF4\x00\x00\x01\xF1\x08\x06\x00\x00\x00&#x27;)  #hex下copy grep hex</span><br>n = <span class="hljs-number">4095</span> <span class="hljs-comment">#理论上0xffffffff,但考虑到屏幕实际，0x0fff就差不多了</span><br><span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<span class="hljs-comment">#高和宽一起爆破</span><br>    width = <span class="hljs-built_in">bytearray</span>(struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>, w))<span class="hljs-comment">#q为8字节，i为4字节，h为2字节</span><br>    <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>        height = <span class="hljs-built_in">bytearray</span>(struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>, h))<br>        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">4</span>):<br>            data[x+<span class="hljs-number">4</span>] = width[x]<br>            data[x+<span class="hljs-number">8</span>] = height[x]<br>            <span class="hljs-comment">#print(data)</span><br>        crc32result = zlib.crc32(data)<br>        <span class="hljs-keyword">if</span> crc32result == crc32key:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;width:<span class="hljs-subst">&#123;width.<span class="hljs-built_in">hex</span>()&#125;</span>\nheight:<span class="hljs-subst">&#123;height.<span class="hljs-built_in">hex</span>()&#125;</span>&quot;</span>)<br>            newpic = <span class="hljs-built_in">bytearray</span>(fr)<br>            <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">4</span>):<br>                newpic[x+<span class="hljs-number">16</span>] = width[x]<br>                newpic[x+<span class="hljs-number">20</span>] = height[x]<br>            fw = <span class="hljs-built_in">open</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;file&#125;</span>.png&quot;</span>,<span class="hljs-string">&#x27;wb&#x27;</span>)<br>            fw.write(newpic)<br>            fw.close()<br>            exit()<br></code></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>遇见webshell查杀题直接用D盾扫。例题:<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges#webshell%E5%90%8E%E9%97%A8">webshell后门</a></li>
@@ -118,7 +300,7 @@
 <blockquote>
 <p>zsteg xxx.png(仅图片)<br>如果zsteg输出类似这样的东西：</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extradata:0         .. file: Zip archive data, at least v2.0 to extract, compression method=AES Encrypted</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">extradata:<span class="hljs-number">0</span>         .. file: Zip archive data, at least v2<span class="hljs-number">.0</span> <span class="hljs-keyword">to</span> extract, compression <span class="hljs-keyword">method</span>=AES <span class="hljs-keyword">Encrypted</span><br></code></pre></td></tr></table></figure>
 
 <p>说明这里有文件可以提取。记住开始的字符串，使用以下命令提取：</p>
 <ul>
@@ -212,7 +394,7 @@
 <li>AAEncode，特征是颜文字，是将js代码转换为颜文字的编码。可用<a target="_blank" rel="noopener" href="http://www.atoolbox.net/Tool.php?Id=703">网站</a>在线解码。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109481013">[SUCTF2018]single dog</a>。</li>
 <li>敲击码。类似棋盘密码，只不过与平时的棋盘排版不同，C和K在一个格，形如下方展示，&#x2F;表示分割。</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">..... ../... ./... ./... ../</span><br><span class="line">  5,2     3,1    3,1    3,2</span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">.....</span> <span class="hljs-string">../...</span> <span class="hljs-string">./...</span> <span class="hljs-string">./...</span> <span class="hljs-string">../</span><br>  5,2     3,1    3,1    3,2<br></code></pre></td></tr></table></figure>
 
 <p>例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109449494">[SWPU2019]你有没有好好看网课?</a></p>
 <ol start="22">
@@ -224,7 +406,7 @@
 <li>pdf文件可以用photoshop等软件打开，能找到里面隐藏的图片等内容。</li>
 <li>crc值爆破恢复文件内容。zip加密的文件内容不应过小，因为此时攻击者可以通过爆破crc值的形式恢复文件内容。例题:<a target="_blank" rel="noopener" href="https://github.com/C0nstellati0n/NoobCTF/blob/main/CTF/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/4%E7%BA%A7/Misc/crc.md">crc</a>。下方脚本可以通过crc值破解多个zip，并将zip的内容写入一个文件中。</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">CrackCrc</span>(<span class="params">crc</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> dic:</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">			<span class="keyword">for</span> k <span class="keyword">in</span> dic:</span><br><span class="line">				<span class="keyword">for</span> h <span class="keyword">in</span> dic:</span><br><span class="line">					s = i + j + k + h</span><br><span class="line">					<span class="keyword">if</span> crc == (binascii.crc32(s.encode())):</span><br><span class="line">						f.write(s)</span><br><span class="line">						<span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">CrackZip</span>():</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">68</span>):</span><br><span class="line">		file = <span class="string">&#x27;out&#x27;</span>+<span class="built_in">str</span>(i)+<span class="string">&#x27;.zip&#x27;</span></span><br><span class="line">		crc = zipfile.ZipFile(file,<span class="string">&#x27;r&#x27;</span>).getinfo(<span class="string">&#x27;data.txt&#x27;</span>).CRC</span><br><span class="line">		CrackCrc(crc)</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&#x27;\r&#x27;</span>+<span class="string">&quot;loading：&#123;:%&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">float</span>((i+<span class="number">1</span>)/<span class="number">68</span>)),end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">dic = string.ascii_letters + string.digits + <span class="string">&#x27;+/=&#x27;</span></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;out.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\nCRC32begin&quot;</span>)</span><br><span class="line">CrackZip()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\nCRC32finished&quot;</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> zipfile<br><span class="hljs-keyword">import</span> string<br><span class="hljs-keyword">import</span> binascii<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">CrackCrc</span>(<span class="hljs-params">crc</span>):<br>	<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> dic:<br>		<span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> dic:<br>			<span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> dic:<br>				<span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> dic:<br>					s = i + j + k + h<br>					<span class="hljs-keyword">if</span> crc == (binascii.crc32(s.encode())):<br>						f.write(s)<br>						<span class="hljs-keyword">return</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">CrackZip</span>():<br>	<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-number">68</span>):<br>		file = <span class="hljs-string">&#x27;out&#x27;</span>+<span class="hljs-built_in">str</span>(i)+<span class="hljs-string">&#x27;.zip&#x27;</span><br>		crc = zipfile.ZipFile(file,<span class="hljs-string">&#x27;r&#x27;</span>).getinfo(<span class="hljs-string">&#x27;data.txt&#x27;</span>).CRC<br>		CrackCrc(crc)<br>		<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\r&#x27;</span>+<span class="hljs-string">&quot;loading：&#123;:%&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">float</span>((i+<span class="hljs-number">1</span>)/<span class="hljs-number">68</span>)),end=<span class="hljs-string">&#x27;&#x27;</span>)<br><br>dic = string.ascii_letters + string.digits + <span class="hljs-string">&#x27;+/=&#x27;</span><br>f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;out.txt&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nCRC32begin&quot;</span>)<br>CrackZip()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nCRC32finished&quot;</span>)<br>f.close()<br></code></pre></td></tr></table></figure>
 
 <ol start="29">
 <li>中文电码+五笔编码。例题:<a href="../../CTF/BUUCTF/Crypto/%E4%BF%A1%E6%81%AF%E5%8C%96%E6%97%B6%E4%BB%A3%E7%9A%84%E6%AD%A5%E4%BC%90.md">信息化时代的步伐</a></li>
@@ -235,17 +417,17 @@
 <li>rar文件可以通过更改文件结构隐藏文件，效果是让rar里有的文件解压不出来。用010 Editor打开rar文件，注意用文件名的区域开头是否是74（在<a target="_blank" rel="noopener" href="https://www.freebuf.com/column/199854.html">RAR文件结构</a>中，文件块的位置应该是74并不是7A，74让文件可以被解压出来，7A则不能），如果不是要改成74让文件被解压出来。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109632626">USB</a></li>
 <li>python3 单字节16进制异或结果写入文件。今天遇到一道题，文本文件里的内容需要需要单字节与5异或后转为16进制写入文件。不知道为啥大佬们的脚本我用不了，可能是版本的问题，故自己写了一个python3的简陋玩意。题目:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/105367979">[GUET-CTF2019]虚假的压缩包</a></li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">original = <span class="built_in">open</span>(<span class="string">&quot;亦真亦假&quot;</span>,<span class="string">&#x27;r&#x27;</span>).read()</span><br><span class="line">flag = <span class="built_in">open</span>(<span class="string">&quot;ctf&quot;</span>,<span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">res=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> original:</span><br><span class="line">	tmp = <span class="built_in">int</span>(i,<span class="number">16</span>)^<span class="number">5</span></span><br><span class="line">	res+=<span class="built_in">hex</span>(tmp)[<span class="number">2</span>:]</span><br><span class="line">flag.write(long_to_bytes(<span class="built_in">int</span>(res,<span class="number">16</span>)))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br>original = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;亦真亦假&quot;</span>,<span class="hljs-string">&#x27;r&#x27;</span>).read()<br>flag = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;ctf&quot;</span>,<span class="hljs-string">&#x27;wb&#x27;</span>)<br>res=<span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> original:<br>	tmp = <span class="hljs-built_in">int</span>(i,<span class="hljs-number">16</span>)^<span class="hljs-number">5</span><br>	res+=<span class="hljs-built_in">hex</span>(tmp)[<span class="hljs-number">2</span>:]<br>flag.write(long_to_bytes(<span class="hljs-built_in">int</span>(res,<span class="hljs-number">16</span>)))<br></code></pre></td></tr></table></figure>
 
 <ol start="36">
 <li>ttl隐写脚本。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109633675">[SWPU2019]Network</a></li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;attachment.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    a=fp.readlines()</span><br><span class="line">    p=[]</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)):</span><br><span class="line">       p.append(<span class="built_in">int</span>(a[x])) </span><br><span class="line">    s=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> p:</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">63</span>):</span><br><span class="line">            b=<span class="string">&#x27;00&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span>(i==<span class="number">127</span>):</span><br><span class="line">            b=<span class="string">&#x27;01&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span>(i==<span class="number">191</span>):</span><br><span class="line">            b=<span class="string">&#x27;10&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            b=<span class="string">&#x27;11&#x27;</span></span><br><span class="line">        s +=b</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(s),<span class="number">8</span>):</span><br><span class="line">    flag += <span class="built_in">chr</span>(<span class="built_in">int</span>(s[i:i+<span class="number">8</span>],<span class="number">2</span>))</span><br><span class="line">flag = binascii.unhexlify(flag)</span><br><span class="line">wp = <span class="built_in">open</span>(<span class="string">&#x27;ans&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">wp.write(flag)</span><br><span class="line">wp.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> binascii<br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;attachment.txt&#x27;</span>,<span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> fp:<br>    a=fp.readlines()<br>    p=[]<br>    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(a)):<br>       p.append(<span class="hljs-built_in">int</span>(a[x])) <br>    s=<span class="hljs-string">&#x27;&#x27;</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> p:<br>        <span class="hljs-keyword">if</span>(i==<span class="hljs-number">63</span>):<br>            b=<span class="hljs-string">&#x27;00&#x27;</span><br>        <span class="hljs-keyword">elif</span>(i==<span class="hljs-number">127</span>):<br>            b=<span class="hljs-string">&#x27;01&#x27;</span><br>        <span class="hljs-keyword">elif</span>(i==<span class="hljs-number">191</span>):<br>            b=<span class="hljs-string">&#x27;10&#x27;</span><br>        <span class="hljs-keyword">else</span>:<br>            b=<span class="hljs-string">&#x27;11&#x27;</span><br>        s +=b<br>flag = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(s),<span class="hljs-number">8</span>):<br>    flag += <span class="hljs-built_in">chr</span>(<span class="hljs-built_in">int</span>(s[i:i+<span class="hljs-number">8</span>],<span class="hljs-number">2</span>))<br>flag = binascii.unhexlify(flag)<br>wp = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;ans&#x27;</span>,<span class="hljs-string">&#x27;wb&#x27;</span>)<br>wp.write(flag)<br>wp.close()<br></code></pre></td></tr></table></figure>
 
 <ol start="37">
 <li>logo编程语言，可用于绘画，形如：</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cs pu lt 90 fd 500 rt 90 pd fd 100 rt 90 repeat 18[fd 5 rt 10] lt 135 fd 50 lt 135 pu bk 100 pd setcolor pick [ red orange yellow green blue violet ] repeat 18[fd 5 rt 10] rt 90 fd 60 rt 90 bk 30 rt 90 fd 60 pu lt 90 fd 100 pd rt 90 fd 50 bk 50 setcolor pick [ red orange yellow green blue violet ] lt 90 fd 50 rt 90 fd 50 pu fd 50 pd fd 25 bk 50 fd 25 rt 90 fd 50 pu setcolor pick [ red orange yellow green blue violet ] fd 100 rt 90 fd 30 rt 45 pd fd 50 bk 50 rt 90 fd 50 bk 100 fd 50 rt 45 pu fd 50 lt 90 pd fd 50 bk 50 rt 90 setcolor pick [ red orange yellow green blue violet ] fd 50 pu lt 90 fd 100 pd fd 50 rt 90 fd 25 bk 25 lt 90 bk 25 rt 90 fd 25 setcolor pick [ red orange yellow green blue violet ] pu fd 25 lt 90 bk 30 pd rt 90 fd 25 pu fd 25 lt 90 pd fd 50 bk 25 rt 90 fd 25 lt 90 fd 25 bk 50 pu bk 100 lt 90 setcolor pick [ red orange yellow green blue violet ] fd 100 pd rt 90 arc 360 20 pu rt 90 fd 50 pd arc 360 15 pu fd 15 setcolor pick [ red orange yellow green blue violet ] lt 90 pd bk 50 lt 90 fd 25 pu home bk 100 lt 90 fd 100 pd arc 360 20 pu home</span><br></pre></td></tr></table></figure>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tap">cs pu lt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 500 </span>rt<span class="hljs-number"> 90 </span>pd fd<span class="hljs-number"> 100 </span>rt<span class="hljs-number"> 90 </span>repeat 18[fd<span class="hljs-number"> 5 </span>rt 10] lt<span class="hljs-number"> 135 </span>fd<span class="hljs-number"> 50 </span>lt<span class="hljs-number"> 135 </span>pu bk<span class="hljs-number"> 100 </span>pd setcolor pick [ red orange yellow green blue violet ] repeat 18[fd<span class="hljs-number"> 5 </span>rt 10] rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 60 </span>rt<span class="hljs-number"> 90 </span>bk<span class="hljs-number"> 30 </span>rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 60 </span>pu lt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 100 </span>pd rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 50 </span>bk<span class="hljs-number"> 50 </span>setcolor pick [ red orange yellow green blue violet ] lt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 50 </span>rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 50 </span>pu fd<span class="hljs-number"> 50 </span>pd fd<span class="hljs-number"> 25 </span>bk<span class="hljs-number"> 50 </span>fd<span class="hljs-number"> 25 </span>rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 50 </span>pu setcolor pick [ red orange yellow green blue violet ] fd<span class="hljs-number"> 100 </span>rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 30 </span>rt<span class="hljs-number"> 45 </span>pd fd<span class="hljs-number"> 50 </span>bk<span class="hljs-number"> 50 </span>rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 50 </span>bk<span class="hljs-number"> 100 </span>fd<span class="hljs-number"> 50 </span>rt<span class="hljs-number"> 45 </span>pu fd<span class="hljs-number"> 50 </span>lt<span class="hljs-number"> 90 </span>pd fd<span class="hljs-number"> 50 </span>bk<span class="hljs-number"> 50 </span>rt<span class="hljs-number"> 90 </span>setcolor pick [ red orange yellow green blue violet ] fd<span class="hljs-number"> 50 </span>pu lt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 100 </span>pd fd<span class="hljs-number"> 50 </span>rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 25 </span>bk<span class="hljs-number"> 25 </span>lt<span class="hljs-number"> 90 </span>bk<span class="hljs-number"> 25 </span>rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 25 </span>setcolor pick [ red orange yellow green blue violet ] pu fd<span class="hljs-number"> 25 </span>lt<span class="hljs-number"> 90 </span>bk<span class="hljs-number"> 30 </span>pd rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 25 </span>pu fd<span class="hljs-number"> 25 </span>lt<span class="hljs-number"> 90 </span>pd fd<span class="hljs-number"> 50 </span>bk<span class="hljs-number"> 25 </span>rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 25 </span>lt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 25 </span>bk<span class="hljs-number"> 50 </span>pu bk<span class="hljs-number"> 100 </span>lt<span class="hljs-number"> 90 </span>setcolor pick [ red orange yellow green blue violet ] fd<span class="hljs-number"> 100 </span>pd rt<span class="hljs-number"> 90 </span>arc<span class="hljs-number"> 360 </span>20 pu rt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 50 </span>pd arc<span class="hljs-number"> 360 </span>15 pu fd<span class="hljs-number"> 15 </span>setcolor pick [ red orange yellow green blue violet ] lt<span class="hljs-number"> 90 </span>pd bk<span class="hljs-number"> 50 </span>lt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 25 </span>pu home bk<span class="hljs-number"> 100 </span>lt<span class="hljs-number"> 90 </span>fd<span class="hljs-number"> 100 </span>pd arc<span class="hljs-number"> 360 </span>20 pu home<br></code></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://www.calormen.com/jslogo/">在线解释器</a></p>
 <ol start="38">
@@ -255,7 +437,7 @@
 <li>gaps+montage工具自动拼图。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/109649446">[MRCTF2020]不眠之夜</a></li>
 <li>汉信码，形如：</li>
 </ol>
-<p><img src="C:/Users/a1348/Desktop/NoobCTF-main/笔记/images/hanxin_code.png" alt="hanxin_code"></p>
+<p><img src="C:/Users/a1348/Desktop/NoobCTF-main/笔记/images/hanxin_code.png" srcset="/img/loading.gif" lazyload alt="hanxin_code"></p>
 <p>可用<a target="_blank" rel="noopener" href="https://tuzim.net/hxdecode/">网站</a>解码。</p>
 <ol start="43">
 <li><a target="_blank" rel="noopener" href="https://lazzzaro.github.io/2020/06/20/misc-%E6%96%87%E4%BB%B6%E9%9A%90%E5%86%99/">snow隐写</a>，有<a target="_blank" rel="noopener" href="http://fog.misty.com/perry/ccs/snow/snow/snow.html">网页版</a>和<a target="_blank" rel="noopener" href="https://darkside.com.au/snow/">exe版</a>。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_53105813/article/details/127896201">看雪看雪看雪</a>。如果不知道密码，还可以尝试爆破，使用工具:<a target="_blank" rel="noopener" href="https://github.com/0xHasanM/SnowCracker">SnowCracker</a>。例题:<a target="_blank" rel="noopener" href="https://github.com/daffainfo/ctf-writeup/tree/main/GREP%20CTF%202023/Arctic%20Penguin">Arctic Penguin</a></li>
@@ -271,7 +453,7 @@
 <li>某些思路邪门的题里，图片的颜色十六进制号可能是flag的十六进制编码。</li>
 <li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/G%E4%BB%A3%E7%A0%81/2892251">GCode</a>,形如：</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">M73 P0 R2</span><br><span class="line">M201 X9000 Y9000 Z500 E10000</span><br><span class="line">M203 X500 Y500 Z12 E120</span><br><span class="line">M204 P2000 R1500 T2000</span><br><span class="line">M205 X10.00 Y10.00 Z0.20 E2.50</span><br><span class="line">M205 S0 T0</span><br><span class="line">M107</span><br><span class="line">M115 U3.1.0</span><br><span class="line">M83</span><br><span class="line">M204 S2000 T1500</span><br><span class="line">M104 S215</span><br><span class="line">M140 S60</span><br><span class="line">M190 S60</span><br><span class="line">M109 S215</span><br><span class="line">G28 W</span><br><span class="line">G80</span><br><span class="line">G1 Y-3.0 F1000.0</span><br><span class="line">G92 E0.0</span><br><span class="line">G1 X60.0 E9.0  F1000.0</span><br><span class="line">M73 P4 R1</span><br><span class="line">G1 X100.0 E12.5  F1000.0</span><br><span class="line">G92 E0.0</span><br><span class="line">M900 K30</span><br><span class="line">G21</span><br><span class="line">G90</span><br><span class="line">M83</span><br><span class="line">G92 E0.0</span><br><span class="line">G1 E-0.80000 F2100.00000</span><br><span class="line">G1 Z0.600 F10800.000</span><br><span class="line">G1 X89.987 Y95.416</span><br><span class="line">G1 Z0.200</span><br><span class="line">G1 E0.80000 F2100.00000</span><br></pre></td></tr></table></figure>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-name">M73</span> P<span class="hljs-number">0</span> R<span class="hljs-number">2</span><br><span class="hljs-name">M201</span> X<span class="hljs-number">9000</span> Y<span class="hljs-number">9000</span> Z<span class="hljs-number">500</span> E<span class="hljs-number">10000</span><br><span class="hljs-name">M203</span> X<span class="hljs-number">500</span> Y<span class="hljs-number">500</span> Z<span class="hljs-number">12</span> E<span class="hljs-number">120</span><br><span class="hljs-name">M204</span> P<span class="hljs-number">2000</span> R<span class="hljs-number">1500</span> T<span class="hljs-number">2000</span><br><span class="hljs-name">M205</span> X<span class="hljs-number">10.00</span> Y<span class="hljs-number">10.00</span> Z<span class="hljs-number">0.20</span> E<span class="hljs-number">2.50</span><br><span class="hljs-name">M205</span> S<span class="hljs-number">0</span> T<span class="hljs-number">0</span><br><span class="hljs-name">M107</span><br><span class="hljs-name">M115</span> U<span class="hljs-number">3.1</span><span class="hljs-number">.0</span><br><span class="hljs-name">M83</span><br><span class="hljs-name">M204</span> S<span class="hljs-number">2000</span> T<span class="hljs-number">1500</span><br><span class="hljs-name">M104</span> S<span class="hljs-number">215</span><br><span class="hljs-name">M140</span> S<span class="hljs-number">60</span><br><span class="hljs-name">M190</span> S<span class="hljs-number">60</span><br><span class="hljs-name">M109</span> S<span class="hljs-number">215</span><br><span class="hljs-name">G28</span> W<br><span class="hljs-name">G80</span><br><span class="hljs-name">G1</span> Y<span class="hljs-number">-3.0</span> F<span class="hljs-number">1000.0</span><br><span class="hljs-name">G92</span> E<span class="hljs-number">0.0</span><br><span class="hljs-name">G1</span> X<span class="hljs-number">60.0</span> E<span class="hljs-number">9.0</span>  F<span class="hljs-number">1000.0</span><br><span class="hljs-name">M73</span> P<span class="hljs-number">4</span> R<span class="hljs-number">1</span><br><span class="hljs-name">G1</span> X<span class="hljs-number">100.0</span> E<span class="hljs-number">12.5</span>  F<span class="hljs-number">1000.0</span><br><span class="hljs-name">G92</span> E<span class="hljs-number">0.0</span><br><span class="hljs-name">M900</span> K<span class="hljs-number">30</span><br><span class="hljs-name">G21</span><br><span class="hljs-name">G90</span><br><span class="hljs-name">M83</span><br><span class="hljs-name">G92</span> E<span class="hljs-number">0.0</span><br><span class="hljs-name">G1</span> E<span class="hljs-number">-0.80000</span> F<span class="hljs-number">2100.00000</span><br><span class="hljs-name">G1</span> Z<span class="hljs-number">0.600</span> F<span class="hljs-number">10800.000</span><br><span class="hljs-name">G1</span> X<span class="hljs-number">89.987</span> Y<span class="hljs-number">95.416</span><br><span class="hljs-name">G1</span> Z<span class="hljs-number">0.200</span><br><span class="hljs-name">G1</span> E<span class="hljs-number">0.80000</span> F<span class="hljs-number">2100.00000</span><br></code></pre></td></tr></table></figure>
 
 <ol start="55">
 <li>FAT文件可以使用<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/veracrypt/">VeraCrypt</a>进行挂载</li>
@@ -296,7 +478,7 @@
 <li>空格+tab隐写过滤脚本</li>
 </ol>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv14000314">例题及来源</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_file_list</span>(<span class="params">dir_path</span>):</span><br><span class="line">    _file_list = os.listdir(dir_path)</span><br><span class="line">    file_list = []</span><br><span class="line">    <span class="keyword">for</span> file_str <span class="keyword">in</span> _file_list:</span><br><span class="line">        new_dir_path = dir_path+<span class="string">&#x27;/&#x27;</span>+file_str</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(new_dir_path):</span><br><span class="line">            file_list.extend(get_file_list(new_dir_path))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            file_list.append(new_dir_path)</span><br><span class="line">    <span class="keyword">return</span> file_list</span><br><span class="line">file_list = get_file_list(<span class="string">r&#x27;/Users/constellation/Desktop/source_code&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> file_str <span class="keyword">in</span> file_list:</span><br><span class="line">    f = <span class="built_in">open</span>(file_str, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = f.read()</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27; \t \t&#x27;</span> <span class="keyword">in</span> data:</span><br><span class="line">            <span class="built_in">print</span>(file_str)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_file_list</span>(<span class="hljs-params">dir_path</span>):<br>    _file_list = os.listdir(dir_path)<br>    file_list = []<br>    <span class="hljs-keyword">for</span> file_str <span class="hljs-keyword">in</span> _file_list:<br>        new_dir_path = dir_path+<span class="hljs-string">&#x27;/&#x27;</span>+file_str<br>        <span class="hljs-keyword">if</span> os.path.isdir(new_dir_path):<br>            file_list.extend(get_file_list(new_dir_path))<br>        <span class="hljs-keyword">else</span>:<br>            file_list.append(new_dir_path)<br>    <span class="hljs-keyword">return</span> file_list<br>file_list = get_file_list(<span class="hljs-string">r&#x27;/Users/constellation/Desktop/source_code&#x27;</span>)<br><span class="hljs-keyword">for</span> file_str <span class="hljs-keyword">in</span> file_list:<br>    f = <span class="hljs-built_in">open</span>(file_str, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>    <span class="hljs-keyword">try</span>:<br>        data = f.read()<br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27; \t \t&#x27;</span> <span class="hljs-keyword">in</span> data:<br>            <span class="hljs-built_in">print</span>(file_str)<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
 
 <ol start="75">
 <li>swf文件是flash文件，可用<a target="_blank" rel="noopener" href="https://github.com/jindrapetrik/jpexs-decompiler">JPEXS Free Flash Decompiler</a>反编译。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/mochu7777777/article/details/115833842">[*CTF2019]babyflash</a></li>
@@ -313,13 +495,13 @@
 <li>Discord服务器link泄露。可用下方的代码插入一个iframe，强制加入服务器。</li>
 </ol>
 <p>例题及来源:<a target="_blank" rel="noopener" href="https://github.com/uclaacm/lactf-archive/tree/main/2023/misc/discord-leak">discord l34k</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 1. Copy Discord embed iframe template (visit any server Server Settings -&gt; Widget -&gt; Premade Widget). --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 2. Replace id with id from prompt. --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 3. Open this file up in a browser. --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 4. Click &quot;Join Discord&quot; to access the server. --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;https://discord.com/widget?id=1060030874722259057&amp;theme=dark&quot;</span> <span class="attr">width</span>=<span class="string">&quot;350&quot;</span> <span class="attr">height</span>=<span class="string">&quot;500&quot;</span> <span class="attr">allowtransparency</span>=<span class="string">&quot;true&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;0&quot;</span> <span class="attr">sandbox</span>=<span class="string">&quot;allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>        <span class="hljs-comment">&lt;!-- 1. Copy Discord embed iframe template (visit any server Server Settings -&gt; Widget -&gt; Premade Widget). --&gt;</span><br>        <span class="hljs-comment">&lt;!-- 2. Replace id with id from prompt. --&gt;</span><br>        <span class="hljs-comment">&lt;!-- 3. Open this file up in a browser. --&gt;</span><br>        <span class="hljs-comment">&lt;!-- 4. Click &quot;Join Discord&quot; to access the server. --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://discord.com/widget?id=1060030874722259057&amp;theme=dark&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;350&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;500&quot;</span> <span class="hljs-attr">allowtransparency</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">frameborder</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">sandbox</span>=<span class="hljs-string">&quot;allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <ol start="87">
 <li>利用Google Sheets API获取被保护、隐藏的sheet内容。需要在<a target="_blank" rel="noopener" href="https://www.google.com/script/start/">这里</a>运行。</li>
 </ol>
 <p>例题及来源:<a target="_blank" rel="noopener" href="https://github.com/uclaacm/lactf-archive/tree/main/2023/misc/hidden-in-plain-sheets">hidden in plain sheets</a></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> sheet = <span class="title class_">SpreadsheetApp</span>.<span class="title function_">openById</span>(<span class="string">&quot;1ULdm_KCOYCWuf6gqpg6tm0t-wnWySX_Bf3yUYOfZ2tw&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> sheets = sheet.<span class="title function_">getSheets</span>();</span><br><span class="line">  <span class="keyword">const</span> secret = sheets.<span class="title function_">find</span>(<span class="function"><span class="params">x</span> =&gt;</span> x.<span class="title function_">getName</span>() == <span class="string">&quot;flag&quot;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(secret.<span class="title function_">getDataRange</span>().<span class="title function_">getValues</span>().<span class="title function_">map</span>(<span class="function"><span class="params">l</span> =&gt;</span> l.<span class="title function_">join</span>(<span class="string">&quot;&quot;</span>)).<span class="title function_">join</span>(<span class="string">&quot;\n&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">myFunction</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">const</span> sheet = <span class="hljs-title class_">SpreadsheetApp</span>.<span class="hljs-title function_">openById</span>(<span class="hljs-string">&quot;1ULdm_KCOYCWuf6gqpg6tm0t-wnWySX_Bf3yUYOfZ2tw&quot;</span>);<br>  <span class="hljs-keyword">const</span> sheets = sheet.<span class="hljs-title function_">getSheets</span>();<br>  <span class="hljs-keyword">const</span> secret = sheets.<span class="hljs-title function_">find</span>(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x.<span class="hljs-title function_">getName</span>() == <span class="hljs-string">&quot;flag&quot;</span>);<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(secret.<span class="hljs-title function_">getDataRange</span>().<span class="hljs-title function_">getValues</span>().<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">l</span> =&gt;</span> l.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot;&quot;</span>)).<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot;\n&quot;</span>));<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <ol start="88">
 <li>智能汽车协议分析+arm可执行文件逆向。例题:<a target="_blank" rel="noopener" href="https://blog.csdn.net/Breeze_CAT/article/details/106156567">[网鼎杯 2020 青龙组]Teslaaaaa</a></li>
@@ -335,7 +517,7 @@
 </li>
 <li>不用audacity而是使用<a target="_blank" rel="noopener" href="https://github.com/jiaaro/pydub">pydub</a>模块：</li>
 </ul>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pydub <span class="keyword">import</span> AudioSegment</span><br><span class="line">song = AudioSegment.from_mp3(<span class="string">&quot;./ow.mp3&quot;</span>)</span><br><span class="line"><span class="comment"># Extract left and right channels from stereo mp3</span></span><br><span class="line">left_channel = song.split_to_mono()[<span class="number">0</span>]</span><br><span class="line">right_channel = song.split_to_mono()[<span class="number">1</span>]</span><br><span class="line"><span class="comment"># Invert phase of the Right channel</span></span><br><span class="line">inverted_right_channel = right_channel.invert_phase()</span><br><span class="line"><span class="comment"># Merge left and inverted right channels</span></span><br><span class="line">flag = left_channel.overlay(inverted_right_channel)</span><br><span class="line">flag.export(<span class="string">&quot;./flag.mp3&quot;</span>, <span class="built_in">format</span>=<span class="string">&quot;mp3&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">from</span> pydub <span class="hljs-keyword">import</span> AudioSegment<br>song = AudioSegment.from_mp3(<span class="hljs-string">&quot;./ow.mp3&quot;</span>)<br><span class="hljs-comment"># Extract left and right channels from stereo mp3</span><br>left_channel = song.split_to_mono()[<span class="hljs-number">0</span>]<br>right_channel = song.split_to_mono()[<span class="hljs-number">1</span>]<br><span class="hljs-comment"># Invert phase of the Right channel</span><br>inverted_right_channel = right_channel.invert_phase()<br><span class="hljs-comment"># Merge left and inverted right channels</span><br>flag = left_channel.overlay(inverted_right_channel)<br>flag.export(<span class="hljs-string">&quot;./flag.mp3&quot;</span>, <span class="hljs-built_in">format</span>=<span class="hljs-string">&quot;mp3&quot;</span>)<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>直接用audacity自带的除噪功能（效果没有前两个好，但是能听到）：<a target="_blank" rel="noopener" href="https://github.com/m4karoni/CTF/tree/main/BCACTF/2023/Forensics#owvolume-warning">https://github.com/m4karoni/CTF/tree/main/BCACTF/2023/Forensics#owvolume-warning</a></li>
@@ -345,7 +527,7 @@
 <li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Whitespace_(programming_language)">WHITESPACES LANGUAGE</a>，由空格，tab键等字符组成，不可见。</li>
 <li><a target="_blank" rel="noopener" href="https://www.dcode.fr/hexahue-cipher">hexahue cipher</a>，形如：</li>
 </ol>
-<p><img src="C:/Users/a1348/Desktop/NoobCTF-main/笔记/images/hexahue.png" alt="hexahue"></p>
+<p><img src="C:/Users/a1348/Desktop/NoobCTF-main/笔记/images/hexahue.png" srcset="/img/loading.gif" lazyload alt="hexahue"></p>
 <ol start="93">
 <li>windows powershell历史记录文件路径：<code>%userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt</code>。</li>
 <li>对于未经改动过的linux vmem dump，可以直接用strings+grep过滤出操作系统（operating system）和内核版本（kernel version）：</li>
@@ -452,7 +634,7 @@
 <li>git命令更改config，使用制定用户的身份推送远程库。例题:<a href="../../CTF/LA%20CTF/Misc/new-challenge.md">new-challenge</a></li>
 <li>MSB（most signficant bit）隐写。将信息藏在RGB颜色分量二进制值的最高位。与<a target="_blank" rel="noopener" href="https://3gstudent.github.io/%E9%9A%90%E5%86%99%E6%8A%80%E5%B7%A7-PNG%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84LSB%E9%9A%90%E5%86%99">LSB</a>不同的是，这种隐写会使图片颜色失真（损坏）。例题:<a target="_blank" rel="noopener" href="https://ctftime.org/writeup/16174">msb</a>，里面有图片颜色失真的例子。可在<a target="_blank" rel="noopener" href="https://stegonline.georgeom.net/extract">stegonline</a>提取。选项设置如下：</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">R:7</span><br><span class="line">G:7</span><br><span class="line">B:7</span><br><span class="line">Pixel Order:Row</span><br><span class="line">Bit Order:MSB</span><br><span class="line">Bit Plane Order:RGB</span><br><span class="line">Trim Trailing Bits:No</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">R:<span class="hljs-number">7</span><br>G:<span class="hljs-number">7</span><br>B:<span class="hljs-number">7</span><br>Pixel <span class="hljs-keyword">Order</span>:<span class="hljs-keyword">Row</span><br><span class="hljs-type">Bit</span> <span class="hljs-keyword">Order</span>:MSB<br><span class="hljs-type">Bit</span> Plane <span class="hljs-keyword">Order</span>:RGB<br>Trim <span class="hljs-keyword">Trailing</span> Bits:<span class="hljs-keyword">No</span><br></code></pre></td></tr></table></figure>
 
 <ol start="106">
 <li>linux 使用mount挂载img镜像。</li>
@@ -492,7 +674,7 @@
 <li>使用mount命令挂载镜像，autospy(ui版tsk)获取被删除的邮件。因为邮件一定有“subject”，于是在“keyword search”处搜索subject，即可看到文件。</li>
 <li><a target="_blank" rel="noopener" href="https://www.wikiwand.com/en/Golden_ratio_base">golden ratio base</a>解码脚本。</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define the Base-Phi constant</span></span><br><span class="line">PHI = (<span class="number">1</span> + math.sqrt(<span class="number">5</span>)) / <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define a function to perform Base-Phi decoding</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">base_phi_decode</span>(<span class="params">encoded_string</span>):</span><br><span class="line">    <span class="comment"># Split the encoded string into segments separated by periods</span></span><br><span class="line">    segments = encoded_string.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize the result string</span></span><br><span class="line">    result = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Iterate over each segment</span></span><br><span class="line">    <span class="keyword">for</span> segment <span class="keyword">in</span> segments:</span><br><span class="line">        <span class="comment"># Initialize the decoded value for this segment to 0</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">len</span>(segment))</span><br><span class="line">        value = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Iterate over each character in the segment</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(segment)):</span><br><span class="line">            <span class="comment"># If the character is &#x27;1&#x27;, add PHI to the decoded value</span></span><br><span class="line">            <span class="keyword">if</span> segment[i] == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                value += PHI**(<span class="built_in">len</span>(segment) - i - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Append the decoded character to the result string</span></span><br><span class="line">        result += <span class="built_in">str</span>(<span class="built_in">int</span>(value))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Return the result string</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="comment"># Test the function with the given encoded string</span></span><br><span class="line">encoded_string = <span class="string">&quot;01010010100.01001001000100.01001010000100&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">eeee = encoded_string.split(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">out = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(eeee)-<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> i ==<span class="number">0</span>:</span><br><span class="line">        out.append(eeee[i]+<span class="string">&#x27;.&#x27;</span>+eeee[i+<span class="number">1</span>][:<span class="number">3</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        out.append(eeee[i][<span class="number">3</span>:]+<span class="string">&#x27;.&#x27;</span>+eeee[i+<span class="number">1</span>][:<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(out)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># decoded_string = base_phi_decode(encoded_string)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(decoded_string)</span></span><br><span class="line"></span><br><span class="line">key = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> out:</span><br><span class="line"></span><br><span class="line">    integer_part, fractional_part = p.split(<span class="string">&quot;.&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Convert the integer part to decimal</span></span><br><span class="line">    decimal_value = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(integer_part)):</span><br><span class="line">        decimal_value += <span class="built_in">int</span>(integer_part[i]) * (PHI ** (<span class="built_in">len</span>(integer_part) - i - <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Convert the fractional part to decimal</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(fractional_part) &gt; <span class="number">0</span>:</span><br><span class="line">        fractional_value = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(fractional_part)):</span><br><span class="line">            fractional_value += <span class="built_in">int</span>(fractional_part[i]) * (<span class="number">2</span> ** -(i + <span class="number">1</span>))</span><br><span class="line">        decimal_value += fractional_value</span><br><span class="line"></span><br><span class="line">    key += <span class="built_in">chr</span>(<span class="built_in">round</span>(decimal_value))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(key)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(out))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> math<br><br><span class="hljs-comment"># Define the Base-Phi constant</span><br>PHI = (<span class="hljs-number">1</span> + math.sqrt(<span class="hljs-number">5</span>)) / <span class="hljs-number">2</span><br><br><span class="hljs-comment"># Define a function to perform Base-Phi decoding</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">base_phi_decode</span>(<span class="hljs-params">encoded_string</span>):<br>    <span class="hljs-comment"># Split the encoded string into segments separated by periods</span><br>    segments = encoded_string.split(<span class="hljs-string">&#x27;.&#x27;</span>)<br><br>    <span class="hljs-comment"># Initialize the result string</span><br>    result = <span class="hljs-string">&#x27;&#x27;</span><br><br>    <span class="hljs-comment"># Iterate over each segment</span><br>    <span class="hljs-keyword">for</span> segment <span class="hljs-keyword">in</span> segments:<br>        <span class="hljs-comment"># Initialize the decoded value for this segment to 0</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(segment))<br>        value = <span class="hljs-number">0</span><br><br>        <span class="hljs-comment"># Iterate over each character in the segment</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(segment)):<br>            <span class="hljs-comment"># If the character is &#x27;1&#x27;, add PHI to the decoded value</span><br>            <span class="hljs-keyword">if</span> segment[i] == <span class="hljs-string">&#x27;1&#x27;</span>:<br>                value += PHI**(<span class="hljs-built_in">len</span>(segment) - i - <span class="hljs-number">1</span>)<br><br>        <span class="hljs-comment"># Append the decoded character to the result string</span><br>        result += <span class="hljs-built_in">str</span>(<span class="hljs-built_in">int</span>(value))<br><br>    <span class="hljs-comment"># Return the result string</span><br>    <span class="hljs-keyword">return</span> result<br><br><span class="hljs-comment"># Test the function with the given encoded string</span><br>encoded_string = <span class="hljs-string">&quot;01010010100.01001001000100.01001010000100&quot;</span><br><br><br>eeee = encoded_string.split(<span class="hljs-string">&#x27;.&#x27;</span>)<br>out = []<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(eeee)-<span class="hljs-number">1</span>):<br>    <span class="hljs-keyword">if</span> i ==<span class="hljs-number">0</span>:<br>        out.append(eeee[i]+<span class="hljs-string">&#x27;.&#x27;</span>+eeee[i+<span class="hljs-number">1</span>][:<span class="hljs-number">3</span>])<br>    <span class="hljs-keyword">else</span>:<br>        out.append(eeee[i][<span class="hljs-number">3</span>:]+<span class="hljs-string">&#x27;.&#x27;</span>+eeee[i+<span class="hljs-number">1</span>][:<span class="hljs-number">3</span>])<br><br><span class="hljs-comment"># print(out)</span><br><br><br><span class="hljs-comment"># decoded_string = base_phi_decode(encoded_string)</span><br><br><span class="hljs-comment"># print(decoded_string)</span><br><br>key = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> out:<br><br>    integer_part, fractional_part = p.split(<span class="hljs-string">&quot;.&quot;</span>)<br><br><br>    <span class="hljs-comment"># Convert the integer part to decimal</span><br>    decimal_value = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(integer_part)):<br>        decimal_value += <span class="hljs-built_in">int</span>(integer_part[i]) * (PHI ** (<span class="hljs-built_in">len</span>(integer_part) - i - <span class="hljs-number">1</span>))<br><br>    <span class="hljs-comment"># Convert the fractional part to decimal</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(fractional_part) &gt; <span class="hljs-number">0</span>:<br>        fractional_value = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(fractional_part)):<br>            fractional_value += <span class="hljs-built_in">int</span>(fractional_part[i]) * (<span class="hljs-number">2</span> ** -(i + <span class="hljs-number">1</span>))<br>        decimal_value += fractional_value<br><br>    key += <span class="hljs-built_in">chr</span>(<span class="hljs-built_in">round</span>(decimal_value))<br><br><span class="hljs-built_in">print</span>(key)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(out))<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>openssl解密aes密文。<code>openssl enc -aes-256-cbc -d -in flag.enc -out res -salt -iv xxx -K xxx</code></li>
@@ -503,7 +685,7 @@
 <li><a target="_blank" rel="noopener" href="https://merricx.github.io/qrazybox/">QRazyBox</a>可以扫描一些其他工具扫描不出来的内容。有的时候，将纠错区涂白还能看见额外内容。例题:<a target="_blank" rel="noopener" href="https://ctf-show.feishu.cn/docx/UpC6dtDqgo7VuoxXlcvcLwzKnqh#ZaIsdcqYOoIEmExxqMEcVopaniv">迅疾响应</a></li>
 <li><a target="_blank" rel="noopener" href="http://www.bertnase.de/npiet/npiet-execute.php">npiet</a>图片编程语言。程序大概长这样：</li>
 </ol>
-<p><img src="C:/Users/a1348/Desktop/NoobCTF-main/笔记/images/npiet.png" alt="npiet"></p>
+<p><img src="C:/Users/a1348/Desktop/NoobCTF-main/笔记/images/npiet.png" srcset="/img/loading.gif" lazyload alt="npiet"></p>
 <ol start="120">
 <li><a target="_blank" rel="noopener" href="https://www.qsl.net/on6mu/rxsstv.htm">RX-SSTV</a>。sstv音频解密工具。</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/daffainfo/ctf-writeup/tree/main/GREP%20CTF%202023/Royal%20Steg">Royal Steg</a></li>
@@ -521,146 +703,337 @@
 <li>可在veracrypt volume中隐藏partition。提取隐藏partition的volume header的命令:<code>sudo dcfldd if=image.img of=hidden-vol.tc bs=1 skip=65536 count=512</code></li>
 </ul>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>隐写系列</div>
+      <div>https://theganlove.github.io/2024/09/01/隐写系列/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>uert</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://theganlove.github.io/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/" data-id="cm0kx5k5k001vo8dk6qftf75y" data-title="隐写系列" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">脚本工具</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/">CTF-web</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">php代码审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E5%AE%A1%E8%AE%A1/">php审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/rce/">rce</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">文件操作</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF/">艺术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A9%E5%91%BD%E6%8B%82%E6%99%93/">革命拂晓</a></li></ul>
-    </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-php/" rel="tag">web php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" rel="tag">文字感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" rel="tag">自己的艺术</a></li></ul>
-    </div>
-  </div>
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/" title="脚本工具">
+                        <span class="hidden-mobile">脚本工具</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/web-php/" style="font-size: 20px;">web php</a> <a href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" style="font-size: 10px;">文字感悟</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">环境</a> <a href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" style="font-size: 10px;">自己的艺术</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/">隐写系列</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/">脚本工具</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/ssrf/">ssrf</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/">jwt等认证went</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/js%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">js原型链污染</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
+            
+          </article>
+        </div>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
-  </div>
-</footer>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
 
     </div>
-    <nav id="mobile-nav">
+  </div>
+</div>
+
+
+
+
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
+
+
   
-</nav>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

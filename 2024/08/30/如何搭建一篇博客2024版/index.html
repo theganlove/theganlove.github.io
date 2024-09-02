@@ -1,104 +1,282 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>如何搭建一篇博客2024版 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="一：环境和工具准备：1.系统（Windows10 11）2.Node js3.Git4.hexo5.文本编辑器6.一个Github账号 二.Node js的安装：1.打开Node官网，下载Node js安装程序，下载地址：https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F;download&#x2F;2.下载后安装，安装目录尽量默认，除非你对它非常了解。3.安装完成后，检查是否安装成功。打开cmd窗口，输入：nod">
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="uert">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一：环境和工具准备：1.系统（Windows10 11）2.Node js3.Git4.hexo5.文本编辑器6.一个Github账号 二.Node js的安装：1.打开Node官网，下载Node js安装程序，下载地址：https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F;download&#x2F;2.下载后安装，安装目录尽量默认，除非你对它非常了解。3.安装完成后，检查是否安装成功。打开cmd窗口，输入：nod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何搭建一篇博客2024版">
 <meta property="og:url" content="https://theganlove.github.io/2024/08/30/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A22024%E7%89%88/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一：环境和工具准备：1.系统（Windows10 11）2.Node js3.Git4.hexo5.文本编辑器6.一个Github账号 二.Node js的安装：1.打开Node官网，下载Node js安装程序，下载地址：https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F;download&#x2F;2.下载后安装，安装目录尽量默认，除非你对它非常了解。3.安装完成后，检查是否安装成功。打开cmd窗口，输入：nod">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-30T11:44:14.000Z">
 <meta property="article:modified_time" content="2024-08-31T05:22:48.682Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="uert">
 <meta property="article:tag" content="环境">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
+<meta name="twitter:card" content="summary_large_image">
   
   
   
-<link rel="stylesheet" href="/css/style.css">
+  <title>如何搭建一篇博客2024版 - Hexo</title>
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"theganlove.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 7.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>主题</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="如何搭建一篇博客2024版"></span>
+          
+        </div>
+
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-30 19:44" pubdate>
+          2024年8月30日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          1.8k 字
         
-      </nav>
-      <nav id="sub-nav">
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
         
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://theganlove.github.io"></form>
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
   </div>
-</header>
+</div>
 
-      <div class="outer">
-        <section id="main"><article id="post-如何搭建一篇博客2024版" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/08/30/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A22024%E7%89%88/" class="article-date">
-  <time class="dt-published" datetime="2024-08-30T11:44:14.000Z" itemprop="datePublished">2024-08-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a>
-  </div>
+</div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      如何搭建一篇博客2024版
-    </h1>
-  
+  </header>
 
-      </header>
+  <main>
     
-    <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="一：环境和工具准备："><a href="#一：环境和工具准备：" class="headerlink" title="一：环境和工具准备："></a>一：环境和工具准备：</h2><p>1.系统（Windows10 11）<br>2.Node js<br>3.Git<br>4.hexo<br>5.文本编辑器<br>6.一个Github账号</p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">如何搭建一篇博客2024版</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一：环境和工具准备："><a href="#一：环境和工具准备：" class="headerlink" title="一：环境和工具准备："></a>一：环境和工具准备：</h2><p>1.系统（Windows10 11）<br>2.Node js<br>3.Git<br>4.hexo<br>5.文本编辑器<br>6.一个Github账号</p>
 <h2 id="二-Node-js的安装："><a href="#二-Node-js的安装：" class="headerlink" title="二.Node js的安装："></a>二.Node js的安装：</h2><p>1.打开Node官网，下载Node js安装程序，下载地址：<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a><br>2.下载后安装，安装目录尽量默认，除非你对它非常了解。<br>3.安装完成后，检查是否安装成功。打开cmd窗口，输入：node -v，看到了<br>版本信息，代表安装成功。<br>4.修改下载源。npm下载各种模块，默认是从国外的服务器下载，速度较慢，把它换成国内镜像，打开cmd窗口，运行命令：npm config set registry <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></p>
 <p>国内访问 npm 官方源可能会有速度较慢或者不稳定的问题，可以切换到国内镜像源，如淘宝镜像：</p>
 <p>npm config set registry <a target="_blank" rel="noopener" href="https://registry.npmmirror.com/">https://registry.npmmirror.com/</a></p>
@@ -130,14 +308,14 @@
 <p>2.使用国内镜像源</p>
 <ul>
 <li><p>国内访问 npm 官方源可能会有速度较慢或者不稳定的问题，可以切换到国内镜像源，如淘宝镜像：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npmmirror.com/</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">npm config set registry https:<span class="hljs-comment">//registry.npmmirror.com/</span><br></code></pre></td></tr></table></figure></li>
 </ul>
 <p>之后再尝试重新安装依赖：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install hexo-deployer-git <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure>
 
 <p>3.配置 Hexo 部署到 GitHub Pages</p>
 <p>打开你的 Hexo 项目根目录下的 <code>_config.yml</code> 文件，找到或添加 <code>deploy</code> 配置部分，按照以下示例进行配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/你的用户名/你的仓库名.github.io.git</span><br><span class="line">  branch: main</span><br><span class="line">  token: 你的GitHub个人访问令牌</span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span><br><span class="hljs-symbol">  type:</span> git<br><span class="hljs-symbol">  repository:</span> https:<span class="hljs-comment">//github.com/你的用户名/你的仓库名.github.io.git</span><br><span class="hljs-symbol">  branch:</span> main<br><span class="hljs-symbol">  token:</span> 你的GitHub个人访问令牌<br></code></pre></td></tr></table></figure>
 
 <p><strong>注意</strong>：</p>
 <ul>
@@ -148,7 +326,7 @@
 <p><strong>理缓存并生成部署</strong></p>
 <ul>
 <li><p>在终端中执行以下命令，清理缓存并生成静态文件，然后部署到 GitHub：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs verilog">hexo clean<br>hexo <span class="hljs-keyword">generate</span><br>hexo deploy<br></code></pre></td></tr></table></figure></li>
 </ul>
 <p><strong>检查部署</strong></p>
 <ul>
@@ -159,18 +337,18 @@
 <p>这将会在 <code>source/_posts/</code> 目录下生成一个 <code>我的新文章.md</code> 文件。</p>
 <h3 id="创建关于页面"><a href="#创建关于页面" class="headerlink" title="创建关于页面"></a>创建关于页面</h3><p>hexo new page about</p>
 <h3 id="配置分类页面"><a href="#配置分类页面" class="headerlink" title="配置分类页面"></a>配置分类页面</h3><p>确保 <code>source/about/index.md</code> 文件中有内容。即使是一个简单的标题和段落也可以：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 关于我</span><br><span class="line">date: 2024-08-31 12:00:00</span><br><span class="line"></span><br><span class="line">这里是关于页面的内容。</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">title:</span> <span class="hljs-string">关于我</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2024-08-31 12:00:00</span><br><br><span class="hljs-string">这里是关于页面的内容。</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="创建分类页面"><a href="#创建分类页面" class="headerlink" title="创建分类页面"></a>创建分类页面</h3><p>hexo new page categories</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: 关于我 </span><br><span class="line">date: 2024-08-31 12:00:00 </span><br><span class="line">--- 这里是关于页面的内容。</span><br></pre></td></tr></table></figure>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ldif"><span class="hljs-attribute">title</span>: 关于我 <br><span class="hljs-attribute">date</span>: 2024-08-31 12:00:00 <br><span class="hljs-literal">-</span>-- 这里是关于页面的内容。<br></code></pre></td></tr></table></figure>
 
 <h3 id="配置分类页面-1"><a href="#配置分类页面-1" class="headerlink" title="配置分类页面"></a>配置分类页面</h3><p>编辑 <code>source/categories/index.md</code> 文件，确保它正确配置为展示所有分类：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">layout: categories</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">title: 分类<br>layout: categories<br></code></pre></td></tr></table></figure>
 
-<h3 id="生成标签页面"><a href="#生成标签页面" class="headerlink" title="生成标签页面"></a>生成标签页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+<h3 id="生成标签页面"><a href="#生成标签页面" class="headerlink" title="生成标签页面"></a>生成标签页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo new page tags<br></code></pre></td></tr></table></figure>
 
 <h3 id="配置标签页面"><a href="#配置标签页面" class="headerlink" title="配置标签页面"></a>配置标签页面</h3><p>接下来，编辑 <code>source/tags/index.md</code> 文件，以确保它正确显示标签列表：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">title: 标签</span><br><span class="line">layout: tags</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">title: 标签<br>layout: tags<br></code></pre></td></tr></table></figure>
 
 
 
@@ -183,152 +361,365 @@
 <p>然后在浏览器中访问 <code>http://localhost:4000/about/</code></p>
 <p>什么没有好的md编辑器还要用vs和clion就out了，到224找我，破解的免费typora不用谢</p>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://theganlove.github.io/2024/08/30/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A22024%E7%89%88/" data-id="cm0kx5k5e000ro8dk9z0t00hr" data-title="如何搭建一篇博客2024版" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li></ul>
 
-    </footer>
-  </div>
+<span class="category-chains">
+  
   
     
-<nav id="article-nav">
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="category-chain-item">环境搭建</a>
   
-    <a href="/2024/08/31/%E7%BB%95%E8%BF%87Disable-function/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          绕过Disable_function
-        
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%8E%AF%E5%A2%83/" class="print-no-link">#环境</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>如何搭建一篇博客2024版</div>
+      <div>https://theganlove.github.io/2024/08/30/如何搭建一篇博客2024版/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>uert</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/31/%E7%BB%95%E8%BF%87Disable-function/" title="绕过Disable_function">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">绕过Disable_function</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
       </div>
-    </a>
-  
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/">CTF-web</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">php代码审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E5%AE%A1%E8%AE%A1/">php审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/rce/">rce</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">文件操作</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF/">艺术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A9%E5%91%BD%E6%8B%82%E6%99%93/">革命拂晓</a></li></ul>
     </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-php/" rel="tag">web php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" rel="tag">文字感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" rel="tag">自己的艺术</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/web-php/" style="font-size: 20px;">web php</a> <a href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" style="font-size: 10px;">文字感悟</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">环境</a> <a href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" style="font-size: 10px;">自己的艺术</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/">隐写系列</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/">脚本工具</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/ssrf/">ssrf</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/">jwt等认证went</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/js%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">js原型链污染</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="side-col d-none d-lg-block col-lg-2">
       
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
 
     </div>
-    <nav id="mobile-nav">
+  </div>
+</div>
+
+
+
+
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
+
+
   
-</nav>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

