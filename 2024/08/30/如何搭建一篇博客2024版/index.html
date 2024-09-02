@@ -27,7 +27,7 @@
 <meta property="og:description" content="一：环境和工具准备：1.系统（Windows10 11）2.Node js3.Git4.hexo5.文本编辑器6.一个Github账号 二.Node js的安装：1.打开Node官网，下载Node js安装程序，下载地址：https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F;download&#x2F;2.下载后安装，安装目录尽量默认，除非你对它非常了解。3.安装完成后，检查是否安装成功。打开cmd窗口，输入：nod">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-30T11:44:14.000Z">
-<meta property="article:modified_time" content="2024-08-31T05:22:48.682Z">
+<meta property="article:modified_time" content="2024-09-02T12:05:36.612Z">
 <meta property="article:author" content="uert">
 <meta property="article:tag" content="环境">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          2.4k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          15 分钟
+          20 分钟
         
       </span>
     
@@ -360,6 +360,63 @@
 <p>hexo server</p>
 <p>然后在浏览器中访问 <code>http://localhost:4000/about/</code></p>
 <p>什么没有好的md编辑器还要用vs和clion就out了，到224找我，破解的免费typora不用谢</p>
+<p>要将你的Hexo网站与自定义域名 绑定，可以按照以下步骤操作：</p>
+<h3 id="1-配置域名DNS"><a href="#1-配置域名DNS" class="headerlink" title="1. 配置域名DNS"></a>1. <strong>配置域名DNS</strong></h3><p>首先，你需要在你的域名注册商处配置DNS记录，以指向GitHub Pages的服务器。</p>
+<h4 id="添加A记录（如果使用裸域名）"><a href="#添加A记录（如果使用裸域名）" class="headerlink" title="添加A记录（如果使用裸域名）"></a>添加A记录（如果使用裸域名）</h4><ol>
+<li><p>登录到你的域名注册商的管理控制台。</p>
+</li>
+<li><p>找到你的域名 <code>uertnecesshazar.top</code> 的DNS设置页面。</p>
+</li>
+<li><p>添加一条A记录：</p>
+<ul>
+<li><strong>主机名（Host）</strong>：<code>@</code> 或留空</li>
+<li><strong>记录类型（Type）</strong>：<code>A</code></li>
+<li><strong>记录值（Value）</strong>：<code>185.199.108.153</code>, <code>185.199.109.153</code>, <code>185.199.110.153</code>, <code>185.199.111.153</code></li>
+<li><strong>TTL</strong>：使用默认值</li>
+</ul>
+<p>你可以添加四条A记录，分别指向GitHub Pages的IP地址，以确保高可用性。</p>
+</li>
+</ol>
+<h4 id="添加CNAME记录（如果使用带www的域名）"><a href="#添加CNAME记录（如果使用带www的域名）" class="headerlink" title="添加CNAME记录（如果使用带www的域名）"></a>添加CNAME记录（如果使用带www的域名）</h4><p>如果你还想支持 <code>www.uertnecesshazar.top</code> 这样的子域名，你可以添加一条CNAME记录：</p>
+<ol>
+<li><strong>主机名（Host）</strong>：<code>www</code></li>
+<li><strong>记录类型（Type）</strong>：<code>CNAME</code></li>
+<li><strong>记录值（Value）</strong>：<code>theganlove.github.io</code></li>
+<li><strong>TTL</strong>：使用默认值</li>
+</ol>
+<h3 id="2-配置Hexo的CNAME文件"><a href="#2-配置Hexo的CNAME文件" class="headerlink" title="2. 配置Hexo的CNAME文件"></a>2. <strong>配置Hexo的CNAME文件</strong></h3><p>为了让GitHub Pages知道你的网站绑定了自定义域名，你需要在Hexo项目中添加一个 <code>CNAME</code> 文件。</p>
+<ol>
+<li><p><strong>创建CNAME文件</strong>：</p>
+<ul>
+<li>在你的 Hexo 项目的 <code>source</code> 目录中，创建一个名为 <code>CNAME</code> 的文件（无扩展名）。</li>
+</ul>
+</li>
+<li><p><strong>编辑CNAME文件</strong>：</p>
+<ul>
+<li><p>在 <code>CNAME</code> 文件中添加你的自定义域名：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs coq">复制代码<br>uertnecesshazar.<span class="hljs-built_in">top</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>保存文件</strong>。</p>
+</li>
+</ol>
+<h3 id="3-重新生成和部署网站"><a href="#3-重新生成和部署网站" class="headerlink" title="3. 重新生成和部署网站"></a>3. <strong>重新生成和部署网站</strong></h3><ol>
+<li><p>生成静态文件：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs verilog">bash<br>复制代码<br>hexo <span class="hljs-keyword">generate</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>部署到GitHub Pages：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">bash<br>复制代码<br>hexo <span class="hljs-keyword">deploy</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="4-等待DNS生效"><a href="#4-等待DNS生效" class="headerlink" title="4. 等待DNS生效"></a>4. <strong>等待DNS生效</strong></h3><p>DNS更改可能需要几分钟到48小时生效。你可以使用 <code>nslookup</code> 或 <code>dig</code> 工具来检查DNS设置是否正确配置。</p>
+<h3 id="5-访问你的自定义域名"><a href="#5-访问你的自定义域名" class="headerlink" title="5. 访问你的自定义域名"></a>5. <strong>访问你的自定义域名</strong></h3><p>一旦DNS生效，你应该可以通过 <code>http://uertnecesshazar.top</code> 或 <code>https://uertnecesshazar.top</code> 访问你的网站。</p>
+<h3 id="6-配置HTTPS（可选）"><a href="#6-配置HTTPS（可选）" class="headerlink" title="6. 配置HTTPS（可选）"></a>6. <strong>配置HTTPS（可选）</strong></h3><p>GitHub Pages 支持免费的HTTPS证书。如果你使用自定义域名并希望启用HTTPS，请在GitHub仓库的设置中启用HTTPS。</p>
+<ol>
+<li>在你的GitHub仓库页面中，点击 “Settings”。</li>
+<li>向下滚动到 “GitHub Pages” 部分。</li>
+<li>如果选项可用，勾选 “Enforce HTTPS” 选项。</li>
+</ol>
+<p>这将强制所有用户通过HTTPS访问你的网站，确保数据传输的安全性。</p>
+<p>通过以上步骤，你将成功将自定义域名 <code>uertnecesshazar.top</code> 与Hexo网站绑定。如果在这些步骤中遇到任何问题，请随时告诉我！</p>
 
                 
               </div>
