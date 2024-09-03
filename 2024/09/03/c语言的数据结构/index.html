@@ -1,0 +1,864 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="uert">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="链表单链表 结构单链表是由节点组成的，每个节点包含两个部分：数据域和指针域。指针域指向下一个节点。最后一个节点的指针域指向NULL，表示链表的结束。 1234typedef struct Node &#123;    int data;    struct Node* next;&#125; Node;  建立建立单链表通常包括创建头节点和初始化链表的其他节点。 12345678910Node*">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言的数据结构">
+<meta property="og:url" content="https://theganlove.github.io/2024/09/03/c%E8%AF%AD%E8%A8%80%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="链表单链表 结构单链表是由节点组成的，每个节点包含两个部分：数据域和指针域。指针域指向下一个节点。最后一个节点的指针域指向NULL，表示链表的结束。 1234typedef struct Node &#123;    int data;    struct Node* next;&#125; Node;  建立建立单链表通常包括创建头节点和初始化链表的其他节点。 12345678910Node*">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-03T12:36:17.000Z">
+<meta property="article:modified_time" content="2024-09-03T12:38:23.424Z">
+<meta property="article:author" content="uert">
+<meta property="article:tag" content="c语言">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>c语言的数据结构 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"theganlove.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>主题</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="c语言的数据结构"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-03 20:36" pubdate>
+          2024年9月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">c语言的数据结构</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4><ol>
+<li><p><strong>结构</strong><br>单链表是由节点组成的，每个节点包含两个部分：数据域和指针域。指针域指向下一个节点。最后一个节点的指针域指向NULL，表示链表的结束。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span><br>    <span class="hljs-type">int</span> data;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">next</span>;</span><br>&#125; Node;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>建立</strong><br>建立单链表通常包括创建头节点和初始化链表的其他节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c">Node* <span class="hljs-title function_">createNode</span><span class="hljs-params">(<span class="hljs-type">int</span> data)</span> &#123;<br>    Node* newNode = (Node*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(Node));<br>    <span class="hljs-keyword">if</span> (!newNode) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory error\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    newNode-&gt;data = data;<br>    newNode-&gt;next = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> newNode;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>前插入和后插入</strong></p>
+<ul>
+<li><p><strong>前插入</strong>：在指定节点之前插入新节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">insertBefore</span><span class="hljs-params">(Node** head, <span class="hljs-type">int</span> value, <span class="hljs-type">int</span> data)</span> &#123;<br>    Node* newNode = createNode(data);<br>    <span class="hljs-keyword">if</span> (*head == <span class="hljs-literal">NULL</span> || (*head)-&gt;data == value) &#123;<br>        newNode-&gt;next = *head;<br>        *head = newNode;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    Node* prev = <span class="hljs-literal">NULL</span>;<br>    Node* current = *head;<br>    <span class="hljs-keyword">while</span> (current &amp;&amp; current-&gt;data != value) &#123;<br>        prev = current;<br>        current = current-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (current == <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Value not found\n&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    prev-&gt;next = newNode;<br>    newNode-&gt;next = current;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>后插入</strong>：在指定节点之后插入新节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">insertAfter</span><span class="hljs-params">(Node* prevNode, <span class="hljs-type">int</span> data)</span> &#123;<br>    <span class="hljs-keyword">if</span> (prevNode == <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The given previous node cannot be NULL\n&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    Node* newNode = createNode(data);<br>    newNode-&gt;next = prevNode-&gt;next;<br>    prevNode-&gt;next = newNode;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>初始化</strong></p>
+<p>初始化链表通常指的是创建一个空的链表，可能会包含一个头节点（头指针）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">Node* <span class="hljs-title function_">initializeList</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;  <span class="hljs-comment">// 空链表</span><br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除</strong></p>
+<ul>
+<li><p><strong>按值删除</strong>：删除链表中第一个匹配给定值的节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">deleteNodeByValue</span><span class="hljs-params">(Node** head, <span class="hljs-type">int</span> value)</span> &#123;<br>    Node* temp = *head;<br>    Node* prev = <span class="hljs-literal">NULL</span>;<br><br>    <span class="hljs-keyword">if</span> (temp != <span class="hljs-literal">NULL</span> &amp;&amp; temp-&gt;data == value) &#123;<br>        *head = temp-&gt;next;<br>        <span class="hljs-built_in">free</span>(temp);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">while</span> (temp != <span class="hljs-literal">NULL</span> &amp;&amp; temp-&gt;data != value) &#123;<br>        prev = temp;<br>        temp = temp-&gt;next;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (temp == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;<br><br>    prev-&gt;next = temp-&gt;next;<br>    <span class="hljs-built_in">free</span>(temp);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>按序号删除</strong>：删除链表中指定位置的节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">deleteNodeByIndex</span><span class="hljs-params">(Node** head, <span class="hljs-type">int</span> index)</span> &#123;<br>    <span class="hljs-keyword">if</span> (*head == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;<br>  <br>    Node* temp = *head;<br>  <br>    <span class="hljs-keyword">if</span> (index == <span class="hljs-number">0</span>) &#123;<br>        *head = temp-&gt;next;<br>        <span class="hljs-built_in">free</span>(temp);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>  <br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; temp != <span class="hljs-literal">NULL</span> &amp;&amp; i &lt; index - <span class="hljs-number">1</span>; i++) &#123;<br>        temp = temp-&gt;next;<br>    &#125;<br>  <br>    <span class="hljs-keyword">if</span> (temp == <span class="hljs-literal">NULL</span> || temp-&gt;next == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;<br>  <br>    Node* next = temp-&gt;next-&gt;next;<br>    <span class="hljs-built_in">free</span>(temp-&gt;next);<br>    temp-&gt;next = next;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>按序号和值查找</strong></p>
+<ul>
+<li><p><strong>按序号查找</strong>：根据索引查找链表中的节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c">Node* <span class="hljs-title function_">getNodeByIndex</span><span class="hljs-params">(Node* head, <span class="hljs-type">int</span> index)</span> &#123;<br>    Node* current = head;<br>    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-keyword">if</span> (count == index) <span class="hljs-keyword">return</span> current;<br>        count++;<br>        current = current-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>按值查找</strong>：根据节点的值查找链表中的节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c">Node* <span class="hljs-title function_">getNodeByValue</span><span class="hljs-params">(Node* head, <span class="hljs-type">int</span> value)</span> &#123;<br>    Node* current = head;<br>    <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-keyword">if</span> (current-&gt;data == value) <span class="hljs-keyword">return</span> current;<br>        current = current-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>遍历</strong></p>
+<p>遍历链表就是从头节点开始，依次访问每个节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">traverseList</span><span class="hljs-params">(Node* head)</span> &#123;<br>    Node* current = head;<br>    <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d -&gt; &quot;</span>, current-&gt;data);<br>        current = current-&gt;next;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;NULL\n&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>求长</strong></p>
+<p>计算链表的长度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">getListLength</span><span class="hljs-params">(Node* head)</span> &#123;<br>    <span class="hljs-type">int</span> length = <span class="hljs-number">0</span>;<br>    Node* current = head;<br>    <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">NULL</span>) &#123;<br>        length++;<br>        current = current-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> length;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="双链表"><a href="#双链表" class="headerlink" title="双链表"></a>双链表</h3><h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>双链表的每个节点除了数据域和指向下一个节点的指针外，还包含一个指向前一个节点的指针。因此，每个节点都包含三个部分：数据域、前驱指针和后继指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DNode</span> &#123;</span><br>    <span class="hljs-type">int</span> data;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DNode</span>* <span class="hljs-title">prev</span>;</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DNode</span>* <span class="hljs-title">next</span>;</span><br>&#125; DNode;<br></code></pre></td></tr></table></figure>
+
+<h4 id="建立"><a href="#建立" class="headerlink" title="建立"></a>建立</h4><p>建立双链表通常需要为每个节点分配内存并设置前驱和后继指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">DNode* <span class="hljs-title function_">createDNode</span><span class="hljs-params">(<span class="hljs-type">int</span> data)</span> &#123;<br>    DNode* newNode = (DNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(DNode));<br>    <span class="hljs-keyword">if</span> (!newNode) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory error\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    newNode-&gt;data = data;<br>    newNode-&gt;prev = <span class="hljs-literal">NULL</span>;<br>    newNode-&gt;next = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">return</span> newNode;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="前插入和后插入"><a href="#前插入和后插入" class="headerlink" title="前插入和后插入"></a>前插入和后插入</h4><ul>
+<li><p><strong>前插入</strong>：在指定节点之前插入新节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">insertBefore</span><span class="hljs-params">(DNode** head, DNode* nextNode, <span class="hljs-type">int</span> data)</span> &#123;<br>    <span class="hljs-keyword">if</span> (nextNode == <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Next node cannot be NULL\n&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    DNode* newNode = createDNode(data);<br>    newNode-&gt;prev = nextNode-&gt;prev;<br>    newNode-&gt;next = nextNode;<br>    nextNode-&gt;prev = newNode;<br>    <span class="hljs-keyword">if</span> (newNode-&gt;prev != <span class="hljs-literal">NULL</span>) &#123;<br>        newNode-&gt;prev-&gt;next = newNode;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        *head = newNode;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>后插入</strong>：在指定节点之后插入新节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">insertAfter</span><span class="hljs-params">(DNode* prevNode, <span class="hljs-type">int</span> data)</span> &#123;<br>    <span class="hljs-keyword">if</span> (prevNode == <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Previous node cannot be NULL\n&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    DNode* newNode = createDNode(data);<br>    newNode-&gt;next = prevNode-&gt;next;<br>    newNode-&gt;prev = prevNode;<br>    prevNode-&gt;next = newNode;<br>    <span class="hljs-keyword">if</span> (newNode-&gt;next != <span class="hljs-literal">NULL</span>) &#123;<br>        newNode-&gt;next-&gt;prev = newNode;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>初始化双链表可以创建一个空链表。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">DNode* <span class="hljs-title function_">initializeDList</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;  <span class="hljs-comment">// 空链表</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><ul>
+<li><p><strong>按值删除</strong>：删除双链表中第一个匹配给定值的节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">deleteDNodeByValue</span><span class="hljs-params">(DNode** head, <span class="hljs-type">int</span> value)</span> &#123;<br>    DNode* temp = *head;<br>    <span class="hljs-keyword">while</span> (temp != <span class="hljs-literal">NULL</span> &amp;&amp; temp-&gt;data != value) &#123;<br>        temp = temp-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (temp == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;<br><br>    <span class="hljs-keyword">if</span> (*head == temp) &#123;<br>        *head = temp-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (temp-&gt;next != <span class="hljs-literal">NULL</span>) &#123;<br>        temp-&gt;next-&gt;prev = temp-&gt;prev;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (temp-&gt;prev != <span class="hljs-literal">NULL</span>) &#123;<br>        temp-&gt;prev-&gt;next = temp-&gt;next;<br>    &#125;<br>    <span class="hljs-built_in">free</span>(temp);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>按序号删除</strong>：删除双链表中指定位置的节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">deleteDNodeByIndex</span><span class="hljs-params">(DNode** head, <span class="hljs-type">int</span> index)</span> &#123;<br>    <span class="hljs-keyword">if</span> (*head == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;<br><br>    DNode* temp = *head;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; temp != <span class="hljs-literal">NULL</span> &amp;&amp; i &lt; index; i++) &#123;<br>        temp = temp-&gt;next;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (temp == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;<br><br>    <span class="hljs-keyword">if</span> (*head == temp) &#123;<br>        *head = temp-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (temp-&gt;next != <span class="hljs-literal">NULL</span>) &#123;<br>        temp-&gt;next-&gt;prev = temp-&gt;prev;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (temp-&gt;prev != <span class="hljs-literal">NULL</span>) &#123;<br>        temp-&gt;prev-&gt;next = temp-&gt;next;<br>    &#125;<br>    <span class="hljs-built_in">free</span>(temp);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="按序号和值查找"><a href="#按序号和值查找" class="headerlink" title="按序号和值查找"></a>按序号和值查找</h4><ul>
+<li><p><strong>按序号查找</strong>：根据索引查找双链表中的节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c">DNode* <span class="hljs-title function_">getDNodeByIndex</span><span class="hljs-params">(DNode* head, <span class="hljs-type">int</span> index)</span> &#123;<br>    DNode* current = head;<br>    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-keyword">if</span> (count == index) <span class="hljs-keyword">return</span> current;<br>        count++;<br>        current = current-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>按值查找</strong>：根据节点的值查找双链表中的节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c">DNode* <span class="hljs-title function_">getDNodeByValue</span><span class="hljs-params">(DNode* head, <span class="hljs-type">int</span> value)</span> &#123;<br>    DNode* current = head;<br>    <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-keyword">if</span> (current-&gt;data == value) <span class="hljs-keyword">return</span> current;<br>        current = current-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h4><p>遍历双链表可以从头到尾遍历，也可以从尾到头遍历。</p>
+<ul>
+<li><p><strong>从头到尾遍历</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">traverseDListForward</span><span class="hljs-params">(DNode* head)</span> &#123;<br>    DNode* current = head;<br>    <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d -&gt; &quot;</span>, current-&gt;data);<br>        current = current-&gt;next;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;NULL\n&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>从尾到头遍历</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">traverseDListBackward</span><span class="hljs-params">(DNode* tail)</span> &#123;<br>    DNode* current = tail;<br>    <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">NULL</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d -&gt; &quot;</span>, current-&gt;data);<br>        current = current-&gt;prev;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;NULL\n&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="求长"><a href="#求长" class="headerlink" title="求长"></a>求长</h4><p>计算双链表的长度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">getDListLength</span><span class="hljs-params">(DNode* head)</span> &#123;<br>    <span class="hljs-type">int</span> length = <span class="hljs-number">0</span>;<br>    DNode* current = head;<br>    <span class="hljs-keyword">while</span> (current != <span class="hljs-literal">NULL</span>) &#123;<br>        length++;<br>        current = current-&gt;next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> length;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h3><h4 id="建立-1"><a href="#建立-1" class="headerlink" title="建立"></a>建立</h4><p>顺序表（或称数组）是一个线性表，使用一段连续的存储空间来存储数据元素。在C语言中，通常通过动态分配内存来创建顺序表，以支持动态扩展。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    <span class="hljs-type">int</span>* data;    <span class="hljs-comment">// 存储数据的指针</span><br>    <span class="hljs-type">int</span> size;     <span class="hljs-comment">// 当前元素个数</span><br>    <span class="hljs-type">int</span> capacity; <span class="hljs-comment">// 顺序表的容量</span><br>&#125; SeqList;<br><br><span class="hljs-comment">// 初始化顺序表</span><br>SeqList* <span class="hljs-title function_">createSeqList</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity)</span> &#123;<br>    SeqList* <span class="hljs-built_in">list</span> = (SeqList*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(SeqList));<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">list</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation error\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-built_in">list</span>-&gt;data = (<span class="hljs-type">int</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>) * initialCapacity);<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">list</span>-&gt;data) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation error\n&quot;</span>);<br>        <span class="hljs-built_in">free</span>(<span class="hljs-built_in">list</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-built_in">list</span>-&gt;size = <span class="hljs-number">0</span>;<br>    <span class="hljs-built_in">list</span>-&gt;capacity = initialCapacity;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">list</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><p>复制顺序表通常是指创建一个新的顺序表，其内容与现有的顺序表相同。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c">SeqList* <span class="hljs-title function_">copySeqList</span><span class="hljs-params">(SeqList* original)</span> &#123;<br>    <span class="hljs-keyword">if</span> (!original) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br><br>    SeqList* newList = createSeqList(original-&gt;capacity);<br>    <span class="hljs-keyword">if</span> (!newList) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; original-&gt;size; i++) &#123;<br>        newList-&gt;data[i] = original-&gt;data[i];<br>    &#125;<br>    newList-&gt;size = original-&gt;size;<br><br>    <span class="hljs-keyword">return</span> newList;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个代码段展示了如何在C语言中创建和复制顺序表。<code>createSeqList</code>函数用于创建并初始化一个指定容量的顺序表，而<code>copySeqList</code>函数则根据原始顺序表创建一个内容相同的新顺序表。</p>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><h4 id="顺序栈"><a href="#顺序栈" class="headerlink" title="顺序栈"></a>顺序栈</h4><p>顺序栈是一种基于数组实现的栈结构，遵循“后进先出”（LIFO）的原则。栈的操作主要包括进栈（Push）和出栈（Pop）。</p>
+<h4 id="建立-2"><a href="#建立-2" class="headerlink" title="建立"></a>建立</h4><p>建立顺序栈通常需要定义一个结构体来包含栈的数组和栈顶指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_SIZE 100  <span class="hljs-comment">// 定义栈的最大容量</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    <span class="hljs-type">int</span> data[MAX_SIZE];  <span class="hljs-comment">// 存储栈元素的数组</span><br>    <span class="hljs-type">int</span> top;             <span class="hljs-comment">// 栈顶指针</span><br>&#125; SeqStack;<br><br><span class="hljs-comment">// 初始化栈</span><br>SeqStack* <span class="hljs-title function_">createStack</span><span class="hljs-params">()</span> &#123;<br>    SeqStack* <span class="hljs-built_in">stack</span> = (SeqStack*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(SeqStack));<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">stack</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation error\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-built_in">stack</span>-&gt;top = <span class="hljs-number">-1</span>;  <span class="hljs-comment">// 栈顶初始化为-1，表示栈为空</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">stack</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="进栈操作"><a href="#进栈操作" class="headerlink" title="进栈操作"></a>进栈操作</h4><p>进栈操作将一个元素压入栈中。首先检查栈是否已满，若未满则将元素添加到栈顶。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">push</span><span class="hljs-params">(SeqStack* <span class="hljs-built_in">stack</span>, <span class="hljs-type">int</span> value)</span> &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">stack</span>-&gt;top == MAX_SIZE - <span class="hljs-number">1</span>) &#123;  <span class="hljs-comment">// 栈是否已满</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Stack overflow\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>    <span class="hljs-built_in">stack</span>-&gt;data[++(<span class="hljs-built_in">stack</span>-&gt;top)] = value;  <span class="hljs-comment">// 栈顶指针加1后赋值</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="出栈操作"><a href="#出栈操作" class="headerlink" title="出栈操作"></a>出栈操作</h4><p>出栈操作从栈顶弹出一个元素。首先检查栈是否为空，若不为空则弹出栈顶元素并返回。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">pop</span><span class="hljs-params">(SeqStack* <span class="hljs-built_in">stack</span>, <span class="hljs-type">int</span>* value)</span> &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">stack</span>-&gt;top == <span class="hljs-number">-1</span>) &#123;  <span class="hljs-comment">// 栈是否为空</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Stack underflow\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>    *value = <span class="hljs-built_in">stack</span>-&gt;data[(<span class="hljs-built_in">stack</span>-&gt;top)--];  <span class="hljs-comment">// 取出栈顶元素，栈顶指针减1</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="示例用法"><a href="#示例用法" class="headerlink" title="示例用法"></a>示例用法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    SeqStack* <span class="hljs-built_in">stack</span> = createStack();<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">stack</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br><br>    push(<span class="hljs-built_in">stack</span>, <span class="hljs-number">10</span>);<br>    push(<span class="hljs-built_in">stack</span>, <span class="hljs-number">20</span>);<br>    push(<span class="hljs-built_in">stack</span>, <span class="hljs-number">30</span>);<br><br>    <span class="hljs-type">int</span> value;<br>    <span class="hljs-keyword">if</span> (pop(<span class="hljs-built_in">stack</span>, &amp;value) == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Popped: %d\n&quot;</span>, value);<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (pop(<span class="hljs-built_in">stack</span>, &amp;value) == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Popped: %d\n&quot;</span>, value);<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这段代码展示了如何创建一个顺序栈，并进行进栈和出栈操作。<code>push</code>函数用于将元素压入栈中，而<code>pop</code>函数则用于从栈中弹出元素。</p>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p>队列是一种先进先出（FIFO）的数据结构，元素从队尾入队，从队头出队。它的基本操作包括入队（Enqueue）、出队（Dequeue）、取队头（Peek&#x2F;Front）和判定队空（IsEmpty）。</p>
+<h4 id="建立-3"><a href="#建立-3" class="headerlink" title="建立"></a>建立</h4><p>队列可以通过顺序表（数组）或链表来实现。这里以数组为基础实现一个循环队列。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_SIZE 100  <span class="hljs-comment">// 定义队列的最大容量</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    <span class="hljs-type">int</span> data[MAX_SIZE];  <span class="hljs-comment">// 存储队列元素的数组</span><br>    <span class="hljs-type">int</span> front;           <span class="hljs-comment">// 队头指针</span><br>    <span class="hljs-type">int</span> rear;            <span class="hljs-comment">// 队尾指针</span><br>&#125; Queue;<br><br><span class="hljs-comment">// 初始化队列</span><br>Queue* <span class="hljs-title function_">createQueue</span><span class="hljs-params">()</span> &#123;<br>    Queue* <span class="hljs-built_in">queue</span> = (Queue*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(Queue));<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">queue</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation error\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-built_in">queue</span>-&gt;front = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 初始化队头</span><br>    <span class="hljs-built_in">queue</span>-&gt;rear = <span class="hljs-number">0</span>;   <span class="hljs-comment">// 初始化队尾</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">queue</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="进队操作"><a href="#进队操作" class="headerlink" title="进队操作"></a>进队操作</h4><p>进队操作将一个元素添加到队尾。首先检查队列是否已满，若未满则将元素加入队列。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">enqueue</span><span class="hljs-params">(Queue* <span class="hljs-built_in">queue</span>, <span class="hljs-type">int</span> value)</span> &#123;<br>    <span class="hljs-keyword">if</span> ((<span class="hljs-built_in">queue</span>-&gt;rear + <span class="hljs-number">1</span>) % MAX_SIZE == <span class="hljs-built_in">queue</span>-&gt;front) &#123;  <span class="hljs-comment">// 判断队列是否满</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Queue overflow\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>    <span class="hljs-built_in">queue</span>-&gt;data[<span class="hljs-built_in">queue</span>-&gt;rear] = value;<br>    <span class="hljs-built_in">queue</span>-&gt;rear = (<span class="hljs-built_in">queue</span>-&gt;rear + <span class="hljs-number">1</span>) % MAX_SIZE;  <span class="hljs-comment">// 队尾指针循环前进</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="出队操作"><a href="#出队操作" class="headerlink" title="出队操作"></a>出队操作</h4><p>出队操作从队头移除一个元素。首先检查队列是否为空，若不为空则移除队头元素并返回。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">dequeue</span><span class="hljs-params">(Queue* <span class="hljs-built_in">queue</span>, <span class="hljs-type">int</span>* value)</span> &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">queue</span>-&gt;front == <span class="hljs-built_in">queue</span>-&gt;rear) &#123;  <span class="hljs-comment">// 判断队列是否为空</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Queue underflow\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>    *value = <span class="hljs-built_in">queue</span>-&gt;data[<span class="hljs-built_in">queue</span>-&gt;front];<br>    <span class="hljs-built_in">queue</span>-&gt;front = (<span class="hljs-built_in">queue</span>-&gt;front + <span class="hljs-number">1</span>) % MAX_SIZE;  <span class="hljs-comment">// 队头指针循环前进</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="取队头操作"><a href="#取队头操作" class="headerlink" title="取队头操作"></a>取队头操作</h4><p>取队头操作获取队列的第一个元素，但不移除它。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">front</span><span class="hljs-params">(Queue* <span class="hljs-built_in">queue</span>, <span class="hljs-type">int</span>* value)</span> &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">queue</span>-&gt;front == <span class="hljs-built_in">queue</span>-&gt;rear) &#123;  <span class="hljs-comment">// 判断队列是否为空</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Queue is empty\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>    *value = <span class="hljs-built_in">queue</span>-&gt;data[<span class="hljs-built_in">queue</span>-&gt;front];<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="判定队空"><a href="#判定队空" class="headerlink" title="判定队空"></a>判定队空</h4><p>判定队列是否为空。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">(Queue* <span class="hljs-built_in">queue</span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">queue</span>-&gt;front == <span class="hljs-built_in">queue</span>-&gt;rear;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="示例用法-1"><a href="#示例用法-1" class="headerlink" title="示例用法"></a>示例用法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    Queue* <span class="hljs-built_in">queue</span> = createQueue();<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">queue</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br><br>    enqueue(<span class="hljs-built_in">queue</span>, <span class="hljs-number">10</span>);<br>    enqueue(<span class="hljs-built_in">queue</span>, <span class="hljs-number">20</span>);<br>    enqueue(<span class="hljs-built_in">queue</span>, <span class="hljs-number">30</span>);<br><br>    <span class="hljs-type">int</span> value;<br>    <span class="hljs-keyword">if</span> (dequeue(<span class="hljs-built_in">queue</span>, &amp;value) == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Dequeued: %d\n&quot;</span>, value);<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (front(<span class="hljs-built_in">queue</span>, &amp;value) == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Front: %d\n&quot;</span>, value);<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (isEmpty(<span class="hljs-built_in">queue</span>)) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Queue is empty\n&quot;</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Queue is not empty\n&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中，队列的基本操作得到了实现和展示。<code>enqueue</code>函数用于将元素添加到队列，<code>dequeue</code>函数则用于从队列中移除元素，<code>front</code>函数可以查看队头元素而不移除，<code>isEmpty</code>函数则用于判断队列是否为空。</p>
+<h3 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h3><p>循环队列是队列的一种变形，它使用数组实现，并通过将队尾指针和队头指针进行“环绕”处理，以有效利用数组空间。以下是循环队列的进队和出队操作。</p>
+<h4 id="循环队列的结构定义"><a href="#循环队列的结构定义" class="headerlink" title="循环队列的结构定义"></a>循环队列的结构定义</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_SIZE 100  <span class="hljs-comment">// 定义循环队列的最大容量</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>    <span class="hljs-type">int</span> data[MAX_SIZE];  <span class="hljs-comment">// 存储队列元素的数组</span><br>    <span class="hljs-type">int</span> front;           <span class="hljs-comment">// 队头指针</span><br>    <span class="hljs-type">int</span> rear;            <span class="hljs-comment">// 队尾指针</span><br>&#125; CircularQueue;<br><br><span class="hljs-comment">// 初始化循环队列</span><br>CircularQueue* <span class="hljs-title function_">createCircularQueue</span><span class="hljs-params">()</span> &#123;<br>    CircularQueue* <span class="hljs-built_in">queue</span> = (CircularQueue*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(CircularQueue));<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">queue</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation error\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-built_in">queue</span>-&gt;front = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 初始化队头指针</span><br>    <span class="hljs-built_in">queue</span>-&gt;rear = <span class="hljs-number">0</span>;   <span class="hljs-comment">// 初始化队尾指针</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">queue</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="进队操作（Enqueue）"><a href="#进队操作（Enqueue）" class="headerlink" title="进队操作（Enqueue）"></a>进队操作（Enqueue）</h4><p>进队操作将元素添加到队尾。首先判断队列是否已满。若未满，则将元素加入到队尾，并更新队尾指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">enqueue</span><span class="hljs-params">(CircularQueue* <span class="hljs-built_in">queue</span>, <span class="hljs-type">int</span> value)</span> &#123;<br>    <span class="hljs-keyword">if</span> ((<span class="hljs-built_in">queue</span>-&gt;rear + <span class="hljs-number">1</span>) % MAX_SIZE == <span class="hljs-built_in">queue</span>-&gt;front) &#123;  <span class="hljs-comment">// 判断队列是否满</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Queue overflow\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>    <span class="hljs-built_in">queue</span>-&gt;data[<span class="hljs-built_in">queue</span>-&gt;rear] = value;<br>    <span class="hljs-built_in">queue</span>-&gt;rear = (<span class="hljs-built_in">queue</span>-&gt;rear + <span class="hljs-number">1</span>) % MAX_SIZE;  <span class="hljs-comment">// 队尾指针循环前进</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="出队操作（Dequeue）"><a href="#出队操作（Dequeue）" class="headerlink" title="出队操作（Dequeue）"></a>出队操作（Dequeue）</h4><p>出队操作从队头移除一个元素。首先判断队列是否为空。若不为空，则移除队头元素，并更新队头指针。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">dequeue</span><span class="hljs-params">(CircularQueue* <span class="hljs-built_in">queue</span>, <span class="hljs-type">int</span>* value)</span> &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">queue</span>-&gt;front == <span class="hljs-built_in">queue</span>-&gt;rear) &#123;  <span class="hljs-comment">// 判断队列是否为空</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Queue underflow\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>    *value = <span class="hljs-built_in">queue</span>-&gt;data[<span class="hljs-built_in">queue</span>-&gt;front];<br>    <span class="hljs-built_in">queue</span>-&gt;front = (<span class="hljs-built_in">queue</span>-&gt;front + <span class="hljs-number">1</span>) % MAX_SIZE;  <span class="hljs-comment">// 队头指针循环前进</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="示例用法-2"><a href="#示例用法-2" class="headerlink" title="示例用法"></a>示例用法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    CircularQueue* <span class="hljs-built_in">queue</span> = createCircularQueue();<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">queue</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br><br>    enqueue(<span class="hljs-built_in">queue</span>, <span class="hljs-number">10</span>);<br>    enqueue(<span class="hljs-built_in">queue</span>, <span class="hljs-number">20</span>);<br>    enqueue(<span class="hljs-built_in">queue</span>, <span class="hljs-number">30</span>);<br><br>    <span class="hljs-type">int</span> value;<br>    <span class="hljs-keyword">if</span> (dequeue(<span class="hljs-built_in">queue</span>, &amp;value) == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Dequeued: %d\n&quot;</span>, value);<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (dequeue(<span class="hljs-built_in">queue</span>, &amp;value) == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Dequeued: %d\n&quot;</span>, value);<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (enqueue(<span class="hljs-built_in">queue</span>, <span class="hljs-number">40</span>) == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enqueued: 40\n&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个示例中，<code>enqueue</code>函数将元素添加到循环队列的队尾，而<code>dequeue</code>函数从队头移除元素并返回。通过<code>(queue-&gt;front + 1) % MAX_SIZE</code>和<code>(queue-&gt;rear + 1) % MAX_SIZE</code>的计算，使得指针在到达数组末端时能够回绕到数组的开始位置，从而实现循环队列的功能。</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组是具有相同类型元素的集合，元素在内存中按顺序存储。根据数组维度的不同，数组可以分为一维数组、二维数组和三维数组。</p>
+<h4 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h4><p>一维数组是一组具有相同类型的变量。数组中的每个元素都有一个索引，索引从0开始。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> arr[<span class="hljs-number">5</span>] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>可以通过索引访问和修改数组中的元素：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">arr[<span class="hljs-number">2</span>] = <span class="hljs-number">10</span>; <span class="hljs-comment">// 修改第三个元素的值为10</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><p>二维数组可以看作是数组的数组，通常用于表示矩阵或表格数据。声明一个二维数组的方法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> matrix[<span class="hljs-number">3</span>][<span class="hljs-number">3</span>] = &#123;<br>    &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;,<br>    &#123;<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>&#125;,<br>    &#123;<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>访问二维数组元素：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> value = matrix[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>]; <span class="hljs-comment">// 获取第二行第三列的元素</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="三维数组"><a href="#三维数组" class="headerlink" title="三维数组"></a>三维数组</h4><p>三维数组是数组的进一步扩展，通常用于表示多维空间中的数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> array3D[<span class="hljs-number">2</span>][<span class="hljs-number">3</span>][<span class="hljs-number">4</span>] = &#123;<br>    &#123;<br>        &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;,<br>        &#123;<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>&#125;,<br>        &#123;<span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>&#125;<br>    &#125;,<br>    &#123;<br>        &#123;<span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>&#125;,<br>        &#123;<span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>, <span class="hljs-number">20</span>&#125;,<br>        &#123;<span class="hljs-number">21</span>, <span class="hljs-number">22</span>, <span class="hljs-number">23</span>, <span class="hljs-number">24</span>&#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>访问三维数组元素：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> value = array3D[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>][<span class="hljs-number">3</span>]; <span class="hljs-comment">// 获取第二个2D数组的第三行第四列的元素</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="矩阵的压缩存储"><a href="#矩阵的压缩存储" class="headerlink" title="矩阵的压缩存储"></a>矩阵的压缩存储</h3><p>矩阵压缩存储用于节省空间，特别是在矩阵具有某种特殊结构时，例如对称矩阵、三角矩阵和稀疏矩阵。</p>
+<h4 id="对称矩阵"><a href="#对称矩阵" class="headerlink" title="对称矩阵"></a>对称矩阵</h4><p>对称矩阵是指矩阵的元素满足 <code>A[i][j] == A[j][i]</code>。对于对称矩阵，只需要存储矩阵的上三角或下三角部分即可。</p>
+<p>假设存储上三角部分：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> n = <span class="hljs-number">3</span>; <span class="hljs-comment">// 矩阵的维度</span><br><span class="hljs-type">int</span> symmetricMatrix[(n * (n + <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span>]; <span class="hljs-comment">// 存储上三角部分的数组</span><br><br><span class="hljs-comment">// 计算索引</span><br><span class="hljs-type">int</span> index = (i * (i + <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span> + j;<br>symmetricMatrix[index] = value;<br></code></pre></td></tr></table></figure>
+
+<p>访问元素时：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">getSymmetricMatrixValue</span><span class="hljs-params">(<span class="hljs-type">int</span>* mat, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>    <span class="hljs-keyword">if</span> (i &lt;= j) &#123;<br>        <span class="hljs-keyword">return</span> mat[(i * (i + <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span> + j];<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> mat[(j * (j + <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span> + i];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="三角矩阵"><a href="#三角矩阵" class="headerlink" title="三角矩阵"></a>三角矩阵</h4><ul>
+<li><strong>上三角矩阵</strong>：只存储非零的上三角部分。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> upperTriangular[(n * (n + <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span>];<br></code></pre></td></tr></table></figure>
+
+<p>存储上三角矩阵的元素：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (i &lt;= j) &#123;<br>    upperTriangular[(i * n) - (i * (i - <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span> + (j - i)] = value;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>下三角矩阵</strong>：只存储非零的下三角部分。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> lowerTriangular[(n * (n + <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span>];<br></code></pre></td></tr></table></figure>
+
+<p>存储下三角矩阵的元素：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (i &gt;= j) &#123;<br>    lowerTriangular[(i * (i + <span class="hljs-number">1</span>)) / <span class="hljs-number">2</span> + j] = value;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="稀疏矩阵压缩存储"><a href="#稀疏矩阵压缩存储" class="headerlink" title="稀疏矩阵压缩存储"></a>稀疏矩阵压缩存储</h4><p>稀疏矩阵是指大部分元素为零的矩阵。稀疏矩阵可以通过三元组（行、列、值）来压缩存储。常见的存储方法包括COO（Coordinate List）、CSR（Compressed Sparse Row）和CSC（Compressed Sparse Column）。</p>
+<ul>
+<li><strong>COO（Coordinate List）</strong>：使用三个数组分别存储非零元素的行索引、列索引和对应的值。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> row[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;;<br><span class="hljs-type">int</span> col[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;;<br><span class="hljs-type">int</span> val[] = &#123;<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>CSR（Compressed Sparse Row）</strong>：使用三个数组存储稀疏矩阵，分别是 <code>values</code>（非零元素的值），<code>col_index</code>（非零元素所在的列索引）和 <code>row_pointer</code>（每行开始的位置）。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> values[] = &#123;<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>&#125;;<br><span class="hljs-type">int</span> col_index[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;;<br><span class="hljs-type">int</span> row_pointer[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>CSC（Compressed Sparse Column）</strong>：与CSR类似，使用三个数组存储稀疏矩阵，只不过是按列进行存储。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> values[] = &#123;<span class="hljs-number">10</span>, <span class="hljs-number">30</span>, <span class="hljs-number">20</span>, <span class="hljs-number">40</span>&#125;;<br><span class="hljs-type">int</span> row_index[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>&#125;;<br><span class="hljs-type">int</span> col_pointer[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>这些压缩存储方法通过只存储非零元素和它们的位置，大大减少了稀疏矩阵所需的存储空间。</p>
+<h3 id="广义表"><a href="#广义表" class="headerlink" title="广义表"></a>广义表</h3><p>广义表（Generalized List）是线性表的推广，广义表中的元素不仅可以是原子（不可再分的基本元素），还可以是子表（即一个广义表）。因此，广义表是一个递归结构，可以包含多个层次的子表。</p>
+<h4 id="广义表的结构定义"><a href="#广义表的结构定义" class="headerlink" title="广义表的结构定义"></a>广义表的结构定义</h4><p>在C语言中，广义表通常通过链表来实现，每个节点可以是一个原子值或一个指向子表的指针。以下是广义表的基本结构定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> &#123;</span> ATOM, LIST &#125; ElemTag; <span class="hljs-comment">// 定义元素类型：ATOM表示原子，LIST表示子表</span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">GLNode</span> &#123;</span><br>    ElemTag tag;  <span class="hljs-comment">// 节点类型</span><br>    <span class="hljs-class"><span class="hljs-keyword">union</span> &#123;</span><br>        <span class="hljs-type">char</span> atom;  <span class="hljs-comment">// 当tag为ATOM时，存储原子值</span><br>        <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span><br>            <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">GLNode</span>* <span class="hljs-title">head</span>;</span>  <span class="hljs-comment">// 指向子表头节点</span><br>            <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">GLNode</span>* <span class="hljs-title">tail</span>;</span>  <span class="hljs-comment">// 指向广义表的下一个节点</span><br>        &#125; ptr;<br>    &#125; value;<br>&#125; GLNode;<br><br><span class="hljs-comment">// 创建一个原子节点</span><br>GLNode* <span class="hljs-title function_">createAtomNode</span><span class="hljs-params">(<span class="hljs-type">char</span> atom)</span> &#123;<br>    GLNode* node = (GLNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(GLNode));<br>    node-&gt;tag = ATOM;<br>    node-&gt;value.atom = atom;<br>    <span class="hljs-keyword">return</span> node;<br>&#125;<br><br><span class="hljs-comment">// 创建一个子表节点</span><br>GLNode* <span class="hljs-title function_">createListNode</span><span class="hljs-params">(GLNode* head, GLNode* tail)</span> &#123;<br>    GLNode* node = (GLNode*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(GLNode));<br>    node-&gt;tag = LIST;<br>    node-&gt;value.ptr.head = head;<br>    node-&gt;value.ptr.tail = tail;<br>    <span class="hljs-keyword">return</span> node;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="广义表的示例"><a href="#广义表的示例" class="headerlink" title="广义表的示例"></a>广义表的示例</h4><p>假设有一个广义表 <code>((a, b), c, (d, (e, f)))</code>，它可以通过以下方式构建：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-comment">// 创建原子节点</span><br>    GLNode* a = createAtomNode(<span class="hljs-string">&#x27;a&#x27;</span>);<br>    GLNode* b = createAtomNode(<span class="hljs-string">&#x27;b&#x27;</span>);<br>    GLNode* c = createAtomNode(<span class="hljs-string">&#x27;c&#x27;</span>);<br>    GLNode* d = createAtomNode(<span class="hljs-string">&#x27;d&#x27;</span>);<br>    GLNode* e = createAtomNode(<span class="hljs-string">&#x27;e&#x27;</span>);<br>    GLNode* f = createAtomNode(<span class="hljs-string">&#x27;f&#x27;</span>);<br><br>    <span class="hljs-comment">// 创建子表 (e, f)</span><br>    GLNode* ef = createListNode(e, createListNode(f, <span class="hljs-literal">NULL</span>));<br><br>    <span class="hljs-comment">// 创建子表 (d, (e, f))</span><br>    GLNode* de = createListNode(d, createListNode(ef, <span class="hljs-literal">NULL</span>));<br><br>    <span class="hljs-comment">// 创建子表 (a, b)</span><br>    GLNode* ab = createListNode(a, createListNode(b, <span class="hljs-literal">NULL</span>));<br><br>    <span class="hljs-comment">// 创建广义表 ((a, b), c, (d, (e, f)))</span><br>    GLNode* gList = createListNode(ab, createListNode(c, createListNode(de, <span class="hljs-literal">NULL</span>)));<br><br>    <span class="hljs-comment">// 打印广义表（为了简洁，省略具体的打印实现）</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中，广义表的结构是通过链表的嵌套来实现的。每个节点要么是一个原子值，要么是一个子表，子表可以进一步包含其他原子或子表。</p>
+<h4 id="广义表的基本操作"><a href="#广义表的基本操作" class="headerlink" title="广义表的基本操作"></a>广义表的基本操作</h4><ol>
+<li><p><strong>获取广义表的头部</strong>（即第一个元素）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">GLNode* <span class="hljs-title function_">getHead</span><span class="hljs-params">(GLNode* gList)</span> &#123;<br>    <span class="hljs-keyword">if</span> (gList &amp;&amp; gList-&gt;tag == LIST) &#123;<br>        <span class="hljs-keyword">return</span> gList-&gt;value.ptr.head;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>获取广义表的尾部</strong>（即去掉第一个元素后剩余的部分）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">GLNode* <span class="hljs-title function_">getTail</span><span class="hljs-params">(GLNode* gList)</span> &#123;<br>    <span class="hljs-keyword">if</span> (gList &amp;&amp; gList-&gt;tag == LIST) &#123;<br>        <span class="hljs-keyword">return</span> gList-&gt;value.ptr.tail;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>判断广义表是否为空表</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">(GLNode* gList)</span> &#123;<br>    <span class="hljs-keyword">return</span> gList == <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>计算广义表的长度</strong>（即顶层元素的个数）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">length</span><span class="hljs-params">(GLNode* gList)</span> &#123;<br>    <span class="hljs-type">int</span> len = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (gList) &#123;<br>        len++;<br>        gList = gList-&gt;value.ptr.tail;<br>    &#125;<br>    <span class="hljs-keyword">return</span> len;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>计算广义表的深度</strong>（即广义表的最大嵌套层数）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">depth</span><span class="hljs-params">(GLNode* gList)</span> &#123;<br>    <span class="hljs-keyword">if</span> (!gList) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (gList-&gt;tag == ATOM) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> maxDepth = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (gList) &#123;<br>        <span class="hljs-type">int</span> currentDepth = depth(gList-&gt;value.ptr.head);<br>        <span class="hljs-keyword">if</span> (currentDepth &gt; maxDepth) &#123;<br>            maxDepth = currentDepth;<br>        &#125;<br>        gList = gList-&gt;value.ptr.tail;<br>    &#125;<br>    <span class="hljs-keyword">return</span> maxDepth + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="广义表的用途"><a href="#广义表的用途" class="headerlink" title="广义表的用途"></a>广义表的用途</h3><p>广义表可以表示任意复杂的递归结构，适用于需要表示层次结构、嵌套关系的数据结构，如编译器中的语法树、复合数据结构的解析等。它通过递归定义和操作，能够灵活地表示和处理多层嵌套的数据。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/c%E8%AF%AD%E8%A8%80%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">c语言的数据结构</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/c%E8%AF%AD%E8%A8%80/" class="print-no-link">#c语言</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>c语言的数据结构</div>
+      <div>https://theganlove.github.io/2024/09/03/c语言的数据结构/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>uert</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/01/%E9%9A%90%E5%86%99%E7%B3%BB%E5%88%97/" title="隐写系列">
+                        <span class="hidden-mobile">隐写系列</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
