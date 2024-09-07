@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="uert">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="数值分析笔记1. 误差分析在数值计算中，误差是不可避免的，理解误差的来源、传播和影响非常重要。 1.1 误差的类型 绝对误差：这是计算结果与实际结果的差异。设真实值为 $x_{\text{true}}$，计算结果为 $x_{\text{approx}}$，那么绝对误差为： $$\text{绝对误差} &#x3D; |x_{\text{true}} - x_{\text{approx}}|$$ 举例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://theganlove.github.io/2024/09/07/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数值分析笔记1. 误差分析在数值计算中，误差是不可避免的，理解误差的来源、传播和影响非常重要。 1.1 误差的类型 绝对误差：这是计算结果与实际结果的差异。设真实值为 $x_{\text{true}}$，计算结果为 $x_{\text{approx}}$，那么绝对误差为： $$\text{绝对误差} &#x3D; |x_{\text{true}} - x_{\text{approx}}|$$ 举例">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-07T12:02:40.111Z">
+<meta property="article:modified_time" content="2024-09-07T13:53:48.767Z">
+<meta property="article:author" content="uert">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"theganlove.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>主题</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-07 20:02" pubdate>
+          2024年9月7日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="数值分析笔记"><a href="#数值分析笔记" class="headerlink" title="数值分析笔记"></a>数值分析笔记</h1><h2 id="1-误差分析"><a href="#1-误差分析" class="headerlink" title="1. 误差分析"></a>1. 误差分析</h2><p>在数值计算中，误差是不可避免的，理解误差的来源、传播和影响非常重要。</p>
+<h3 id="1-1-误差的类型"><a href="#1-1-误差的类型" class="headerlink" title="1.1 误差的类型"></a>1.1 误差的类型</h3><ul>
+<li><p><strong>绝对误差</strong>：<br>这是计算结果与实际结果的差异。设真实值为 $x_{\text{true}}$，计算结果为 $x_{\text{approx}}$，那么绝对误差为：</p>
+<p>$$<br>\text{绝对误差} &#x3D; |x_{\text{true}} - x_{\text{approx}}|<br>$$</p>
+<p><strong>举例</strong>：假设真实值 $x_{\text{true}} &#x3D; 3.141592$，近似值 $x_{\text{approx}} &#x3D; 3.14$，那么：</p>
+<p>$$<br>\text{绝对误差} &#x3D; |3.141592 - 3.14| &#x3D; 0.001592<br>$$</p>
+</li>
+<li><p><strong>相对误差</strong>：<br>这是绝对误差相对于真实值的比例，表示为：</p>
+<p>$$<br>\text{相对误差} &#x3D; \frac{\text{绝对误差}}{x_{\text{true}}}<br>$$</p>
+<p><strong>举例</strong>：真实值 $x_{\text{true}} &#x3D; 3.141592$，那么相对误差为：</p>
+<p>$$<br>\text{相对误差} &#x3D; \frac{0.001592}{3.141592} \approx 0.000507<br>$$<br>表示误差大约为真实值的 $0.05%$。</p>
+</li>
+</ul>
+<h3 id="1-2-误差传播"><a href="#1-2-误差传播" class="headerlink" title="1.2 误差传播"></a>1.2 误差传播</h3><p>误差在数值计算中会通过运算逐步放大。例如，如果你在连续使用一个近似值进行多次计算，每一步运算可能都会引入新的误差。</p>
+<p><strong>举例</strong>：<br>假设你用 $x &#x3D; 3.14$ 来代替 $\pi$，并进行平方运算：<br>$$<br>x^2 &#x3D; 3.14^2 &#x3D; 9.8596<br>$$<br>而真实值 $\pi^2 \approx 9.8696$，可以看到随着运算的进行，误差进一步增大了。</p>
+<h2 id="2-非线性方程求根"><a href="#2-非线性方程求根" class="headerlink" title="2. 非线性方程求根"></a>2. 非线性方程求根</h2><p>非线性方程求根指的是找到使得 $f(x) &#x3D; 0$ 的 $x$ 值。常见的求根方法包括二分法、牛顿法和割线法。</p>
+<h3 id="2-1-二分法"><a href="#2-1-二分法" class="headerlink" title="2.1 二分法"></a>2.1 二分法</h3><p>二分法是一种稳定且简单的求根方法，适用于连续函数。其基本思想是利用函数在某个区间 $[a, b]$ 上的符号变化，逐步缩小区间，直到找到近似根。</p>
+<p><strong>算法步骤</strong>：</p>
+<ol>
+<li>取一个初始区间 $[a, b]$，且 $f(a) \cdot f(b) &lt; 0$，保证方程在 $[a, b]$ 之间有根。</li>
+<li>计算中点 $m &#x3D; \frac{a + b}{2}$，检查 $f(m)$ 的符号。<ul>
+<li>如果 $f(m) &#x3D; 0$，则 $m$ 就是方程的根。</li>
+<li>如果 $f(m) \cdot f(a) &lt; 0$，则根在区间 $[a, m]$，令 $b &#x3D; m$。</li>
+<li>如果 $f(m) \cdot f(b) &lt; 0$，则根在区间 $[m, b]$，令 $a &#x3D; m$。</li>
+</ul>
+</li>
+<li>重复步骤2，直到区间长度足够小。</li>
+</ol>
+<p><strong>举例</strong>：求解方程 $f(x) &#x3D; x^2 - 4 &#x3D; 0$ 的根（真实解为 $x &#x3D; 2$ 和 $x &#x3D; -2$）。</p>
+<ul>
+<li>初始区间取 $[1, 3]$，因为 $f(1) &#x3D; -3$，$f(3) &#x3D; 5$，满足 $f(1) \cdot f(3) &lt; 0$。</li>
+<li>计算中点 $m &#x3D; \frac{1 + 3}{2} &#x3D; 2$，此时 $f(2) &#x3D; 0$，找到了根 $x &#x3D; 2$。</li>
+</ul>
+<h3 id="2-2-牛顿法"><a href="#2-2-牛顿法" class="headerlink" title="2.2 牛顿法"></a>2.2 牛顿法</h3><p>牛顿法是一种快速收敛的求根方法，它利用函数在某一点的切线来迭代逼近根。牛顿法的迭代公式为：<br>$$<br>x_{n+1} &#x3D; x_n - \frac{f(x_n)}{f’(x_n)}<br>$$<br>要求函数 $f(x)$ 的导数 $f’(x)$ 存在且容易计算。</p>
+<p><strong>举例</strong>：用牛顿法求解方程 $f(x) &#x3D; x^2 - 4 &#x3D; 0$。</p>
+<ul>
+<li>设初始值 $x_0 &#x3D; 3$。</li>
+<li>计算 $f(3) &#x3D; 5$，$f’(3) &#x3D; 2 \times 3 &#x3D; 6$，则迭代公式为：<br>$$<br>x_1 &#x3D; 3 - \frac{5}{6} \approx 2.17<br>$$</li>
+<li>继续迭代，$f(2.17) \approx 0.71$，$f’(2.17) &#x3D; 4.34$，迭代得：<br>$$<br>x_2 &#x3D; 2.17 - \frac{0.71}{4.34} \approx 2.01<br>$$</li>
+<li>逐步逼近根 $x &#x3D; 2$。</li>
+</ul>
+<h2 id="3-解线性方程组的迭代方法"><a href="#3-解线性方程组的迭代方法" class="headerlink" title="3. 解线性方程组的迭代方法"></a>3. 解线性方程组的迭代方法</h2><p>线性方程组的迭代法适用于大规模稀疏矩阵的求解。常见的迭代方法有雅可比迭代法和高斯-赛德尔迭代法。</p>
+<h3 id="3-1-雅可比迭代法"><a href="#3-1-雅可比迭代法" class="headerlink" title="3.1 雅可比迭代法"></a>3.1 雅可比迭代法</h3><p>雅可比迭代法的基本思想是将每个变量逐次更新，基于旧的解进行新的迭代。方程组 $Ax &#x3D; b$ 被拆分为形式：<br>$$<br>x_i^{(k+1)} &#x3D; \frac{1}{a_{ii}} \left(b_i - \sum_{j \neq i} a_{ij} x_j^{(k)} \right)<br>$$</p>
+<p><strong>举例</strong>：解线性方程组<br>$$<br>\begin{aligned}<br>2x_1 + x_2 &amp;&#x3D; 5 \<br>x_1 + 3x_2 &amp;&#x3D; 6<br>\end{aligned}<br>$$</p>
+<ul>
+<li>初始猜测 $x_1^{(0)} &#x3D; x_2^{(0)} &#x3D; 0$。</li>
+<li>第一次迭代：<br>$$<br>x_1^{(1)} &#x3D; \frac{1}{2} (5 - 0) &#x3D; 2.5<br>$$<br>$$<br>x_2^{(1)} &#x3D; \frac{1}{3} (6 - 0) &#x3D; 2<br>$$</li>
+<li>第二次迭代：<br>$$<br>x_1^{(2)} &#x3D; \frac{1}{2} (5 - 2) &#x3D; 1.5<br>$$<br>$$<br>x_2^{(2)} &#x3D; \frac{1}{3} (6 - 1.5) &#x3D; 1.5<br>$$<br>迭代继续进行，逐步逼近解 $x_1 &#x3D; 1$，$x_2 &#x3D; 1$。</li>
+</ul>
+<h3 id="3-2-高斯-赛德尔迭代法"><a href="#3-2-高斯-赛德尔迭代法" class="headerlink" title="3.2 高斯-赛德尔迭代法"></a>3.2 高斯-赛德尔迭代法</h3><p>高斯-赛德尔法是雅可比法的改进，每次迭代时，使用最新的解来更新当前变量。与雅可比法相比，收敛速度更快。</p>
+<p><strong>举例</strong>：使用高斯-赛德尔法解上面的方程组。</p>
+<ul>
+<li>初始猜测 $x_1^{(0)} &#x3D; x_2^{(0)} &#x3D; 0$。</li>
+<li>第一次迭代：<br>$$<br>x_1^{(1)} &#x3D; \frac{1}{2} (5 - 0) &#x3D; 2.5<br>$$<br>使用最新的 $x_1^{(1)} &#x3D; 2.5$ 来更新 $x_2$：<br>$$<br>x_2^{(1)} &#x3D; \frac{1}{3} (6 - 2.5) &#x3D; 1.167<br>$$</li>
+<li>第二次迭代：<br>$$<br>x_1^{(2)} &#x3D; \frac{1}{2} (5 - 1.167) &#x3D; 1.917<br>$$<br>$$<br>x_2^{(2)} &#x3D; \frac{1}{3} (6 - 1.917) &#x3D; 1.361<br>$$<br>继续迭代，逐步逼近解。</li>
+</ul>
+<h2 id="4-不动点迭代法"><a href="#4-不动点迭代法" class="headerlink" title="4. 不动点迭代法"></a>4. 不动点迭代法</h2><p>不动点迭代法是一种通过 $x &#x3D; g(x)$ 的迭代形式求解方程的方法，收敛性依赖于 $g(x)$ 的性质。</p>
+<h3 id="4-1-算法步骤"><a href="#4-1-算法步骤" class="headerlink" title="4.1 算法步骤"></a>4.1 算法步骤</h3><ol>
+<li>从一个初始猜测值 $x_0$ 开始。</li>
+<li>根据公式 $x_{n+1} &#x3D; g(x_n)$ 计算新值。</li>
+<li>重复第 2 步，直到收敛到一个解。</li>
+</ol>
+<h3 id="4-2-收敛性条件"><a href="#4-2-收敛性条件" class="headerlink" title="4.2 收敛性条件"></a>4.2 收敛性条件</h3><p>不动点迭代法的收敛性依赖于函数 $g(x)$ 的性质，尤其是它在不动点附近的导数。如果 $g(x)$ 在不动点附近满足以下条件，则该方法收敛：</p>
+<ul>
+<li>存在 $c \in (0, 1)$，使得 $|g’(x)| \leq c$，那么迭代将收敛。</li>
+</ul>
+<p><strong>举例</strong>：<br>求解方程 $x^2 - 2 &#x3D; 0$ 的根，可以转化为不动点形式 $x &#x3D; \frac{2}{x}$。设初始值 $x_0 &#x3D; 1$，通过迭代公式：<br>$$<br>x_{n+1} &#x3D; \frac{2}{x_n}<br>$$<br>我们可以逐步逼近根 $x &#x3D; \sqrt{2}$。</p>
+<h2 id="5-全局收敛性"><a href="#5-全局收敛性" class="headerlink" title="5. 全局收敛性"></a>5. 全局收敛性</h2><p>全局收敛性是指某种数值方法对任意初始点都能收敛到方程的解，而不仅仅是某个特定区间或条件下。</p>
+<ul>
+<li><strong>局部收敛性</strong>：如果算法只在某个初始点或特定区域内收敛到解，我们称其为局部收敛。</li>
+<li><strong>全局收敛性</strong>：算法不依赖于初始猜测值，在较大的区间或空间内都能收敛到解。</li>
+</ul>
+<p><strong>举例</strong>：<br>二分法具有全局收敛性，因为只要函数在初始区间 $[a, b]$ 上连续并且满足 $f(a) \cdot f(b) &lt; 0$，无论初始猜测值如何，二分法都能收敛到根。而牛顿法通常是局部收敛的，它对初始值较为敏感。</p>
+<h2 id="6-迭代收敛的加速方法"><a href="#6-迭代收敛的加速方法" class="headerlink" title="6. 迭代收敛的加速方法"></a>6. 迭代收敛的加速方法</h2><p>迭代方法在很多情况下会收敛较慢，因此引入一些加速技术来提高收敛速度是必要的。以下是几种常用的加速方法：</p>
+<h3 id="6-1-Aitken加速法"><a href="#6-1-Aitken加速法" class="headerlink" title="6.1 Aitken加速法"></a>6.1 Aitken加速法</h3><p>Aitken加速法是一种常用的迭代加速技术，特别适用于线性收敛的迭代方法。其目的是通过消除逐次迭代产生的误差来加速收敛。</p>
+<ul>
+<li><strong>加速公式</strong>：给定迭代序列 ${x_n}$，Aitken加速后的序列 ${x_n^{\ast}}$ 的计算公式为：<br>$$<br>x_n^{\ast} &#x3D; x_n - \frac{(x_{n+1} - x_n)^2}{x_{n+2} - 2x_{n+1} + x_n}<br>$$</li>
+<li>通过加速，迭代序列会收敛得更快。</li>
+</ul>
+<p><strong>举例</strong>：<br>假设我们有一组迭代值 $x_0 &#x3D; 1$，$x_1 &#x3D; 1.5$，$x_2 &#x3D; 1.75$，我们可以应用Aitken加速法计算新的值 $x_0^{\ast}$：<br>$$<br>x_0^{\ast} &#x3D; 1 - \frac{(1.5 - 1)^2}{1.75 - 2 \times 1.5 + 1} &#x3D; 1.3333<br>$$<br>加速后，新序列更快接近真实值。</p>
+<h2 id="7-向量范数与向量序列的极限"><a href="#7-向量范数与向量序列的极限" class="headerlink" title="7. 向量范数与向量序列的极限"></a>7. 向量范数与向量序列的极限</h2><p>向量范数是用来衡量向量大小的工具，尤其是在处理迭代算法的收敛性分析时，向量范数有助于分析误差。</p>
+<h3 id="7-1-常用的向量范数"><a href="#7-1-常用的向量范数" class="headerlink" title="7.1 常用的向量范数"></a>7.1 常用的向量范数</h3><ul>
+<li><strong>1-范数</strong>：向量 $x &#x3D; (x_1, x_2, \dots, x_n)$ 的1-范数定义为：<br>$$<br>|x|_1 &#x3D; |x_1| + |x_2| + \dots + |x_n|<br>$$</li>
+<li><strong>2-范数（欧几里得范数）</strong>：向量的2-范数定义为：<br>$$<br>|x|_2 &#x3D; \sqrt{x_1^2 + x_2^2 + \dots + x_n^2}<br>$$</li>
+<li><strong>无穷范数</strong>：向量的无穷范数定义为：<br>$$<br>|x|_{\infty} &#x3D; \max(|x_1|, |x_2|, \dots, |x_n|)<br>$$</li>
+</ul>
+<h3 id="7-2-向量序列的极限"><a href="#7-2-向量序列的极限" class="headerlink" title="7.2 向量序列的极限"></a>7.2 向量序列的极限</h3><p>设有一个向量序列 ${x_k}$，如果当 $k \to \infty$ 时，向量序列逐渐接近某个向量 $x$，我们称 ${x_k}$ 收敛于 $x$。即：<br>$$<br>\lim_{k \to \infty} x_k &#x3D; x<br>$$<br>利用向量范数可以衡量序列的收敛性。</p>
+<h2 id="8-迭代过程的收敛性"><a href="#8-迭代过程的收敛性" class="headerlink" title="8. 迭代过程的收敛性"></a>8. 迭代过程的收敛性</h2><p>迭代算法的收敛性指的是，随着迭代次数的增加，近似解是否逐步逼近真实解。</p>
+<h3 id="8-1-线性收敛与超线性收敛"><a href="#8-1-线性收敛与超线性收敛" class="headerlink" title="8.1 线性收敛与超线性收敛"></a>8.1 线性收敛与超线性收敛</h3><ul>
+<li><p><strong>线性收敛</strong>：如果存在一个常数 $0 &lt; r &lt; 1$，使得误差 $e_n$ 满足 $e_{n+1} \approx r e_n$，那么算法是线性收敛的。比如，二分法具有线性收敛性。</p>
+</li>
+<li><p><strong>超线性收敛</strong>：如果误差 $e_{n+1}$ 满足 $e_{n+1} \ll e_n$，即收敛速度快于线性，那么我们称之为超线性收敛。牛顿法在接近根时具有二次收敛（即误差平方减小）。</p>
+</li>
+</ul>
+<h3 id="8-2-判定收敛性的方法"><a href="#8-2-判定收敛性的方法" class="headerlink" title="8.2 判定收敛性的方法"></a>8.2 判定收敛性的方法</h3><p>为了判断一个迭代过程是否收敛，我们可以计算当前迭代结果与前几次迭代结果的差异。如果差异逐步减小到一个很小的阈值，那么可以认为迭代过程收敛。</p>
+<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><ul>
+<li><strong>不动点迭代法</strong>：是一种通过 $x &#x3D; g(x)$ 的迭代形式求解方程的方法，收敛性依赖于 $g(x)$ 的性质。</li>
+<li><strong>全局收敛性</strong>：某种算法对所有初始点收敛的特性。</li>
+<li><strong>加速方法</strong>：如 <strong>Aitken加速法</strong>，用于加快线性收敛迭代的速度。</li>
+<li><strong>向量范数与向量序列的极限</strong>：范数用于衡量向量的大小，极限用于描述迭代序列的收敛性。</li>
+<li><strong>迭代过程的收敛性</strong>：评估迭代算法的效果，关键是确定算法是否线性或超线性收敛。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>https://theganlove.github.io/2024/09/07/数值分析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>uert</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/05/ctf%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" title="ctf基础笔记">
+                        <span class="hidden-mobile">ctf基础笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

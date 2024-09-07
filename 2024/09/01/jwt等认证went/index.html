@@ -19,20 +19,22 @@
   <meta name="author" content="uert">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="jwt等认证went">
+    <meta name="description" content="JWT jwt是一个轻量级的认证规范 对数据进行签名用的 防止数据被篡改1 对数据进行加密   内容对用户敏感，不需要对外2 对数据进行签名   内容不敏感，但是确保不被篡改 JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取JSON Web Token JWT?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改?usernam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jwt等认证">
 <meta property="og:url" content="https://theganlove.github.io/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JWT jwt是一个轻量级的认证规范 对数据进行签名用的 防止数据被篡改1 对数据进行加密   内容对用户敏感，不需要对外2 对数据进行签名   内容不敏感，但是确保不被篡改 JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取JSON Web Token JWT?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改?usernam">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-01T12:48:22.000Z">
-<meta property="article:modified_time" content="2024-09-03T09:59:19.629Z">
+<meta property="article:modified_time" content="2024-09-07T15:02:52.813Z">
 <meta property="article:author" content="uert">
 <meta property="article:tag" content="web js">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>jwt等认证went - Hexo</title>
+  <title>jwt等认证 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="jwt等认证went"></span>
+            <span id="subtitle" data-typed-text="jwt等认证"></span>
           
         </div>
 
@@ -221,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.3k 字
         
       </span>
     
@@ -232,7 +234,7 @@
         
         
         
-          1 分钟
+          11 分钟
         
       </span>
     
@@ -269,12 +271,45 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">jwt等认证went</h1>
+            <h1 id="seo-header">jwt等认证</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <p>JWT</p>
+<p>jwt是一个轻量级的认证规范 对数据进行签名用的</p>
+<p>防止数据被篡改<br>1 对数据进行加密   内容对用户敏感，不需要对外<br>2 对数据进行签名   内容不敏感，但是确保不被篡改</p>
+<p>JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取<br>JSON Web Token JWT<br>?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改<br>?username&#x3D;admin&amp;score&#x3D;100&amp;token&#x3D;c17961f5f372f8cf039113909d715943<br>? md5(score&#x3D;100&amp;username&#x3D;admin)&#x3D;c17961f5f372f8cf039113909d715943<br>?score&#x3D;100&amp;username&#x3D;admin&amp;token&#x3D;c17961ff372f8cf039113909d715943<br>篡改数据的同时，破解了算法，篡改了签名<br>加盐机制，salt<br>md5(score&#x3D;100&amp;username&#x3D;admin_ctfshow)&#x3D;20f3fa445b286df3f1a518fcbcd8bbe2</p>
+<p>盐值有可能被爆破，也有可能被泄露<br>增加更高的密码算法，不再简单的md5，盐值也大幅度提高长度，达到几百上千位 来保证我们的数据不被篡改  或者即使篡改了我们能发现<br>由 Header、Payload、Signature三部分构成，用点分隔，数据采用Base64URL进行编码<br>Header是JWT的第一个部分，是一个 JSON 对象，主要声明了JWT的签名算法，如“HS256”、“RS256”等，以及其他可选参数，如“kid”等。<br>Header</p>
+<p>{<br>    “alg” : “HS256”,<br>    “typ” : “jwt”<br>}<br>Payload是JWT的第二个部分，这也是一个 JSON 对象，主要承载了各种声明并传递明文数据，一般用于存储用户的信息，如 id、用户名、角色、令牌生成时间和其他自定义声明<br>Payload<br>{<br>    “user” : “Admin”<br>}<br>Signature<br>    Signature 是对 Header 和 Payload 进行签名，具体是用什么加密方式写在 Header的alg中。同时拥有该部分的JWT被称为JWS，也就是签了名的JWT。<br>    Signature的功能是保护token完整性。<br>生成方法为将header和payload两个部分联结起来，然后通过header部分指定的算法，计算出签名。抽象成公式就是：signature &#x3D; HMAC-SHA256(base64urlEncode(header) + ‘.’ + base64urlEncode(payload), secret_key)<br>值得注意的是，编码header和payload时使用的编码方式为base64urlencode，base64url编码是base64的修改版，为了方便在网络中传输使用了不同的编码表，它不会在末尾填充”&#x3D;”号，并将标准Base64中的”+”和”&#x2F;“分别改成了”-“和”_”。</p>
+<p>JWT生成-在线网址&amp;工具<br>python3 flask_session_cookie_manager3.py encode -s ‘secret_key’ -t ‘{“admin”:True,”username”:”admin”}’</p>
+<p>漏洞点</p>
+<p>1 当不校验算法时，我们可以替换算法，甚至可以使用空的算法，来达到数据篡改目的<br>{<br>    “alg” : “None”,<br>    “typ” : “jwt”<br>}<br>{<br>    “user” : “Admin”<br>}<br>{“alg”:”None”,”typ”:”JWT”}<br>{“iss”:”admin”,”iat”:1673703091,”exp”:1673710291,”nbf”:1673703091,”sub”:”admin”,”jti”:”21a3d6eec9efbc030983fbc3650c0f03”}</p>
+<p>ewogICAgImFsZyIgOiAiTm9uZSIsCiAgICAidHlwIiA6ICJqd3QiCn0&#x3D;.ewogICAgInVzZXIiIDogImFkbWluIgp9</p>
+<p>JWT 爆破工具地址<br><a target="_blank" rel="noopener" href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a><br>docker build . -t jwtcrack<br>docker run -it –rm  jwtcrack eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.cAOIAifu3fykvhkHpbuhbvtH807-Z2rI1FS3vX1XMjE</p>
+<p>密钥混淆攻击<br>    JWT最常用的两种算法是HMAC和RSA。HMAC用同一个密钥对token进行签名和认证。而RSA需要两个密钥，先用私钥加密生成JWT，然后使用其对应的公钥来解密验证。那么，后端代码会使用公钥作为秘密密钥，然后使用HS256算法验证签名。由于公钥有时可以被攻击者获取到，所以攻击者可以修改header中算法为HS256，然后使用RSA公钥对数据进行签名。<br>     利用方式：jwt_tool(<a target="_blank" rel="noopener" href="https://github.com/ticarpi/jwt_tool">https://github.com/ticarpi/jwt_tool</a>)<br>     用法：python3 jwt_tool.py token_here -pk pubkey -T -S hs256<br>密钥爆破&#x2F;泄露<br>    HMAC签名密钥（例如HS256 &#x2F; HS384 &#x2F; HS512）使用对称加密，这意味着对令牌进行签名的密钥也用于对其进行验证。由于签名验证是一个自包含的过程，因此可以测试令牌本身的有效密钥，而不必将其发送回应用程序进行验证。<br>    因此，jwtcrack破解是JWT破解工具，可以通过穷举的方式暴力破解密钥。<br>    如果可以破解HMAC密钥，则可以伪造令牌中的任何内容，这个漏洞将会给系统带来非常严重的后果，所以在加密时不要使用弱密钥进行加密。<br>    jwtcrack(<a target="_blank" rel="noopener" href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a>)<br>    用法：.&#x2F;jwtcrack token_here</p>
+<p>node安装jwt命令</p>
+<p>npm install jsonwebtoken</p>
+<p>1 私钥泄露</p>
+<p>可以根据私钥生成任意的jwt字符串</p>
+<p>const jwt &#x3D; require(‘jsonwebtoken’);<br>const fs &#x3D; require(‘fs’);</p>
+<p>var privateKey &#x3D; fs.readFileSync(‘private.key’);</p>
+<p>var token &#x3D; jwt.sign({ user: ‘admin’ }, privateKey, { algorithm: ‘RS256’ });<br>console.log(token)<br>验签</p>
+<p>2 公钥泄露</p>
+<p>可以根据公钥，修改算法从非对称算法 到 对称密钥算法  </p>
+<p>双方都使用公钥验签，顺利篡改数据</p>
+<p>当公钥可以拿到时，如果使用对称密码，则对面使用相同的公钥进行解密</p>
+<p>实现验签通过</p>
+<p>总结加密方式</p>
+<p>1 非对称加密算法  私钥  公钥   只要两个时匹配 一个私钥加密的文件，用公钥都能解开(验签)</p>
+<p>2 对称加密算法   暗号  口令  公钥 </p>
+<p>总结jwt攻击</p>
+<p>1 空密码算法绕过 不验证算法的前提下</p>
+<p>2 弱密码绕过   猜测弱密码</p>
+<p>3 密码爆破   安装docker 执行jwtcracker</p>
+<p>4 私钥泄露  直接利用私钥生成正确jwt字符串 过验签</p>
+<p>5 公钥泄露  不验证算法前提下，修改算法为对称加密，通过公钥重新生成对称签名的字符串 实现验签通过</p>
+
                 
               </div>
             
@@ -326,7 +361,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>jwt等认证went</div>
+      <div>jwt等认证</div>
       <div>https://theganlove.github.io/2024/09/01/jwt等认证went/</div>
     </div>
     <div class="license-meta">
