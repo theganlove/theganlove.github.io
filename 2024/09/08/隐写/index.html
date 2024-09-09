@@ -19,21 +19,21 @@
   <meta name="author" content="uert">
   <meta name="keywords" content="">
   
-    <meta name="description" content="title: 如何搭建一篇博客2024版date: 2024-08-30 19:44:14categories:  环境搭建tags: 环境  数值分析笔记1. 误差分析在数值计算中，误差是不可避免的，理解误差的来源、传播和影响非常重要。 1.1 误差的类型 绝对误差：这是计算结果与实际结果的差异。设真实值为 $x_{\text{true}}$，计算结果为 $x_{\text{approx}}$，">
+    <meta name="description" content="1. 基础文件处理 文件打包与混淆： 利用polyglots技巧进行多文件混合（如：图片与其他文件混合）。 base操作，用于进行编码、解码。 工具：CyberChef、Cryptool、Hiencode等。   隐写工具及隐写信息提取： 使用word进行隐写。 常用命令： ls用于列出隐藏内容。 php-sup -win -r相关命令用于分析和处理隐写信息。   其他工具：stegsolve、p">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://theganlove.github.io/2024/09/07/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="隐写">
+<meta property="og:url" content="https://theganlove.github.io/2024/09/08/%E9%9A%90%E5%86%99/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title: 如何搭建一篇博客2024版date: 2024-08-30 19:44:14categories:  环境搭建tags: 环境  数值分析笔记1. 误差分析在数值计算中，误差是不可避免的，理解误差的来源、传播和影响非常重要。 1.1 误差的类型 绝对误差：这是计算结果与实际结果的差异。设真实值为 $x_{\text{true}}$，计算结果为 $x_{\text{approx}}$，">
+<meta property="og:description" content="1. 基础文件处理 文件打包与混淆： 利用polyglots技巧进行多文件混合（如：图片与其他文件混合）。 base操作，用于进行编码、解码。 工具：CyberChef、Cryptool、Hiencode等。   隐写工具及隐写信息提取： 使用word进行隐写。 常用命令： ls用于列出隐藏内容。 php-sup -win -r相关命令用于分析和处理隐写信息。   其他工具：stegsolve、p">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-07T12:02:40.111Z">
-<meta property="article:modified_time" content="2024-09-09T14:38:21.974Z">
+<meta property="article:published_time" content="2024-09-08T14:57:48.000Z">
+<meta property="article:modified_time" content="2024-09-08T14:58:04.594Z">
 <meta property="article:author" content="uert">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hexo</title>
+  <title>隐写 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="隐写"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-07 20:02" pubdate>
-          2024年9月7日 晚上
+        <time datetime="2024-09-08 22:57" pubdate>
+          2024年9月8日 晚上
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          364 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          21 分钟
+          4 分钟
         
       </span>
     
@@ -270,116 +270,72 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">隐写</h1>
             
             
               <div class="markdown-body">
                 
-                <p>title: 如何搭建一篇博客2024版<br>date: 2024-08-30 19:44:14<br>categories:</p>
-<ul>
-<li>环境搭建<br>tags: 环境</li>
-</ul>
-<h1 id="数值分析笔记"><a href="#数值分析笔记" class="headerlink" title="数值分析笔记"></a>数值分析笔记</h1><h2 id="1-误差分析"><a href="#1-误差分析" class="headerlink" title="1. 误差分析"></a>1. 误差分析</h2><p>在数值计算中，误差是不可避免的，理解误差的来源、传播和影响非常重要。</p>
-<h3 id="1-1-误差的类型"><a href="#1-1-误差的类型" class="headerlink" title="1.1 误差的类型"></a>1.1 误差的类型</h3><ul>
-<li><p><strong>绝对误差</strong>：<br>这是计算结果与实际结果的差异。设真实值为 $x_{\text{true}}$，计算结果为 $x_{\text{approx}}$，那么绝对误差为：</p>
-<p>$$<br>\text{绝对误差} &#x3D; |x_{\text{true}} - x_{\text{approx}}|<br>$$</p>
-<p><strong>举例</strong>：假设真实值 $x_{\text{true}} &#x3D; 3.141592$，近似值 $x_{\text{approx}} &#x3D; 3.14$，那么：</p>
-<p>$$<br>\text{绝对误差} &#x3D; |3.141592 - 3.14| &#x3D; 0.001592<br>$$</p>
-</li>
-<li><p><strong>相对误差</strong>：<br>这是绝对误差相对于真实值的比例，表示为：</p>
-<p>$$<br>\text{相对误差} &#x3D; \frac{\text{绝对误差}}{x_{\text{true}}}<br>$$</p>
-<p><strong>举例</strong>：真实值 $x_{\text{true}} &#x3D; 3.141592$，那么相对误差为：</p>
-<p>$$<br>\text{相对误差} &#x3D; \frac{0.001592}{3.141592} \approx 0.000507<br>$$<br>表示误差大约为真实值的 $0.05%$。</p>
-</li>
-</ul>
-<h3 id="1-2-误差传播"><a href="#1-2-误差传播" class="headerlink" title="1.2 误差传播"></a>1.2 误差传播</h3><p>误差在数值计算中会通过运算逐步放大。例如，如果你在连续使用一个近似值进行多次计算，每一步运算可能都会引入新的误差。</p>
-<p><strong>举例</strong>：<br>假设你用 $x &#x3D; 3.14$ 来代替 $\pi$，并进行平方运算：<br>$$<br>x^2 &#x3D; 3.14^2 &#x3D; 9.8596<br>$$<br>而真实值 $\pi^2 \approx 9.8696$，可以看到随着运算的进行，误差进一步增大了。</p>
-<h2 id="2-非线性方程求根"><a href="#2-非线性方程求根" class="headerlink" title="2. 非线性方程求根"></a>2. 非线性方程求根</h2><p>非线性方程求根指的是找到使得 $f(x) &#x3D; 0$ 的 $x$ 值。常见的求根方法包括二分法、牛顿法和割线法。</p>
-<h3 id="2-1-二分法"><a href="#2-1-二分法" class="headerlink" title="2.1 二分法"></a>2.1 二分法</h3><p>二分法是一种稳定且简单的求根方法，适用于连续函数。其基本思想是利用函数在某个区间 $[a, b]$ 上的符号变化，逐步缩小区间，直到找到近似根。</p>
-<p><strong>算法步骤</strong>：</p>
-<ol>
-<li>取一个初始区间 $[a, b]$，且 $f(a) \cdot f(b) &lt; 0$，保证方程在 $[a, b]$ 之间有根。</li>
-<li>计算中点 $m &#x3D; \frac{a + b}{2}$，检查 $f(m)$ 的符号。<ul>
-<li>如果 $f(m) &#x3D; 0$，则 $m$ 就是方程的根。</li>
-<li>如果 $f(m) \cdot f(a) &lt; 0$，则根在区间 $[a, m]$，令 $b &#x3D; m$。</li>
-<li>如果 $f(m) \cdot f(b) &lt; 0$，则根在区间 $[m, b]$，令 $a &#x3D; m$。</li>
+                <h3 id="1-基础文件处理"><a href="#1-基础文件处理" class="headerlink" title="1. 基础文件处理"></a>1. 基础文件处理</h3><ul>
+<li><strong>文件打包与混淆：</strong><ul>
+<li>利用<code>polyglots</code>技巧进行多文件混合（如：图片与其他文件混合）。</li>
+<li><code>base</code>操作，用于进行编码、解码。</li>
+<li>工具：<code>CyberChef</code>、<code>Cryptool</code>、<code>Hiencode</code>等。</li>
 </ul>
 </li>
-<li>重复步骤2，直到区间长度足够小。</li>
-</ol>
-<p><strong>举例</strong>：求解方程 $f(x) &#x3D; x^2 - 4 &#x3D; 0$ 的根（真实解为 $x &#x3D; 2$ 和 $x &#x3D; -2$）。</p>
-<ul>
-<li>初始区间取 $[1, 3]$，因为 $f(1) &#x3D; -3$，$f(3) &#x3D; 5$，满足 $f(1) \cdot f(3) &lt; 0$。</li>
-<li>计算中点 $m &#x3D; \frac{1 + 3}{2} &#x3D; 2$，此时 $f(2) &#x3D; 0$，找到了根 $x &#x3D; 2$。</li>
+<li><strong>隐写工具及隐写信息提取：</strong><ul>
+<li>使用<code>word</code>进行隐写。</li>
+<li>常用命令：<ul>
+<li><code>ls</code>用于列出隐藏内容。</li>
+<li><code>php-sup -win -r</code>相关命令用于分析和处理隐写信息。</li>
 </ul>
-<h3 id="2-2-牛顿法"><a href="#2-2-牛顿法" class="headerlink" title="2.2 牛顿法"></a>2.2 牛顿法</h3><p>牛顿法是一种快速收敛的求根方法，它利用函数在某一点的切线来迭代逼近根。牛顿法的迭代公式为：<br>$$<br>x_{n+1} &#x3D; x_n - \frac{f(x_n)}{f’(x_n)}<br>$$<br>要求函数 $f(x)$ 的导数 $f’(x)$ 存在且容易计算。</p>
-<p><strong>举例</strong>：用牛顿法求解方程 $f(x) &#x3D; x^2 - 4 &#x3D; 0$。</p>
-<ul>
-<li>设初始值 $x_0 &#x3D; 3$。</li>
-<li>计算 $f(3) &#x3D; 5$，$f’(3) &#x3D; 2 \times 3 &#x3D; 6$，则迭代公式为：<br>$$<br>x_1 &#x3D; 3 - \frac{5}{6} \approx 2.17<br>$$</li>
-<li>继续迭代，$f(2.17) \approx 0.71$，$f’(2.17) &#x3D; 4.34$，迭代得：<br>$$<br>x_2 &#x3D; 2.17 - \frac{0.71}{4.34} \approx 2.01<br>$$</li>
-<li>逐步逼近根 $x &#x3D; 2$。</li>
-</ul>
-<h2 id="3-解线性方程组的迭代方法"><a href="#3-解线性方程组的迭代方法" class="headerlink" title="3. 解线性方程组的迭代方法"></a>3. 解线性方程组的迭代方法</h2><p>线性方程组的迭代法适用于大规模稀疏矩阵的求解。常见的迭代方法有雅可比迭代法和高斯-赛德尔迭代法。</p>
-<h3 id="3-1-雅可比迭代法"><a href="#3-1-雅可比迭代法" class="headerlink" title="3.1 雅可比迭代法"></a>3.1 雅可比迭代法</h3><p>雅可比迭代法的基本思想是将每个变量逐次更新，基于旧的解进行新的迭代。方程组 $Ax &#x3D; b$ 被拆分为形式：<br>$$<br>x_i^{(k+1)} &#x3D; \frac{1}{a_{ii}} \left(b_i - \sum_{j \neq i} a_{ij} x_j^{(k)} \right)<br>$$</p>
-<p><strong>举例</strong>：解线性方程组<br>$$<br>\begin{aligned}<br>2x_1 + x_2 &amp;&#x3D; 5 \<br>x_1 + 3x_2 &amp;&#x3D; 6<br>\end{aligned}<br>$$</p>
-<ul>
-<li>初始猜测 $x_1^{(0)} &#x3D; x_2^{(0)} &#x3D; 0$。</li>
-<li>第一次迭代：<br>$$<br>x_1^{(1)} &#x3D; \frac{1}{2} (5 - 0) &#x3D; 2.5<br>$$<br>$$<br>x_2^{(1)} &#x3D; \frac{1}{3} (6 - 0) &#x3D; 2<br>$$</li>
-<li>第二次迭代：<br>$$<br>x_1^{(2)} &#x3D; \frac{1}{2} (5 - 2) &#x3D; 1.5<br>$$<br>$$<br>x_2^{(2)} &#x3D; \frac{1}{3} (6 - 1.5) &#x3D; 1.5<br>$$<br>迭代继续进行，逐步逼近解 $x_1 &#x3D; 1$，$x_2 &#x3D; 1$。</li>
-</ul>
-<h3 id="3-2-高斯-赛德尔迭代法"><a href="#3-2-高斯-赛德尔迭代法" class="headerlink" title="3.2 高斯-赛德尔迭代法"></a>3.2 高斯-赛德尔迭代法</h3><p>高斯-赛德尔法是雅可比法的改进，每次迭代时，使用最新的解来更新当前变量。与雅可比法相比，收敛速度更快。</p>
-<p><strong>举例</strong>：使用高斯-赛德尔法解上面的方程组。</p>
-<ul>
-<li>初始猜测 $x_1^{(0)} &#x3D; x_2^{(0)} &#x3D; 0$。</li>
-<li>第一次迭代：<br>$$<br>x_1^{(1)} &#x3D; \frac{1}{2} (5 - 0) &#x3D; 2.5<br>$$<br>使用最新的 $x_1^{(1)} &#x3D; 2.5$ 来更新 $x_2$：<br>$$<br>x_2^{(1)} &#x3D; \frac{1}{3} (6 - 2.5) &#x3D; 1.167<br>$$</li>
-<li>第二次迭代：<br>$$<br>x_1^{(2)} &#x3D; \frac{1}{2} (5 - 1.167) &#x3D; 1.917<br>$$<br>$$<br>x_2^{(2)} &#x3D; \frac{1}{3} (6 - 1.917) &#x3D; 1.361<br>$$<br>继续迭代，逐步逼近解。</li>
-</ul>
-<h2 id="4-不动点迭代法"><a href="#4-不动点迭代法" class="headerlink" title="4. 不动点迭代法"></a>4. 不动点迭代法</h2><p>不动点迭代法是一种通过 $x &#x3D; g(x)$ 的迭代形式求解方程的方法，收敛性依赖于 $g(x)$ 的性质。</p>
-<h3 id="4-1-算法步骤"><a href="#4-1-算法步骤" class="headerlink" title="4.1 算法步骤"></a>4.1 算法步骤</h3><ol>
-<li>从一个初始猜测值 $x_0$ 开始。</li>
-<li>根据公式 $x_{n+1} &#x3D; g(x_n)$ 计算新值。</li>
-<li>重复第 2 步，直到收敛到一个解。</li>
-</ol>
-<h3 id="4-2-收敛性条件"><a href="#4-2-收敛性条件" class="headerlink" title="4.2 收敛性条件"></a>4.2 收敛性条件</h3><p>不动点迭代法的收敛性依赖于函数 $g(x)$ 的性质，尤其是它在不动点附近的导数。如果 $g(x)$ 在不动点附近满足以下条件，则该方法收敛：</p>
-<ul>
-<li>存在 $c \in (0, 1)$，使得 $|g’(x)| \leq c$，那么迭代将收敛。</li>
-</ul>
-<p><strong>举例</strong>：<br>求解方程 $x^2 - 2 &#x3D; 0$ 的根，可以转化为不动点形式 $x &#x3D; \frac{2}{x}$。设初始值 $x_0 &#x3D; 1$，通过迭代公式：<br>$$<br>x_{n+1} &#x3D; \frac{2}{x_n}<br>$$<br>我们可以逐步逼近根 $x &#x3D; \sqrt{2}$。</p>
-<h2 id="5-全局收敛性"><a href="#5-全局收敛性" class="headerlink" title="5. 全局收敛性"></a>5. 全局收敛性</h2><p>全局收敛性是指某种数值方法对任意初始点都能收敛到方程的解，而不仅仅是某个特定区间或条件下。</p>
-<ul>
-<li><strong>局部收敛性</strong>：如果算法只在某个初始点或特定区域内收敛到解，我们称其为局部收敛。</li>
-<li><strong>全局收敛性</strong>：算法不依赖于初始猜测值，在较大的区间或空间内都能收敛到解。</li>
-</ul>
-<p><strong>举例</strong>：<br>二分法具有全局收敛性，因为只要函数在初始区间 $[a, b]$ 上连续并且满足 $f(a) \cdot f(b) &lt; 0$，无论初始猜测值如何，二分法都能收敛到根。而牛顿法通常是局部收敛的，它对初始值较为敏感。</p>
-<h2 id="6-迭代收敛的加速方法"><a href="#6-迭代收敛的加速方法" class="headerlink" title="6. 迭代收敛的加速方法"></a>6. 迭代收敛的加速方法</h2><p>迭代方法在很多情况下会收敛较慢，因此引入一些加速技术来提高收敛速度是必要的。以下是几种常用的加速方法：</p>
-<h3 id="6-1-Aitken加速法"><a href="#6-1-Aitken加速法" class="headerlink" title="6.1 Aitken加速法"></a>6.1 Aitken加速法</h3><p>Aitken加速法是一种常用的迭代加速技术，特别适用于线性收敛的迭代方法。其目的是通过消除逐次迭代产生的误差来加速收敛。</p>
-<ul>
-<li><strong>加速公式</strong>：给定迭代序列 ${x_n}$，Aitken加速后的序列 ${x_n^{\ast}}$ 的计算公式为：<br>$$<br>x_n^{\ast} &#x3D; x_n - \frac{(x_{n+1} - x_n)^2}{x_{n+2} - 2x_{n+1} + x_n}<br>$$</li>
-<li>通过加速，迭代序列会收敛得更快。</li>
-</ul>
-<p><strong>举例</strong>：<br>假设我们有一组迭代值 $x_0 &#x3D; 1$，$x_1 &#x3D; 1.5$，$x_2 &#x3D; 1.75$，我们可以应用Aitken加速法计算新的值 $x_0^{\ast}$：<br>$$<br>x_0^{\ast} &#x3D; 1 - \frac{(1.5 - 1)^2}{1.75 - 2 \times 1.5 + 1} &#x3D; 1.3333<br>$$<br>加速后，新序列更快接近真实值。</p>
-<h2 id="7-向量范数与向量序列的极限"><a href="#7-向量范数与向量序列的极限" class="headerlink" title="7. 向量范数与向量序列的极限"></a>7. 向量范数与向量序列的极限</h2><p>向量范数是用来衡量向量大小的工具，尤其是在处理迭代算法的收敛性分析时，向量范数有助于分析误差。</p>
-<h3 id="7-1-常用的向量范数"><a href="#7-1-常用的向量范数" class="headerlink" title="7.1 常用的向量范数"></a>7.1 常用的向量范数</h3><ul>
-<li><strong>1-范数</strong>：向量 $x &#x3D; (x_1, x_2, \dots, x_n)$ 的1-范数定义为：<br>$$<br>|x|_1 &#x3D; |x_1| + |x_2| + \dots + |x_n|<br>$$</li>
-<li><strong>2-范数（欧几里得范数）</strong>：向量的2-范数定义为：<br>$$<br>|x|_2 &#x3D; \sqrt{x_1^2 + x_2^2 + \dots + x_n^2}<br>$$</li>
-<li><strong>无穷范数</strong>：向量的无穷范数定义为：<br>$$<br>|x|_{\infty} &#x3D; \max(|x_1|, |x_2|, \dots, |x_n|)<br>$$</li>
-</ul>
-<h3 id="7-2-向量序列的极限"><a href="#7-2-向量序列的极限" class="headerlink" title="7.2 向量序列的极限"></a>7.2 向量序列的极限</h3><p>设有一个向量序列 ${x_k}$，如果当 $k \to \infty$ 时，向量序列逐渐接近某个向量 $x$，我们称 ${x_k}$ 收敛于 $x$。即：<br>$$<br>\lim_{k \to \infty} x_k &#x3D; x<br>$$<br>利用向量范数可以衡量序列的收敛性。</p>
-<h2 id="8-迭代过程的收敛性"><a href="#8-迭代过程的收敛性" class="headerlink" title="8. 迭代过程的收敛性"></a>8. 迭代过程的收敛性</h2><p>迭代算法的收敛性指的是，随着迭代次数的增加，近似解是否逐步逼近真实解。</p>
-<h3 id="8-1-线性收敛与超线性收敛"><a href="#8-1-线性收敛与超线性收敛" class="headerlink" title="8.1 线性收敛与超线性收敛"></a>8.1 线性收敛与超线性收敛</h3><ul>
-<li><p><strong>线性收敛</strong>：如果存在一个常数 $0 &lt; r &lt; 1$，使得误差 $e_n$ 满足 $e_{n+1} \approx r e_n$，那么算法是线性收敛的。比如，二分法具有线性收敛性。</p>
 </li>
-<li><p><strong>超线性收敛</strong>：如果误差 $e_{n+1}$ 满足 $e_{n+1} \ll e_n$，即收敛速度快于线性，那么我们称之为超线性收敛。牛顿法在接近根时具有二次收敛（即误差平方减小）。</p>
+<li>其他工具：<code>stegsolve</code>、<code>pngcheck</code>、<code>exiftool</code>、<code>snow</code>（雪隐写工具）。</li>
+</ul>
 </li>
 </ul>
-<h3 id="8-2-判定收敛性的方法"><a href="#8-2-判定收敛性的方法" class="headerlink" title="8.2 判定收敛性的方法"></a>8.2 判定收敛性的方法</h3><p>为了判断一个迭代过程是否收敛，我们可以计算当前迭代结果与前几次迭代结果的差异。如果差异逐步减小到一个很小的阈值，那么可以认为迭代过程收敛。</p>
-<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><ul>
-<li><strong>不动点迭代法</strong>：是一种通过 $x &#x3D; g(x)$ 的迭代形式求解方程的方法，收敛性依赖于 $g(x)$ 的性质。</li>
-<li><strong>全局收敛性</strong>：某种算法对所有初始点收敛的特性。</li>
-<li><strong>加速方法</strong>：如 <strong>Aitken加速法</strong>，用于加快线性收敛迭代的速度。</li>
-<li><strong>向量范数与向量序列的极限</strong>：范数用于衡量向量的大小，极限用于描述迭代序列的收敛性。</li>
-<li><strong>迭代过程的收敛性</strong>：评估迭代算法的效果，关键是确定算法是否线性或超线性收敛。</li>
+<hr>
+<h3 id="2-隐写术工具及技术"><a href="#2-隐写术工具及技术" class="headerlink" title="2. 隐写术工具及技术"></a>2. 隐写术工具及技术</h3><ul>
+<li><strong>图片隐写处理：</strong><ul>
+<li>使用<code>pngcheck</code>分析PNG格式图像。</li>
+<li>了解文件格式结构，文件头（IDAT）等。</li>
+<li>隐写信息提取工具：<code>stegsolve</code>、<code>stegdetect</code>。</li>
+</ul>
+</li>
+<li><strong>音频隐写处理：</strong><ul>
+<li>使用<code>audacity</code>工具分析音频文件中的隐写信息。</li>
+<li>支持的文件格式：<code>mp3</code>、<code>wav</code>、<code>mp4</code>等。</li>
+</ul>
+</li>
+<li><strong>视频及其他格式隐写处理：</strong><ul>
+<li>使用<code>imagemagick</code>处理GIF等格式文件。</li>
+<li>命令：<code>sudo imagemagick</code>用于分析图像及GIF。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-隐写检测及分析工具"><a href="#3-隐写检测及分析工具" class="headerlink" title="3. 隐写检测及分析工具"></a>3. 隐写检测及分析工具</h3><ul>
+<li><strong>常见隐写检测工具：</strong><ul>
+<li><code>pngcheck</code>用于PNG格式的隐写检测。</li>
+<li><code>stegdetect</code>用于JPG隐写的检测。</li>
+</ul>
+</li>
+<li><strong>其他高级隐写分析工具：</strong><ul>
+<li><code>blindwatermark</code>（盲水印分析工具）。</li>
+<li><code>stegano</code>系列工具，如<code>xiasteganography</code>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-高级隐写技术及其他相关工具"><a href="#4-高级隐写技术及其他相关工具" class="headerlink" title="4. 高级隐写技术及其他相关工具"></a>4. 高级隐写技术及其他相关工具</h3><ul>
+<li><strong>多种隐写工具对比及测试：</strong><ul>
+<li>对比不同隐写工具的优劣，如：<code>bmfontpy3</code>、<code>blindwatermark</code>等。</li>
+<li><code>cover</code>和<code>coalesce</code>等命令用于分析音频、视频的隐写信息。</li>
+</ul>
+</li>
+<li><strong>常用隐写术的命令及工具：</strong><ul>
+<li><code>mp3info</code>、<code>ffmpeg</code>、<code>snow</code>等工具。</li>
+</ul>
+</li>
 </ul>
 
                 
@@ -398,8 +354,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>https://theganlove.github.io/2024/09/07/数值分析/</div>
+      <div>隐写</div>
+      <div>https://theganlove.github.io/2024/09/08/隐写/</div>
     </div>
     <div class="license-meta">
       
@@ -411,7 +367,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月7日</div>
+          <div>2024年9月8日</div>
         </div>
       
       
@@ -443,9 +399,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/08/%E9%9A%90%E5%86%99/" title="隐写">
+                      <a href="/2024/09/09/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" title="算法笔记">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">隐写</span>
+                        <span class="hidden-mobile">算法笔记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -453,8 +409,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/09/05/ctf%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" title="ctf基础笔记">
-                        <span class="hidden-mobile">ctf基础笔记</span>
+                      <a href="/2024/09/07/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
