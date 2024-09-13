@@ -27,7 +27,7 @@
 <meta property="og:description" content="一.数组c++的操作 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293#include &amp;lt">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-09T11:20:21.000Z">
-<meta property="article:modified_time" content="2024-09-12T14:30:48.116Z">
+<meta property="article:modified_time" content="2024-09-13T04:25:55.797Z">
 <meta property="article:author" content="uert">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          20k 字
+          21k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          171 分钟
+          175 分钟
         
       </span>
     
@@ -372,14 +372,10 @@
 <li><strong>前缀和法的核心</strong>：将原始问题中的区间和转换为前缀和的差值问题，进而简化计算，达到提高效率的目的。</li>
 <li>在 <strong>最大子数组和问题</strong> 中，通过维护一个 <code>preMin</code> 数组来保存当前子数组的最小前缀和，从而可以通过差值来计算最大和。</li>
 <li>代码中的 <code>Math.min</code> 和 <code>Math.max</code> 是用于动态更新当前最优的结果。</li>
-</ul>
-<h3 id="6-笔记中的其他内容："><a href="#6-笔记中的其他内容：" class="headerlink" title="6. 笔记中的其他内容："></a>6. <strong>笔记中的其他内容</strong>：</h3><ul>
 <li>详细讲解了如何通过前缀和数组快速计算区间和。</li>
 <li>针对不同问题，给出了具体的代码实现并且逐步进行了分析。</li>
-<li>重点强调了利用 <code>HashMap</code>（哈希表） 来高效存储和查找前缀和，以及如何动态维护前缀和中的最小值。</li>
+<li>重点强调了利用 <code>HashMap</code>（哈希表） 来高效存储和查找前缀和，以及如何动态维护前缀和中的最小值。：</li>
 </ul>
-<p>总的来说，这份笔记主要围绕前缀和的概念展开，通过两个经典算法问题（子数组和问题和最大子数组和问题）详细展示了前缀和的应用方法，代码中使用了哈希表、最小前缀和等技巧，提升了算法的执行效率。</p>
-<p>这部分笔记与之前的前缀和、子数组问题紧密相关，进一步扩展到了二维前缀和和差分数组的应用。两部分内容可以自然结合起来形成一个完整的算法学习体系，涵盖了从一维到二维的复杂数组问题。接下来，我将详细总结如何将这两部分内容连贯地整合起来：</p>
 <h3 id="一维前缀和及其应用："><a href="#一维前缀和及其应用：" class="headerlink" title="一维前缀和及其应用："></a>一维前缀和及其应用：</h3><ul>
 <li>在前面的笔记中，我们介绍了<strong>一维前缀和</strong>的概念以及如何利用前缀和来快速解决区间和问题，特别是对于子数组和等于某个目标值的计数问题，我们使用了前缀和和哈希表结合的方法进行高效解答。此外，<strong>最大子数组和问题</strong>通过前缀和与最小前缀和的差值计算得出答案。</li>
 </ul>
@@ -402,28 +398,13 @@
 <li><p>差分数组的本质是通过对局部变化的记录和累积，使得区间更新可以在 O(1) 时间内完成，极大优化了需要频繁进行更新操作的场景。</p>
 </li>
 </ul>
-<h3 id="综合总结："><a href="#综合总结：" class="headerlink" title="综合总结："></a>综合总结：</h3><p>通过这两部分笔记的整合，我们构建了一个从简单到复杂的算法问题解决思路：</p>
-<ol>
+<h3 id="综合总结："><a href="#综合总结：" class="headerlink" title="综合总结："></a>综合总结：</h3><ol>
 <li><strong>一维前缀和</strong>解决了基本的区间和问题，同时通过哈希表等技巧，可以处理子数组和计数等高级问题。</li>
 <li><strong>二维前缀和</strong>将这一思想推广到矩阵，能够快速求解矩形区域和问题，极大提高了处理二维数据的效率。</li>
 <li><strong>差分数组</strong>则提供了高效的区间更新方法，特别适合于需要多次区间操作的场景，在减少时间复杂度方面有显著优势。</li>
 </ol>
-<p>在实际应用中，这些算法思想结合在一起，能够解决从一维到二维、从区间和到区间更新等多种复杂的数组问题。通过合理使用前缀和与差分数组，可以优化大量涉及区间操作的算法，特别是在大规模数据场景下效果尤为显著。</p>
-<p>比较前缀和，差分，双指针，滑动窗口，单调栈各自适用的情况</p>
-<ol>
-<li><p>前缀和（Prefix Sum）<br>适用情况：<br>快速计算数组某个子区间的和：适用于需要多次计算数组某个区间和的场景。<br>区间查询和更新较少：适合静态数组或查询操作远多于更新操作的情况。</p>
-</li>
-<li><p>差分（Difference Array）<br>适用情况：<br>快速进行区间修改：适用于需要频繁对数组某个区间进行加减操作的场景。<br>需要高效进行批量更新：适合大规模区间更新操作。</p>
-</li>
-<li><p>双指针（Two Pointers）<br>适用情况：<br>处理有序数组：适用于需要在有序数组或链表中查找、遍历等操作。<br>解决滑动窗口问题：适合在数组或字符串上维护动态区间的问题。</p>
-</li>
-<li><p>滑动窗口（Sliding Window）<br>适用情况：<br>子数组问题：适用于需要找到数组中满足特定条件的子数组或子字符串的问题。<br>连续子区间：适合处理需要计算连续子区间的问题。</p>
-</li>
-<li><p>单调栈（Monotonic Stack）<br>适用情况：<br>找到数组中每个元素的下一个更大（或更小）元素：适用于需要在数组中找到特定方向上的极值问题。<br>维护区间单调性：适合处理需要保持区间单调性的问题。</p>
-</li>
-</ol>
-<h1 id="七-双指针"><a href="#七-双指针" class="headerlink" title="七.双指针"></a>七.双指针</h1><p>好的，我会更加详细地总结这两张笔记的内容，包括双指针、两数之和、三数之和以及盛水最多的容器问题，逐步扩展每个部分的思路、实现细节和优化策略。</p>
-<h3 id="1-双指针算法的核心思想："><a href="#1-双指针算法的核心思想：" class="headerlink" title="1. 双指针算法的核心思想："></a><strong>1. 双指针算法的核心思想</strong>：</h3><ul>
+<hr>
+<h1 id="七-双指针"><a href="#七-双指针" class="headerlink" title="七.双指针"></a>七.双指针</h1><h3 id="1-双指针算法的核心思想："><a href="#1-双指针算法的核心思想：" class="headerlink" title="1. 双指针算法的核心思想："></a><strong>1. 双指针算法的核心思想</strong>：</h3><ul>
 <li><p><strong>定义</strong>：双指针法是通过两个指针从不同方向（常见的是一头一尾）同时进行遍历，进而达到降低时间复杂度的目的。这种方法尤其适合在有序数组或特定问题中使用，通过一左一右或一前一后两个指针逼近来找到符合条件的解。</p>
 </li>
 <li><p><strong>应用场景</strong>：</p>
@@ -501,10 +482,16 @@
 <li>对于“盛水最多的容器”问题，利用双指针的对称移动特性，可以在 O(n) 时间内获得最优解。</li>
 </ul>
 <hr>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>这两张笔记详细讲述了双指针算法在不同场景中的应用，涵盖了两数之和、三数之和以及盛水最多的容器问题。通过双指针法，可以有效地降低时间复杂度，尤其在处理有序数组时尤为高效。对于复杂度较高的问题，通过排序和双指针的结合，可以将许多原本 O(n²) 或 O(n³) 的问题降</p>
-<p>到 O(nlogn) 或 O(n²)，显著提升算法效率。</p>
-<h1 id="八-递归"><a href="#八-递归" class="headerlink" title="八.递归"></a>八.递归</h1><p>这些笔记围绕回溯法（Backtracking）展开，涉及子集、组合、全排列和二叉树的反转等经典问题的递归实现。以下是对每个部分的详细总结：</p>
-<h3 id="1-回溯法的核心思想："><a href="#1-回溯法的核心思想：" class="headerlink" title="1. 回溯法的核心思想："></a><strong>1. 回溯法的核心思想</strong>：</h3><ul>
+<p>比较前缀和，差分，双指针，滑动窗口，单调栈各自适用的情况</p>
+<ol>
+<li>前缀和（Prefix Sum）<br>适用情况：<br>快速计算数组某个子区间的和：适用于需要多次计算数组某个区间和的场景。<br>区间查询和更新较少：适合静态数组或查询操作远多于更新操作的情况。</li>
+<li>差分（Difference Array）<br>适用情况：<br>快速进行区间修改：适用于需要频繁对数组某个区间进行加减操作的场景。<br>需要高效进行批量更新：适合大规模区间更新操作。</li>
+<li>双指针（Two Pointers）<br>适用情况：<br>处理有序数组：适用于需要在有序数组或链表中查找、遍历等操作。<br>解决滑动窗口问题：适合在数组或字符串上维护动态区间的问题。</li>
+<li>滑动窗口（Sliding Window）<br>适用情况：<br>子数组问题：适用于需要找到数组中满足特定条件的子数组或子字符串的问题。<br>连续子区间：适合处理需要计算连续子区间的问题。</li>
+<li>单调栈（Monotonic Stack）<br>适用情况：<br>找到数组中每个元素的下一个更大（或更小）元素：适用于需要在数组中找到特定方向上的极值问题。<br>维护区间单调性：适合处理需要保持区间单调性的问题。</li>
+</ol>
+<hr>
+<h1 id="八-递归"><a href="#八-递归" class="headerlink" title="八.递归"></a>八.递归</h1><h3 id="1-回溯法的核心思想："><a href="#1-回溯法的核心思想：" class="headerlink" title="1. 回溯法的核心思想："></a><strong>1. 回溯法的核心思想</strong>：</h3><ul>
 <li><strong>定义</strong>：回溯法是一种通过递归逐步生成解空间，遇到不满足条件时及时回溯到上一个状态的算法，通常用于解决排列组合、子集、路径等问题。</li>
 <li><strong>基本框架</strong>：<ul>
 <li>在递归中不断尝试新的可能性，当某种解不满足条件时，回溯到上一层继续尝试其他分支。</li>
@@ -577,7 +564,6 @@
 <li><strong>递归反转过程</strong>：从根节点开始，对每个节点的左右子树进行交换，并递归处理子树。</li>
 <li><strong>时间复杂度</strong>：O(n)，每个节点遍历一次。</li>
 </ul>
-<hr>
 <h3 id="6-总结："><a href="#6-总结：" class="headerlink" title="6. 总结："></a><strong>6. 总结</strong>：</h3><ul>
 <li><strong>回溯法</strong>是一种经典的递归算法，适用于组合、排列、子集等问题。其核心思想是在递归过程中通过试探的方式逐步生成解，遇到不满足条件的解时回溯到上一步重新尝试。</li>
 <li><strong>子集与组合</strong>：通过回溯生成所有可能的子集或组合，并在递归过程中进行剪枝优化。</li>
@@ -585,8 +571,8 @@
 <li><strong>二叉树的递归操作</strong>：类似反转二叉树等问题可以通过递归方式简化操作，每次递归处理左右子树即可。</li>
 </ul>
 <p>这些笔记展示了回溯法在多种问题中的应用，并提供了相应的递归实现。</p>
-<h1 id="九-分治"><a href="#九-分治" class="headerlink" title="九.分治"></a>九.分治</h1><p>这张笔记主要涉及分治算法和递归问题，包含经典问题的递归解法和一些递归优化技巧。以下是详细总结：</p>
-<h3 id="1-分治算法（Divide-and-Conquer）："><a href="#1-分治算法（Divide-and-Conquer）：" class="headerlink" title="1. 分治算法（Divide and Conquer）："></a><strong>1. 分治算法（Divide and Conquer）</strong>：</h3><ul>
+<hr>
+<h1 id="九-分治"><a href="#九-分治" class="headerlink" title="九.分治"></a>九.分治</h1><h3 id="1-分治算法（Divide-and-Conquer）："><a href="#1-分治算法（Divide-and-Conquer）：" class="headerlink" title="1. 分治算法（Divide and Conquer）："></a><strong>1. 分治算法（Divide and Conquer）</strong>：</h3><ul>
 <li><strong>定义</strong>：将原问题划分为若干个相同或相似的子问题，递归求解子问题，然后将各个子问题的解合并成原问题的解。</li>
 <li><strong>应用场景</strong>：分治法常用于大规模问题的解决，比如快速排序、归并排序、矩阵乘法等。</li>
 <li><strong>要点</strong>：<ul>
@@ -630,9 +616,8 @@
 <li><strong>递归优化</strong>：在实现递归算法时，可以通过<strong>记忆化搜索</strong>等方式来优化重复计算问题，大大提升算法的效率。</li>
 <li><strong>递归框架</strong>：很多复杂问题都可以通过递归分解为子问题来解决，比如 <code>pow</code> 问题通过递归将指数减半、括号生成问题通过递归生成不同数量括号的组合等。</li>
 </ul>
-<h1 id="十-二叉树"><a href="#十-二叉树" class="headerlink" title="十.二叉树"></a>十.二叉树</h1><p>这两张笔记主要围绕二叉树的遍历、构造和相关算法展开，涵盖了二叉树的前序、中序、后序遍历，树的层次遍历，如何通过前序和中序重建二叉树，以及找到两个节点的最近公共祖先等问题。以下是详细总结：</p>
 <hr>
-<h3 id="1-二叉树的定义和遍历方式："><a href="#1-二叉树的定义和遍历方式：" class="headerlink" title="1. 二叉树的定义和遍历方式："></a><strong>1. 二叉树的定义和遍历方式</strong>：</h3><ul>
+<h1 id="十-二叉树"><a href="#十-二叉树" class="headerlink" title="十.二叉树"></a>十.二叉树</h1><h3 id="1-二叉树的定义和遍历方式："><a href="#1-二叉树的定义和遍历方式：" class="headerlink" title="1. 二叉树的定义和遍历方式："></a>1. 二叉树的定义和遍历方式：</h3><ul>
 <li>二叉树是一种树形数据结构，其中每个节点最多有两个子节点，分别称为左子节点和右子节点。</li>
 <li><strong>遍历方式</strong>：<ul>
 <li><strong>前序遍历</strong>（Pre-order Traversal）：按根节点 -&gt; 左子树 -&gt; 右子树的顺序遍历。</li>
@@ -642,25 +627,20 @@
 </ul>
 </li>
 </ul>
-<h4 id="遍历方式总结："><a href="#遍历方式总结：" class="headerlink" title="遍历方式总结："></a><strong>遍历方式总结</strong>：</h4><p>笔记中的图展示了二叉树的前序、中序、后序和层次遍历的结果。</p>
-<hr>
-<h3 id="2-前序遍历的递归实现："><a href="#2-前序遍历的递归实现：" class="headerlink" title="2. 前序遍历的递归实现："></a><strong>2. 前序遍历的递归实现</strong>：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorder</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>    List&lt;Integer&gt; seq = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    dfs(root);<br>    <span class="hljs-keyword">return</span> seq;<br>&#125;<br><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;<br>    seq.add(root.val);<br>    dfs(root.left);<br>    dfs(root.right);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="遍历方式总结："><a href="#遍历方式总结：" class="headerlink" title="遍历方式总结："></a><strong>遍历方式总结</strong>：</h4><h3 id="2-前序遍历的递归实现："><a href="#2-前序遍历的递归实现：" class="headerlink" title="2. 前序遍历的递归实现："></a><strong>2. 前序遍历的递归实现</strong>：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorder</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>    List&lt;Integer&gt; seq = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    dfs(root);<br>    <span class="hljs-keyword">return</span> seq;<br>&#125;<br><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;<br>    seq.add(root.val);<br>    dfs(root.left);<br>    dfs(root.right);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>思路</strong>：使用递归的方式遍历树，先访问当前节点，然后递归访问左子树和右子树。</li>
 <li><strong>时间复杂度</strong>：O(n)，其中 n 为节点数量。</li>
 </ul>
-<hr>
 <h3 id="3-后序遍历的递归实现："><a href="#3-后序遍历的递归实现：" class="headerlink" title="3. 后序遍历的递归实现："></a><strong>3. 后序遍历的递归实现</strong>：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;<br>    dfs(root.left);<br>    dfs(root.right);<br>    seq.add(root.val);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>思路</strong>：先递归遍历左子树，再递归遍历右子树，最后访问根节点。</li>
 </ul>
-<hr>
 <h3 id="4-树的层次遍历（广度优先搜索）："><a href="#4-树的层次遍历（广度优先搜索）：" class="headerlink" title="4. 树的层次遍历（广度优先搜索）："></a><strong>4. 树的层次遍历（广度优先搜索）</strong>：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">levelOrder</span><span class="hljs-params">(Node root)</span> &#123;<br>    Queue&lt;Pair&lt;Node, Integer&gt;&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>    List&lt;List&lt;Integer&gt;&gt; seq = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> seq;<br><br>    q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Pair</span>&lt;&gt;(root, <span class="hljs-number">0</span>));<br>    <span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> q.peek().getKey();<br>        <span class="hljs-type">Integer</span> <span class="hljs-variable">depth</span> <span class="hljs-operator">=</span> q.poll().getValue();<br><br>        <span class="hljs-keyword">if</span> (depth &gt;= seq.size()) <br>            seq.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;());<br>        seq.get(depth).add(node.val);<br><br>        <span class="hljs-keyword">for</span> (Node child : node.children) &#123;<br>            q.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Pair</span>&lt;&gt;(child, depth + <span class="hljs-number">1</span>));<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> seq;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>思路</strong>：使用队列辅助实现层次遍历，每次取出一个节点，并将其所有子节点加入队列。遍历每一层时记录该层的深度。</li>
 <li><strong>时间复杂度</strong>：O(n)，其中 n 为节点数量。</li>
 </ul>
-<hr>
 <h3 id="5-根据前序遍历和中序遍历重建二叉树："><a href="#5-根据前序遍历和中序遍历重建二叉树：" class="headerlink" title="5. 根据前序遍历和中序遍历重建二叉树："></a><strong>5. 根据前序遍历和中序遍历重建二叉树</strong>：</h3><h4 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a><strong>问题描述</strong>：</h4><p>给定二叉树的前序遍历和中序遍历，重建这棵二叉树。</p>
 <h4 id="算法思路：-6"><a href="#算法思路：-6" class="headerlink" title="算法思路："></a><strong>算法思路</strong>：</h4><ul>
 <li>前序遍历的第一个节点是根节点。</li>
@@ -677,7 +657,6 @@
 </li>
 <li><strong>时间复杂度</strong>：O(n)，其中 n 为节点数量。</li>
 </ul>
-<hr>
 <h3 id="6-找到两个节点的最近公共祖先："><a href="#6-找到两个节点的最近公共祖先：" class="headerlink" title="6. 找到两个节点的最近公共祖先："></a><strong>6. 找到两个节点的最近公共祖先</strong>：</h3><h4 id="问题描述：-1"><a href="#问题描述：-1" class="headerlink" title="问题描述："></a><strong>问题描述</strong>：</h4><p>在二叉树中找到两个节点的最近公共祖先（LCA）。</p>
 <h4 id="算法思路：-7"><a href="#算法思路：-7" class="headerlink" title="算法思路："></a><strong>算法思路</strong>：</h4><ul>
 <li>对每个节点递归判断：<ul>
@@ -695,17 +674,13 @@
 </ul>
 </li>
 </ul>
-<hr>
 <h3 id="7-笔记中还涉及的图和链表相关的补充知识："><a href="#7-笔记中还涉及的图和链表相关的补充知识：" class="headerlink" title="7. 笔记中还涉及的图和链表相关的补充知识："></a><strong>7. 笔记中还涉及的图和链表相关的补充知识</strong>：</h3><ul>
 <li><strong>广度优先搜索（BFS）与深度优先搜索（DFS）</strong>：图的遍历方式类似于树的层次遍历和前序遍历。</li>
 <li><strong>动态规划问题</strong>：如矩阵路径求解的动态规划方法，使用递推公式求解最短路径或最长路径问题。</li>
 <li><strong>链表操作</strong>：涉及链表节点的插入、删除和反转操作，通常通过定义 <code>head</code> 指针和递归方法实现。</li>
 </ul>
 <hr>
-<h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><p>这两页笔记主要围绕二叉树的遍历、重建、和最近公共祖先等问题展开。二叉树的遍历方式包括前序、中序、后序、和层次遍历；通过前序和中序遍历可以唯一确定一棵二叉树；寻找二叉树节点的最近公共祖先可以通过递归遍历树来判断。</p>
-<h1 id="十一-图"><a href="#十一-图" class="headerlink" title="十一.图"></a>十一.图</h1><p>这张笔记主要围绕<strong>图论</strong>展开，涉及图的存储方式、遍历算法、环检测、拓扑排序以及课程安排问题的解决方案。以下是详细总结：</p>
-<hr>
-<h3 id="1-图的存储方式："><a href="#1-图的存储方式：" class="headerlink" title="1. 图的存储方式："></a><strong>1. 图的存储方式</strong>：</h3><p>图可以通过多种方式表示，常见的有：</p>
+<h1 id="十一-图"><a href="#十一-图" class="headerlink" title="十一.图"></a>十一.图</h1><h3 id="1-图的存储方式："><a href="#1-图的存储方式：" class="headerlink" title="1. 图的存储方式："></a><strong>1. 图的存储方式</strong>：</h3><p>图可以通过多种方式表示，常见的有：</p>
 <ul>
 <li><p><strong>邻接矩阵</strong>：</p>
 <ul>
@@ -774,15 +749,14 @@
 <h4 id="代码实现：-14"><a href="#代码实现：-14" class="headerlink" title="代码实现："></a><strong>代码实现</strong>：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">public</span> boolean <span class="hljs-title">canFinish</span><span class="hljs-params">(<span class="hljs-type">int</span> numCourses, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; prerequisites)</span> </span>&#123;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">graph</span>(numCourses);<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">inDegree</span><span class="hljs-params">(numCourses, <span class="hljs-number">0</span>)</span></span>;<br>    <br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; pre : prerequisites) &#123;<br>        graph[pre[<span class="hljs-number">1</span>]].<span class="hljs-built_in">push_back</span>(pre[<span class="hljs-number">0</span>]);<br>        inDegree[pre[<span class="hljs-number">0</span>]]++;<br>    &#125;<br>    <br>    queue&lt;<span class="hljs-type">int</span>&gt; q;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; numCourses; i++) &#123;<br>        <span class="hljs-keyword">if</span> (inDegree[i] == <span class="hljs-number">0</span>) q.<span class="hljs-built_in">push</span>(i);  <span class="hljs-comment">// 入度为0的课程可以先学习</span><br>    &#125;<br>    <br>    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>        <span class="hljs-type">int</span> curr = q.<span class="hljs-built_in">front</span>();<br>        q.<span class="hljs-built_in">pop</span>();<br>        count++;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> neighbor : graph[curr]) &#123;<br>            inDegree[neighbor]--;<br>            <span class="hljs-keyword">if</span> (inDegree[neighbor] == <span class="hljs-number">0</span>) q.<span class="hljs-built_in">push</span>(neighbor);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> count == numCourses;  <span class="hljs-comment">// 如果学习的课程数等于课程总数，则可以完成所有课程</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>图的表示方式</strong>：通过邻接矩阵、邻接表或链式前向星表示图结构，适应不同的场景和空间复杂度要求。</li>
 <li><strong>图的遍历</strong>：DFS 和 BFS 是图的两种基本遍历方式，DFS 常用于连通分量、环检测，BFS 常用于最短路径和拓扑排序。</li>
 <li><strong>拓扑排序</strong>：基于入度的 BFS 是一种高效的拓扑排序方法，广泛应用于课程安排、任务调度等场景。</li>
 <li><strong>环检测与课程安排</strong>：通过 DFS 或 BFS 进行环检测，确定是否存在循环依赖，从而判断课程能否按要求完成。</li>
 </ul>
-<h1 id="十二-搜索"><a href="#十二-搜索" class="headerlink" title="十二.搜索"></a>十二.搜索</h1><p>这张笔记内容主要涉及<strong>状态</strong>的概念以及状态空间搜索，重点讨论了如何将问题转化为图或树，进而利用深度优先搜索（DFS）或广度优先搜索（BFS）进行求解。同时，还介绍了电话号码字母组合的经典递归实现。以下是详细总结：</p>
 <hr>
-<h3 id="1-状态与状态空间搜索："><a href="#1-状态与状态空间搜索：" class="headerlink" title="1. 状态与状态空间搜索："></a><strong>1. 状态与状态空间搜索</strong>：</h3><ul>
+<h1 id="十二-搜索"><a href="#十二-搜索" class="headerlink" title="十二.搜索"></a>十二.搜索</h1><h3 id="1-状态与状态空间搜索："><a href="#1-状态与状态空间搜索：" class="headerlink" title="1. 状态与状态空间搜索："></a><strong>1. 状态与状态空间搜索</strong>：</h3><ul>
 <li><p><strong>状态</strong>：状态表示问题的每一个可能的配置。状态可以看作图中的一个顶点，状态的转移则对应图中的边。状态空间的搜索通常用于解决某些搜索问题，如寻找最优解、遍历所有可能的解等。</p>
 </li>
 <li><p><strong>搜索算法</strong>：</p>
@@ -832,7 +806,7 @@
 </ul>
 <h4 id="记忆化搜索："><a href="#记忆化搜索：" class="headerlink" title="记忆化搜索："></a><strong>记忆化搜索</strong>：</h4><p>将已经计算过的状态及其结果进行缓存，避免在递归过程中重复计算。电话号码字母组合问题通过字典存储每个数字与字母的映射，就是一种简化的记忆化优化。</p>
 <hr>
-<h3 id="总结：-3"><a href="#总结：-3" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>状态空间搜索</strong>是一种广泛应用于图遍历和组合问题的技术，主要通过 DFS 和 BFS 实现。对于复杂问题，合理地定义状态和状态转移是关键。</li>
 <li><strong>电话号码的字母组合问题</strong>是一个经典的状态搜索问题，通过 DFS 实现可以生成所有可能的组合，借助哈希表存储映射关系提高搜索效率。</li>
 <li><strong>递归和剪枝</strong>：在搜索过程中，使用递归和剪枝可以有效减少不必要的计算，提升算法性能。</li>
@@ -884,12 +858,12 @@
 </li>
 </ul>
 <hr>
-<h3 id="总结：-4"><a href="#总结：-4" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>基因突变问题</strong>通过 BFS 解决，是一个经典的层次遍历问题。BFS 可以保证找到的路径是最短的，适合解决此类寻找最小步数的问题。</li>
 <li><strong>DFS 和 BFS 的适用场景不同</strong>，DFS 更适合于需要遍历所有解的场景，而 BFS 则适合用于最短路径类问题。这两种搜索方法在不同的应用场景下各有优势。</li>
 </ul>
-<h1 id="十三-二分"><a href="#十三-二分" class="headerlink" title="十三.二分"></a>十三.二分</h1><p>这张笔记主要介绍了<strong>二分查找</strong>算法的实现与应用，讨论了二分查找在查找目标值以及查找边界时的不同处理方法，涉及了多种语言的实现，包括 C++&#x2F;Java 和 Python，并给出了多种二分查找的变形。以下是详细总结：</p>
 <hr>
+<h1 id="十三-二分"><a href="#十三-二分" class="headerlink" title="十三.二分"></a>十三.二分</h1><p>各种排序算法 分为基于比较的和非比较的排序 比较：交换 冒泡 快速     插入 插入 希尔     选择 选择 堆     归并 二路 多路 非比较： 计数排序 桶排序 基数排序 用c++语言总结这些算法怎么写,技巧等</p>
 <h3 id="1-二分查找的基本实现："><a href="#1-二分查找的基本实现：" class="headerlink" title="1. 二分查找的基本实现："></a><strong>1. 二分查找的基本实现</strong>：</h3><h4 id="问题描述：-5"><a href="#问题描述：-5" class="headerlink" title="问题描述："></a><strong>问题描述</strong>：</h4><p>二分查找用于在有序数组中查找目标值 <code>target</code>，其时间复杂度为 O(log n)。</p>
 <h4 id="算法思路：-9"><a href="#算法思路：-9" class="headerlink" title="算法思路："></a><strong>算法思路</strong>：</h4><ul>
 <li>将数组的搜索范围缩小为左边界 <code>left</code> 和右边界 <code>right</code>，每次取中间位置 <code>mid</code> 的值进行比较：<ul>
@@ -926,7 +900,7 @@
 <h4 id="代码实现：-17"><a href="#代码实现：-17" class="headerlink" title="代码实现："></a><strong>代码实现</strong>：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> left = <span class="hljs-number">0</span>, right = n;<br><span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>    <span class="hljs-type">int</span> mid = (left + right) / <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> (array[mid] &gt;= <span class="hljs-number">26</span>)<br>        right = mid;<br>    <span class="hljs-keyword">else</span><br>        left = mid + <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-keyword">return</span> right;  <span class="hljs-comment">// 返回第一个大于等于 26 的位置</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="总结：-5"><a href="#总结：-5" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-3"><a href="#总结：-3" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>二分查找</strong>是一种非常高效的查找算法，尤其适用于在有序数组或单调函数中查找目标值或边界值。</li>
 <li>通过变形的二分查找，可以解决查找左边界、右边界、统计重复元素出现次数等问题。</li>
 <li>实现二分查找时要注意终止条件和边界处理，确保不会出现死循环或越界问题。</li>
@@ -963,7 +937,7 @@
 <li>精确平方根的思路与整数平方根类似，只不过停止条件是 <code>right - left</code> 小于某个精度 <code>eps</code>，从而确保结果精确到指定的小数位数。</li>
 </ul>
 <hr>
-<h3 id="总结：-6"><a href="#总结：-6" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-4"><a href="#总结：-4" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>二分查找</strong>不仅能解决简单的查找问题，还能通过调整条件找到数组中目标值的边界位置，适用于有序数组的场景。</li>
 <li><strong>平方根问题</strong>可以通过二分查找求解，不论是整数平方根还是精确平方根，通过调整精度可以得到不同的结果。</li>
 </ul>
@@ -1005,11 +979,102 @@
 <li><strong>判定函数</strong>：通过不断尝试不同的 <code>mid</code> 值（即可能的最大子数组和），判断是否能够在不超过 <code>m</code> 次划分的前提下，将数组划分为子数组。</li>
 </ul>
 <hr>
-<h3 id="总结：-7"><a href="#总结：-7" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-5"><a href="#总结：-5" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>三分查找</strong>适用于处理单峰性问题，尤其是在寻找极值点时，能够有效缩小区间。</li>
 <li><strong>分割数组问题</strong>使用二分查找来确定最大子数组和的最小值，通过判定函数来检查当前划分是否满足条件。这种思路在需要均匀分配任务或资源时非常常用。</li>
 </ul>
-<h1 id="十四-排序"><a href="#十四-排序" class="headerlink" title="十四.排序"></a>十四.排序</h1><h1 id="十五-贪心"><a href="#十五-贪心" class="headerlink" title="十五. 贪心"></a>十五. 贪心</h1><h1 id="十六-动态规划"><a href="#十六-动态规划" class="headerlink" title="十六.动态规划"></a>十六.动态规划</h1><h1 id="十七-字典树-并查集"><a href="#十七-字典树-并查集" class="headerlink" title="十七.字典树,并查集"></a>十七.字典树,并查集</h1><h1 id="十八-图论"><a href="#十八-图论" class="headerlink" title="十八.图论"></a>十八.图论</h1><h1 id="十九-字符串处理"><a href="#十九-字符串处理" class="headerlink" title="十九.字符串处理"></a>十九.字符串处理</h1><h1 id="二十-高级搜索"><a href="#二十-高级搜索" class="headerlink" title="二十.高级搜索"></a>二十.高级搜索</h1><h1 id="二十一-平衡二叉树"><a href="#二十一-平衡二叉树" class="headerlink" title="二十一.平衡二叉树"></a>二十一.平衡二叉树</h1><h1 id="二十二-跳跃表"><a href="#二十二-跳跃表" class="headerlink" title="二十二.跳跃表"></a>二十二.跳跃表</h1><h1 id="二十三-线段树"><a href="#二十三-线段树" class="headerlink" title="二十三.线段树"></a>二十三.线段树</h1>
+<h1 id="十四-排序"><a href="#十四-排序" class="headerlink" title="十四.排序"></a>十四.排序</h1><p>在 C++ 语言中，常见的排序算法可以分为基于比较的和非比较的两类。总结这些算法时，可以从算法的时间复杂度、空间复杂度以及适用场景的角度来进行编写。以下是每种排序算法的简要说明、代码实现和一些技巧：</p>
+<h3 id="一、基于比较的排序"><a href="#一、基于比较的排序" class="headerlink" title="一、基于比较的排序"></a>一、基于比较的排序</h3><h4 id="1-交换类排序"><a href="#1-交换类排序" class="headerlink" title="1. 交换类排序"></a>1. 交换类排序</h4><p><strong>(1) 冒泡排序</strong></p>
+<ul>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(1)</li>
+<li>稳定性：稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">bubbleSort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n - i - <span class="hljs-number">1</span>; j++) &#123;<br>            <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j + <span class="hljs-number">1</span>]) &#123;<br>                std::<span class="hljs-built_in">swap</span>(arr[j], arr[j + <span class="hljs-number">1</span>]);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：每一轮遍历可以把最大（或最小）的元素放在数组的末尾。</p>
+<p><strong>(2) 快速排序</strong></p>
+<ul>
+<li>时间复杂度：O(n log n)</li>
+<li>空间复杂度：O(log n)</li>
+<li>稳定性：不稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> low, <span class="hljs-type">int</span> high)</span> </span>&#123;<br>    <span class="hljs-type">int</span> pivot = arr[low];<br>    <span class="hljs-keyword">while</span> (low &lt; high) &#123;<br>        <span class="hljs-keyword">while</span> (low &lt; high &amp;&amp; arr[high] &gt;= pivot) high--;<br>        arr[low] = arr[high];<br>        <span class="hljs-keyword">while</span> (low &lt; high &amp;&amp; arr[low] &lt;= pivot) low++;<br>        arr[high] = arr[low];<br>    &#125;<br>    arr[low] = pivot;<br>    <span class="hljs-keyword">return</span> low;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> low, <span class="hljs-type">int</span> high)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (low &lt; high) &#123;<br>        <span class="hljs-type">int</span> pivot = <span class="hljs-built_in">partition</span>(arr, low, high);<br>        <span class="hljs-built_in">quickSort</span>(arr, low, pivot - <span class="hljs-number">1</span>);<br>        <span class="hljs-built_in">quickSort</span>(arr, pivot + <span class="hljs-number">1</span>, high);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：通过分治法将数组划分为较小的子数组，递归排序。</p>
+<h4 id="2-插入类排序"><a href="#2-插入类排序" class="headerlink" title="2. 插入类排序"></a>2. 插入类排序</h4><p><strong>(1) 直接插入排序</strong></p>
+<ul>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(1)</li>
+<li>稳定性：稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insertionSort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-type">int</span> key = arr[i];<br>        <span class="hljs-type">int</span> j = i - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (j &gt;= <span class="hljs-number">0</span> &amp;&amp; arr[j] &gt; key) &#123;<br>            arr[j + <span class="hljs-number">1</span>] = arr[j];<br>            j--;<br>        &#125;<br>        arr[j + <span class="hljs-number">1</span>] = key;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：适合小规模数据集，具有局部性特点的数据性能较好。</p>
+<p><strong>(2) 希尔排序</strong></p>
+<ul>
+<li>时间复杂度：O(n log n)</li>
+<li>空间复杂度：O(1)</li>
+<li>稳定性：不稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">shellSort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> gap = n / <span class="hljs-number">2</span>; gap &gt; <span class="hljs-number">0</span>; gap /= <span class="hljs-number">2</span>) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = gap; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> key = arr[i];<br>            <span class="hljs-type">int</span> j = i;<br>            <span class="hljs-keyword">while</span> (j &gt;= gap &amp;&amp; arr[j - gap] &gt; key) &#123;<br>                arr[j] = arr[j - gap];<br>                j -= gap;<br>            &#125;<br>            arr[j] = key;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：通过缩小增量逐步优化插入排序。</p>
+<h4 id="3-选择类排序"><a href="#3-选择类排序" class="headerlink" title="3. 选择类排序"></a>3. 选择类排序</h4><p><strong>(1) 选择排序</strong></p>
+<ul>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(1)</li>
+<li>稳定性：不稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">selectionSort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) &#123;<br>        <span class="hljs-type">int</span> minIdx = i;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i + <span class="hljs-number">1</span>; j &lt; n; j++) &#123;<br>            <span class="hljs-keyword">if</span> (arr[j] &lt; arr[minIdx]) &#123;<br>                minIdx = j;<br>            &#125;<br>        &#125;<br>        std::<span class="hljs-built_in">swap</span>(arr[i], arr[minIdx]);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：每轮找到最小（或最大）值并交换到对应位置。</p>
+<p><strong>(2) 堆排序</strong></p>
+<ul>
+<li>时间复杂度：O(n log n)</li>
+<li>空间复杂度：O(1)</li>
+<li>稳定性：不稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">heapify</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> i)</span> </span>&#123;<br>    <span class="hljs-type">int</span> largest = i;<br>    <span class="hljs-type">int</span> left = <span class="hljs-number">2</span> * i + <span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> right = <span class="hljs-number">2</span> * i + <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> (left &lt; n &amp;&amp; arr[left] &gt; arr[largest]) largest = left;<br>    <span class="hljs-keyword">if</span> (right &lt; n &amp;&amp; arr[right] &gt; arr[largest]) largest = right;<br>    <span class="hljs-keyword">if</span> (largest != i) &#123;<br>        std::<span class="hljs-built_in">swap</span>(arr[i], arr[largest]);<br>        <span class="hljs-built_in">heapify</span>(arr, n, largest);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">heapSort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) <span class="hljs-built_in">heapify</span>(arr, n, i);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>        std::<span class="hljs-built_in">swap</span>(arr[<span class="hljs-number">0</span>], arr[i]);<br>        <span class="hljs-built_in">heapify</span>(arr, i, <span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：利用堆结构维护最大或最小堆。</p>
+<h4 id="4-归并排序"><a href="#4-归并排序" class="headerlink" title="4. 归并排序"></a>4. 归并排序</h4><ul>
+<li>时间复杂度：O(n log n)</li>
+<li>空间复杂度：O(n)</li>
+<li>稳定性：稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> m, <span class="hljs-type">int</span> r)</span> </span>&#123;<br>    <span class="hljs-type">int</span> n1 = m - l + <span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> n2 = r - m;<br>    <span class="hljs-type">int</span> L[n1], R[n2];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n1; i++) L[i] = arr[l + i];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n2; j++) R[j] = arr[m + <span class="hljs-number">1</span> + j];<br>    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, k = l;<br>    <span class="hljs-keyword">while</span> (i &lt; n1 &amp;&amp; j &lt; n2) &#123;<br>        <span class="hljs-keyword">if</span> (L[i] &lt;= R[j]) arr[k++] = L[i++];<br>        <span class="hljs-keyword">else</span> arr[k++] = R[j++];<br>    &#125;<br>    <span class="hljs-keyword">while</span> (i &lt; n1) arr[k++] = L[i++];<br>    <span class="hljs-keyword">while</span> (j &lt; n2) arr[k++] = R[j++];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">mergeSort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (l &lt; r) &#123;<br>        <span class="hljs-type">int</span> m = l + (r - l) / <span class="hljs-number">2</span>;<br>        <span class="hljs-built_in">mergeSort</span>(arr, l, m);<br>        <span class="hljs-built_in">mergeSort</span>(arr, m + <span class="hljs-number">1</span>, r);<br>        <span class="hljs-built_in">merge</span>(arr, l, m, r);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：递归分割数组，合并时排序。</p>
+<h3 id="二、非比较类排序"><a href="#二、非比较类排序" class="headerlink" title="二、非比较类排序"></a>二、非比较类排序</h3><h4 id="1-计数排序"><a href="#1-计数排序" class="headerlink" title="1. 计数排序"></a>1. 计数排序</h4><ul>
+<li>时间复杂度：O(n + k)</li>
+<li>空间复杂度：O(k)</li>
+<li>稳定性：稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">countingSort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> max)</span> </span>&#123;<br>    <span class="hljs-type">int</span> count[max + <span class="hljs-number">1</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-type">int</span> output[n];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) count[arr[i]]++;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= max; i++) count[i] += count[i - <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>        output[count[arr[i]] - <span class="hljs-number">1</span>] = arr[i];<br>        count[arr[i]]--;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) arr[i] = output[i];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：适合范围较小的整数排序。</p>
+<h4 id="2-桶排序"><a href="#2-桶排序" class="headerlink" title="2. 桶排序"></a>2. 桶排序</h4><ul>
+<li>时间复杂度：O(n + k)</li>
+<li>空间复杂度：O(n + k)</li>
+<li>稳定性：稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">bucketSort</span><span class="hljs-params">(<span class="hljs-type">float</span> arr[], <span class="hljs-type">int</span> n)</span> </span>&#123;<br>    std::vector&lt;<span class="hljs-type">float</span>&gt; buckets[n];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-type">int</span> idx = n * arr[i];<br>        buckets[idx].<span class="hljs-built_in">push_back</span>(arr[i]);<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        std::<span class="hljs-built_in">sort</span>(buckets[i].<span class="hljs-built_in">begin</span>(), buckets[i].<span class="hljs-built_in">end</span>());<br>    &#125;<br>    <span class="hljs-type">int</span> idx = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;val : buckets[i]) &#123;<br>            arr[idx++] = val;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：适合分布均匀的实数排序。</p>
+<h4 id="3-基数排序"><a href="#3-基数排序" class="headerlink" title="3. 基数排序"></a>3. 基数排序</h4><ul>
+<li>时间复杂度：O(nk)</li>
+<li>空间复杂度：O(n + k)</li>
+<li>稳定性：稳定</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getMax</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-type">int</span> max = arr[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++) <span class="hljs-keyword">if</span> (arr[i] &gt; max) max = arr[i];<br>    <span class="hljs-keyword">return</span> max;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">countingSortForRadix</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> exp)</span> </span>&#123;<br>    <span class="hljs-type">int</span> output[n], count[<span class="hljs-number">10</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) count[(arr[i] / exp) % <span class="hljs-number">10</span>]++;<br><br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">10</span>; i++) count[i] += count[i - <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>        output[count[(arr[i] / exp) % <span class="hljs-number">10</span>] - <span class="hljs-number">1</span>] = arr[i];<br>        count[(arr[i] / exp) % <span class="hljs-number">10</span>]--;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) arr[i] = output[i];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">radixSort</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-type">int</span> max = <span class="hljs-built_in">getMax</span>(arr, n);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> exp = <span class="hljs-number">1</span>; max / exp &gt; <span class="hljs-number">0</span>; exp *= <span class="hljs-number">10</span>) <span class="hljs-built_in">countingSortForRadix</span>(arr, n, exp);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>技巧</strong>：按位排序，从低位到高位逐一处理。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><strong>算法选择</strong>：根据数据的规模、分布特点选择合适的算法。快速排序在多数情况下表现良好，但对于极端情况可能退化；归并排序的稳定性和性能较优但占用额外空间；堆排序在处理大规模数据时表现优异。</li>
+<li><strong>非比较排序</strong>：如计数排序、桶排序和基数排序，适合特定场景，通常用于整型或有范围限制的数据。</li>
+</ul>
+<h1 id="十五-贪心"><a href="#十五-贪心" class="headerlink" title="十五. 贪心"></a>十五. 贪心</h1><h1 id="十六-动态规划"><a href="#十六-动态规划" class="headerlink" title="十六.动态规划"></a>十六.动态规划</h1><h1 id="十七-字典树-并查集"><a href="#十七-字典树-并查集" class="headerlink" title="十七.字典树,并查集"></a>十七.字典树,并查集</h1><h1 id="十八-图论"><a href="#十八-图论" class="headerlink" title="十八.图论"></a>十八.图论</h1><h1 id="十九-字符串处理"><a href="#十九-字符串处理" class="headerlink" title="十九.字符串处理"></a>十九.字符串处理</h1><h1 id="二十-高级搜索"><a href="#二十-高级搜索" class="headerlink" title="二十.高级搜索"></a>二十.高级搜索</h1><h1 id="二十一-平衡二叉树"><a href="#二十一-平衡二叉树" class="headerlink" title="二十一.平衡二叉树"></a>二十一.平衡二叉树</h1><h1 id="二十二-跳跃表"><a href="#二十二-跳跃表" class="headerlink" title="二十二.跳跃表"></a>二十二.跳跃表</h1><h1 id="二十三-线段树"><a href="#二十三-线段树" class="headerlink" title="二十三.线段树"></a>二十三.线段树</h1>
                 
               </div>
             
