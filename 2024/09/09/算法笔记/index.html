@@ -27,7 +27,7 @@
 <meta property="og:description" content="本笔记以c++为主，其他语言也有相关代码 c++代码的基础内容头文件 1.基础数据结构和算法 #include &lt;iostream&gt;：用于输入输出流，如 std::cin 和 std::cout。 #include &lt;vector&gt;：用于动态数组 std::vector。 #include &lt;string&gt;：用于 std::string 字符串操作。 #incl">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-09T11:20:21.000Z">
-<meta property="article:modified_time" content="2024-10-13T04:59:38.897Z">
+<meta property="article:modified_time" content="2024-10-13T09:58:33.763Z">
 <meta property="article:author" content="uert">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          31k 字
+          34k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          258 分钟
+          284 分钟
         
       </span>
     
@@ -1339,15 +1339,15 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 
 <p>本层逻辑，我们把它明确好，至于左右怎么干,就是一个递归的问题了，就不用去想这么多。</p>
 <hr>
-<h1 id="九-分治"><a href="#九-分治" class="headerlink" title="九.分治"></a>九.分治</h1><h3 id="1-分治算法（Divide-and-Conquer）："><a href="#1-分治算法（Divide-and-Conquer）：" class="headerlink" title="1. 分治算法（Divide and Conquer）："></a><strong>1. 分治算法（Divide and Conquer）</strong>：</h3><ul>
+<h1 id="九-分治"><a href="#九-分治" class="headerlink" title="九.分治"></a>九.分治</h1><h3 id="分治算法（Divide-and-Conquer）："><a href="#分治算法（Divide-and-Conquer）：" class="headerlink" title="分治算法（Divide and Conquer）："></a><strong>分治算法（Divide and Conquer）</strong>：</h3><ul>
 <li><strong>定义</strong>：将原问题划分为若干个相同或相似的子问题，递归求解子问题，然后将各个子问题的解合并成原问题的解。</li>
 <li><strong>应用场景</strong>：分治法常用于大规模问题的解决，比如快速排序、归并排序、矩阵乘法等。</li>
 <li><strong>要点</strong>：<ul>
 <li>将问题分成若干子问题；</li>
-<li>分别递归求解每个子问题；</li>
 <li>合并子问题的解得到最终解。</li>
 </ul>
 </li>
+<li>简单来说就是不重不漏，重复算过的,不要去给它再去运算一遍，我们可以记忆化，想记忆我们开一个map</li>
 </ul>
 <hr>
 <h3 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h3><h4 id="递归实现-pow-x-n-问题："><a href="#递归实现-pow-x-n-问题：" class="headerlink" title="递归实现 pow(x, n) 问题："></a><strong>递归实现 <code>pow(x, n)</code> 问题</strong>：</h4><p>计算 <code>x</code> 的 <code>n</code> 次方。</p>
@@ -1392,7 +1392,7 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 <li><strong>递归框架</strong>：很多复杂问题都可以通过递归分解为子问题来解决，比如 <code>pow</code> 问题通过递归将指数减半、括号生成问题通过递归生成不同数量括号的组合等。</li>
 </ul>
 <hr>
-<h1 id="十-二叉树"><a href="#十-二叉树" class="headerlink" title="十.二叉树"></a>十.二叉树</h1><h3 id="1-二叉树的定义和遍历方式："><a href="#1-二叉树的定义和遍历方式：" class="headerlink" title="1. 二叉树的定义和遍历方式："></a>1. 二叉树的定义和遍历方式：</h3><ul>
+<h1 id="十-二叉树"><a href="#十-二叉树" class="headerlink" title="十.二叉树"></a>十.二叉树</h1><h3 id="二叉树的定义和遍历方式："><a href="#二叉树的定义和遍历方式：" class="headerlink" title="二叉树的定义和遍历方式："></a>二叉树的定义和遍历方式：</h3><ul>
 <li>二叉树是一种树形数据结构，其中每个节点最多有两个子节点，分别称为左子节点和右子节点。</li>
 <li><strong>遍历方式</strong>：<ul>
 <li><strong>前序遍历</strong>（Pre-order Traversal）：按根节点 -&gt; 左子树 -&gt; 右子树的顺序遍历。</li>
@@ -1406,7 +1406,7 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 
 
 
-<h3 id="根据前序遍历和中序遍历重建二叉树："><a href="#根据前序遍历和中序遍历重建二叉树：" class="headerlink" title="根据前序遍历和中序遍历重建二叉树："></a><strong>根据前序遍历和中序遍历重建二叉树</strong>：</h3><p><strong>问题描述</strong>：</p>
+<h3 id="例题-2"><a href="#例题-2" class="headerlink" title="例题"></a>例题</h3><h4 id="根据前序遍历和中序遍历重建二叉树："><a href="#根据前序遍历和中序遍历重建二叉树：" class="headerlink" title="根据前序遍历和中序遍历重建二叉树："></a><strong>根据前序遍历和中序遍历重建二叉树</strong>：</h4><p><strong>问题描述</strong>：</p>
 <p>给定二叉树的前序遍历和中序遍历，重建这棵二叉树。</p>
 <p><strong>算法思路</strong>：</p>
 <ul>
@@ -1425,8 +1425,7 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 </li>
 <li><strong>时间复杂度</strong>：O(n)，其中 n 为节点数量。</li>
 </ul>
-<h3 id="找到两个节点的最近公共祖先："><a href="#找到两个节点的最近公共祖先：" class="headerlink" title="找到两个节点的最近公共祖先："></a><strong>找到两个节点的最近公共祖先</strong>：</h3><p><strong>问题描述</strong>：</p>
-<p>在二叉树中找到两个节点的最近公共祖先（LCA）。</p>
+<h4 id="找到两个节点的最近公共祖先："><a href="#找到两个节点的最近公共祖先：" class="headerlink" title="找到两个节点的最近公共祖先："></a><strong>找到两个节点的最近公共祖先</strong>：</h4><p><strong>问题描述</strong>：                                                                                                                                                            先求出父结点，然后用向上标记法<br>p 向上一直到 root 标红色<br>q向上，第一次遇到红色时，就找到了LCA</p>
 <p><strong>算法思路</strong>：</p>
 <ul>
 <li>对每个节点递归判断：<ul>
@@ -1445,43 +1444,271 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 </ul>
 </li>
 </ul>
-<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><ul>
-<li><strong>广度优先搜索（BFS）与深度优先搜索（DFS）</strong>：图的遍历方式类似于树的层次遍历和前序遍历。</li>
-<li><strong>动态规划问题</strong>：如矩阵路径求解的动态规划方法，使用递推公式求解最短路径或最长路径问题。</li>
-<li><strong>链表操作</strong>：涉及链表节点的插入、删除和反转操作，通常通过定义 <code>head</code> 指针和递归方法实现。</li>
-</ul>
 <hr>
-<h1 id="十一-图"><a href="#十一-图" class="headerlink" title="十一.图"></a>十一.图</h1><h3 id="1-图的存储方式："><a href="#1-图的存储方式：" class="headerlink" title="1. 图的存储方式："></a><strong>1. 图的存储方式</strong>：</h3><p>图可以通过多种方式表示，常见的有：</p>
+<h1 id="十一-图"><a href="#十一-图" class="headerlink" title="十一.图"></a>十一.图</h1><h3 id="图的存储方式："><a href="#图的存储方式：" class="headerlink" title="图的存储方式："></a><strong>图的存储方式</strong>：</h3><p>图可以通过多种方式表示，常见的有：</p>
+<pre><code class="hljs">0 —— 1
+|    |
+2 —— 3
+</code></pre>
 <ul>
-<li><strong>邻接矩阵</strong>：<ul>
+<li><p><strong>邻接矩阵</strong>：</p>
+<ul>
 <li>使用二维数组 <code>graph[MAX_N][MAX_N]</code>，其中 <code>graph[x][y] = 1</code> 表示节点 <code>x</code> 与节点 <code>y</code> 之间有一条边。</li>
 <li>适用于稠密图，但在处理稀疏图时会占用大量空间，复杂度为 O(N^2)。</li>
 </ul>
 </li>
-<li><strong>邻接表</strong>：<ul>
+<li><p><strong>出边数组</strong>：</p>
+<ul>
 <li>使用动态数组 <code>vector&lt;int&gt; graph[MAX_N]</code> 来存储邻接表，每个元素存储与该节点相邻的所有节点。</li>
 <li>这种方式更适合稀疏图，复杂度为 O(M)，其中 M 是图中边的数量。</li>
 </ul>
 </li>
-<li><strong>链式前向星</strong>：<ul>
+<li><p><strong>邻接表</strong>：</p>
+<ul>
 <li>使用结构体数组来存储边的信息，每个边包含两个属性：<code>from</code> 和 <code>to</code> 表示边的起点和终点，以及 <code>next</code> 指向下一条边。</li>
 <li><code>head</code> 数组用于记录每个顶点的第一条边。适合空间较紧张的情况。</li>
 </ul>
-</li>
-</ul>
-<hr>
-<h3 id="2-图的遍历："><a href="#2-图的遍历：" class="headerlink" title="2. 图的遍历："></a><strong>2. 图的遍历</strong>：</h3><p>图的遍历包括深度优先搜索（DFS）和广度优先搜索（BFS）。</p>
-<h4 id="DFS（深度优先搜索）："><a href="#DFS（深度优先搜索）：" class="headerlink" title="DFS（深度优先搜索）："></a><strong>DFS（深度优先搜索）</strong>：</h4><ul>
-<li><strong>递归实现</strong>：<ul>
-<li>使用递归来实现 DFS，首先访问当前节点，然后递归访问与当前节点相连的节点。</li>
-<li>常用于检测图中是否存在环、连通分量的统计等问题。</li>
-</ul>
-</li>
-</ul>
-<h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a><strong>代码实现</strong>：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> u, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; to, vector&lt;<span class="hljs-type">bool</span>&gt;&amp; visited)</span> </span>&#123;<br>    visited[u] = <span class="hljs-literal">true</span>;  <span class="hljs-comment">// 标记当前节点已访问</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> v : to[u]) &#123;<br>        <span class="hljs-keyword">if</span> (!visited[v]) &#123;<br>            <span class="hljs-built_in">dfs</span>(v, to, visited);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>邻接矩阵实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAX_N = <span class="hljs-number">4</span>;  <span class="hljs-comment">// 节点数量</span><br><span class="hljs-type">int</span> graph[MAX_N][MAX_N];  <span class="hljs-comment">// 邻接矩阵</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addEdge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>    graph[x][y] = <span class="hljs-number">1</span>;<br>    graph[y][x] = <span class="hljs-number">1</span>;  <span class="hljs-comment">// 无向图，需要对称添加</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printGraph</span><span class="hljs-params">()</span> </span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;邻接矩阵:&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX_N; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; MAX_N; j++) &#123;<br>            cout &lt;&lt; graph[i][j] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>        &#125;<br>        cout &lt;&lt; endl;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br><br>    <span class="hljs-built_in">printGraph</span>();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
+<p>出边数组实现</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAX_N = <span class="hljs-number">4</span>;  <span class="hljs-comment">// 节点数量</span><br>vector&lt;<span class="hljs-type">int</span>&gt; graph[MAX_N];  <span class="hljs-comment">// 出边数组</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addEdge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>    graph[x].<span class="hljs-built_in">push_back</span>(y);<br>    graph[y].<span class="hljs-built_in">push_back</span>(x);  <span class="hljs-comment">// 无向图</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printGraph</span><span class="hljs-params">()</span> </span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;出边数组:&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX_N; i++) &#123;<br>        cout &lt;&lt; i &lt;&lt; <span class="hljs-string">&quot;: &quot;</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> v : graph[i]) &#123;<br>            cout &lt;&lt; v &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>        &#125;<br>        cout &lt;&lt; endl;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br><br>    <span class="hljs-built_in">printGraph</span>();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br>出边数组:<br><span class="hljs-number">0</span>: <span class="hljs-number">1</span> <span class="hljs-number">2</span> <br><span class="hljs-number">1</span>: <span class="hljs-number">0</span> <span class="hljs-number">3</span> <br><span class="hljs-number">2</span>: <span class="hljs-number">0</span> <span class="hljs-number">3</span> <br><span class="hljs-number">3</span>: <span class="hljs-number">1</span> <span class="hljs-number">2</span> <br></code></pre></td></tr></table></figure>
+
+<p>邻接表实现</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Node</span> &#123;<br>    <span class="hljs-type">int</span> to;<br>    Node* next;<br>&#125;;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAX_N = <span class="hljs-number">4</span>;  <span class="hljs-comment">// 节点数量</span><br>Node* head[MAX_N];  <span class="hljs-comment">// 邻接表的表头数组</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addEdge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>    Node* node1 = <span class="hljs-keyword">new</span> Node&#123;y, head[x]&#125;;  <span class="hljs-comment">// 添加x-&gt;y的边</span><br>    head[x] = node1;<br><br>    Node* node2 = <span class="hljs-keyword">new</span> Node&#123;x, head[y]&#125;;  <span class="hljs-comment">// 添加y-&gt;x的边（无向图）</span><br>    head[y] = node2;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">printGraph</span><span class="hljs-params">()</span> </span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;邻接表:&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX_N; i++) &#123;<br>        cout &lt;&lt; i &lt;&lt; <span class="hljs-string">&quot;: &quot;</span>;<br>        Node* curr = head[i];<br>        <span class="hljs-keyword">while</span> (curr != <span class="hljs-literal">nullptr</span>) &#123;<br>            cout &lt;&lt; curr-&gt;to &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>            curr = curr-&gt;next;<br>        &#125;<br>        cout &lt;&lt; endl;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br><br>    <span class="hljs-built_in">printGraph</span>();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br>邻接表:<br><span class="hljs-number">0</span>: <span class="hljs-number">2</span> <span class="hljs-number">1</span> <br><span class="hljs-number">1</span>: <span class="hljs-number">3</span> <span class="hljs-number">0</span> <br><span class="hljs-number">2</span>: <span class="hljs-number">3</span> <span class="hljs-number">0</span> <br><span class="hljs-number">3</span>: <span class="hljs-number">2</span> <span class="hljs-number">1</span> <br></code></pre></td></tr></table></figure></li>
+</ul>
 <hr>
-<h3 id="3-环检测："><a href="#3-环检测：" class="headerlink" title="3. 环检测："></a><strong>3. 环检测</strong>：</h3><p>环检测是一个典型的图论问题，通常使用 DFS 来实现。</p>
+<h3 id="图的遍历-："><a href="#图的遍历-：" class="headerlink" title="** 图的遍历**："></a>** 图的遍历**：</h3><p>图的遍历包括深度优先搜索（DFS）和广度优先搜索（BFS）。</p>
+<h4 id="DFS（深度优先搜索）："><a href="#DFS（深度优先搜索）：" class="headerlink" title="DFS（深度优先搜索）："></a><strong>DFS（深度优先搜索）</strong>：</h4><ul>
+<li><p><strong>递归实现</strong>：</p>
+<ul>
+<li><p>DFS 使用<strong>递归</strong>或<strong>栈</strong>来模拟，从起始节点出发，不断深入访问未访问的邻居节点，直到没有更多节点可访问，然后回溯到上一个节点。</p>
+<p>常用于：图的连通性判断、拓扑排序、检测环等。</p>
+</li>
+</ul>
+</li>
+<li><p>划分连通块</p>
+</li>
+</ul>
+<h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a><strong>代码实现</strong>：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAX_N = <span class="hljs-number">5</span>;  <span class="hljs-comment">// 节点数量</span><br>vector&lt;<span class="hljs-type">int</span>&gt; graph[MAX_N];  <span class="hljs-comment">// 图的邻接表</span><br><span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">visited</span><span class="hljs-params">(MAX_N, <span class="hljs-literal">false</span>)</span></span>;  <span class="hljs-comment">// 标记节点是否访问过</span><br><br><span class="hljs-comment">// 添加边 (x, y) 的函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addEdge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>    graph[x].<span class="hljs-built_in">push_back</span>(y);<br>    graph[y].<span class="hljs-built_in">push_back</span>(x);  <span class="hljs-comment">// 无向图添加双向边</span><br>&#125;<br><br><span class="hljs-comment">// 深度优先搜索 (DFS) 函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(<span class="hljs-type">int</span> node)</span> </span>&#123;<br>    visited[node] = <span class="hljs-literal">true</span>;  <span class="hljs-comment">// 标记当前节点为已访问</span><br>    cout &lt;&lt; node &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;   <span class="hljs-comment">// 输出当前访问的节点</span><br><br>    <span class="hljs-comment">// 递归访问所有未访问的邻居节点</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> neighbor : graph[node]) &#123;<br>        <span class="hljs-keyword">if</span> (!visited[neighbor]) &#123;<br>            <span class="hljs-built_in">DFS</span>(neighbor);<br>        &#125;<br>    &#125;<br>&#125;<br>DFS 遍历顺序: <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">2</span> <span class="hljs-number">4</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="广度优先搜索-BFS"><a href="#广度优先搜索-BFS" class="headerlink" title="广度优先搜索 (BFS)"></a><strong>广度优先搜索 (BFS)</strong></h3><p><strong>思想：</strong></p>
+<ul>
+<li>BFS 使用<strong>队列</strong>来模拟，从起始节点出发，先访问所有相邻节点，再依次访问这些相邻节点的邻居，层层扩展。</li>
+<li>常用于：求最短路径、连通性判断等。</li>
+</ul>
+<p><strong>BFS 实现代码 (C++)：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAX_N = <span class="hljs-number">5</span>;  <span class="hljs-comment">// 节点数量</span><br>vector&lt;<span class="hljs-type">int</span>&gt; graph[MAX_N];  <span class="hljs-comment">// 图的邻接表</span><br><span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">visited</span><span class="hljs-params">(MAX_N, <span class="hljs-literal">false</span>)</span></span>;  <span class="hljs-comment">// 标记节点是否访问过</span><br><br><span class="hljs-comment">// 添加边 (x, y) 的函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addEdge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>    graph[x].<span class="hljs-built_in">push_back</span>(y);<br>    graph[y].<span class="hljs-built_in">push_back</span>(x);  <span class="hljs-comment">// 无向图添加双向边</span><br>&#125;<br><br><span class="hljs-comment">// 广度优先搜索 (BFS) 函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">BFS</span><span class="hljs-params">(<span class="hljs-type">int</span> start)</span> </span>&#123;<br>    queue&lt;<span class="hljs-type">int</span>&gt; q;  <span class="hljs-comment">// 定义一个队列</span><br>    visited[start] = <span class="hljs-literal">true</span>;  <span class="hljs-comment">// 标记起始节点为已访问</span><br>    q.<span class="hljs-built_in">push</span>(start);  <span class="hljs-comment">// 将起始节点加入队列</span><br><br>    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>        <span class="hljs-type">int</span> node = q.<span class="hljs-built_in">front</span>();  <span class="hljs-comment">// 取出队首节点</span><br>        q.<span class="hljs-built_in">pop</span>();  <span class="hljs-comment">// 从队列中移除该节点</span><br>        cout &lt;&lt; node &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;  <span class="hljs-comment">// 输出当前访问的节点</span><br><br>        <span class="hljs-comment">// 遍历所有邻居节点</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> neighbor : graph[node]) &#123;<br>            <span class="hljs-keyword">if</span> (!visited[neighbor]) &#123;<br>                visited[neighbor] = <span class="hljs-literal">true</span>;  <span class="hljs-comment">// 标记为已访问</span><br>                q.<span class="hljs-built_in">push</span>(neighbor);  <span class="hljs-comment">// 将邻居节点加入队列</span><br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 构造图</span><br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>);<br>    <span class="hljs-built_in">addEdge</span>(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>);<br><br>    cout &lt;&lt; <span class="hljs-string">&quot;BFS 遍历顺序: &quot;</span>;<br>    <span class="hljs-built_in">BFS</span>(<span class="hljs-number">0</span>);  <span class="hljs-comment">// 从节点 0 开始遍历</span><br>    cout &lt;&lt; endl;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>输出：</strong></p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs tap">复制代码<br>BFS 遍历顺序:<span class="hljs-number"> 0 </span>1<span class="hljs-number"> 2 </span>3 4<br></code></pre></td></tr></table></figure>
+
+<h3 id="DFS-和-BFS-的对比："><a href="#DFS-和-BFS-的对比：" class="headerlink" title="** DFS 和 BFS 的对比：**"></a>** DFS 和 BFS 的对比：**</h3><table>
+<thead>
+<tr>
+<th><strong>特点</strong></th>
+<th><strong>DFS</strong></th>
+<th><strong>BFS</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数据结构</strong></td>
+<td>栈（递归调用栈或手动使用栈）</td>
+<td>队列</td>
+</tr>
+<tr>
+<td><strong>访问顺序</strong></td>
+<td>一条路径走到尽头再回溯</td>
+<td>从当前层所有节点向下一层扩展</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>拓扑排序、检测环、连通性判断</td>
+<td>最短路径、层次遍历</td>
+</tr>
+<tr>
+<td><strong>空间复杂度</strong></td>
+<td>O(h)，h为递归深度（最差为O(n)）</td>
+<td>O(n)，n为节点数量</td>
+</tr>
+<tr>
+<td><strong>时间复杂度</strong></td>
+<td>O(n + m)，n为节点数，m为边数</td>
+<td>O(n + m)，n为节点数，m为边数</td>
+</tr>
+</tbody></table>
+<p>.冗余连接</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">findRedundantConnection</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; edges)</span> </span>&#123;<br>        n = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 初始化节点数</span><br>        <span class="hljs-comment">// 计算实际的最大节点编号（n）</span><br>        <span class="hljs-keyword">for</span> (vector&lt;<span class="hljs-type">int</span>&gt;&amp; edge : edges) &#123;<br>            <span class="hljs-type">int</span> x = edge[<span class="hljs-number">0</span>], y = edge[<span class="hljs-number">1</span>];  <span class="hljs-comment">// 获取当前边的两个节点</span><br>            n = <span class="hljs-built_in">max</span>(n, <span class="hljs-built_in">max</span>(x, y));  <span class="hljs-comment">// 更新最大节点编号</span><br>        &#125;<br><br>        <span class="hljs-comment">// 初始化邻接表和访问标记数组</span><br>        to = vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;());<br>        visited = <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">bool</span>&gt;(n + <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>);<br><br>        <span class="hljs-comment">// 遍历所有边，构建图并检查环</span><br>        <span class="hljs-keyword">for</span> (vector&lt;<span class="hljs-type">int</span>&gt;&amp; edge : edges) &#123;<br>            <span class="hljs-type">int</span> x = edge[<span class="hljs-number">0</span>], y = edge[<span class="hljs-number">1</span>];  <span class="hljs-comment">// 获取当前边的两个节点</span><br>            <br>            <span class="hljs-comment">// 添加边到邻接表中，构建无向图，邻接表的构建</span><br>            to[x].<span class="hljs-built_in">push_back</span>(y);<br>            to[y].<span class="hljs-built_in">push_back</span>(x);<br><br>            <span class="hljs-comment">// 检查是否形成环</span><br>            <span class="hljs-built_in">fill</span>(visited.<span class="hljs-built_in">begin</span>(), visited.<span class="hljs-built_in">end</span>(), <span class="hljs-literal">false</span>);  <span class="hljs-comment">// 每次重置访问数组</span><br>            hasCycle = <span class="hljs-literal">false</span>;  <span class="hljs-comment">// 重置环标记</span><br>            <span class="hljs-built_in">dfs</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);  <span class="hljs-comment">// 从节点1开始DFS，父节点设为0（不存在）</span><br><br>            <span class="hljs-comment">// 如果检测到环，返回当前边</span><br>            <span class="hljs-keyword">if</span> (hasCycle) <span class="hljs-keyword">return</span> edge;<br>        &#125;<br>        <span class="hljs-keyword">return</span> &#123;&#125;;  <span class="hljs-comment">// 如果没有发现冗余边，返回空数组</span><br>    &#125;<br><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-comment">// 深度优先搜索 (DFS) 用于检测是否形成环,dfs模版</span><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa)</span> </span>&#123;<br>        visited[x] = <span class="hljs-literal">true</span>;  <span class="hljs-comment">// 标记当前节点已访问</span><br>        <span class="hljs-comment">// 遍历当前节点 x 的所有邻居节点</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> y : to[x]) &#123;<br>            <span class="hljs-keyword">if</span> (y == fa) <span class="hljs-keyword">continue</span>;  <span class="hljs-comment">// 如果是父节点，则跳过</span><br>            <span class="hljs-keyword">if</span> (!visited[y]) &#123;<br>                <span class="hljs-comment">// 如果未访问，继续递归DFS</span><br>                <span class="hljs-built_in">dfs</span>(y, x);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-comment">// 如果已经访问过，说明存在环</span><br>                hasCycle = <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-type">int</span> n;  <span class="hljs-comment">// 节点总数</span><br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; to;  <span class="hljs-comment">// 邻接表，存储每个节点的邻居</span><br>    vector&lt;<span class="hljs-type">bool</span>&gt; visited;  <span class="hljs-comment">// 标记节点是否访问过</span><br>    <span class="hljs-type">bool</span> hasCycle;  <span class="hljs-comment">// 是否存在环的标记</span><br>&#125;;<br><br>遍历边 &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;，图中没有环，继续。<br>遍历边 &#123;<span class="hljs-number">1</span>, <span class="hljs-number">3</span>&#125;，图中没有环，继续。<br>遍历边 &#123;<span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;，此时检测到环，返回 &#123;<span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;。<br></code></pre></td></tr></table></figure>
+
+<p>我们用一个具体的例子来<strong>模拟代码的执行过程</strong>，以帮助你理解逻辑如何运作，并分析 <code>visited</code> 数组在每一步的变化。</p>
+<hr>
+<h3 id="例子输入："><a href="#例子输入：" class="headerlink" title="例子输入："></a><strong>例子输入：</strong></h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">edges = [[1, 2], [1, 3], [2, 3]]<br></code></pre></td></tr></table></figure>
+
+<p><strong>图结构：</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-number">1</span> —— <span class="hljs-number">2</span><br><span class="hljs-string">|  /</span><br><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<p>目标：找出导致环的冗余边。</p>
+<hr>
+<h3 id="模拟代码的运行过程："><a href="#模拟代码的运行过程：" class="headerlink" title="模拟代码的运行过程："></a><strong>模拟代码的运行过程：</strong></h3><h4 id="初始状态："><a href="#初始状态：" class="headerlink" title="初始状态："></a><strong>初始状态：</strong></h4><ol>
+<li>遍历 <code>edges</code>，计算最大节点编号 <code>n</code> 为 3（根据 <code>max(x, y)</code>）。</li>
+<li>初始化邻接表 <code>to = [[], [], [], []]</code>（每个节点的邻居为空）。</li>
+<li>初始化访问数组 <code>visited = [false, false, false, false]</code>。</li>
+</ol>
+<hr>
+<h3 id="第一轮遍历：处理边-1-2"><a href="#第一轮遍历：处理边-1-2" class="headerlink" title="第一轮遍历：处理边 [1, 2]"></a><strong>第一轮遍历：处理边 [1, 2]</strong></h3><ol>
+<li><strong>将边 [1, 2]</strong> 添加到邻接表中：<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">to = <span class="hljs-string">[[], [2], [1], []]</span><br></code></pre></td></tr></table></figure></li>
+<li>重置 <code>visited = [false, false, false, false]</code>。</li>
+<li>调用 <code>dfs(1, 0)</code> 开始深度优先搜索。</li>
+</ol>
+<h4 id="DFS-1-0-："><a href="#DFS-1-0-：" class="headerlink" title="DFS(1, 0)："></a><strong>DFS(1, 0)：</strong></h4><ul>
+<li>标记节点 1 已访问：<code>visited = [false, true, false, false]</code></li>
+<li>遍历节点 1 的邻居 2：<ul>
+<li>由于 2 未访问，递归调用 <code>dfs(2, 1)</code>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="DFS-2-1-："><a href="#DFS-2-1-：" class="headerlink" title="DFS(2, 1)："></a><strong>DFS(2, 1)：</strong></h4><ul>
+<li>标记节点 2 已访问：<code>visited = [false, true, true, false]</code></li>
+<li>遍历节点 2 的邻居 1：<ul>
+<li>1 是父节点，跳过。</li>
+</ul>
+</li>
+</ul>
+<p><strong>结果：</strong>未发现环，继续处理下一条边。</p>
+<hr>
+<h3 id="第二轮遍历：处理边-1-3"><a href="#第二轮遍历：处理边-1-3" class="headerlink" title="第二轮遍历：处理边 [1, 3]"></a><strong>第二轮遍历：处理边 [1, 3]</strong></h3><ol>
+<li><strong>将边 [1, 3]</strong> 添加到邻接表中：<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">to = <span class="hljs-string">[[], [2, 3], [1], [1]]</span><br></code></pre></td></tr></table></figure></li>
+<li>重置 <code>visited = [false, false, false, false]</code>。</li>
+<li>调用 <code>dfs(1, 0)</code>。</li>
+</ol>
+<h4 id="DFS-1-0-：-1"><a href="#DFS-1-0-：-1" class="headerlink" title="DFS(1, 0)："></a><strong>DFS(1, 0)：</strong></h4><ul>
+<li>标记节点 1 已访问：<code>visited = [false, true, false, false]</code></li>
+<li>遍历节点 1 的邻居 2：<ul>
+<li>由于 2 未访问，递归调用 <code>dfs(2, 1)</code>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="DFS-2-1-：-1"><a href="#DFS-2-1-：-1" class="headerlink" title="DFS(2, 1)："></a><strong>DFS(2, 1)：</strong></h4><ul>
+<li><p>标记节点 2 已访问：<code>visited = [false, true, true, false]</code></p>
+</li>
+<li><p>遍历节点 2 的邻居 1：</p>
+<ul>
+<li>1 是父节点，跳过。</li>
+</ul>
+</li>
+<li><p>返回到 <code>dfs(1, 0)</code>，继续遍历邻居 3：</p>
+<ul>
+<li>由于 3 未访问，递归调用 <code>dfs(3, 1)</code>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="DFS-3-1-："><a href="#DFS-3-1-：" class="headerlink" title="DFS(3, 1)："></a><strong>DFS(3, 1)：</strong></h4><ul>
+<li>标记节点 3 已访问：<code>visited = [false, true, true, true]</code></li>
+<li>遍历节点 3 的邻居 1：<ul>
+<li>1 是父节点，跳过。</li>
+</ul>
+</li>
+</ul>
+<p><strong>结果：</strong>未发现环，继续处理下一条边。</p>
+<hr>
+<h3 id="第三轮遍历：处理边-2-3"><a href="#第三轮遍历：处理边-2-3" class="headerlink" title="第三轮遍历：处理边 [2, 3]"></a><strong>第三轮遍历：处理边 [2, 3]</strong></h3><ol>
+<li><strong>将边 [2, 3]</strong> 添加到邻接表中：<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">to = <span class="hljs-string">[[], [2, 3], [1, 3], [1, 2]]</span><br></code></pre></td></tr></table></figure></li>
+<li>重置 <code>visited = [false, false, false, false]</code>。</li>
+<li>调用 <code>dfs(1, 0)</code>。</li>
+</ol>
+<h4 id="DFS-1-0-：-2"><a href="#DFS-1-0-：-2" class="headerlink" title="DFS(1, 0)："></a><strong>DFS(1, 0)：</strong></h4><ul>
+<li>标记节点 1 已访问：<code>visited = [false, true, false, false]</code></li>
+<li>遍历节点 1 的邻居 2：<ul>
+<li>由于 2 未访问，递归调用 <code>dfs(2, 1)</code>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="DFS-2-1-：-2"><a href="#DFS-2-1-：-2" class="headerlink" title="DFS(2, 1)："></a><strong>DFS(2, 1)：</strong></h4><ul>
+<li>标记节点 2 已访问：<code>visited = [false, true, true, false]</code></li>
+<li>遍历节点 2 的邻居 1：<ul>
+<li>1 是父节点，跳过。</li>
+</ul>
+</li>
+<li>遍历节点 2 的邻居 3：<ul>
+<li>由于 3 未访问，递归调用 <code>dfs(3, 2)</code>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="DFS-3-2-："><a href="#DFS-3-2-：" class="headerlink" title="DFS(3, 2)："></a><strong>DFS(3, 2)：</strong></h4><ul>
+<li>标记节点 3 已访问：<code>visited = [false, true, true, true]</code></li>
+<li>遍历节点 3 的邻居 1：<ul>
+<li>1 已访问，并且不是父节点，说明检测到环！</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="返回结果："><a href="#返回结果：" class="headerlink" title="返回结果："></a><strong>返回结果：</strong></h3><ul>
+<li>在处理边 <code>[2, 3]</code> 时检测到环，因此返回 <code>[2, 3]</code> 作为答案。</li>
+</ul>
+<hr>
+<h3 id="代码中-fill-的作用："><a href="#代码中-fill-的作用：" class="headerlink" title="代码中 fill() 的作用："></a><strong>代码中 <code>fill()</code> 的作用：</strong></h3><ul>
+<li><strong>在每轮遍历中，重置 <code>visited</code> 数组</strong>是为了确保每次 <code>dfs()</code> 调用时，所有节点都被标记为<strong>未访问</strong>。</li>
+<li>在这个例子中，由于每次从节点 1 开始 <strong>DFS</strong>，且图是连通的，**实际上可以省略 <code>fill()</code>**，但保留 <code>fill()</code> 可以让代码更加稳健，以防未来有其他情况需要重新初始化访问状态。</li>
+</ul>
+<hr>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h3><ol>
+<li><strong>模拟过程结果：</strong> 在第三轮处理边 <code>[2, 3]</code> 时，检测到环并返回 <code>[2, 3]</code> 作为答案。</li>
+<li><strong><code>fill()</code> 是否有用：</strong> 在这个例子中，由于每次从相同起点开始遍历，<code>fill()</code> 可以省略。但是，如果图不保证连通，或者需要从不同的节点开始遍历，那么 <code>fill()</code> 是必要的。</li>
+<li><strong>代码优化：</strong> 如果确定每次都从相同节点开始并且图是连通的，可以去掉 <code>fill()</code>。否则，保留 <code>fill()</code> 能保证代码的健壮性。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">canFinish</span><span class="hljs-params">(<span class="hljs-type">int</span> numCourses, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; prerequisites)</span> </span>&#123;<br>        <span class="hljs-comment">// 初始化邻接表和入度数组</span><br>        to = vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;(numCourses, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;());  <span class="hljs-comment">// 邻接表</span><br>        inDeg = <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(numCourses, <span class="hljs-number">0</span>);  <span class="hljs-comment">// 入度数组</span><br>        <span class="hljs-comment">// 构建图：为每个课程记录先修关系和入度</span><br>        <span class="hljs-keyword">for</span> (vector&lt;<span class="hljs-type">int</span>&gt;&amp; pre : prerequisites) &#123;<br>            <span class="hljs-type">int</span> ai = pre[<span class="hljs-number">0</span>];  <span class="hljs-comment">// 课程 ai</span><br>            <span class="hljs-type">int</span> bi = pre[<span class="hljs-number">1</span>];  <span class="hljs-comment">// 课程 bi，必须先学 bi 才能学 ai</span><br>            to[bi].<span class="hljs-built_in">push_back</span>(ai);  <span class="hljs-comment">// 记录 bi 指向 ai 的关系</span><br>            inDeg[ai]++;  <span class="hljs-comment">// 课程 ai 的入度加 1</span><br>        &#125;<br>        <span class="hljs-comment">// 初始化队列：将所有入度为 0 的课程入队</span><br>        queue&lt;<span class="hljs-type">int</span>&gt; q;<br>        <span class="hljs-comment">//拓扑排序第一步:从零入度点出发</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; numCourses; ++i) &#123;<br>            <span class="hljs-keyword">if</span> (inDeg[i] == <span class="hljs-number">0</span>) q.<span class="hljs-built_in">push</span>(i);  <span class="hljs-comment">// 没有先修课的课程</span><br>        &#125;<br>        vector&lt;<span class="hljs-type">int</span>&gt; lessons;  <span class="hljs-comment">// 存储已完成的课程顺序</span><br>        <span class="hljs-comment">// 执行拓扑排序</span><br>        <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>            <span class="hljs-type">int</span> x = q.<span class="hljs-built_in">front</span>();  <span class="hljs-comment">// 取出队首课程</span><br>            q.<span class="hljs-built_in">pop</span>();  <span class="hljs-comment">// 移除队首课程</span><br>            lessons.<span class="hljs-built_in">push_back</span>(x);  <span class="hljs-comment">// 记录该课程已完成</span><br>            <span class="hljs-comment">//第二步:扩展一个点，周围的点入度减一</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> y : to[x]) &#123;<br>                inDeg[y]--;  <span class="hljs-comment">// 该课程的入度减 1</span><br>                <span class="hljs-comment">//第三步:入度减为0，表示可以入队了</span><br>                <span class="hljs-keyword">if</span> (inDeg[y] == <span class="hljs-number">0</span>) q.<span class="hljs-built_in">push</span>(y);  <span class="hljs-comment">// 入度为 0 的课程入队</span><br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 如果所有课程都能完成，则返回 true</span><br>        <span class="hljs-keyword">return</span> lessons.<span class="hljs-built_in">size</span>() == numCourses;<br>    &#125;<br><br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; to;  <span class="hljs-comment">// 邻接表</span><br>    vector&lt;<span class="hljs-type">int</span>&gt; inDeg;  <span class="hljs-comment">// 入度数组</span><br>&#125;;<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="模拟执行过程："><a href="#模拟执行过程：" class="headerlink" title="模拟执行过程："></a><strong>模拟执行过程：</strong></h2><h3 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h3><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">lua复制代码numCourses = 4<br>prerequisites = <span class="hljs-comment">[<span class="hljs-comment">[1, 0]</span>, <span class="hljs-comment">[2, 0]</span>, <span class="hljs-comment">[3, 1]</span>, <span class="hljs-comment">[3, 2]</span>]</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>图的结构：</strong></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">rust</span>复制代码    <span class="hljs-number">0</span> --&gt; <span class="hljs-number">1</span> --&gt; <span class="hljs-number">3</span><br>    <span class="hljs-attribute">0</span> --&gt; <span class="hljs-number">2</span> --&gt; <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="执行过程："><a href="#执行过程：" class="headerlink" title="执行过程："></a><strong>执行过程：</strong></h3><ol>
+<li><p><strong>构建邻接表和入度数组：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">lua复制代码邻接表 to:   <span class="hljs-comment">[<span class="hljs-comment">[1, 2]</span>, <span class="hljs-comment">[3]</span>, <span class="hljs-comment">[3]</span>, <span class="hljs-comment">[]</span>]</span><br>入度数组 inDeg: <span class="hljs-comment">[0, 1, 1, 2]</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>初始化队列：</strong></p>
+<ul>
+<li>入度为 0 的课程为 <code>0</code>，所以队列初始化为：<code>q = [0]</code>。</li>
+</ul>
+</li>
+<li><p><strong>执行拓扑排序：</strong></p>
+<ul>
+<li><p><strong>取出 0</strong>：<code>lessons = [0]</code></p>
+<ul>
+<li><p>课程 1 和 2 的入度减少：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">css<br><br><br>复制代码<br>inDeg = <span class="hljs-string">[0, 0, 0, 2]</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>课程 1 和 2 入队：<code>q = [1, 2]</code></p>
+</li>
+</ul>
+</li>
+<li><p><strong>取出 1</strong>：<code>lessons = [0, 1]</code></p>
+<ul>
+<li><p>课程 3 的入度减少：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">css<br><br><br>复制代码<br>inDeg = <span class="hljs-string">[0, 0, 0, 1]</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>取出 2</strong>：<code>lessons = [0, 1, 2]</code></p>
+<ul>
+<li><p>课程 3 的入度减少：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">css<br><br><br>复制代码<br>inDeg = <span class="hljs-string">[0, 0, 0, 0]</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>课程 3 入队：<code>q = [3]</code></p>
+</li>
+</ul>
+</li>
+<li><p><strong>取出 3</strong>：<code>lessons = [0, 1, 2, 3]</code></p>
+</li>
+</ul>
+</li>
+<li><p><strong>检查结果：</strong></p>
+<ul>
+<li>已完成课程数量为 4，等于课程总数，返回 <code>true</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="环检测："><a href="#环检测：" class="headerlink" title="环检测："></a><strong>环检测</strong>：</h3><p>环检测是一个典型的图论问题，通常使用 DFS 来实现。</p>
 <h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a><strong>思路</strong>：</h4><ul>
 <li><strong>DFS 实现环检测</strong>：<ul>
 <li>在进行 DFS 时，如果当前节点已经被访问过且是祖先节点，则说明存在环。</li>
@@ -1526,7 +1753,7 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 <h4 id="代码实现：-3"><a href="#代码实现：-3" class="headerlink" title="代码实现："></a><strong>代码实现</strong>：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">public</span> boolean <span class="hljs-title">canFinish</span><span class="hljs-params">(<span class="hljs-type">int</span> numCourses, vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;&amp; prerequisites)</span> </span>&#123;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">graph</span>(numCourses);<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">inDegree</span><span class="hljs-params">(numCourses, <span class="hljs-number">0</span>)</span></span>;<br>    <br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; pre : prerequisites) &#123;<br>        graph[pre[<span class="hljs-number">1</span>]].<span class="hljs-built_in">push_back</span>(pre[<span class="hljs-number">0</span>]);<br>        inDegree[pre[<span class="hljs-number">0</span>]]++;<br>    &#125;<br>    <br>    queue&lt;<span class="hljs-type">int</span>&gt; q;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; numCourses; i++) &#123;<br>        <span class="hljs-keyword">if</span> (inDegree[i] == <span class="hljs-number">0</span>) q.<span class="hljs-built_in">push</span>(i);  <span class="hljs-comment">// 入度为0的课程可以先学习</span><br>    &#125;<br>    <br>    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;<br>        <span class="hljs-type">int</span> curr = q.<span class="hljs-built_in">front</span>();<br>        q.<span class="hljs-built_in">pop</span>();<br>        count++;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> neighbor : graph[curr]) &#123;<br>            inDegree[neighbor]--;<br>            <span class="hljs-keyword">if</span> (inDegree[neighbor] == <span class="hljs-number">0</span>) q.<span class="hljs-built_in">push</span>(neighbor);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> count == numCourses;  <span class="hljs-comment">// 如果学习的课程数等于课程总数，则可以完成所有课程</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>图的表示方式</strong>：通过邻接矩阵、邻接表或链式前向星表示图结构，适应不同的场景和空间复杂度要求。</li>
 <li><strong>图的遍历</strong>：DFS 和 BFS 是图的两种基本遍历方式，DFS 常用于连通分量、环检测，BFS 常用于最短路径和拓扑排序。</li>
 <li><strong>拓扑排序</strong>：基于入度的 BFS 是一种高效的拓扑排序方法，广泛应用于课程安排、任务调度等场景。</li>
@@ -1534,20 +1761,23 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 </ul>
 <hr>
 <h1 id="十二-搜索"><a href="#十二-搜索" class="headerlink" title="十二.搜索"></a>十二.搜索</h1><h3 id="1-状态与状态空间搜索："><a href="#1-状态与状态空间搜索：" class="headerlink" title="1. 状态与状态空间搜索："></a><strong>1. 状态与状态空间搜索</strong>：</h3><ul>
-<li><p><strong>状态</strong>：状态表示问题的每一个可能的配置。状态可以看作图中的一个顶点，状态的转移则对应图中的边。状态空间的搜索通常用于解决某些搜索问题，如寻找最优解、遍历所有可能的解等。</p>
+<li><p><strong>状态</strong>：</p>
+</li>
+<li><p>什么是状态?<br>题面中涉及的所有数学信息<br>你在纸上人力计算时，关注的所有数据<br>一个函数访问的所有变量<br>例如最简单的计票问题<br>给n个名字，统计每个名字出现了多少次<br>你在纸上画“正”字统计的时候，关注了哪些数据?<br>名字(n个字符串)<br>统计到哪个名字了(第1≤i≤n个名字)<br>画的“正”字(一个用于计数的数据结构，例如 Hash Map</p>
+</li>
+<li><p>就是程序维护的所有动态数据构成的集合</p>
+</li>
+<li><p>所有可能状态构成的集合就是一个问题的状态空间<br>把状态作为点，如果从一个状态可以到达另一个状态，就连一条边这样就把整个状态空间抽象为了一张有向图<br>对问题的求解，就是对这张图的遍历<br>计票问题的状态空间由n个状态组成<br>可以看作一张n个点，n-1条边的有向图<br>整张图是一条链，自然就可以用一维循环解决了</p>
 </li>
 <li><p><strong>搜索算法</strong>：</p>
 <ul>
 <li><strong>深度优先搜索（DFS）</strong>：优先探索当前路径，深入到不能继续为止，再进行回溯。适用于需要遍历整棵搜索树或图的场景。</li>
 <li><strong>广度优先搜索（BFS）</strong>：按照层次逐步扩展所有状态，适用于最短路径等需要找到最早解的场景。</li>
+<li>一般来说，每个状态只遍历一次所以当状态空间是“图”而不是“树”时，要判重(记忆化)</li>
 </ul>
 </li>
 </ul>
-<h4 id="状态搜索的步骤："><a href="#状态搜索的步骤：" class="headerlink" title="状态搜索的步骤："></a><strong>状态搜索的步骤</strong>：</h4><ul>
-<li><strong>确定初始状态</strong>：选择问题的起始状态，通常是一个明确的初始条件。</li>
-<li><strong>确定状态转移</strong>：定义状态如何从一个状态转移到下一个状态，类似于图中的边。</li>
-<li><strong>搜索终止条件</strong>：根据问题的性质，设置搜索的结束条件。</li>
-</ul>
+<h4 id="状态搜索的步骤："><a href="#状态搜索的步骤：" class="headerlink" title="状态搜索的步骤："></a><strong>状态搜索的步骤</strong>：</h4><p>搜索题的解题步骤<br>1.纸上模拟，提取信息<br>2.定义状态<br>3.确定遍历顺序(DFS、BFS)<br>4.定义搜索框架<br>    如果是DFS，状态作为参数，确定递归边界，注意还原现场<br>    如果是BFS，状态用队列保存<br>    考虑是否需要判重<br>5.程序实现</p>
 <h4 id="DFS-和-BFS-的比较："><a href="#DFS-和-BFS-的比较：" class="headerlink" title="DFS 和 BFS 的比较："></a><strong>DFS 和 BFS 的比较</strong>：</h4><ul>
 <li><strong>DFS</strong>：在找到目标解之前，会不断深入搜索某条路径。适用于找到所有解，或不关心最优解的场景。</li>
 <li><strong>BFS</strong>：逐层扩展搜索，通常用于寻找最优解或最短路径。</li>
@@ -1583,7 +1813,7 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 </ul>
 <h4 id="记忆化搜索："><a href="#记忆化搜索：" class="headerlink" title="记忆化搜索："></a><strong>记忆化搜索</strong>：</h4><p>将已经计算过的状态及其结果进行缓存，避免在递归过程中重复计算。电话号码字母组合问题通过字典存储每个数字与字母的映射，就是一种简化的记忆化优化。</p>
 <hr>
-<h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>状态空间搜索</strong>是一种广泛应用于图遍历和组合问题的技术，主要通过 DFS 和 BFS 实现。对于复杂问题，合理地定义状态和状态转移是关键。</li>
 <li><strong>电话号码的字母组合问题</strong>是一个经典的状态搜索问题，通过 DFS 实现可以生成所有可能的组合，借助哈希表存储映射关系提高搜索效率。</li>
 <li><strong>递归和剪枝</strong>：在搜索过程中，使用递归和剪枝可以有效减少不必要的计算，提升算法性能。</li>
@@ -1635,7 +1865,7 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 </li>
 </ul>
 <hr>
-<h3 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-3"><a href="#总结：-3" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>基因突变问题</strong>通过 BFS 解决，是一个经典的层次遍历问题。BFS 可以保证找到的路径是最短的，适合解决此类寻找最小步数的问题。</li>
 <li><strong>DFS 和 BFS 的适用场景不同</strong>，DFS 更适合于需要遍历所有解的场景，而 BFS 则适合用于最短路径类问题。这两种搜索方法在不同的应用场景下各有优势。</li>
 </ul>
@@ -1674,7 +1904,7 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 <h4 id="代码实现：-6"><a href="#代码实现：-6" class="headerlink" title="代码实现："></a><strong>代码实现</strong>：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> left = <span class="hljs-number">0</span>, right = n;<br><span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>    <span class="hljs-type">int</span> mid = (left + right) / <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> (array[mid] &gt;= <span class="hljs-number">26</span>)<br>        right = mid;<br>    <span class="hljs-keyword">else</span><br>        left = mid + <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-keyword">return</span> right;  <span class="hljs-comment">// 返回第一个大于等于 26 的位置</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="总结：-3"><a href="#总结：-3" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-4"><a href="#总结：-4" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>二分查找</strong>是一种非常高效的查找算法，尤其适用于在有序数组或单调函数中查找目标值或边界值。</li>
 <li>通过变形的二分查找，可以解决查找左边界、右边界、统计重复元素出现次数等问题。</li>
 <li>实现二分查找时要注意终止条件和边界处理，确保不会出现死循环或越界问题。</li>
@@ -1693,7 +1923,7 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 
 <h4 id="实数平方根"><a href="#实数平方根" class="headerlink" title="实数平方根"></a>实数平方根</h4><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-built_in">double</span> myRealSqrt(<span class="hljs-built_in">double</span> x) &#123;<br>    <span class="hljs-built_in">double</span> <span class="hljs-built_in">left</span> = <span class="hljs-number">0</span>, <span class="hljs-built_in">right</span> = x;<br>    while (<span class="hljs-built_in">right</span> - <span class="hljs-built_in">left</span> &gt; <span class="hljs-number">1e-7</span>) &#123;<br>        <span class="hljs-built_in">double</span> mid = (<span class="hljs-built_in">left</span> + <span class="hljs-built_in">right</span>) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> (mid * mid &lt;= x) &#123;<br>            <span class="hljs-built_in">left</span> = mid;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-built_in">right</span> = mid;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">right</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="总结：-4"><a href="#总结：-4" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-5"><a href="#总结：-5" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>二分查找</strong>不仅能解决简单的查找问题，还能通过调整条件找到数组中目标值的边界位置，适用于有序数组的场景。</li>
 <li><strong>平方根问题</strong>可以通过二分查找求解，不论是整数平方根还是精确平方根，通过调整精度可以得到不同的结果。</li>
 </ul>
@@ -1735,7 +1965,7 @@ for (int i = n - 1; i &gt;= 0; i--) &#123;
 <li><strong>判定函数</strong>：通过不断尝试不同的 <code>mid</code> 值（即可能的最大子数组和），判断是否能够在不超过 <code>m</code> 次划分的前提下，将数组划分为子数组。</li>
 </ul>
 <hr>
-<h3 id="总结：-5"><a href="#总结：-5" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
+<h3 id="总结：-6"><a href="#总结：-6" class="headerlink" title="总结："></a><strong>总结</strong>：</h3><ul>
 <li><strong>三分查找</strong>适用于处理单峰性问题，尤其是在寻找极值点时，能够有效缩小区间。</li>
 <li><strong>分割数组问题</strong>使用二分查找来确定最大子数组和的最小值，通过判定函数来检查当前划分是否满足条件。这种思路在需要均匀分配任务或资源时非常常用。</li>
 </ul>
