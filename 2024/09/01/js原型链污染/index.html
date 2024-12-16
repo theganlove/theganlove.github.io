@@ -1,0 +1,813 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="uert">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="JS基础数据类型： 基本数据类型: String Number Boolean Null Undefined Symbol   引用类型: Object Array Function    变量定义: 变量定义的例子： 1234var car &#x3D; &#x27;A&#x27;; &#x2F;&#x2F; 定义字符串var car &#x3D; &#x27;B&#x27;; &#x2F;&#x2F; 另一个字符串var x &#x3D; 3.0;   &#x2F;&#x2F; 定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js原型链污染">
+<meta property="og:url" content="https://theganlove.github.io/2024/09/01/js%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JS基础数据类型： 基本数据类型: String Number Boolean Null Undefined Symbol   引用类型: Object Array Function    变量定义: 变量定义的例子： 1234var car &#x3D; &#x27;A&#x27;; &#x2F;&#x2F; 定义字符串var car &#x3D; &#x27;B&#x27;; &#x2F;&#x2F; 另一个字符串var x &#x3D; 3.0;   &#x2F;&#x2F; 定">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-01T12:48:22.000Z">
+<meta property="article:modified_time" content="2024-09-08T13:46:45.616Z">
+<meta property="article:author" content="uert">
+<meta property="article:tag" content="web js">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>js原型链污染 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"theganlove.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>主题</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="js原型链污染"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-01 20:48" pubdate>
+          2024年9月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">js原型链污染</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="JS基础数据类型："><a href="#JS基础数据类型：" class="headerlink" title="JS基础数据类型："></a>JS基础数据类型：</h3><ol>
+<li><strong>基本数据类型</strong>:<ul>
+<li><code>String</code></li>
+<li><code>Number</code></li>
+<li><code>Boolean</code></li>
+<li><code>Null</code></li>
+<li><code>Undefined</code></li>
+<li><code>Symbol</code></li>
+</ul>
+</li>
+<li><strong>引用类型</strong>:<ul>
+<li><code>Object</code></li>
+<li><code>Array</code></li>
+<li><code>Function</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义:"></a>变量定义:</h3><ul>
+<li><p><strong>变量定义的例子</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> car = <span class="hljs-string">&#x27;A&#x27;</span>; <span class="hljs-comment">// 定义字符串</span><br><span class="hljs-keyword">var</span> car = <span class="hljs-string">&#x27;B&#x27;</span>; <span class="hljs-comment">// 另一个字符串</span><br><span class="hljs-keyword">var</span> x = <span class="hljs-number">3.0</span>;   <span class="hljs-comment">// 定义数字</span><br><span class="hljs-keyword">var</span> is = <span class="hljs-literal">true</span>; <span class="hljs-comment">// 定义布尔值</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>数组定义</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> cars = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>();<br>cars[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;A&quot;</span>; <span class="hljs-comment">// 直接赋值</span><br><br><span class="hljs-keyword">var</span> cars = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>); <span class="hljs-comment">// 使用Array构造函数定义</span><br><br><span class="hljs-keyword">var</span> cars = [<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>]; <span class="hljs-comment">// 使用字面量定义数组</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="对象定义："><a href="#对象定义：" class="headerlink" title="对象定义："></a>对象定义：</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> person = &#123;<span class="hljs-attr">first</span>: <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-attr">last</span>: <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-attr">score</span>: <span class="hljs-string">&quot;C&quot;</span>&#125;; <span class="hljs-comment">// 定义对象</span><br></code></pre></td></tr></table></figure>
+<p>通过对象进行属性访问:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js">name = person.<span class="hljs-property">first</span>; <span class="hljs-comment">// 访问对象的属性</span><br>name = person[<span class="hljs-string">&quot;first&quot;</span>]; <span class="hljs-comment">// 另一种方式访问 (类似 Python)</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="函数定义："><a href="#函数定义：" class="headerlink" title="函数定义："></a>函数定义：</h3><ul>
+<li><p><strong>传统函数定义</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">xx</span>(<span class="hljs-params">a, c</span>) &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>匿名函数赋值</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> xx = <span class="hljs-keyword">function</span>(<span class="hljs-params">a, c</span>) &#123;<br>&#125;;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>箭头函数</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> <span class="hljs-title function_">xx</span> = (<span class="hljs-params">a, c</span>) =&gt; &#123;&#125;;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="加法操作符的使用："><a href="#加法操作符的使用：" class="headerlink" title="加法操作符的使用："></a>加法操作符的使用：</h3><p>除了number+number和bool和bool其余返回string</p>
+<ul>
+<li><p><strong>数字与字符串的拼接</strong>：</p>
+<ul>
+<li>数字加数字：<code>1 + 1 = 2</code></li>
+<li>字符串加字符串：<code>&quot;abc&quot; + &quot;def&quot; = &quot;abcdef&quot;</code></li>
+<li>字符串加数字：<code>&quot;abc&quot; + 1 = &quot;abc1&quot;</code></li>
+<li>字符串加对象:     “uert”+{person:’abc’}&#x3D;uert{person:’abc’}</li>
+<li>对象加对象：<code>[Object Object]</code> 拼接结果</li>
+<li>字符串加数组: “uert”+[“abc”,”efg”]&#x3D;”uertabc”,”efg”</li>
+<li>字符串加null: “uert”+null&#x3D; “uertnull”  同理true和false</li>
+</ul>
+<p> Python 里面不能像 JS 这样混合不同类型的数据来做拼接，但 JS 是可以的。</p>
+</li>
+<li><p><strong>其他运算符</strong>:</p>
+<ul>
+<li>fuc+fuc&#x3D;”(a,b)&#x3D;&gt;{return(a+b)}(a,b)&#x3D;&gt;{return(a+b)}”</li>
+<li>arr+arr&#x3D;”abc,efgabc,abc”</li>
+<li>arr+true&#x3D; “abc,deftrue”</li>
+</ul>
+</li>
+</ul>
+<h3 id="非字符串与非字符串的操作："><a href="#非字符串与非字符串的操作：" class="headerlink" title="非字符串与非字符串的操作："></a>非字符串与非字符串的操作：</h3><ul>
+<li><code>true + true = 2</code></li>
+<li><code>false + false = 0</code></li>
+</ul>
+<h3 id="函数的简写："><a href="#函数的简写：" class="headerlink" title="函数的简写："></a>函数的简写：</h3><ul>
+<li>使用箭头函数：<code>(a, b) =&gt; &#123;return (a + b)&#125;</code> 和 <code>arr + true = abc.deftrue</code>。</li>
+</ul>
+<h3 id="长度属性："><a href="#长度属性：" class="headerlink" title="长度属性："></a>长度属性：</h3><ul>
+<li><p><strong>String 的长度</strong>:</p>
+<ul>
+<li><code>string.length</code> 返回字符串的字符数。</li>
+</ul>
+</li>
+<li><p><strong>Array 的长度</strong>:</p>
+<ul>
+<li><code>Array.length</code> 返回数组的元素个数。</li>
+</ul>
+</li>
+<li><p>还提到 <code>number 没有 length</code> 属性。</p>
+</li>
+</ul>
+<h3 id="JSON-解析："><a href="#JSON-解析：" class="headerlink" title="JSON 解析："></a>JSON 解析：</h3><ul>
+<li>使用 <code>JSON.parse()</code> 可以将 JSON 字符串转化为对象。</li>
+<li>注意到你提到 <code>JSON.parse(null)</code> 会返回 <code>null</code>。</li>
+</ul>
+<h3 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h3><ul>
+<li>使用 <code>in</code> 可以遍历对象的属性。</li>
+<li>在最右侧提到 <code>这里指的是数字</code>。</li>
+</ul>
+<h1 id="js-trick"><a href="#js-trick" class="headerlink" title="js   trick"></a>js   trick</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">NaN==NaN</span><br>&lt;false<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">NaN==NaN</span><br>&lt;false<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash"><span class="hljs-literal">false</span>==<span class="hljs-string">&#x27;0&#x27;</span></span><br>&lt;ture<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">0==<span class="hljs-string">&#x27;0&#x27;</span></span><br>&lt;true<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">0==<span class="hljs-literal">false</span></span><br>&lt;true<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">1e-1234 //整数的负大数次方为0</span><br>&lt;0<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">-1e-1234 //负数的负大数次方为-0</span><br>&lt;-0<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">0===-0</span><br>&lt;true<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">1337/0</span><br>&lt;无穷<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">1337/-0</span><br>&lt;负无穷<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">负无穷==正无穷</span><br>&lt;false<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">e=-1</span><br>&lt;-1<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">!e++</span><br>&lt;false<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">!e--</span><br>&lt;true<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">!<span class="hljs-string">&#x27;0&#x27;</span>  //例子 f==!f  f是<span class="hljs-string">&quot;0&quot;</span>就行</span><br>&lt;false<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">!<span class="hljs-string">&#x27;&#x27;</span></span>   <br>&lt;true<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">a=[<span class="hljs-string">&quot;name&quot;</span>:<span class="hljs-string">&quot;hello&quot;</span>]</span><br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">a[<span class="hljs-string">&quot;name&quot;</span>]</span><br>&lt;&#x27;hello&#x27;<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">a[[<span class="hljs-string">&quot;name&quot;</span>]]</span><br>&lt;&#x27;hello&#x27;<br></code></pre></td></tr></table></figure>
+
+<h1 id="类型污染"><a href="#类型污染" class="headerlink" title="类型污染"></a>类型污染</h1><p>first !&#x3D;&#x3D; second &amp;&amp; shal(salt + frist) &#x3D;&#x3D;&#x3D; shal(salt + second)</p>
+<p>POST : {“frist” : “A” “second”: [“A”]}</p>
+<h1 id="原型链污染"><a href="#原型链污染" class="headerlink" title="原型链污染"></a>原型链污染</h1><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">Function</span> <span class="hljs-title function_">Foo</span>(<span class="hljs-params"></span>) &#123;...&#125;;<br>let f1 = <span class="hljs-keyword">new</span> Foo();<br>解释：<br>每个函数都有一个 prototype 属性，指向一个对象，这个对象包含该构造函数所有实例共享的方法和属性。<br>每个对象有一个 __proto__ 属性，指向创建该对象的构造函数的 prototype。<br>let foo = &#123;<span class="hljs-attr">bar</span>:<span class="hljs-number">1</span>&#125;;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(foo.bar); <span class="hljs-comment">//1</span><br>foo.__proto__.bar=<span class="hljs-number">2</span>; <span class="hljs-comment">//把foo的原型object</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(foo.bar); <span class="hljs-comment">//还是1</span><br>let zoo=&#123;&#125;;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(zoo.bar); <span class="hljs-comment">//结果是&#123;&#125;而不是2</span><br>我.uert=张三<br>除非我里面没有张三,才是张铁柱<br>该爹法<br>val.__proto__.isAdmin = <span class="hljs-literal">true</span><br>换爹法<br>val.__proto__=&#123;<span class="hljs-string">&#x27;isAdmin&#x27;</span>:<span class="hljs-literal">true</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>举例说明：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span>(<span class="hljs-params">name</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;<br>&#125;<br><span class="hljs-title class_">Person</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">sayHello</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Hello, &quot;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>);<br>&#125;;<br><br><span class="hljs-keyword">let</span> john = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>(<span class="hljs-string">&quot;John&quot;</span>);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(john.<span class="hljs-property">__proto__</span> === <span class="hljs-title class_">Person</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>); <span class="hljs-comment">// true</span><br>john.<span class="hljs-title function_">sayHello</span>(); <span class="hljs-comment">// &quot;Hello, John&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>在这个例子中：</p>
+<ul>
+<li><code>john</code> 是通过 <code>new Person()</code> 创建的对象。</li>
+<li><code>john.__proto__</code> 指向 <code>Person.prototype</code>，它包含 <code>sayHello</code> 方法。</li>
+<li>当你调用 <code>john.sayHello()</code> 时，JavaScript 引擎会沿着 <code>__proto__</code> 查找这个方法，最终在 <code>Person.prototype</code> 上找到并执行。</li>
+</ul>
+<h1 id="原型链图解"><a href="#原型链图解" class="headerlink" title="原型链图解"></a>原型链图解</h1><h3 id="JavaScript-原型链的核心概念："><a href="#JavaScript-原型链的核心概念：" class="headerlink" title="JavaScript 原型链的核心概念："></a>JavaScript 原型链的核心概念：</h3><ol>
+<li><strong>每个对象都有一个隐式原型（<code>__proto__</code>）</strong>：<ul>
+<li>当你创建一个对象时，该对象会有一个隐式原型指向它的构造函数的 <code>prototype</code> 属性。</li>
+</ul>
+</li>
+<li><strong>构造函数与 <code>prototype</code> 属性</strong>：<ul>
+<li>每个函数都有一个显式原型属性（<code>prototype</code>），这个属性指向通过这个构造函数创建的实例对象的原型。</li>
+</ul>
+</li>
+<li>**对象的 <code>__proto__</code> 指向构造函数的 <code>prototype</code>**：<ul>
+<li>例如，<code>let obj = new Foo();</code> 中，<code>obj.__proto__ === Foo.prototype</code>。即 <code>obj</code> 的原型指向了 <code>Foo</code> 构造函数的 <code>prototype</code>。</li>
+</ul>
+</li>
+<li><strong>构造函数本身也是对象</strong>：<ul>
+<li>所以构造函数 <code>Foo</code> 也是由 <code>Function</code> 构造出来的，它有一个 <code>__proto__</code>，指向 <code>Function.prototype</code>。</li>
+</ul>
+</li>
+<li>**终点是 <code>null</code>**：<ul>
+<li>原型链的终点是 <code>null</code>，即 <code>Object.prototype.__proto__ === null</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="更详细的图形说明："><a href="#更详细的图形说明：" class="headerlink" title="更详细的图形说明："></a>更详细的图形说明：</h3><ul>
+<li><strong>Foo 对象实例</strong>：<ul>
+<li><code>foo.__proto__ -&gt; Foo.prototype</code></li>
+</ul>
+</li>
+<li><strong>Foo 构造函数</strong>：<ul>
+<li><code>Foo.__proto__ -&gt; Function.prototype</code></li>
+</ul>
+</li>
+<li><strong>Function 构造函数</strong>：<ul>
+<li><code>Function.__proto__ -&gt; Function.prototype</code></li>
+<li><code>Function.prototype.__proto__ -&gt; Object.prototype</code></li>
+</ul>
+</li>
+<li><strong>Object 构造函数</strong>：<ul>
+<li><code>Object.__proto__ -&gt; Function.prototype</code></li>
+<li><code>Object.prototype.__proto__ -&gt; null</code></li>
+</ul>
+</li>
+</ul>
+<p>这个层次结构可以这样看：</p>
+<ul>
+<li><strong>Foo 的实例</strong>：继承自 <code>Foo.prototype</code></li>
+<li><strong>Foo.prototype</strong>：继承自 <code>Object.prototype</code></li>
+<li><strong>Foo（构造函数本身）</strong>：继承自 <code>Function.prototype</code></li>
+<li><strong>Function.prototype</strong>：继承自 <code>Object.prototype</code></li>
+<li><strong>Object.prototype</strong>：继承自 <code>null</code>，原型链结束。</li>
+</ul>
+<h1 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-number">1.</span>obj1[xx]= obj2[yy] 换爹    注释: 这种写法是一种动态属性赋值方式。它的意思是，将 obj2 对象中键为 yy 的值赋给 obj1 对象中键为 xx 的属性。<br><br><span class="hljs-keyword">let</span> obj1 = &#123;&#125;;<br><span class="hljs-keyword">let</span> obj2 = &#123;<br>  <span class="hljs-attr">key1</span>: &#123; <span class="hljs-attr">isAdmin</span>: <span class="hljs-literal">true</span> &#125;,<br>  <span class="hljs-attr">key2</span>: <span class="hljs-string">&quot;value2&quot;</span><br>&#125;;<br><br><span class="hljs-comment">// 动态赋值的变量</span><br><span class="hljs-keyword">let</span> xx = <span class="hljs-string">&quot;__proto__&quot;</span>; <span class="hljs-comment">// 设置为 &quot;__proto__&quot; 来修改原型链</span><br><span class="hljs-keyword">let</span> yy = <span class="hljs-string">&quot;key1&quot;</span>; <span class="hljs-comment">// 从 obj2 中获取键为 key1 的值</span><br><br><span class="hljs-comment">// 通过原型链污染将 obj2[key1] 的值赋给 obj1.__proto__</span><br>obj1[xx] = obj2[yy];<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj1.<span class="hljs-property">isAdmin</span>); <span class="hljs-comment">// true, 通过原型链污染，obj1 获得了 isAdmin 属性</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(&#123;&#125;.<span class="hljs-property">isAdmin</span>); <span class="hljs-comment">// true, 所有对象都被污染了</span><br><br><br><span class="hljs-number">2.</span>obj[xx][yy]=zz 改爹**   在 obj[xx] 返回的结果（假设是一个对象）上，再通过 yy 动态访问其属性。<br><span class="hljs-comment">// 定义一个空对象 obj</span><br><span class="hljs-keyword">let</span> obj = &#123;&#125;;<br><br><span class="hljs-comment">// 设置动态变量</span><br><span class="hljs-keyword">let</span> xx = <span class="hljs-string">&quot;__proto__&quot;</span>;  <span class="hljs-comment">// 用来修改对象的原型链</span><br><span class="hljs-keyword">let</span> yy = <span class="hljs-string">&quot;isAdmin&quot;</span>;    <span class="hljs-comment">// 我们要在原型链上添加的属性</span><br><span class="hljs-keyword">let</span> zz = <span class="hljs-literal">true</span>;         <span class="hljs-comment">// 要赋的值</span><br><br><span class="hljs-comment">// 使用 obj[xx][yy] = zz 改爹法修改原型链</span><br>obj[xx][yy] = zz;<br><br><span class="hljs-comment">// 现在任何通过 Object 创建的对象都继承了 isAdmin 属性</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj.<span class="hljs-property">isAdmin</span>); <span class="hljs-comment">// true</span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(&#123;&#125;.<span class="hljs-property">isAdmin</span>);  <span class="hljs-comment">// true, 所有新对象也被污染了</span><br>+<br><br><br> <span class="hljs-number">2.</span><span class="hljs-title function_">merge</span>() 函数的原型链污染<br><span class="hljs-keyword">let</span> maliciousPayload = &#123;<br>  <span class="hljs-string">&quot;__proto__&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;polluted&quot;</span>: <span class="hljs-string">&quot;malicious value&quot;</span><br>  &#125;<br>&#125;;<br><br><span class="hljs-keyword">let</span> obj = &#123;&#125;;<br><span class="hljs-title function_">merge</span>(obj, maliciousPayload);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj.<span class="hljs-property">polluted</span>);  <span class="hljs-comment">// 输出 &quot;malicious value&quot;</span><br><br><br><br><span class="hljs-number">4.</span>lodash.<span class="hljs-title function_">merge</span>() 的原型链污染<br><span class="hljs-keyword">const</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;lodash&#x27;</span>);<br><br><span class="hljs-keyword">let</span> maliciousPayload = &#123;<br>  <span class="hljs-string">&quot;__proto__&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;polluted&quot;</span>: <span class="hljs-string">&quot;malicious value&quot;</span><br>  &#125;<br>&#125;;<br><br><span class="hljs-keyword">let</span> obj = &#123;&#125;;<br>_.<span class="hljs-title function_">merge</span>(obj, maliciousPayload);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj.<span class="hljs-property">polluted</span>);  <span class="hljs-comment">// 输出 &quot;malicious value&quot;</span><br><br><br><span class="hljs-number">5.</span> <span class="hljs-title function_">set</span>() 和 <span class="hljs-title function_">update</span>()<br><span class="hljs-keyword">let</span> maliciousPayload = &#123;<br>  <span class="hljs-string">&quot;__proto__&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;polluted&quot;</span>: <span class="hljs-string">&quot;malicious value&quot;</span><br>  &#125;<br>&#125;;<br><br><span class="hljs-comment">// 假设有个深度更新的库函数 `set`</span><br><span class="hljs-title function_">set</span>(obj, <span class="hljs-string">&#x27;key&#x27;</span>, maliciousPayload);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj.<span class="hljs-property">polluted</span>);  <span class="hljs-comment">// 输出 &quot;malicious value&quot;</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p>your[req.body.key] &#x3D; req.body.value</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua">&#123;<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">&#x27;__proto__&#x27;</span>,<span class="hljs-string">&quot;value&quot;</span>:&#123;<span class="hljs-string">&quot;isAdmin&quot;</span>:<span class="hljs-number">1</span>&#125;&#125;<br>对key__proto__过滤传&#123;<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">[[&#x27;__proto__&#x27;]]</span>&#125;试试<br><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CTF-web/" class="category-chain-item">CTF-web</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/CTF-web/js/" class="category-chain-item">js</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/web-js/" class="print-no-link">#web js</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>js原型链污染</div>
+      <div>https://theganlove.github.io/2024/09/01/js原型链污染/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>uert</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/01/ssrf/" title="ssrf">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ssrf</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/01/SSTI/" title="SSTI">
+                        <span class="hidden-mobile">SSTI</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

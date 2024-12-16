@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="uert">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="PHP7.1函数相关变更list()现在支持键名现在list()和它的新的*[]*语法支持在它内部去指定键名。这意味着它可以将任意类型的数组 都赋值给一些变量（与短数组语法类似） 123456789101112131415161718192021&lt;?php$data &#x3D; [    [&quot;id&quot; &#x3D;&gt; 1, &quot;name&quot; &#x3D;&gt; &#x27;To">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP7.1特性">
+<meta property="og:url" content="https://theganlove.github.io/2024/08/31/PHP7-1%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="PHP7.1函数相关变更list()现在支持键名现在list()和它的新的*[]*语法支持在它内部去指定键名。这意味着它可以将任意类型的数组 都赋值给一些变量（与短数组语法类似） 123456789101112131415161718192021&lt;?php$data &#x3D; [    [&quot;id&quot; &#x3D;&gt; 1, &quot;name&quot; &#x3D;&gt; &#x27;To">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\a1348\Desktop\WebBook-master\WebBook-master\images\19-10-1_PHP_PHP71%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E5%8F%98%E6%9B%B4_2.png">
+<meta property="og:image" content="https://theganlove.github.io/Users/j7ur8/WebBook/BookBuild/images/19-10-2_PHP_PHP71%E8%AF%AD%E6%B3%95%E7%9B%B8%E5%85%B3%E5%8F%98%E6%9B%B4_1.png">
+<meta property="article:published_time" content="2024-08-31T05:48:49.000Z">
+<meta property="article:modified_time" content="2024-08-31T05:53:37.628Z">
+<meta property="article:author" content="uert">
+<meta property="article:tag" content="web php">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:\Users\a1348\Desktop\WebBook-master\WebBook-master\images\19-10-1_PHP_PHP71%E5%87%BD%E6%95%B0%E7%9B%B8%E5%85%B3%E5%8F%98%E6%9B%B4_2.png">
+  
+  
+  
+  <title>PHP7.1特性 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"theganlove.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>主题</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PHP7.1特性"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-31 13:48" pubdate>
+          2024年8月31日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          988 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">PHP7.1特性</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="PHP7-1函数相关变更"><a href="#PHP7-1函数相关变更" class="headerlink" title="PHP7.1函数相关变更"></a>PHP7.1函数相关变更</h1><h2 id="list-现在支持键名"><a href="#list-现在支持键名" class="headerlink" title="list()现在支持键名"></a>list()现在支持键名</h2><p>现在<code>list()</code>和它的新的*[]*语法支持在它内部去指定键名。这意味着它可以将任意类型的数组 都赋值给一些变量（与短数组语法类似）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$data</span> = [<br>    [<span class="hljs-string">&quot;id&quot;</span> =&gt; <span class="hljs-number">1</span>, <span class="hljs-string">&quot;name&quot;</span> =&gt; <span class="hljs-string">&#x27;Tom&#x27;</span>],<br>    [<span class="hljs-string">&quot;id&quot;</span> =&gt; <span class="hljs-number">2</span>, <span class="hljs-string">&quot;name&quot;</span> =&gt; <span class="hljs-string">&#x27;Fred&#x27;</span>],<br>];<br><br><span class="hljs-comment">// list() style</span><br><span class="hljs-keyword">list</span>(<span class="hljs-string">&quot;id&quot;</span> =&gt; <span class="hljs-variable">$id1</span>, <span class="hljs-string">&quot;name&quot;</span> =&gt; <span class="hljs-variable">$name1</span>) = <span class="hljs-variable">$data</span>[<span class="hljs-number">0</span>];<br><br><span class="hljs-comment">// [] style</span><br>[<span class="hljs-string">&quot;id&quot;</span> =&gt; <span class="hljs-variable">$id1</span>, <span class="hljs-string">&quot;name&quot;</span> =&gt; <span class="hljs-variable">$name1</span>] = <span class="hljs-variable">$data</span>[<span class="hljs-number">0</span>];<br><br><span class="hljs-comment">// list() style</span><br><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$data</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">list</span>(<span class="hljs-string">&quot;id&quot;</span> =&gt; <span class="hljs-variable">$id</span>, <span class="hljs-string">&quot;name&quot;</span> =&gt; <span class="hljs-variable">$name</span>)) &#123;<br>    <span class="hljs-comment">// logic here with $id and $name</span><br>&#125;<br><br><span class="hljs-comment">// [] style</span><br><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$data</span> <span class="hljs-keyword">as</span> [<span class="hljs-string">&quot;id&quot;</span> =&gt; <span class="hljs-variable">$id</span>, <span class="hljs-string">&quot;name&quot;</span> =&gt; <span class="hljs-variable">$name</span>]) &#123;<br>    <span class="hljs-comment">// logic here with $id and $name</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="禁止动态调用的函数"><a href="#禁止动态调用的函数" class="headerlink" title="禁止动态调用的函数"></a>禁止动态调用的函数</h2><p>如下：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.assert.php">assert()</a> - with a string as the first argument</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.compact.php">compact()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.extract.php">extract()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.func-get-args.php">func_get_args()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.func-get-arg.php">func_get_arg()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.func-num-args.php">func_num_args()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.get-defined-vars.php">get_defined_vars()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.mb-parse-str.php">mb_parse_str()</a> - with one arg</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.parse-str.php">parse_str()</a> - with one arg</li>
+</ul>
+<p>尾随的<code>-</code>代表禁止动态调用的条件。<code>func_get_args</code>等几个函数测试了下好像并没有禁止动态调用？不太懂。</p>
+<h2 id="unserialize"><a href="#unserialize" class="headerlink" title="unserialize"></a>unserialize</h2><p>对<code>allowed_classes</code>参数严格化，如果对其传入的值是<strong>布尔值</strong>和<strong>数组</strong>之外的内容，<code>unserialize</code>将返回<strong>False</strong>和<strong>E_WARNING</strong></p>
+<h2 id="getenv可以不需要传入参数"><a href="#getenv可以不需要传入参数" class="headerlink" title="getenv可以不需要传入参数"></a>getenv可以不需要传入参数</h2><p><code>getenv()</code> 可以不传入任何参数。 如果不传入参数，此函数会以关联数组的形式 返回所有的环境变量。</p>
+<p><img src="C:\Users\a1348\Desktop\WebBook-master\WebBook-master\images\19-10-1_PHP_PHP71函数相关变更_2.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="parse-url支持RFC3986"><a href="#parse-url支持RFC3986" class="headerlink" title="parse_url支持RFC3986"></a>parse_url支持RFC3986</h2><p><code>parse_url()</code> 更加严格的限制， 并且提供对 RFC3986 的支持。</p>
+<h2 id="session-start将返回false"><a href="#session-start将返回false" class="headerlink" title="session_start将返回false"></a>session_start将返回false</h2><p><code>session_start()</code> 当无法成功初始化会话的时候，返回 <strong>FALSE</strong>， 并且不会初始化超级变量 <code>$_SESSION</code>。</p>
+<p>但是我测试的时候发现，PHP7.0已经会返回False了（Win+PHP7.12nts</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>@<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">session_start</span>(<span class="hljs-string">&#x27;11&#x27;</span>));<br>@<span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$_SESSION</span>);<br><br><span class="hljs-comment"># 结果</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">php5</span><br><span class="hljs-comment">bool(true)</span><br><span class="hljs-comment">array(0) &#123;</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">PHP5</span><br><span class="hljs-comment">bool(false)</span><br><span class="hljs-comment">NULL</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="（废弃）两个函数的Eval选项"><a href="#（废弃）两个函数的Eval选项" class="headerlink" title="（废弃）两个函数的Eval选项"></a>（废弃）两个函数的Eval选项</h2><p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.mb-ereg-replace.php">mb_ereg_replace()</a>和<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.mb-eregi-replace.php">mb_eregi_replace()</a></p>
+<h2 id="（废弃）ext-mcrypt"><a href="#（废弃）ext-mcrypt" class="headerlink" title="（废弃）ext&#x2F;mcrypt"></a>（废弃）ext&#x2F;mcrypt</h2><h1 id="PHP7-1语法相关的变更"><a href="#PHP7-1语法相关的变更" class="headerlink" title="PHP7.1语法相关的变更"></a>PHP7.1语法相关的变更</h1><h2 id="增加）短数组"><a href="#增加）短数组" class="headerlink" title="(增加）短数组"></a>(增加）短数组</h2><p>短数组语法<code>[]</code>现在作为<code>list()</code>语法的一个备选项，可以用于将数组的值赋给一些变量（包括在<em>foreach</em>中）。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$data</span> = [<br>    [<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;Tom&#x27;</span>],<br>    [<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;Fred&#x27;</span>],<br>];<br><br><span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$data</span>);<br><br><span class="hljs-comment">// list() style</span><br><br><span class="hljs-keyword">list</span>(<span class="hljs-variable">$id1</span>, <span class="hljs-variable">$name1</span>) = <span class="hljs-variable">$data</span>[<span class="hljs-number">0</span>];<br><br><span class="hljs-comment">// [] style</span><br><span class="hljs-comment">#[$id1, $name1] = $data[0];</span><br><br><span class="hljs-comment">// list() style</span><br><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$data</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">list</span>(<span class="hljs-variable">$id</span>, <span class="hljs-variable">$name</span>)) &#123;<br>	<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$id</span> <span class="hljs-subst">$name</span>\n&quot;</span>;<br>    <span class="hljs-comment">// logic here with $id and $name</span><br>&#125;<br><br><span class="hljs-comment">// [] style</span><br><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$data</span> <span class="hljs-keyword">as</span> [<span class="hljs-variable">$id</span>, <span class="hljs-variable">$name</span>]) &#123;<br>    <span class="hljs-comment">// logic here with $id and $name</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="（增加）支持为负的字符串偏移量"><a href="#（增加）支持为负的字符串偏移量" class="headerlink" title="（增加）支持为负的字符串偏移量"></a>（增加）支持为负的字符串偏移量</h2><p>现在所有支持偏移量的<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/book.strings.php">字符串操作函数</a> 都支持接受负数作为偏移量，包括通过<code>[]</code>或<code>&#123;&#125;</code>操作<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.string.php#language.types.string.substr">字符串下标</a>。在这种情况下，一个负数的偏移量会被理解为一个从字符串结尾开始的偏移量。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-string">&quot;abcdef&quot;</span>[-<span class="hljs-number">2</span>]); <span class="hljs-comment">// string (1) &quot;e&quot;</span><br><span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">strpos</span>(<span class="hljs-string">&quot;aabbcc&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, -<span class="hljs-number">3</span>));  <span class="hljs-comment">// int(3)</span><br></code></pre></td></tr></table></figure>
+
+<p>字符串也同样支持</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$string</span> = <span class="hljs-string">&#x27;bar&#x27;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;The last character of &#x27;<span class="hljs-subst">$string</span>&#x27; is &#x27;<span class="hljs-subst">$string</span>[-1]&#x27;.\n&quot;</span>;<br><br><span class="hljs-comment"># 结果</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">The last character of &#x27;bar&#x27; is &#x27;r&#x27;.</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="（增加）当传递参数过少时将抛出错误"><a href="#（增加）当传递参数过少时将抛出错误" class="headerlink" title="（增加）当传递参数过少时将抛出错误"></a>（增加）当传递参数过少时将抛出错误</h2><p>在过去如果我们调用一个用户定义的函数时，提供的参数不足，那么将会产生一个警告(warning)。 现在，这个警告被提升为一个错误异常(Error exception)，意味着PHP会中断执行。这个变更仅对用户定义的函数生效， 并不包含内置函数。例如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"><span class="hljs-variable">$param</span></span>)</span>&#123;<br>	<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;1\n&quot;</span>;<br>&#125;<br><span class="hljs-title function_ invoke__">system</span>();<br><span class="hljs-title function_ invoke__">test</span>();<br></code></pre></td></tr></table></figure>
+
+<p><img src="/Users/j7ur8/WebBook/BookBuild/images/19-10-2_PHP_PHP71%E8%AF%AD%E6%B3%95%E7%9B%B8%E5%85%B3%E5%8F%98%E6%9B%B4_1.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="引用数组元素创建元素的顺序更改"><a href="#引用数组元素创建元素的顺序更改" class="headerlink" title="引用数组元素创建元素的顺序更改"></a>引用数组元素创建元素的顺序更改</h2><figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs sml">&lt;?php<br>$<span class="hljs-built_in">array</span> = <span class="hljs-literal">[]</span>;<br>$<span class="hljs-built_in">array</span>[<span class="hljs-string">&quot;a&quot;</span>] =&amp; $<span class="hljs-built_in">array</span>[<span class="hljs-string">&quot;b&quot;</span>];<br>$<span class="hljs-built_in">array</span>[<span class="hljs-string">&quot;b&quot;</span>] = <span class="hljs-number">1</span>;<br>var_dump($<span class="hljs-built_in">array</span>);<br><br># 结果<br>/*<br><span class="hljs-type">PHP7</span>.<span class="hljs-number">0</span><br><span class="hljs-built_in">array</span>(<span class="hljs-number">2</span>) &#123;<br>  [<span class="hljs-string">&quot;a&quot;</span>]=&gt;<br>  &amp;<span class="hljs-built_in">int</span>(<span class="hljs-number">1</span>)<br>  [<span class="hljs-string">&quot;b&quot;</span>]=&gt;<br>  &amp;<span class="hljs-built_in">int</span>(<span class="hljs-number">1</span>)<br>&#125;<br><br><span class="hljs-type">PHP7</span>.<span class="hljs-number">1</span><br><span class="hljs-built_in">array</span>(<span class="hljs-number">2</span>) &#123;<br>  [<span class="hljs-string">&quot;b&quot;</span>]=&gt;<br>  &amp;<span class="hljs-built_in">int</span>(<span class="hljs-number">1</span>)<br>  [<span class="hljs-string">&quot;a&quot;</span>]=&gt;<br>  &amp;<span class="hljs-built_in">int</span>(<span class="hljs-number">1</span>)<br>&#125;<br>*/<br></code></pre></td></tr></table></figure>
+
+<h2 id="JSON编码和解码"><a href="#JSON编码和解码" class="headerlink" title="JSON编码和解码"></a>JSON编码和解码</h2><p>解码一个空键值将会解析为一个空属性名，而之前会解析为<code>_empty_</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-title function_ invoke__">json_decode</span>(<span class="hljs-title function_ invoke__">json_encode</span>([<span class="hljs-string">&#x27;&#x27;</span> =&gt; <span class="hljs-number">1</span>])));<br><br><span class="hljs-comment"># 结果</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">PHP&lt;7.1</span><br><span class="hljs-comment">object(stdClass)#1 (1) &#123;</span><br><span class="hljs-comment">  [&quot;_empty_&quot;]=&gt;</span><br><span class="hljs-comment">  int(1)</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">PHP7.1</span><br><span class="hljs-comment">object(stdClass)#1 (1) &#123;</span><br><span class="hljs-comment">  [&quot;&quot;]=&gt;</span><br><span class="hljs-comment">  int(1)</span><br><span class="hljs-comment">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><h2 id="可为空（Nullable）类型-¶"><a href="#可为空（Nullable）类型-¶" class="headerlink" title="可为空（Nullable）类型 ¶"></a>可为空（Nullable）类型<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.new-features.php#migration71.new-features.nullable-types"> ¶</a></h2><h2 id="Void-函数-¶"><a href="#Void-函数-¶" class="headerlink" title="Void 函数 ¶"></a>Void 函数<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.new-features.php#migration71.new-features.void-functions"> ¶</a></h2><h2 id="类常量可见性-¶"><a href="#类常量可见性-¶" class="headerlink" title="类常量可见性 ¶"></a>类常量可见性<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.new-features.php#migration71.new-features.class-constant-visibility"> ¶</a></h2><h2 id="iterable-伪类-¶"><a href="#iterable-伪类-¶" class="headerlink" title="iterable 伪类 ¶"></a><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.iterable.php">iterable</a> 伪类<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.new-features.php#migration71.new-features.iterable-pseudo-type"> ¶</a></h2><h2 id="多异常捕获处理-¶"><a href="#多异常捕获处理-¶" class="headerlink" title="多异常捕获处理 ¶"></a>多异常捕获处理<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.new-features.php#migration71.new-features.mulit-catch-exception-handling"> ¶</a></h2><h2 id="Invalid-class-interface-and-trait-names-¶"><a href="#Invalid-class-interface-and-trait-names-¶" class="headerlink" title="Invalid class, interface, and trait names ¶"></a>Invalid class, interface, and trait names<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.incompatible.php#migration71.incompatible.invalid-class-names"> ¶</a></h2><h2 id="Numerical-string-conversions-now-respect-scientific-notation-¶"><a href="#Numerical-string-conversions-now-respect-scientific-notation-¶" class="headerlink" title="Numerical string conversions now respect scientific notation ¶"></a>Numerical string conversions now respect scientific notation<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.incompatible.php#migration71.incompatible.numerical-strings-scientific-notation"> ¶</a></h2><h2 id="Fixes-to-mt-rand-algorithm-¶"><a href="#Fixes-to-mt-rand-algorithm-¶" class="headerlink" title="Fixes to mt_rand() algorithm ¶"></a>Fixes to <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.mt-rand.php">mt_rand()</a> algorithm<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.incompatible.php#migration71.incompatible.fixes-to-mt_rand-algorithm"> ¶</a></h2><h2 id="rand-aliased-to-mt-rand-and-srand-aliased-to-mt-srand-¶"><a href="#rand-aliased-to-mt-rand-and-srand-aliased-to-mt-srand-¶" class="headerlink" title="rand() aliased to mt_rand() and srand() aliased to mt_srand() ¶"></a><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.rand.php">rand()</a> aliased to <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.mt-rand.php">mt_rand()</a> and <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.srand.php">srand()</a> aliased to <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.mt-srand.php">mt_srand()</a> <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.incompatible.php#migration71.incompatible.rand-srand-aliases">¶</a></h2><h2 id="Disallow-the-ASCII-delete-control-character-in-identifiers-¶"><a href="#Disallow-the-ASCII-delete-control-character-in-identifiers-¶" class="headerlink" title="Disallow the ASCII delete control character in identifiers ¶"></a>Disallow the ASCII delete control character in identifiers<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.incompatible.php#migration71.incompatible.delete-control-character-in-identifiers"> ¶</a></h2><h2 id="在不完整的对象上不再调用析构方法-¶"><a href="#在不完整的对象上不再调用析构方法-¶" class="headerlink" title="在不完整的对象上不再调用析构方法 ¶"></a>在不完整的对象上不再调用析构方法<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.incompatible.php#migration71.incompatible.dont-call-destructors"> ¶</a></h2><h2 id="call-user-func-不再支持对传址的函数的调用-¶"><a href="#call-user-func-不再支持对传址的函数的调用-¶" class="headerlink" title="call_user_func()不再支持对传址的函数的调用 ¶"></a><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.call-user-func.php">call_user_func()</a>不再支持对传址的函数的调用 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.incompatible.php#migration71.incompatible.call_user_func-with-ref-args">¶</a></h2><h2 id="ini配置项移除-¶"><a href="#ini配置项移除-¶" class="headerlink" title="ini配置项移除 ¶"></a>ini配置项移除<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.incompatible.php#migration71.incompatible.removed-ini-directives"> ¶</a></h2><h2 id="Sort-order-of-equal-elements"><a href="#Sort-order-of-equal-elements" class="headerlink" title="Sort order of equal elements"></a>Sort order of equal elements</h2><h2 id="Lexically-bound-variables-cannot-reuse-names-¶"><a href="#Lexically-bound-variables-cannot-reuse-names-¶" class="headerlink" title="Lexically bound variables cannot reuse names ¶"></a>Lexically bound variables cannot reuse names<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/migration71.incompatible.php#migration71.incompatible.lexical-names"> ¶</a></h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CTF-web/" class="category-chain-item">CTF-web</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/CTF-web/php%E5%AE%A1%E8%AE%A1/" class="category-chain-item">php审计</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/web-php/" class="print-no-link">#web php</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>PHP7.1特性</div>
+      <div>https://theganlove.github.io/2024/08/31/PHP7-1特性/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>uert</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/31/PHP7-2%E7%89%B9%E6%80%A7/" title="PHP7.2特性">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PHP7.2特性</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/31/PHP7-0%E7%89%B9%E6%80%A7/" title="PHP7.0特性">
+                        <span class="hidden-mobile">PHP7.0特性</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

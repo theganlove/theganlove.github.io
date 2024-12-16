@@ -1,0 +1,1483 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="uert">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Docker操作Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一 个可移植的容器中,然后发布到任何流行的Linux机器或Windows 机器上,也可以实现 虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口 Docker 环境安装与基本操作整理1. 安装 Docker 添加 Docker PGP key 1curl -fsSL https:&#x2F;&#x2F;mirrors.t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透基础">
+<meta property="og:url" content="https://theganlove.github.io/2024/11/14/%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Docker操作Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一 个可移植的容器中,然后发布到任何流行的Linux机器或Windows 机器上,也可以实现 虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口 Docker 环境安装与基本操作整理1. 安装 Docker 添加 Docker PGP key 1curl -fsSL https:&#x2F;&#x2F;mirrors.t">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-14T12:04:07.000Z">
+<meta property="article:modified_time" content="2024-11-16T05:30:40.758Z">
+<meta property="article:author" content="uert">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>渗透基础 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"theganlove.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>主题</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="渗透基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-14 20:04" pubdate>
+          2024年11月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          125 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">渗透基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Docker操作"><a href="#Docker操作" class="headerlink" title="Docker操作"></a>Docker操作</h2><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一 个可移植的容器中,然后发布到任何流行的Linux机器或Windows 机器上,也可以实现 虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口</p>
+<h3 id="Docker-环境安装与基本操作整理"><a href="#Docker-环境安装与基本操作整理" class="headerlink" title="Docker 环境安装与基本操作整理"></a>Docker 环境安装与基本操作整理</h3><h4 id="1-安装-Docker"><a href="#1-安装-Docker" class="headerlink" title="1. 安装 Docker"></a>1. <strong>安装 Docker</strong></h4><ul>
+<li><p><strong>添加 Docker PGP key</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -fsSL https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/docker-ce/</span>linux<span class="hljs-regexp">/debian/g</span>pg | sudo apt-key add -<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置 Docker APT repository</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;deb https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian/ buster stable&#x27;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/docker.list<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>更新 APT 包列表</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt update<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>卸载旧版本 Docker</strong></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">sudo apt <span class="hljs-built_in">remove</span> docker docker-engine docker.<span class="hljs-built_in">io</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装 Docker</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install docker-ce<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看 Docker 状态</strong></p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">systemctl status docker</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动 Docker</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">systemctl <span class="hljs-literal">start</span> docker<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置 Docker 开机自动启动</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">systemctl <span class="hljs-built_in">enable</span> docker<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2-安装-Docker-Compose"><a href="#2-安装-Docker-Compose" class="headerlink" title="2. 安装 Docker Compose"></a>2. <strong>安装 Docker Compose</strong></h4><ul>
+<li><p>下载并安装 Docker Compose</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -L https:<span class="hljs-regexp">//g</span>et.daocloud.io<span class="hljs-regexp">/docker/</span>compose<span class="hljs-regexp">/releases/</span>download<span class="hljs-regexp">/v2.1.0/</span>docker-compose-$(uname -s)-$(uname -m) &gt; <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>docker-compose<br>chmod +x <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>docker-compose<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-Docker-镜像操作"><a href="#3-Docker-镜像操作" class="headerlink" title="3. Docker 镜像操作"></a>3. <strong>Docker 镜像操作</strong></h4><ul>
+<li><p><strong>列出镜像</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">docker <span class="hljs-selector-tag">image</span> ls -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>拉取镜像</strong></p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">docker image pull hello-world<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除镜像</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker image <span class="hljs-built_in">rm</span> 镜像名或镜像<span class="hljs-built_in">id</span><br>docker rmi 镜像名或镜像<span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-Docker-容器操作"><a href="#4-Docker-容器操作" class="headerlink" title="4. Docker 容器操作"></a>4. <strong>Docker 容器操作</strong></h4><ul>
+<li><p><strong>创建容器</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">docker run <span class="hljs-selector-attr">[options]</span> 镜像名 <span class="hljs-selector-attr">[命令]</span><br></code></pre></td></tr></table></figure>
+
+<p>常用参数：</p>
+<ul>
+<li><code>-i</code>：以交互模式运行容器</li>
+<li><code>-t</code>：分配伪终端</li>
+<li><code>--name</code>：指定容器名称</li>
+<li><code>-v</code>：目录映射</li>
+<li><code>-d</code>：以守护模式运行容器</li>
+<li><code>-p</code>：端口映射</li>
+<li><code>-e</code>：设置环境变量</li>
+<li><code>--network=host</code>：将主机网络环境映射到容器</li>
+</ul>
+</li>
+<li><p><strong>创建交互式容器</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-built_in">run</span> -it <span class="hljs-attribute">--name</span>=mycentos centos /bin/bash<br></code></pre></td></tr></table></figure>
+
+<p>在容器中可以随意执行linux命令，就是一个ubuntu的环境，当执行exit命令退出时，该容器也随之停止。</p>
+</li>
+<li><p><strong>创建守护式容器</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-built_in">run</span> -dit <span class="hljs-attribute">--name</span>=mycentos2 centos<br></code></pre></td></tr></table></figure>
+
+<p>如果对于一个需要长期运行的容器来说，我们可以创建一个守护式容器。在容器内部exit退出时，容器也不会停止。</p>
+</li>
+<li><p><strong>进入运行中的容器</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker <span class="hljs-built_in">exec</span> -it 容器名或容器<span class="hljs-built_in">id</span> /bin/bash<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看容器</strong></p>
+<ul>
+<li><p>查看正在运行的容器：</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">docker <span class="hljs-keyword">container</span> <span class="hljs-keyword">ls</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看所有容器（包括已停止的）：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">docker container <span class="hljs-keyword">ls</span> <span class="hljs-params">--all</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>停止和启动容器</strong></p>
+<ul>
+<li><p>停止容器：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">docker container stop 容器名或容器<span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>启动容器：</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xquery">docker container <span class="hljs-keyword">start</span> 容器名或容<span class="hljs-built_in">器id</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>强制停止容器（kill）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker container <span class="hljs-built_in">kill</span> 容器名或容器<span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除容器</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker container <span class="hljs-built_in">rm</span> 容器名或容器<span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="5-容器保存为镜像"><a href="#5-容器保存为镜像" class="headerlink" title="5. 容器保存为镜像"></a>5. <strong>容器保存为镜像</strong></h4><ul>
+<li><p>保存容器为镜像</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">docker</span> commit 容器名 镜像名<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="6-镜像备份与迁移"><a href="#6-镜像备份与迁移" class="headerlink" title="6. 镜像备份与迁移"></a>6. <strong>镜像备份与迁移</strong></h4><ul>
+<li><p><strong>将镜像保存为文件</strong></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">docker save -o <span class="hljs-string">./</span>镜像文件<span class="hljs-string">.tar</span> 镜像名<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>加载镜像文件</strong></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">docker load -i <span class="hljs-string">./</span>镜像文件<span class="hljs-string">.tar</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Docker-搭建漏洞靶场"><a href="#Docker-搭建漏洞靶场" class="headerlink" title="Docker 搭建漏洞靶场"></a>Docker 搭建漏洞靶场</h3><h4 id="1-VulHub"><a href="#1-VulHub" class="headerlink" title="1. VulHub"></a>1. <strong>VulHub</strong></h4><p>VulHub 提供了多个漏洞靶场的 Docker 镜像，涵盖了 Web 应用、网络服务等各种类型的漏洞。</p>
+<ul>
+<li><strong>GitHub 仓库</strong>:<br><a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub">https://github.com/vulhub/vulhub</a></li>
+<li><strong>Docker Hub 镜像</strong>:<br><a target="_blank" rel="noopener" href="https://hub.docker.com/u/vulhub">https://hub.docker.com/u/vulhub</a></li>
+</ul>
+<p>使用方法：</p>
+<ol>
+<li>拉取并启动所需漏洞靶场镜像</li>
+<li>根据仓库中的文档配置并运行漏洞靶场。</li>
+</ol>
+<h4 id="2-VulApps"><a href="#2-VulApps" class="headerlink" title="2. VulApps"></a>2. <strong>VulApps</strong></h4><p>VulApps 是一个轻量级的漏洞靶场项目，包含一些经典的漏洞场景，适合初学者进行漏洞研究。</p>
+<ul>
+<li><strong>GitHub 仓库</strong>:<br><a target="_blank" rel="noopener" href="https://github.com/Medicean/VulApps">https://github.com/Medicean/VulApps</a></li>
+<li><strong>Docker Hub 镜像</strong>:<br><a target="_blank" rel="noopener" href="https://hub.docker.com/r/medicean/vulapps">https://hub.docker.com/r/medicean/vulapps</a></li>
+</ul>
+<p>使用方法：</p>
+<ol>
+<li>在 Docker 上启动 <code>vulapps</code> 镜像。</li>
+<li>根据需求选择相应的漏洞场景。</li>
+</ol>
+<h4 id="3-VulFocus"><a href="#3-VulFocus" class="headerlink" title="3. VulFocus"></a>3. <strong>VulFocus</strong></h4><p>VulFocus 是一个漏洞靶场平台，提供了一系列 Web 漏洞模拟环境。用户可以通过平台选择不同的漏洞类型和版本进行测试。</p>
+<ul>
+<li><strong>GitHub 仓库</strong>:<br><a target="_blank" rel="noopener" href="https://github.com/fofapro/vulfocus">https://github.com/fofapro/vulfocus</a></li>
+<li><strong>平台网址</strong>:<br><a target="_blank" rel="noopener" href="http://vulfocus.fofa.so/#/">http://vulfocus.fofa.so/#/</a></li>
+<li><strong>Docker Hub 镜像</strong>:<br><a target="_blank" rel="noopener" href="https://hub.docker.com/u/vulfocu">https://hub.docker.com/u/vulfocu</a></li>
+</ul>
+<p>使用方法：</p>
+<ol>
+<li>使用 Docker 启动不同的漏洞环境。</li>
+<li>根据目标漏洞进行渗透测试。</li>
+</ol>
+<hr>
+<p>如何使用这些漏洞靶场：</p>
+<ol>
+<li><p><strong>拉取镜像</strong>：根据 GitHub 或 Docker Hub 上的镜像名称使用 <code>docker pull</code> 命令来拉取漏洞靶场镜像。</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">docker pull vulhub/<span class="hljs-keyword">some</span>-vulnerable-app<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动容器</strong>：使用 <code>docker run</code> 启动所需的漏洞容器，通常会有映射端口、环境变量等配置。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d -p <span class="hljs-number">8080</span>:<span class="hljs-number">80</span> vulhub/some-vulnerable-app<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置漏洞环境</strong>：根据具体的漏洞靶场需求，进行配置调整。大多数漏洞靶场会提供文档，指导如何操作。</p>
+</li>
+</ol>
+<h2 id="内网靶场虚拟环境搭建"><a href="#内网靶场虚拟环境搭建" class="headerlink" title="内网靶场虚拟环境搭建"></a>内网靶场虚拟环境搭建</h2><h3 id="NAT-模式概述"><a href="#NAT-模式概述" class="headerlink" title="NAT 模式概述"></a>NAT 模式概述</h3><ul>
+<li><strong>NAT（Network Address Translation）模式</strong>允许虚拟机通过主机的网络连接上互联网。</li>
+<li><strong>适合场景</strong>：当网络 IP 资源紧缺，但虚拟机需要访问外部网络时，NAT 模式是理想的选择。虚拟机的 IP 地址由虚拟 DHCP 服务器分配。</li>
+</ul>
+<p>配置说明</p>
+<ul>
+<li>VMware 网络适配器设置<ul>
+<li><strong>vmnet0</strong>：桥接模式（自动连接）</li>
+<li><strong>vmnet1</strong>：仅主机模式（Host-only）</li>
+<li><strong>vmnet8</strong>：NAT 模式</li>
+</ul>
+</li>
+<li>NAT 模式架构<ul>
+<li><strong>虚拟 NAT 设备</strong>：负责将虚拟机的私有 IP 地址转换为主机的 IP 地址，从而通过主机访问外部网络。</li>
+<li><strong>虚拟 DHCP 服务器</strong>：为虚拟机自动分配 IP 地址，通常为 <code>192.168.62.x</code> 的网段。</li>
+</ul>
+</li>
+</ul>
+<p>具体结构说明</p>
+<ul>
+<li><strong>主机</strong>：主机网卡使用 NAT 模式，连接到 VMware Network Adapter VMnet8，IP 地址通常为 <code>192.168.62.1</code>。</li>
+<li><strong>虚拟交换机（Vmnet8）</strong>：连接到主机的 VMware Network Adapter VMnet8，充当虚拟机与主机通信的桥梁。</li>
+<li><strong>虚拟机</strong>：在 NAT 模式下，通过虚拟 NAT 设备和 DHCP 服务器获得 IP 地址（如 <code>192.168.62.158</code>），可以通过主机联网。</li>
+</ul>
+<p>使用 NAT 模式的优点</p>
+<ul>
+<li><strong>简单配置</strong>：无需在虚拟机上手动配置网络地址。</li>
+<li><strong>资源节省</strong>：节省 IP 资源，适用于需要上网的测试环境。</li>
+<li><strong>自动联网</strong>：虚拟机通过主机共享网络，无需额外网络配置</li>
+</ul>
+<p>![已上传的图片](F:\new myblog\STUDY\source\img\file-GkHsOQkysjbvmkUUMkxtj9h2)</p>
+<h3 id="桥接模式概述"><a href="#桥接模式概述" class="headerlink" title="桥接模式概述"></a>桥接模式概述</h3><ul>
+<li><strong>桥接模式</strong>是指将虚拟机的虚拟网卡通过虚拟网桥与主机的物理网卡连接，使虚拟机直接连接到主机所在的物理网络中。</li>
+<li><strong>适合场景</strong>：当虚拟机需要与主机及其他网络设备直接通信时（例如需要独立的 IP 地址，并与主机和局域网其他设备在同一网段中）。</li>
+</ul>
+<p>配置说明</p>
+<ul>
+<li>VMware 网络适配器设置<ul>
+<li><strong>vmnet0</strong>：桥接模式，选择桥接到物理网卡（有线或无线网卡）。</li>
+<li><strong>vmnet1</strong>：NAT 模式。</li>
+<li><strong>vmnet8</strong>：仅主机模式（Host-only）。</li>
+</ul>
+</li>
+<li>桥接模式架构<ul>
+<li><strong>虚拟网桥</strong>：将主机网卡与虚拟机的网卡相连，模拟一个交换机的功能。</li>
+<li><strong>虚拟机网络配置</strong>：在桥接模式下，虚拟机需要与主机在同一网段，并且共享相同的网关和 DNS 配置。</li>
+</ul>
+</li>
+</ul>
+<p>具体结构说明</p>
+<ul>
+<li><strong>主机</strong>：主机网卡通过桥接模式连接到虚拟网桥，获得与物理网络相同的 IP 地址。</li>
+<li><strong>虚拟交换机（Vmnet0）</strong>：充当虚拟机和主机之间的桥梁，允许所有桥接模式的虚拟机在同一个网络内相互通信。</li>
+<li><strong>虚拟机</strong>：桥接模式下的虚拟机需要配置与主机相同的网关和 DNS 服务器，并获得与主机同一网段的 IP 地址（如图中虚拟机 IP 为 <code>192.168.1.x</code> 网段）。</li>
+</ul>
+<p>使用桥接模式的优点</p>
+<ul>
+<li><strong>直接访问局域网</strong>：虚拟机与主机在同一个局域网中，可以直接访问网络中的其他设备。</li>
+<li><strong>独立 IP 地址</strong>：虚拟机可以使用独立的 IP 地址，与局域网设备直接通信。</li>
+<li><strong>高效通信</strong>：适用于需要大量数据交互和相互访问的场景。</li>
+</ul>
+<p>![已上传的图片](F:\new myblog\STUDY\source\img\file-iZ2TYgcVmqBMFnZPGRMx0RcS)</p>
+<h3 id="Host-Only-模式概述"><a href="#Host-Only-模式概述" class="headerlink" title="Host-Only 模式概述"></a>Host-Only 模式概述</h3><ul>
+<li><strong>Host-Only 模式</strong>（仅主机模式）使得虚拟机与主机之间能够互相通信，但虚拟机无法访问外部网络。</li>
+<li><strong>适合场景</strong>：当虚拟机需要与主机直接通信，但不需要连接互联网或局域网时，这种模式非常适用。例如在测试环境中，仅需虚拟机和主机相互交互。</li>
+</ul>
+<p>配置说明</p>
+<ul>
+<li>VMware 网络适配器设置<ul>
+<li><strong>vmnet1</strong>：Host-Only 模式，用于主机和虚拟机之间的通信。</li>
+</ul>
+</li>
+<li>Host-Only 模式架构<ul>
+<li><strong>虚拟交换机（Vmnet1）</strong>：充当主机和虚拟机之间的通信桥梁。</li>
+<li><strong>虚拟 DHCP 服务器</strong>：负责分配 IP 地址，使得主机和虚拟机处于同一网段，通常为 <code>192.168.62.x</code>。</li>
+</ul>
+</li>
+</ul>
+<p>具体结构说明</p>
+<ul>
+<li><strong>主机</strong>：主机的 VMware Network Adapter VMnet1 配置了 Host-Only 网络（IP 地址为 <code>192.168.62.1</code>）。</li>
+<li><strong>虚拟交换机（Vmnet1）</strong>：主机通过 VMnet1 虚拟交换机与虚拟机通信，形成一个封闭的网络。</li>
+<li><strong>虚拟机</strong>：虚拟机获得虚拟 DHCP 服务器分配的 IP 地址（如 <code>192.168.62.158</code>），并与主机相互通信。</li>
+</ul>
+<p>使用 Host-Only 模式的优点</p>
+<ul>
+<li><strong>隔离性</strong>：虚拟机与外部网络完全隔离，形成一个独立的网络环境。</li>
+<li><strong>安全性</strong>：只与主机通信，避免外部网络的安全威胁。</li>
+<li><strong>独立测试环境</strong>：适用于测试需要主机和虚拟机交互的场景，无需联网。</li>
+</ul>
+<p>![已上传的图片](F:\new myblog\STUDY\source\img\TNbA%3D)</p>
+<h2 id="网络协议分层"><a href="#网络协议分层" class="headerlink" title="网络协议分层"></a>网络协议分层</h2><h3 id="网络协议的五层分层结构"><a href="#网络协议的五层分层结构" class="headerlink" title="网络协议的五层分层结构"></a>网络协议的五层分层结构</h3><p>网络协议通常分为五层结构，分别是：<strong>应用层</strong>、<strong>传输层</strong>、<strong>网络层</strong>、<strong>数据链路层</strong>和<strong>物理层</strong>。每一层都有自己独立的功能，各层之间通过接口相互连接，保证了数据从发送方传输到接收方的完整性和正确性。</p>
+<hr>
+<h4 id="1-应用层（Application-Layer）"><a href="#1-应用层（Application-Layer）" class="headerlink" title="1. 应用层（Application Layer）"></a>1. 应用层（Application Layer）</h4><ul>
+<li><strong>作用</strong>：为用户提供网络应用服务，是直接与用户交互的层。</li>
+<li>最上层的，也是我们能直接接触到的就是应用层（ Application Layer），我们电 脑或手机使用的应用软件都是在应用层实现。那么，当两个不同设备的应用需要通信 的时候，应用就把应用数据传给下一层，也就是传输层。 所以，应用层只需要专注于为用户提供应用功能，不用去关心数据是如何传输的，就 类似于，我们寄快递的时候，只需要把包裹交给快递员，由他负责运输快递，我们不 需要关心快速是如何被运输的。 而且应用层是工作在操作系统中的用户态，传输层及以下则工作在内核态。</li>
+<li><strong>特性</strong>：处理特定的应用数据，不需要关心数据如何传输。</li>
+<li><strong>常见协议</strong>：HTTP、FTP、SMTP、DNS等。</li>
+<li><strong>用户态</strong>：应用层运行在操作系统的用户态，提供各种应用程序接口，便于应用开发。</li>
+</ul>
+<hr>
+<h4 id="2-传输层（Transport-Layer）"><a href="#2-传输层（Transport-Layer）" class="headerlink" title="2. 传输层（Transport Layer）"></a>2. 传输层（Transport Layer）</h4><ul>
+<li><strong>作用</strong>：提供端到端的通信服务，负责数据的传输管理。</li>
+<li><strong>特性</strong>：将应用层的数据分割成小的段，提供错误检测、流量控制、重传等功能。</li>
+<li><strong>常见协议</strong>：TCP（传输控制协议）、UDP（用户数据报协议）。</li>
+<li>TCP 的全称叫传输层控制协议（Transmission Control Protocol），大部分应用使用 的正是 TCP 传输层协议，比如 HTTP 应用层协议。TCP 相比 UDP 多了很多特性，比 如流量控制、超时重传、拥塞控制等，这些都是为了保证数据包能可靠地传输给对 方。 UDP 就相对很简单，简单到只负责发送数据包，不保证数据包是否能抵达对方，但 它实时性相对更好，传输效率也高。当然，UDP 也可以实现可靠传输，把 TCP 的特 性在应用层上实现就可以，不过要实现一个商用的可靠 UDP 传输协议，也不是一件 简单的事情。 应用需要传输的数据可能会非常大，如果直接传输就不好控制，因此当传输层的数据 包大小超过 MSS（TCP 最大报文段长度） ，就要将数据包分块，这样即使中途有一 个分块丢失或损坏了，只需要重新这一个分块，而不用重新发送整个数据包。在 TCP  协议中，我们把每个分块称为一个 TCP 段（TCP Segment）。当设备作为接收方时，传输层则要负责把数据包传给应用，但是一台设备上可能会有 很多应用在接收或者传输数据，因此需要用一个编号将应用区分开来，这个编号就是 端口。 比如 80 端口通常是 Web 服务器用的，22 端口通常是远程登录服务器用的。而对于 浏览器（客户端）中的每个标签栏都是一个独立的进程，操作系统会为这些进程分配 临时的端口号。 由于传输层的报文中会携带端口号，因此接收方可以识别出该报文是发送给哪个应用</li>
+<li><strong>内核态</strong>：传输层运行在操作系统的内核态，直接与网络层交互，为数据提供可靠性。</li>
+</ul>
+<hr>
+<h4 id="3-网络层（Network-Layer）"><a href="#3-网络层（Network-Layer）" class="headerlink" title="3. 网络层（Network Layer）"></a>3. 网络层（Network Layer）</h4><ul>
+<li><strong>作用</strong>：负责路径选择和数据转发，实现跨网络的数据传输。</li>
+<li><strong>特性</strong>：网络层使用逻辑地址（如IP地址）进行寻址，将数据发送到目标网络。</li>
+<li><strong>常见协议</strong>：IP（互联网协议）、ICMP（互联网控制消息协议）、ARP（地址解析协议）。</li>
+<li>传输层可能大家刚接触的时候，会认为它负责将数据从一个设备传输到另一个设备， 事实上它并不负责。 实际场景中的网络环节是错综复杂的，中间有各种各样的线路和分叉路口，如果一个 设备的数据要传输给另一个设备，就需要在各种各样的路径和节点进行选择，而传输 层的设计理念是简单、高效、专注，如果传输层还负责这一块功能就有点违背设计原 则了。 也就是说，我们不希望传输层协议处理太多的事情，只需要服务好应用即可，让其作 为应用间数据传输的媒介，帮助实现应用到应用的通信，而实际的传输功能就交给下 一层，也就是网络层（Internet Layer）。网络层最常使用的是 IP 协议（Internet Protocol），IP 协议会将传输层的报文作为数 据部分，再加上 IP 包头组装成 IP 报文，如果 IP 报文大小超过 MTU（以太网中一般 为 1500 字节）就会再次进行分片，得到一个即将发送到网络的 IP 报文</li>
+<li>网络层负责将数据从一个设备传输到另一个设备，实现主机与主机之间的通信，也叫点对点（end to end）通 信，世界上那么多设备，又该如何找到 对方呢？因此，网络层需要有区分设备的编号。 我们一般用 IP 地址给设备进行编号，对于 IPv4 协议， IP 地址共 32 位，分成了四 段，每段是 8 位。只有一个单纯的 IP 地址虽然做到了区分设备，但是寻址起来就特 别麻烦，全世界那么多台设备，难道一个一个去匹配？这显然不科学。 因此，需要将 IP 地址分成两种意义： 一个是网络号，负责标识该 IP 地址是属于哪个子网的； 一个是主机号，负责标识同一子网下的不同主机； 怎么分的呢？这需要配合子网掩码才能算出 IP 地址 的网络号和主机号。那么在寻址 的过程中，先匹配到相同的网络号，才会去找对应的主机。 除了寻址能力， IP 协议还有另一个重要的能力就是路由。实际场景中，两台设备并 不是用一条网线连接起来的，而是通过很多网关、路由器、交换机等众多网络设备连 接起来的，那么就会形成很多条网络的路径，因此当数据包到达一个网络节点，就需 要通过算法决定下一步走哪条路径。 所以，IP 协议的寻址作用是告诉我们去往下一个目的地该朝哪个方向走，路由则是 根据「下一个目的地」选择路径。寻址更像在导航，路由更像在操作方向盘</li>
+</ul>
+<p>![image-20241114203316631](F:\new myblog\STUDY\source\img\image-20241114203316631.png)</p>
+<ul>
+<li><strong>功能</strong>：进行路由选择，决定数据通过哪条路径到达目的地。</li>
+</ul>
+<p>![image-20241114203117316](F:\new myblog\STUDY\source\img\image-20241114203117316.png)</p>
+<hr>
+<h4 id="4-数据链路层（Data-Link-Layer）"><a href="#4-数据链路层（Data-Link-Layer）" class="headerlink" title="4. 数据链路层（Data Link Layer）"></a>4. 数据链路层（Data Link Layer）</h4><ul>
+<li><strong>作用</strong>：负责在同一网络内的节点之间传输数据，保证数据的可靠传输。</li>
+<li><strong>特性</strong>：数据链路层使用物理地址（如MAC地址）来进行节点的寻址。</li>
+<li>实际场景中，网络并不是一个整体，比如你家和我家就不属于一个网络，所以数据不 仅可以在同一个网络中设备间进行传输，也可以跨网络进行传输。 一旦数据需要跨网络传输，就需要有一个设备同时在两个网络当中，这个设备一般是 路由器，路由器可以通过路由表计算出下一个要去的 IP 地址。 那问题来了，路由器怎么知道这个 IP 地址是哪个设备的呢？ 于是，就需要有一个专门的层来标识网络中的设备，让数据在一个链路中传输，这就 是数据链路层（Data Link Layer），它主要为网络层提供链路级别传输的服务</li>
+<li><strong>常见协议</strong>：以太网协议、PPP（点对点协议）、帧中继等。</li>
+<li><strong>功能</strong>：提供错误检测、帧同步等功能。</li>
+</ul>
+<hr>
+<h4 id="5-物理层（Physical-Layer）"><a href="#5-物理层（Physical-Layer）" class="headerlink" title="5. 物理层（Physical Layer）"></a>5. 物理层（Physical Layer）</h4><ul>
+<li><strong>作用</strong>：负责比特流的传输，即物理上将数据从一个节点传送到另一个节点。</li>
+<li><strong>特性</strong>：直接与物理介质（如网线、光纤）相连，处理电信号或光信号的传输。</li>
+<li>当数据准备要从设备发送到网络时，需要把数据包转换成电信号，让其可以在物理介 质中传输，这一层就是物理层（Physical Layer），它主要是为数据链路层提供二进 制传输的服务</li>
+<li><strong>功能</strong>：定义了物理介质的接口标准，如电压、频率、信道等。</li>
+</ul>
+<p>![image-20241114203211430](F:\new myblog\STUDY\source\img\image-20241114203211430.png)</p>
+<ol>
+<li><strong>应用层：发送包裹</strong></li>
+</ol>
+<ul>
+<li>应用层就像寄件人，我们想把包裹寄给远方的朋友。在这个阶段，我们关注的是<strong>寄什么</strong>（比如信件、包裹）和<strong>寄给谁</strong>。</li>
+<li>应用层提供了各种“寄包裹”的方式，比如浏览网页、发送邮件、下载文件等。</li>
+<li>就像寄包裹时不关心快递公司怎么运送一样，应用层也不关心数据是如何传输的。</li>
+</ul>
+<ol start="2">
+<li><strong>传输层：分包和贴上标签</strong></li>
+</ol>
+<ul>
+<li>传输层负责把“大包裹”分成“多个小包裹”，并在每个包裹上贴上发件人和收件人的标签，以便快递公司能按顺序送达每个小包裹。</li>
+<li>有些包裹可能会丢失，传输层负责检查哪些包裹没送到，并让快递公司重新送。</li>
+<li>这就像快递公司贴上的快递单，确保每个包裹能被送到正确的收件人手中。</li>
+</ul>
+<ol start="3">
+<li><strong>网络层：规划路线</strong></li>
+</ol>
+<ul>
+<li>网络层负责选择“快递路线”，决定包裹从哪个仓库到哪个中转站，再到最终的配送站。</li>
+<li>它相当于一张地图，根据最优路径把包裹送到目标地点附近。</li>
+<li>就像地图指引快递员走哪条路，网络层用IP地址来找到去往收件人所在城市或小区的最佳路径。</li>
+</ul>
+<ol start="4">
+<li><strong>数据链路层：本地配送</strong></li>
+</ol>
+<ul>
+<li>数据链路层负责在“最后一公里”把包裹送到目的地附近的小区或大楼。</li>
+<li>它就像快递小哥在小区内挨家挨户地分发包裹。</li>
+<li>这层是最接近设备本地的，使用设备的“物理地址”（类似门牌号）来找到收件人。</li>
+</ul>
+<ol start="5">
+<li><strong>物理层：传输包裹的车辆和道路</strong></li>
+</ol>
+<ul>
+<li>物理层是最底层，负责实际把包裹从一个地方运输到另一个地方。</li>
+<li>它相当于快递公司使用的“快递车、火车或飞机”等工具，把包裹物理地移动。</li>
+<li>就像一辆辆装着包裹的快递车在路上行驶，物理层使用电缆、光纤等媒介传输数据，确保信号传到下一个节点。</li>
+</ul>
+<p>总结一下</p>
+<ul>
+<li><strong>应用层</strong>：决定要发什么东西（数据）和发给谁（目标）。</li>
+<li><strong>传输层</strong>：把大件分成小件，每件都贴好收件人地址。</li>
+<li><strong>网络层</strong>：规划路线，把小包裹送到正确的城市或小区。</li>
+<li><strong>数据链路层</strong>：负责本地的配送，找到具体的楼层或门牌号。</li>
+<li><strong>物理层</strong>：让快递车、火车等工具实际运输包裹。</li>
+</ul>
+<p>通过这种层层协作，数据最终能准确地从一台设备传到另一台设备。</p>
+<h4 id="IP-和-MAC"><a href="#IP-和-MAC" class="headerlink" title="IP 和 MAC"></a>IP 和 MAC</h4><ul>
+<li><strong>IP 地址（网络层）</strong>：IP 负责“跨区”传输数据，它像是我们出行时的<strong>行程表</strong>，定义了数据从源头到目的地的整体路径。IP 地址主要用于在不同网络之间传输数据，是一个全局的地址，标识每个设备在网络中的位置。</li>
+<li><strong>MAC 地址（数据链路层）</strong>：MAC 负责“局部”传输数据，它像是我们乘坐交通工具的<strong>车票</strong>，限定了数据在一个特定网络区间内的传输。MAC 地址是设备的物理地址，标识了同一个网络区间（如局域网）内设备之间的通信。</li>
+</ul>
+<p>关系</p>
+<ul>
+<li>当数据需要传输时，<strong>IP 地址</strong>会指定整个行程的起点和终点（源 IP 和目的 IP），确保数据能传递到目标设备所在的网络。</li>
+<li>在这个传输过程中，数据会经过多个网络区间，每经过一个新的网络区间，<strong>MAC 地址</strong>会指引数据在当前网络区间内的传输，确保数据从一个节点传递到另一个节点，直至抵达目标网络。</li>
+</ul>
+<p>举例</p>
+<p>小林的出行示例可以进一步理解这个过程：</p>
+<p>举个生活的栗子，小林要去一个很远的地方旅行，制定了一个行程表，其间需先后乘 坐飞机、地铁、公交车才能抵达目的地，为此小林需要买飞机票，地铁票等。 飞机票和地铁票都是去往特定的地点的，每张票只能够在某一限定区间内移动，此处 的「区间内」就如同通信网络中数据链路。 在区间内移动相当于数据链路层，充当区间内两个节点传输的功能，区间内的出发点 好比源 MAC 地址，目标地点好比目的 MAC 地址。 整个旅游行程表就相当于网络层，充当远程定位的功能，行程的开始好比源 IP，行 程的终点好比目的 IP 地址。如果小林只有行程表而没有车票，就无法搭乘交通工具到达目的地。相反，如果除了 车票而没有行程表，恐怕也很难到达目的地。因为小林不知道该坐什么车，也不知道 该在哪里换乘。 因此，只有两者兼备，既有某个区间的车票又有整个旅行的行程表，才能保证到达目 的地。与此类似，计算机网络中也需要「数据链路层」和「网络层」这个分层才能实 现向最终目标地址的通信。 还有重要一点，旅行途中我们虽然不断变化了交通工具，但是旅行行程的起始地址和 目的地址始终都没变。其实，在网络中数据包传输中也是如此，源IP地址和目标IP地 址在传输过程中是不会变化的，只有源 MAC 地址和目标 MAC 一直在变化</p>
+<ul>
+<li><p><strong>行程表（IP 地址）</strong>：小林知道出发点和终点在哪里，需要经过哪些城市或地点。这是网络层 IP 的作用——确保数据最终能跨越多个网络区间，到达目的网络。</p>
+</li>
+<li><p><strong>车票（MAC 地址）</strong>：小林在每个特定的区间（如机场、地铁站、公交站）买票，从一个交通节点移动到下一个节点。这就是数据链路层 MAC 的作用——在局部的网络环境中，从一个设备传到另一个设备，逐步推进数据到目标。</p>
+<p>总结</p>
+<p>IP 地址是“全局路线图”，用于确定远距离的网络传输方向。MAC 地址是“局部导航”，负责在同一局域网内的数据传输。两者缺一不可，只有 IP 地址和 MAC 地址共同协作，才能让数据成功地从源头传递到目的地。</p>
+</li>
+</ul>
+<p>IP地址的基础知识  IP地址的定义  在 TCP&#x2F;IP 网络通信时，为了保证能正常通信，每个设备都需要配置正确的 IP 地址， 否则无法实现正常的通信。 IP 地址（IPv4 地址）由  32 位正整数来表示，IP 地址在计算机是以二进制的方式处 理的。 而人类为了方便记忆采用了点分十进制的标记方式，也就是将 32 位 IP 地址以每 8  位为组，共分为 4 组，每组以「.」隔开，再将每组转换成十进制</p>
+<p>![image-20241114203640359](F:\new myblog\STUDY\source\img\image-20241114203640359.png)</p>
+<p>![image-20241114203659730](F:\new myblog\STUDY\source\img\image-20241114203659730.png)</p>
+<p>在 IP 地址中，有两个 IP 是特殊的，分别是主机号全为 1 和 全为 0 地址</p>
+<p>主机号全为 1 指定某个网络下的所有主机，用于广播 主机号全为 0 指定某个网络。广播地址用于在同一个链路中相互连接的主机之间发送数据包</p>
+<p>![image-20241114203803343](F:\new myblog\STUDY\source\img\image-20241114203803343.png)</p>
+<p>学校班级中就有广播的例子，在准备上课的时候，通常班长会喊：“上课， 全体起 立！”，班里的同学听到这句话是不是全部都站起来了？这个句话就有广播的含义。 当主机号全为 1 时，就表示该网络的广播地址。例如把  172.20.0.0&#x2F;16 用二进制表 示如下： 10101100.00010100.00000000.00000000 将这个地址的主机部分全部改为 1，则形成广播地址： 10101100.00010100.11111111.11111111 再将这个地址用十进制表示，则为  172.20.255.255。 广播地址可以分为本地广播和直接广播两种。</p>
+<p>在本网络内广播的叫做本地广播。例如网络地址为 192.168.0.0&#x2F;24 的情况下， 广播地址是 192.168.0.255 。因为这个广播地址的 IP 包会被路由器屏蔽，所以 不会到达 192.168.0.0&#x2F;24 以外的其他链路上。 </p>
+<p>在不同网络之间的广播叫做直接广播。例如网络地址为 192.168.0.0&#x2F;24 的主机 向 192.168.1.255&#x2F;24 的目标地址发送 IP 包。收到这个包的路由器，将数据转发 给192.168.1.0&#x2F;24，从而使得所有 192.168.1.1~192.168.1.254 的主机都能收到 这个包（由于直接广播有一定的安全问题，多数情况下会在路由器上设置为不转 发）</p>
+<p>![image-20241114203856867](F:\new myblog\STUDY\source\img\image-20241114203856867.png)</p>
+<p> D 类和 E 类地址是没有主机号的，所以不可用于主机 IP，D 类常被用于多播，E  类是预留的分类，暂时未使用，不管是路由器还是主机解析到一个 IP 地址时候，我们判断其 IP 地址的首位是否为  0，为 0 则为 A 类地址，那么就能很快的找出网络地址和主机地址。 其余分类判断方式参考如下图</p>
+<p>![image-20241114204000116](F:\new myblog\STUDY\source\img\image-20241114204000116.png)</p>
+<p>公有IP与私有IP地址  在 A、B、C 分类地址，实际上有分公有 IP 地址和 私有 IP 地址</p>
+<p>![image-20241114204019915](F:\new myblog\STUDY\source\img\image-20241114204019915.png)</p>
+<p>平时我们办公室、家里、学校用的 IP 地址，一般都是私有 IP 地址。因为这些地址允 许组织内部的 IT 人员自己管理、自己分配，而且可以重复。因此，你学校的某个私 有 IP 地址和我学校的可以是一样的。</p>
+<p> 就像每个小区都有自己的楼编号和门牌号，你小区家可以叫  1 栋 101 号，我小区家 也可以叫 1 栋 101，没有任何问题。但一旦出了小区，就需要带上中山路 666 号 （公网 IP 地址），是国家统一分配的，不能两个小区都叫中山路 666。 </p>
+<p>所以，公有 IP 地址是有个组织统一分配的，假设你要开一个博客网站，那么你就需 要去申请购买一个公有 IP，这样全世界的人才能访问。并且公有 IP 地址基本上要在 整个互联网范围内保持唯一</p>
+<h4 id="IP-地址与路由控制"><a href="#IP-地址与路由控制" class="headerlink" title="IP 地址与路由控制"></a>IP 地址与路由控制</h4><p> IP地址的网络地址这一部分是用于进行路由控制。 路由控制表中记录着网络地址与下一步应该发送至路由器的地址，在主机和路由器上 都会有各自的路由器控制表。 在发送 IP 包时，首先要确定 IP 包首部中的目标地址，再从路由控制表中找到与该地 址具有相同网络地址的记录，根据该记录将 IP 包转发给相应的下一个路由器。如果 路由控制表中存在多条相同网络地址的记录，就选择相同位数最多的网络地址，也就是最长匹配</p>
+<p>![image-20241114204120253](F:\new myblog\STUDY\source\img\image-20241114204120253.png)</p>
+<p>传输过程详解</p>
+<ol>
+<li><strong>主机 A 发起 IP 包的传输</strong><ul>
+<li><strong>源 IP 地址</strong>：10.1.1.30（主机 A 的 IP 地址）</li>
+<li><strong>目标 IP 地址</strong>：10.1.2.10（目标主机的 IP 地址）</li>
+<li>当主机 A 要将 IP 包发送给目标地址 10.1.2.10 时，它首先会查找自己的<strong>路由表</strong>，查看是否有通往 10.1.2.10 的直接路径。</li>
+<li><strong>查找路由表</strong>：由于主机 A 的路由表中没有匹配的条目，它将此包转发给<strong>默认网关</strong>，即 <strong>路由器 1</strong>。</li>
+</ul>
+</li>
+<li><strong>路由器 1 收到 IP 包</strong><ul>
+<li>路由器 1 接收到了主机 A 发来的 IP 包，开始查找自己的<strong>路由表</strong>，试图找到通向目标 IP 地址（10.1.2.10）的路由。</li>
+<li><strong>匹配路由表</strong>：在路由表中，路由器 1 找到了一个匹配的条目，它知道可以通过将包发送给 <strong>路由器 2</strong>（IP 地址为 10.1.0.2）来达到目标网络。</li>
+<li><strong>转发 IP 包</strong>：于是，路由器 1 将 IP 包转发给了 <strong>路由器 2</strong>。</li>
+</ul>
+</li>
+<li><strong>路由器 2 收到 IP 包</strong><ul>
+<li>路由器 2 接收到了从路由器 1 转发过来的 IP 包，同样会在自己的<strong>路由表</strong>中查找是否有通往目标地址 10.1.2.10 的路径。</li>
+<li><strong>查找路由表</strong>：路由器 2 的路由表中发现了目标网络（10.1.2.0&#x2F;24），并确定可以通过其接口 10.1.2.1 到达该网络。</li>
+<li><strong>转发 IP 包</strong>：于是，路由器 2 将 IP 包通过其 10.1.2.1 接口转发出去。</li>
+</ul>
+</li>
+<li><strong>经过交换机到达目标主机</strong><ul>
+<li>当 IP 包从路由器 2 的 10.1.2.1 接口发出后，进入到交换机。</li>
+<li>交换机会根据<strong>目标 MAC 地址</strong>，将 IP 包传递给在同一局域网中的目标主机 10.1.2.10。</li>
+<li><strong>最终目的地</strong>：目标主机 10.1.2.10 收到了来自主机 A（10.1.1.30）的 IP 包。</li>
+</ul>
+</li>
+</ol>
+<p><strong>路由器的作用</strong>：在网络中，不同网络之间的通信由路由器负责，路由器通过<strong>路由表</strong>来确定数据包的转发路径。</p>
+<p><strong>路由查找</strong>：每个路由器收到 IP 包后都会查找自己的路由表，找到通往目标地址的最佳路径，然后逐跳转发，直到包抵达目标网络。</p>
+<p><strong>逐跳转发</strong>：IP 包会经过多个路由器，每个路由器都会更新包的 MAC 地址（源 MAC 和目标 MAC），但<strong>源 IP 和目标 IP 始终不变</strong>。</p>
+<p><strong>局域网内的传输</strong>：当 IP 包到达目标网络后，通常会通过交换机等局域网设备最终传递到目标主机。</p>
+<p>环回地址是在同一台计算机上的程序之间进行网络通信时所使用的一个默认地址。 计算机使用一个特殊的 IP 地址 127.0.0.1 作为环回地址，与该地址具有相同意义的 是一个叫做 localhost 的主机名。 使用这个 IP 或主机名时，数据包不会流向网络</p>
+<h2 id="IP-协议相关技术"><a href="#IP-协议相关技术" class="headerlink" title="IP 协议相关技术"></a>IP 协议相关技术</h2><h3 id="1-DNS（域名系统）"><a href="#1-DNS（域名系统）" class="headerlink" title="1. DNS（域名系统）"></a>1. <strong>DNS（域名系统）</strong></h3><ul>
+<li><strong>作用</strong>：将人类易读的域名（如 <a target="_blank" rel="noopener" href="http://www.example.com)转换为/">www.example.com）转换为</a> IP 地址（如 192.168.1.1），因为人们更容易记住域名。</li>
+<li><strong>域名层级</strong>：域名具有层级关系，从右到左依次为：根域、顶级域、次级域。</li>
+<li>层级关系示例<ul>
+<li><strong>根 DNS 服务器</strong>：位于层级的最顶层，负责管理顶级域的请求。</li>
+<li><strong>顶级域 DNS 服务器</strong>：如 .com、.net、.org，管理该顶级域下的所有子域。</li>
+<li><strong>权威 DNS 服务器</strong>：如 example.com 的 DNS 服务器，负责提供该域下具体主机的 IP 地址。</li>
+</ul>
+</li>
+<li><strong>解析过程</strong>：当你访问 <a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a> 时，DNS 系统会逐层解析，最终找到该域名的 IP 地址，完成域名到 IP 地址的转换。</li>
+</ul>
+<hr>
+<h3 id="2-ARP（地址解析协议）和-RARP（逆地址解析协议）"><a href="#2-ARP（地址解析协议）和-RARP（逆地址解析协议）" class="headerlink" title="2. ARP（地址解析协议）和 RARP（逆地址解析协议）"></a>2. <strong>ARP（地址解析协议）和 RARP（逆地址解析协议）</strong></h3><ul>
+<li><p>ARP（Address Resolution Protocol）</p>
+<p>用于将 IP 地址解析为 MAC 地址，确保在局域网内能够找到对应设备。</p>
+<ul>
+<li>工作过程：主机 A 想通过 IP 地址与局域网中的主机 B 通信，但需要知道主机 B 的 MAC 地址。ARP 广播请求后，主机 B 响应自己的 MAC 地址，主机 A 可以直接与主机 B 通信。</li>
+</ul>
+</li>
+<li><p><strong>RARP（Reverse ARP）</strong>：与 ARP 相反，RARP 是通过 MAC 地址来获取 IP 地址的协议，用于一些设备在启动时通过 MAC 地址获得 IP 地址（现在较少使用，DHCP 通常可以替代）。</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-DHCP（动态主机配置协议）"><a href="#3-DHCP（动态主机配置协议）" class="headerlink" title="3. DHCP（动态主机配置协议）"></a>3. <strong>DHCP（动态主机配置协议）</strong></h3><ul>
+<li><strong>作用</strong>：动态为设备分配 IP 地址、子网掩码、网关、DNS 服务器等网络参数，减少手动配置的麻烦。</li>
+<li>工作流程<ol>
+<li><strong>请求</strong>：设备连接到网络时，发送 DHCP 请求。</li>
+<li><strong>提供</strong>：DHCP 服务器收到请求，分配一个未使用的 IP 地址，并将相关网络参数发送给设备。</li>
+<li><strong>确认</strong>：设备接受并确认使用该 IP 地址。</li>
+</ol>
+</li>
+<li><strong>优点</strong>：自动分配 IP 地址，避免了手动配置的错误，适用于动态变化的网络环境。</li>
+</ul>
+<hr>
+<h3 id="4-NAT（网络地址转换）"><a href="#4-NAT（网络地址转换）" class="headerlink" title="4. NAT（网络地址转换）"></a>4. <strong>NAT（网络地址转换）</strong></h3><ul>
+<li><strong>作用</strong>：用于将私有 IP 地址转换为公有 IP 地址，通常用于内部网络访问外部网络（如互联网）。</li>
+<li>类型<ul>
+<li><strong>静态 NAT</strong>：将私有 IP 和公有 IP 一一映射。</li>
+<li><strong>动态 NAT</strong>：根据需要动态分配公有 IP 地址。</li>
+<li><strong>PAT（端口地址转换）</strong>：将多个私有 IP 地址映射到同一个公有 IP 地址，但使用不同的端口区分。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：通过 NAT，可以节省公有 IP 地址，增强内部网络的安全性，因为外部网络无法直接访问私有 IP 地址。</li>
+</ul>
+<hr>
+<h3 id="5-ICMP（互联网控制报文协议）"><a href="#5-ICMP（互联网控制报文协议）" class="headerlink" title="5. ICMP（互联网控制报文协议）"></a>5. <strong>ICMP（互联网控制报文协议）</strong></h3><ul>
+<li><p><strong>作用</strong>：用于发送控制消息，检测网络连接状况，通常用于诊断和故障排除。</p>
+</li>
+<li><p>常见用途</p>
+<ul>
+<li><strong>Ping</strong>：测试目标主机是否可达，返回响应时间。</li>
+<li><strong>Traceroute</strong>：显示数据包从源到目标经过的每一跳的网络设备，帮助分析网络延迟和中断位置。</li>
+</ul>
+</li>
+<li><p><strong>功能</strong>：ICMP 不用于传输数据，而是提供网络故障信息、连接测试、路径追踪等工具。</p>
+</li>
+<li><p><strong>DNS</strong> 解决了域名到 IP 的转换。</p>
+<p><strong>ARP&#x2F;RARP</strong> 实现了 IP 地址与 MAC 地址的对应。</p>
+<p><strong>DHCP</strong> 动态分配 IP 地址，简化网络配置。</p>
+<p><strong>NAT</strong> 进行地址转换，优化 IP 地址的使用。</p>
+<p><strong>ICMP</strong> 则用于网络诊断和控制，确保网络运行正常。</p>
+</li>
+</ul>
+<h3 id="DNS-域名解析"><a href="#DNS-域名解析" class="headerlink" title="DNS 域名解析"></a>DNS 域名解析</h3><p>![image-20241114204250218](F:\new myblog\STUDY\source\img\image-20241114204250218.png)</p>
+<p>DNS 域名解析流程</p>
+<ol>
+<li><strong>缓存检查</strong>：<ul>
+<li>浏览器会先查找自己的缓存，看看是否已有对应域名的 IP 地址。</li>
+<li>如果浏览器没有找到，则向操作系统的缓存查询。</li>
+<li>若操作系统的缓存中也没有，再查找本地的 <strong>hosts 文件</strong>。如果 <strong>hosts 文件</strong>中也没有对应的 IP 地址，则进行 DNS 查询。</li>
+</ul>
+</li>
+<li><strong>向本地 DNS 服务器发起请求</strong>：<ul>
+<li>客户端向<strong>本地 DNS 服务器</strong>（通常是网络提供商的 DNS 服务器）发出请求，询问目标域名（如 <a target="_blank" rel="noopener" href="http://www.server.com)的/">www.server.com）的</a> IP 地址。</li>
+</ul>
+</li>
+<li><strong>本地 DNS 查询缓存</strong>：<ul>
+<li>本地 DNS 服务器会先查询自己的缓存。如果缓存中已有该域名的 IP 地址，则直接返回结果。</li>
+<li>如果缓存中没有找到，则本地 DNS 会向<strong>根域名服务器</strong>发出请求。</li>
+</ul>
+</li>
+<li><strong>根 DNS 指向顶级域 DNS</strong>：<ul>
+<li>根 DNS 服务器收到请求后，发现查询的是 <code>.com</code> 结尾的域名。于是，它告诉本地 DNS 去找负责 <code>.com</code> 域名的<strong>顶级域名服务器</strong>，并提供其地址。</li>
+</ul>
+</li>
+<li><strong>顶级域 DNS 指向权威 DNS</strong>：<ul>
+<li>本地 DNS 服务器接到 <code>.com</code> 顶级域的地址后，向该<strong>顶级域名服务器</strong>询问 <code>server.com</code> 的 IP 地址。</li>
+<li>顶级域名服务器告诉本地 DNS 去找 <code>server.com</code> 的<strong>权威 DNS 服务器</strong>，并提供其地址。</li>
+</ul>
+</li>
+<li><strong>权威 DNS 返回 IP 地址</strong>：<ul>
+<li>本地 DNS 服务器联系 <code>server.com</code> 的<strong>权威 DNS 服务器</strong>，询问 <code>www.server.com</code> 的 IP 地址。</li>
+<li>权威 DNS 服务器查询其数据库，找到 <code>www.server.com</code> 对应的 IP 地址（如 X.X.X.X），并将结果返回给本地 DNS。</li>
+</ul>
+</li>
+<li><strong>返回 IP 给客户端</strong>：<ul>
+<li>本地 DNS 服务器将 <code>www.server.com</code> 的 IP 地址返回给客户端。</li>
+<li>客户端获得 IP 地址后，便可以直接与目标服务器建立连接，访问 <code>www.server.com</code>。</li>
+</ul>
+</li>
+</ol>
+<p>![image-20241114204317144](F:\new myblog\STUDY\source\img\image-20241114204317144.png)</p>
+<h3 id="ARP-协议工作流程"><a href="#ARP-协议工作流程" class="headerlink" title="ARP 协议工作流程"></a>ARP 协议工作流程</h3><p>ARP 是借助 ARP 请求与 ARP 响应两种类型的包确定 MAC 地址的</p>
+<ol>
+<li><strong>准备 IP 数据包</strong>：<ul>
+<li>在传输一个 IP 数据包时，主机已经确定了源 IP 地址和目标 IP 地址。</li>
+<li>根据主机的路由表，主机可以找到 IP 包的<strong>下一跳</strong>，即数据包需要发送的下一个设备的 IP 地址（可能是目标设备，也可能是中间的路由器）。</li>
+</ul>
+</li>
+<li><strong>获取 MAC 地址的需求</strong>：<ul>
+<li>网络层负责将数据包传递到目标 IP 地址或下一跳 IP 地址。</li>
+<li>但是，网络层的下一层是数据链路层，数据链路层需要通过 MAC 地址进行通信。因此，主机需要知道<strong>下一跳设备的 MAC 地址</strong>。</li>
+</ul>
+</li>
+<li><strong>ARP 请求</strong>：<ul>
+<li>如果主机还不知道下一跳的 MAC 地址，它会发出一个<strong>ARP 请求</strong>。</li>
+<li>ARP 请求是一种<strong>广播包</strong>，包含请求方的 IP 地址、MAC 地址，以及目标 IP 地址（需要查询的 IP 地址）。</li>
+<li>由于是广播包，网络内的所有设备都能收到这个请求包。</li>
+</ul>
+</li>
+<li><strong>ARP 响应</strong>：<ul>
+<li>在网络中，每台设备收到 ARP 请求后，会检查请求中的目标 IP 地址是否与自身的 IP 地址匹配。</li>
+<li>如果匹配，目标设备会<strong>回复一个 ARP 响应</strong>，在响应包中包含自己的 MAC 地址。</li>
+<li>ARP 响应是<strong>单播包</strong>，只发回给请求方。</li>
+</ul>
+</li>
+<li><strong>更新 ARP 缓存</strong>：<ul>
+<li>请求方（发送 ARP 请求的主机）收到 ARP 响应后，会把目标 IP 地址和对应的 MAC 地址记录到<strong>ARP 缓存</strong>中。</li>
+<li>下次再需要发送给同一 IP 地址的数据包时，主机可以直接从缓存中获取 MAC 地址，而不需要再次发送 ARP 请求。</li>
+</ul>
+</li>
+<li><strong>完成数据传输</strong>：<ul>
+<li>通过 ARP 获取到目标 MAC 地址后，主机可以在数据包的链路层帧头中添加正确的 MAC 地址。</li>
+<li>然后，数据包就可以发送到目标设备，完成这一跳的传输。</li>
+</ul>
+</li>
+</ol>
+<p>![image-20241114204327513](F:\new myblog\STUDY\source\img\image-20241114204327513.png)</p>
+<p>主机会通过广播发送 ARP 请求，这个包中包含了想要知道的 MAC 地址的主机 IP 地址。</p>
+<p>当同个链路中的所有设备收到 ARP 请求时，会去拆开 ARP 请求包里的内容，如果 ARP 请求包中的目标 IP 地址与自己的 IP 地址一致，那么这个设备就将自己的 MAC 地址塞入 ARP 响应包返回给主机。</p>
+<p>操作系统通常会把第一次通过 ARP 获取的 MAC 地址缓存起来，以便下次直接从缓存中找到对应 IP 地址的 MAC 地址。</p>
+<p>不过，MAC 地址的缓存是有一定期限的，超过这个期限，缓存的内容将被清除。</p>
+<p>ARP 协议是已知 IP 地址求 MAC 地址，那 RARP 协议正好相反。它是已知 MAC 地址求 IP 地址。例如将打印机服务器等小型嵌入式设备接入到网络时就经常会用得到。</p>
+<p>通常这需要架设一台 RARP 服务器，在这个服务器上注册设备的 MAC 地址及其 IP 地址。然后再将这个设备接入到网络，接着：</p>
+<p>该设备会发送一条「我的 MAC 地址是 XXXX，请告诉我，我的 IP 地址应该是什么」的请求信息。</p>
+<p>RARP 服务器接到这个消息后返回「MAC 地址为 XXXX 的设备，IP 地址为 XXXX」的信息给这个设备。</p>
+<p>最后，设备就根据从 RARP 服务器所收到的应答信息设置自己的 IP 地址。</p>
+<p>![image-20241114204342956](F:\new myblog\STUDY\source\img\image-20241114204342956.png)</p>
+<h3 id="DHCP-动态获取-IP-地址"><a href="#DHCP-动态获取-IP-地址" class="headerlink" title="DHCP 动态获取 IP 地址"></a>DHCP 动态获取 IP 地址</h3><p>DHCP 在生活中非常常见。我们的电脑通常通过 DHCP 动态获取 IP 地址，这大大简化了手动配置 IP 信息的过程。</p>
+<p>![image-20241114204358756](F:\new myblog\STUDY\source\img\image-20241114204358756.png)</p>
+<p>DHCP 交互的 4 个步骤</p>
+<ol>
+<li><strong>DHCP Discover（发现报文）</strong><ul>
+<li>客户端首先发起 DHCP 发现报文（DHCP DISCOVER），这是一个 IP 数据报。</li>
+<li>由于客户端没有 IP 地址，也不知道 DHCP 服务器的地址，因此使用 <strong>UDP 广播通信</strong>。</li>
+<li>发现报文的<strong>目的地址</strong>是广播地址 <code>255.255.255.255</code>（端口 67），而<strong>源 IP 地址</strong>是 <code>0.0.0.0</code>（端口 68）。</li>
+<li>客户端将该数据报传递给链路层，链路层再将其广播到所有网络设备。</li>
+</ul>
+</li>
+<li><strong>DHCP Offer（提供报文）</strong><ul>
+<li>DHCP 服务器收到发现报文后，会用 DHCP 提供报文（DHCP OFFER）向客户端响应。</li>
+<li>提供报文依然使用广播地址 <code>255.255.255.255</code>。</li>
+<li>报文中包含了服务器提供的可租用 IP 地址、子网掩码、默认网关、DNS 服务器以及 IP 地址的租用期等配置信息。</li>
+</ul>
+</li>
+<li><strong>DHCP Request（请求报文）</strong><ul>
+<li>客户端收到一个或多个服务器的 DHCP 提供报文后，从中选择一个服务器，并向选定的服务器发送 DHCP 请求报文（DHCP REQUEST）。</li>
+<li>该请求报文回显了服务器提供的参数。</li>
+</ul>
+</li>
+<li><strong>DHCP ACK（确认报文）</strong><ul>
+<li>服务器收到 DHCP 请求报文后，使用 DHCP ACK 报文进行响应，确认所请求的参数。</li>
+<li>一旦客户端收到 DHCP ACK 报文，整个交互过程便完成，客户端即可在租用期内使用服务器分配的 IP 地址。</li>
+</ul>
+</li>
+</ol>
+<p>租约续约过程</p>
+<ul>
+<li><p>租期快到期时</p>
+<p>客户端会向服务器发送 DHCP 请求报文。</p>
+<ul>
+<li>如果服务器同意续约，会用 DHCP ACK 报文应答，客户端即可延长租期。</li>
+<li>如果服务器不同意续约，则会用 DHCP NACK 报文应答，客户端必须停止使用当前 IP 地址。</li>
+</ul>
+</li>
+</ul>
+<p>由于 DHCP 交互全程使用<strong>UDP 广播</strong>通信，如果 DHCP 服务器和客户端不在同一个局域网内，而路由器不会转发广播包，那么每个网络都需要一个 DHCP 服务器。</p>
+<p>为了解决这个问题，出现了<strong>DHCP 中继代理</strong>。有了 DHCP 中继代理，不同网段的 IP 地址分配也可以由一个 DHCP 服务器统一管理，简化了网络管理。</p>
+<p>![image-20241114204414199](F:\new myblog\STUDY\source\img\image-20241114204414199.png)</p>
+<p>DHCP 中继代理的工作流程</p>
+<ol>
+<li><strong>DHCP 客户端向中继代理发送请求</strong><ul>
+<li>DHCP 客户端会将 DHCP 请求包发送给<strong>DHCP 中继代理</strong>。</li>
+<li>DHCP 中继代理收到客户端的广播请求包后，将其转发给 DHCP 服务器，但这次是以<strong>单播</strong>的形式发出。</li>
+</ul>
+</li>
+<li><strong>DHCP 服务器响应中继代理</strong><ul>
+<li>DHCP 服务器收到中继代理转发的请求包后，返回一个应答包给中继代理。</li>
+<li>这个应答包包含了分配给客户端的 IP 地址和其他网络配置信息。</li>
+</ul>
+</li>
+<li><strong>中继代理转发应答给客户端</strong><ul>
+<li>DHCP 中继代理收到服务器的应答包后，再将该包转发给 DHCP 客户端。</li>
+</ul>
+</li>
+</ol>
+<h3 id="NAT-网络地址转换"><a href="#NAT-网络地址转换" class="headerlink" title="NAT 网络地址转换"></a>NAT 网络地址转换</h3><p>Pv4 地址资源非常紧缺，尽管通过无分类地址（CIDR）可以减缓 IPv4 地址的耗尽速度，但随着互联网用户的快速增长，IPv4 地址依然面临耗尽的风险。</p>
+<p>于是，提出了一种<strong>网络地址转换（NAT）</strong>的方法，再次缓解了 IPv4 地址耗尽的问题。</p>
+<p>简单来说，<strong>NAT</strong> 是在同一公司、家庭或教室内的主机对外通信时，将<strong>私有 IP 地址</strong>转换成<strong>公有 IP 地址</strong>。这种转换使得多个内网设备可以共享一个公有 IP 地址，从而减少公有 IP 的需求。</p>
+<p>然而，普通的 NAT 转换虽然可以节省 IP 地址，但在大量设备访问互联网的情况下依然不够用。</p>
+<p>![image-20241114204426532](F:\new myblog\STUDY\source\img\image-20241114204426532.png)</p>
+<p>![image-20241114204439369](F:\new myblog\STUDY\source\img\image-20241114204439369.png)</p>
+<h3 id="NAPT-路由器的转换"><a href="#NAPT-路由器的转换" class="headerlink" title="NAPT 路由器的转换"></a>NAPT 路由器的转换</h3><p>在网络地址和端口转换（NAPT）中，多个私有 IP 地址的客户端可以通过同一个公有 IP 地址访问同一台服务器，NAPT 使用<strong>端口号</strong>来区分每个连接。</p>
+<p>示例场景</p>
+<ul>
+<li>两个客户端：<strong>192.168.1.10</strong> 和 <strong>192.168.1.11</strong>，它们都在与服务器 <strong>183.232.231.172</strong> 进行通信。</li>
+<li>本地端口：这两个客户端的本地端口号都是 <strong>1025</strong>。</li>
+<li>公有 IP 地址：NAPT 路由器为两个客户端提供一个<strong>相同的公有 IP 地址</strong>，如 <strong>120.229.175.121</strong>，并通过不同的端口号来区分连接。</li>
+</ul>
+<p>NAPT 转换表</p>
+<p>NAPT 路由器会为每个连接生成一个转换表，用于正确地转换 IP 地址和端口号的组合，以确保不同的客户端能够同时与服务器进行通信。<br>转换表的示例如下：</p>
+<table>
+<thead>
+<tr>
+<th>内部 IP 地址</th>
+<th>内部端口</th>
+<th>公有 IP 地址</th>
+<th>公有端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.1.10</td>
+<td>1025</td>
+<td>120.229.175.121</td>
+<td>30001</td>
+</tr>
+<tr>
+<td>192.168.1.11</td>
+<td>1025</td>
+<td>120.229.175.121</td>
+<td>30002</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>客户端 A</strong>（192.168.1.10:1025）会被转换为 <strong>120.229.175.121:30001</strong>。</li>
+<li><strong>客户端 B</strong>（192.168.1.11:1025）会被转换为 <strong>120.229.175.121:30002</strong>。</li>
+</ul>
+<p>转换表的生成与删除</p>
+<ul>
+<li>NAPT 转换表在<strong>建立连接时生成</strong>，例如在 TCP 连接首次握手时，SYN 包发出后就会生成表项。</li>
+<li>在连接关闭时（例如 TCP 的 FIN 包确认应答），对应的转换表项会被删除，从而释放资源。</li>
+</ul>
+<p>ICMP 互联网控制报文协议</p>
+<p>在复杂的网络传输环境中，网络包传输常常遇到各种问题。当问题发生时，计算机网络需要“告知”发送方，以便及时调整传输策略，从而<strong>控制整个网络的稳定性和可靠性</strong></p>
+<p><strong>ICMP（互联网控制报文协议）</strong>主要用于报告网络传输中的问题并提供诊断信息，具体功能包括：</p>
+<ul>
+<li><strong>确认 IP 包是否成功送达目标地址</strong></li>
+<li><strong>报告 IP 包在传输过程中被丢弃的原因</strong></li>
+<li><strong>帮助优化和改善网络设置</strong></li>
+</ul>
+<p>![image-20241114204450318](F:\new myblog\STUDY\source\img\image-20241114204450318.png)</p>
+<p>在 IP 通信中，如果某个 IP 包未能成功到达目标地址，ICMP 负责通知发送方并提供具体的失败原因。例如：</p>
+<ol>
+<li><strong>通知过程</strong>：<ul>
+<li>主机 A 向主机 B 发送数据包，但由于某种原因，途中的<strong>路由器 2</strong>未能找到主机 B。</li>
+<li>路由器 2 会向主机 A 发送一个 <strong>ICMP 目标不可达</strong>消息，告知主机 A 目标主机 B 无法到达。</li>
+</ul>
+</li>
+<li><strong>消息传递</strong>：<ul>
+<li>ICMP 消息通过 IP 协议发送，按照正常的路由转发过程返回给发送方。</li>
+<li>路由器 2 发送的 ICMP 消息会先经过<strong>路由器 1</strong>，再转发给主机 A。</li>
+</ul>
+</li>
+<li><strong>解析 ICMP 消息</strong>：<ul>
+<li>主机 A 接收到 ICMP 消息后，解析消息的首部和数据域，得知具体的问题原因。</li>
+</ul>
+</li>
+</ol>
+<p>您提到的 ICMP 的 “控制” 功能非常关键，以下是相关内容的整理版本：</p>
+<hr>
+<h3 id="ICMP：网络控制和诊断协议"><a href="#ICMP：网络控制和诊断协议" class="headerlink" title="ICMP：网络控制和诊断协议"></a>ICMP：网络控制和诊断协议</h3><p>在复杂的网络传输环境中，网络包传输常常遇到各种问题。当问题发生时，计算机网络需要“告知”发送方，以便及时调整传输策略，从而<strong>控制整个网络的稳定性和可靠性</strong>。</p>
+<hr>
+<p>ICMP 的主要功能</p>
+<p><strong>ICMP（互联网控制报文协议）</strong>主要用于报告网络传输中的问题并提供诊断信息，具体功能包括：</p>
+<ul>
+<li><strong>确认 IP 包是否成功送达目标地址</strong></li>
+<li><strong>报告 IP 包在传输过程中被丢弃的原因</strong></li>
+<li><strong>帮助优化和改善网络设置</strong></li>
+</ul>
+<hr>
+<p>ICMP 报告问题的过程</p>
+<p>在 IP 通信中，如果某个 IP 包未能成功到达目标地址，ICMP 负责通知发送方并提供具体的失败原因。例如：</p>
+<ol>
+<li><p><strong>通知过程</strong>：</p>
+<ul>
+<li>主机 A 向主机 B 发送数据包，但由于某种原因，途中的<strong>路由器 2</strong>未能找到主机 B。</li>
+<li>路由器 2 会向主机 A 发送一个 <strong>ICMP 目标不可达</strong>消息，告知主机 A 目标主机 B 无法到达。</li>
+</ul>
+</li>
+<li><p><strong>消息传递</strong>：</p>
+<ul>
+<li>ICMP 消息通过 IP 协议发送，按照正常的路由转发过程返回给发送方。</li>
+<li>路由器 2 发送的 ICMP 消息会先经过<strong>路由器 1</strong>，再转发给主机 A。</li>
+</ul>
+</li>
+<li><p><strong>解析 ICMP 消息</strong>：</p>
+<ul>
+<li>主机 A 接收到 ICMP 消息后，解析消息的首部和数据域，得知具体的问题原因。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>ICMP 消息的分类</p>
+<p>ICMP 消息分为两大类：</p>
+<ol>
+<li><p><strong>查询报文类型</strong>：用于诊断网络的健康状况，例如 <code>ping</code> 和 <code>traceroute</code> 工具的基础。</p>
+<ul>
+<li>例如 <code>ping</code> 命令就是发送 ICMP 回显请求报文，确认目标主机是否可达，并测量往返时间。</li>
+</ul>
+</li>
+<li><p><strong>差错报文类型</strong>：用于报告传输错误原因，帮助发送方了解网络中的问题。</p>
+<ul>
+<li>例如，当路由器无法找到目标 IP 时，会返回“目标不可达”报文，指明数据包未送达的原因。</li>
+</ul>
+</li>
+</ol>
+<p>![image-20241114204501213](F:\new myblog\STUDY\source\img\image-20241114204501213.png)</p>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>HTTP的名字「超文本协议传输」，它可以拆成三个部分： 超文本 传输 协议</p>
+<ol>
+<li><p>协议     HTTP 是一个用在计算机世界里的协议。它使用计算机能够理解的语言确立了一种计 算机之间交流通信的规范（两个以上的参与者），以及相关的各种控制和错误处理方 式（行为约定和规范）。</p>
+</li>
+<li><p>传输   就是把一堆东西从 A 点搬到 B 点，或者从 B 点 搬到 A 点。 HTTP 协议是一个双向协议。 HTTP 是一个在计算机世界里专门用来在两点之间传输数据的约定和规范。 我们在上网冲浪时，浏览器是请求方 A ，百度网站就是应答方 B。双方约定用 HTTP  协议来通信，于是浏览器把请求数据发送给网站，网站再把一些数据返回给浏览器， 最后由浏览器渲染在屏幕，就可以看到图片、视频了</p>
+</li>
+<li><p>超文本     HTTP 传输的内容是「超文本」 「文本」，在互联网早期的时候只是简单的字符文字，但现在「文本」。的涵义已经 可以扩展为图片、视频、压缩包等，在 HTTP 眼里这些都算做「文本」。「超文本」，它就是超越了普通文本的文本，它是文字、图片、视频等的混合体，最 关键有超链接，能从一个超文本跳转到另外一个超文本。 HTML 就是最常见的超文本了，它本身只是纯文字文件，但内部用很多标签定义了图 片、视频等的链接，在经过浏览器的解释，呈现给我们的就是一个文字、有画面的网页了</p>
+</li>
+</ol>
+<p>   HTTP 是一个在计算机世界里专门在「两点」之间「传输」文字、图片、音频、视频 等「超文本」数据的「约定和规范」</p>
+<p>URL（统一资源定位符）：我们常说的网址，包含了用于查找资源的足够的信息，而 一个完整的URL包含下面几部分</p>
+<p> protocol:[&#x2F;&#x2F;[user[:password]@]host[:port]][&#x2F;path][?query] [#fragment]</p>
+<p><strong>protocol</strong>：指定使用的传输协议，最常见的协议是 <strong>HTTP&#x2F;HTTPS</strong>，用于定位网络资源。其他协议包括：</p>
+<ul>
+<li><strong>mailto:</strong> 打开邮箱客户端</li>
+<li><strong>ftp:</strong> 用于文件传输</li>
+<li><strong>file:</strong> 获取本地或共享文件</li>
+</ul>
+<p><strong>user</strong>用于在需要认证后才能访问的资源时提供账号和密码。</p>
+<p><strong>host</strong>：指定合法的互联网主机域名或 IP 地址，表示资源所在的服务器位置。</p>
+<p><strong>port</strong>：用于指定在传输层上用于信息交换的进程端口号，表示获取服务器资源的入口。</p>
+<ul>
+<li>不同协议有默认端口号，例如 HTTP 的默认端口是 80。若使用其他端口，则需要显式指定。</li>
+</ul>
+<p><strong>path</strong>：表示服务器上资源的具体路径，指明请求的资源位置。</p>
+<p><strong>?query</strong>：可选项，用于传递动态网页参数。</p>
+<ul>
+<li>多个参数之间用 <strong>“&amp;”</strong> 隔开，每个参数的键值对之间用 <strong>“&#x3D;”</strong> 隔开。</li>
+</ul>
+<p><strong>#fragment</strong>：信息片段字符串，用于指定资源中的某个部分。</p>
+<ul>
+<li>例如，在网页中可以用 fragment 直接定位到特定的段落或名词解释位置。</li>
+</ul>
+<h3 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h3><p>HTTP请求由四个部分组成： 请求行 请求头部 空行 请求正</p>
+<p>![image-20241114210646570](F:\new myblog\STUDY\source\img\image-20241114210646570.png)</p>
+<p>![image-20241114210708742](F:\new myblog\STUDY\source\img\image-20241114210708742.png)</p>
+<p>请求方法</p>
+<h3 id="HTTP-请求方法"><a href="#HTTP-请求方法" class="headerlink" title="HTTP 请求方法"></a>HTTP 请求方法</h3><ol>
+<li><strong>GET</strong>：获取由 <code>Request-URI</code> 所标识的资源。</li>
+<li><strong>POST</strong>：在 <code>Request-URI</code> 所标识的资源后附加新的数据。</li>
+<li><strong>HEAD</strong>：请求获取由 <code>Request-URI</code> 所标识的资源的响应消息报头，不返回主体内容。</li>
+<li><strong>PUT</strong>：请求服务器存储一个资源，并使用 <code>Request-URI</code> 作为该资源的标识。</li>
+<li><strong>DELETE</strong>：请求服务器删除 <code>Request-URI</code> 所标识的资源。</li>
+<li><strong>TRACE</strong>：请求服务器回送收到的请求信息，主要用于测试或诊断。</li>
+<li><strong>OPTIONS</strong>：请求查询服务器的性能，或者获取与资源相关的选项和需求。</li>
+<li><strong>CONNECT</strong>：保留给将来使用，在 HTTP&#x2F;1.1 协议中为代理服务器预留，以便能够将连接改为管道方式。</li>
+<li><strong>PATCH</strong>：用于将局部修改应用到资源（由 RFC 5789 指定的方法）。</li>
+</ol>
+<p><strong>HTTP&#x2F;1.0</strong> 定义了三种请求方法：<code>GET</code>、<code>POST</code> 和 <code>HEAD</code>。</p>
+<p><strong>HTTP&#x2F;1.1</strong> 新增了六种请求方法：<code>OPTIONS</code>、<code>PUT</code>、<code>PATCH</code>、<code>DELETE</code>、<code>TRACE</code> 和 <code>CONNECT</code>。</p>
+<p>![image-20241114210859708](F:\new myblog\STUDY\source\img\image-20241114210859708.png)</p>
+<p>状态码 </p>
+<p>以下是您关于 HTTP 状态码的内容排版整理：</p>
+<hr>
+<h3 id="HTTP-状态码详解"><a href="#HTTP-状态码详解" class="headerlink" title="HTTP 状态码详解"></a>HTTP 状态码详解</h3><h4 id="2xx：成功状态码"><a href="#2xx：成功状态码" class="headerlink" title="2xx：成功状态码"></a>2xx：成功状态码</h4><ul>
+<li><strong>200 OK</strong>：表示请求成功，一切正常。响应头包含 <code>body</code> 数据。</li>
+<li><strong>204 No Content</strong>：请求成功，但响应头没有 <code>body</code> 数据。</li>
+<li><strong>206 Partial Content</strong>：表示分块下载或断点续传，<code>body</code> 数据是资源的一部分，服务器处理成功。</li>
+</ul>
+<hr>
+<h4 id="3xx：重定向状态码"><a href="#3xx：重定向状态码" class="headerlink" title="3xx：重定向状态码"></a>3xx：重定向状态码</h4><ul>
+<li><strong>301 Moved Permanently</strong>：永久重定向，资源已移动到新的 URL，客户端需使用新的 URL。</li>
+<li><strong>302 Found</strong>（Moved Temporarily）：临时重定向，资源暂时需要用另一个 URL 访问。<ul>
+<li><strong>301</strong> 和 <strong>302</strong> 状态码的响应头中会使用 <code>Location</code> 字段指明跳转的 URL，浏览器会自动重定向。</li>
+</ul>
+</li>
+<li><strong>304 Not Modified</strong>：资源未修改，重定向到客户端已有的缓存文件，通常用于缓存控制。</li>
+</ul>
+<hr>
+<h4 id="4xx：客户端错误状态码"><a href="#4xx：客户端错误状态码" class="headerlink" title="4xx：客户端错误状态码"></a>4xx：客户端错误状态码</h4><ul>
+<li><strong>400 Bad Request</strong>：请求的报文有错误，属于笼统的错误码。</li>
+<li><strong>403 Forbidden</strong>：服务器禁止访问资源，与客户端请求无关。</li>
+<li><strong>404 Not Found</strong>：请求的资源不存在或未找到，服务器无法提供资源。</li>
+</ul>
+<hr>
+<h4 id="5xx：服务器错误状态码"><a href="#5xx：服务器错误状态码" class="headerlink" title="5xx：服务器错误状态码"></a>5xx：服务器错误状态码</h4><ul>
+<li><strong>500 Internal Server Error</strong>：服务器内部错误，属于笼统的通用错误码。</li>
+<li><strong>501 Not Implemented</strong>：服务器不支持请求的功能，相当于“即将开业，敬请期待”。</li>
+<li><strong>502 Bad Gateway</strong>：服务器作为网关或代理时访问后端服务器出错。</li>
+<li><strong>503 Service Unavailable</strong>：服务器暂时无法响应请求，通常表示服务器繁忙，请稍后重试。</li>
+</ul>
+<hr>
+<h3 id="HTTP请求方法理解"><a href="#HTTP请求方法理解" class="headerlink" title="HTTP请求方法理解"></a>HTTP请求方法理解</h3><h4 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h4><p>Get 方法的含义是请求从服务器获取资源，这个资源可以是静态的文本、页面、图 片视频等</p>
+<p>![image-20241114211249857](F:\new myblog\STUDY\source\img\image-20241114211249857.png)</p>
+<h4 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h4><p>POST：向 Request-URI所标识的资源提交数据，数据就放在请求正文中 用于向指定资源发送数据，指定的资源会对数据进行处理，然后将处理结果返回给客 户端，一般用于表单提交、文件上传</p>
+<p>![image-20241114211204865](F:\new myblog\STUDY\source\img\image-20241114211204865.png)</p>
+<h4 id="HEAD"><a href="#HEAD" class="headerlink" title="HEAD"></a>HEAD</h4><p>HEAD：请求获取由Request-URI所标识的资源的响应消息报头首部，不会返回报文 主体</p>
+<p>![image-20241114211328505](F:\new myblog\STUDY\source\img\image-20241114211328505.png)</p>
+<h4 id="OPTIONS"><a href="#OPTIONS" class="headerlink" title="OPTIONS"></a>OPTIONS</h4><p>OPTIONS：查询资源支持的方法</p>
+<p>![image-20241114211353396](F:\new myblog\STUDY\source\img\image-20241114211353396.png)</p>
+<h4 id="PUT"><a href="#PUT" class="headerlink" title="PUT"></a>PUT</h4><p><code>PUT</code> 请求用于向服务器存储一个资源，并使用 <code>Request-URI</code> 作为其标识。服务器会将请求主体的内容保存到 <code>URL</code> 指定的资源位置，包含以下两种情况：</p>
+<ol>
+<li><strong>资源不存在</strong>：<ul>
+<li>如果 <code>URL</code> 指定的资源不存在，服务器会新建一个文件，将请求主体中的内容保存到新建的文件中。</li>
+<li><strong>响应码</strong>：<code>201 Created</code></li>
+</ul>
+</li>
+<li><strong>资源已存在</strong>：<ul>
+<li>如果 <code>URL</code> 指定的资源已存在，服务器会用请求主体中的内容<strong>覆盖原文件内容</strong>。</li>
+<li><strong>响应码</strong>：<code>200 OK</code> 或 <code>204 No Content</code></li>
+</ul>
+</li>
+</ol>
+<p>![image-20241114211421629](F:\new myblog\STUDY\source\img\image-20241114211421629.png)</p>
+<h4 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h4><p>DELETE：请求服务器删除Request-URI所标识的资源</p>
+<p>![image-20241114211431471](F:\new myblog\STUDY\source\img\image-20241114211431471.png)</p>
+<h4 id="TRACE"><a href="#TRACE" class="headerlink" title="TRACE"></a>TRACE</h4><p>TRACE：路径追踪，请求服务器回送收到的请求信息，主要用于测试或诊断发送的请 求是否在客户端与服务端之间传送时被网关、防火墙、代理更改</p>
+<h3 id="HTTPS与HTTP"><a href="#HTTPS与HTTP" class="headerlink" title="HTTPS与HTTP"></a>HTTPS与HTTP</h3><p>HTTP 与 HTTPS 的区别</p>
+<ol>
+<li><strong>传输安全性</strong>：<ul>
+<li><strong>HTTP</strong>：超文本传输协议，信息<strong>以明文形式传输</strong>，存在安全风险。</li>
+<li><strong>HTTPS</strong>：在 TCP 和 HTTP 网络层之间加入 <strong>SSL&#x2F;TLS</strong> 安全协议，使得报文可以<strong>加密传输</strong>，解决了 HTTP 的不安全问题。</li>
+</ul>
+</li>
+<li><strong>连接建立流程</strong>：<ul>
+<li><strong>HTTP</strong>：建立相对简单，经过 TCP 三次握手后即可传输 HTTP 报文。</li>
+<li><strong>HTTPS</strong>：在 TCP 三次握手之后，还需进行<strong>SSL&#x2F;TLS 握手</strong>过程，才可进入加密的报文传输。</li>
+</ul>
+</li>
+<li><strong>端口号</strong>：<ul>
+<li><strong>HTTP</strong>：默认端口号为 80。</li>
+<li><strong>HTTPS</strong>：默认端口号为 443。</li>
+</ul>
+</li>
+<li><strong>证书验证</strong>：<ul>
+<li><strong>HTTPS</strong>：需要向 <strong>CA（证书权威机构）</strong> 申请数字证书，以保证服务器身份的可信度。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>HTTPS 解决的问题</p>
+<p>由于 HTTP 是明文传输，在安全性上存在以下三个主要风险：</p>
+<ol>
+<li><strong>窃听风险</strong>：第三方可以在通信链路中获取通信内容，导致用户隐私泄露。</li>
+<li><strong>篡改风险</strong>：第三方可以强制插入内容（如垃圾广告），影响用户体验和内容完整性。</li>
+<li><strong>冒充风险</strong>：第三方可以冒充合法网站（如银行或购物网站），引诱用户输入敏感信息，从而盗取用户财产。</li>
+</ol>
+<p>![image-20241114211604169](F:\new myblog\STUDY\source\img\image-20241114211604169.png)</p>
+<p>- </p>
+<h2 id="写电子笔记真是最傻逼的事情了，这种要记忆的用笔记啊"><a href="#写电子笔记真是最傻逼的事情了，这种要记忆的用笔记啊" class="headerlink" title="写电子笔记真是最傻逼的事情了，这种要记忆的用笔记啊"></a>写电子笔记真是最傻逼的事情了，这种要记忆的用笔记啊</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>渗透基础</div>
+      <div>https://theganlove.github.io/2024/11/14/渗透基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>uert</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/28/AWD%E5%A7%BF%E5%8A%BF%E6%80%BB%E7%BB%93/" title="AWD姿势总结">
+                        <span class="hidden-mobile">AWD姿势总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
