@@ -27,7 +27,7 @@
 <meta property="og:description" content="注意:本笔记代码都是c++，而且为了蓝桥杯做了很大的改变，所以初次学不要按照本笔记 c++代码的基础内容DevC++常用快捷键 F9：编译并运行程序。  Shift + F9：仅编译（不运行）  Ctrl + &#x2F;：注释当前行或选中的代码  Ctrl + Shift + &#x2F;：取消注释  进入 工具 -&gt; 编辑器选项 -&gt; 代码模板，在其中添加你常用的代码片段。例如，可以创建一个 for">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-09T11:20:21.000Z">
-<meta property="article:modified_time" content="2025-03-28T07:07:37.954Z">
+<meta property="article:modified_time" content="2025-04-02T07:57:55.534Z">
 <meta property="article:author" content="uert">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
@@ -292,10 +292,14 @@
 <p>在 <strong>编译选项</strong> 窗口中，选择 <strong>编译器设置</strong>。</p>
 <p>在 <strong>设置</strong> 选项卡下的 <strong>命令行</strong> 中，加入 <code>-std=c++11</code>（或更高版本的标准，如 <code>-std=c++14</code>、<code>-std=c++17</code>）。</p>
 </li>
+<li><p>ctrl+n开cpp，ctrl+shift+a进行优化代码</p>
+</li>
+<li><p>背景设置高亮为黑色，模板为obvilition</p>
+</li>
 </ol>
 <p>++++</p>
 <h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><ul>
-<li><p><code>#include &lt;bits/stdc++.h&gt;</code><br>不需要一一手动包含，但是占时间，容易超时，不会再写。</p>
+<li><p><code>#include &lt;bits/stdc++.h&gt;</code><br>不需要一一手动包含，但是占时间，容易超时，不会再写。不过编译时间无所谓了</p>
 </li>
 <li><p><code>#include &lt;iostream&gt;</code><br>标准输入输出流，常用对象：<code>std::cin</code>, <code>std::cout</code>, <code>std::cerr</code>, <code>std::endl</code>。</p>
 </li>
@@ -336,6 +340,7 @@
 <h2 id="数论"><a href="#数论" class="headerlink" title="数论"></a>数论</h2><p>最大公约数，最小公倍数，唯一分解定理(必会)<br>素数，素数筛法 (必会)<br>快速幂，费马小定理求逆元(必会)<br>排列组合，第二类斯特林数(必会)<br>概率论与期望公式(尽量会，去年第一次考，然后每年都会考均值期望)<br>矩阵乘法(尽量会，近几年没考过)<br>数论分块(尽量会，近几年没考过)</p>
 <h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><p>单起点多终点正权最短路(必会，dijikstra)<br>单起点多终点负权最短路(必会，Bellmanford，spfa)<br>多起点多终点最短路(必会，Floy 记住循环kij就好）<br>最小瓶颈路<br>最小生成树<br>最近公共祖光(Ica)尽量会)</p>
 <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>字符串哈希(必会，尤其是与二分结合的思想以及回文半径回文中心的思想)<br>kmp(必会，会求周期)<br>manacher(求回文串，尽可能会)<br>字典树(尽可能会)</p>
+<p>切记：小心变量覆盖的问题</p>
 <hr>
 <h1 id="C-算法详细内容"><a href="#C-算法详细内容" class="headerlink" title="C++算法详细内容"></a>C++算法详细内容</h1><h2 id="基础数据结构和算法"><a href="#基础数据结构和算法" class="headerlink" title="基础数据结构和算法"></a><strong>基础数据结构和算法</strong></h2><h3 id="1-基础语法与数据类型"><a href="#1-基础语法与数据类型" class="headerlink" title="1. 基础语法与数据类型"></a>1. <strong>基础语法与数据类型</strong></h3><h4 id="1-输入输出"><a href="#1-输入输出" class="headerlink" title="1.输入输出"></a>1.输入输出</h4><p>cin和cout</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">cin</span> &gt;&gt; a;  <span class="hljs-comment">// 从键盘输入一个整数</span><br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;You entered: &quot;</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 输出结果</span><br><br><span class="hljs-type">char</span> ch;<br><span class="hljs-built_in">cin</span> &gt;&gt; ch;  <span class="hljs-comment">// 输入一个字符</span><br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;Character: &quot;</span> &lt;&lt; ch &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 输出字符</span><br><br><br><span class="hljs-built_in">string</span> str;<br><span class="hljs-built_in">cin</span> &gt;&gt; str;  <span class="hljs-comment">// 只会读取一个单词，遇到空格会停止</span><br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;You entered: &quot;</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br><span class="hljs-built_in">string</span> str;<br>getline(<span class="hljs-built_in">cin</span>, str);  <span class="hljs-comment">// 读取一整行，包括空格，用之前确认是否有空字符，用getchar处理</span><br><span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;You entered: &quot;</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;<br></code></pre></td></tr></table></figure>

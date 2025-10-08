@@ -19,15 +19,15 @@
   <meta name="author" content="uert">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Docker操作Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一 个可移植的容器中,然后发布到任何流行的Linux机器或Windows 机器上,也可以实现 虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口 Docker 环境安装与基本操作整理1. 安装 Docker 添加 Docker PGP key 1curl -fsSL https:&#x2F;&#x2F;mirrors.t">
+    <meta name="description" content="Linux使用基础Linux使用基础 ![image-20250418110229353](F:\new myblog\STUDY\source\img\image-20250418110229353.png) 123456789101112131415161718192021222324252627282930313233343536&#x2F;：根目录，每一个文件和目录都从这里开始。只有root用户具有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="渗透基础">
 <meta property="og:url" content="https://theganlove.github.io/2024/11/14/%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Docker操作Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一 个可移植的容器中,然后发布到任何流行的Linux机器或Windows 机器上,也可以实现 虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口 Docker 环境安装与基本操作整理1. 安装 Docker 添加 Docker PGP key 1curl -fsSL https:&#x2F;&#x2F;mirrors.t">
+<meta property="og:description" content="Linux使用基础Linux使用基础 ![image-20250418110229353](F:\new myblog\STUDY\source\img\image-20250418110229353.png) 123456789101112131415161718192021222324252627282930313233343536&#x2F;：根目录，每一个文件和目录都从这里开始。只有root用户具有">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-14T12:04:07.000Z">
-<meta property="article:modified_time" content="2024-11-16T05:30:40.758Z">
+<meta property="article:modified_time" content="2025-04-19T12:04:37.885Z">
 <meta property="article:author" content="uert">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15k 字
+          16k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          125 分钟
+          136 分钟
         
       </span>
     
@@ -275,8 +275,30 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Docker操作"><a href="#Docker操作" class="headerlink" title="Docker操作"></a>Docker操作</h2><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一 个可移植的容器中,然后发布到任何流行的Linux机器或Windows 机器上,也可以实现 虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口</p>
-<h3 id="Docker-环境安装与基本操作整理"><a href="#Docker-环境安装与基本操作整理" class="headerlink" title="Docker 环境安装与基本操作整理"></a>Docker 环境安装与基本操作整理</h3><h4 id="1-安装-Docker"><a href="#1-安装-Docker" class="headerlink" title="1. 安装 Docker"></a>1. <strong>安装 Docker</strong></h4><ul>
+                <h3 id="Linux使用基础"><a href="#Linux使用基础" class="headerlink" title="Linux使用基础"></a>Linux使用基础</h3><p>Linux使用基础</p>
+<p>![image-20250418110229353](F:\new myblog\STUDY\source\img\image-20250418110229353.png)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs bash">/：<br>根目录，每一个文件和目录都从这里开始。只有root用户具有该目录下的写权限。<br>/bin：<br>用户二进制文件，包含二进制可执行文件。系统的所有用户使用的命令都设在这里，例如：ps，<span class="hljs-built_in">ls</span>，ping，<br>grep，<span class="hljs-built_in">cp</span>等。<br>/boot：<br>这里存放的是启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件。<br>/dev ：<br>设备文件，dev是Device(设备)的缩写, 该目录下存放的是Linux的外部设备，在Linux中访问设备的方式<br>和访问文件的方式是相同的。<br>/etc：<br>这个目录用来存放所有的系统管理所需要的配置文件和子目录。<br>/home：<br>用户的主目录，在Linux中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的。<br>/lib：<br>这个目录里存放着系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件。几乎所有的应用程序<br>都需要用到这些共享库。<br>/root：<br>该目录为系统管理员，也称作超级权限者的用户主目录。<br>/usr/bin：<br>系统用户使用的应用程序。<br>/opt：<br>可选的附加应用程序，这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库就可以放到这个<br>目录下。默认是空的。<br>/sbin：<br>s就是Super User的意思，系统二进制文件，在这个目录下的linux命令通常由系统管理员使用。<br>/usr：<br>这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于windows下的program <br>files目录。<br>/usr/sbin：<br>超级用户使用的比较高级的管理程序和系统守护程序。<br>/tmp：<br>这个目录是用来存放一些临时文件的。<br>/var：<br>这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文<br>件<br></code></pre></td></tr></table></figure>
+
+<p>文件属性</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">r：4<br> w：2<br> x：1<br>属主：u（user）<br>数组：g（group）<br>其他：o（other）<br><span class="hljs-built_in">chmod</span> u+x <span class="hljs-built_in">test</span><br><span class="hljs-built_in">chown</span> root.root <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<p>![image-20250418110404835](F:\new myblog\STUDY\source\img\image-20250418110404835.png)</p>
+<p>文件目录管理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span><br> <span class="hljs-built_in">cd</span><br> <span class="hljs-built_in">pwd</span><br> <span class="hljs-built_in">mkdir</span><br> <span class="hljs-built_in">rmdir</span><br> <span class="hljs-built_in">cp</span><br> <span class="hljs-built_in">rm</span><br> <span class="hljs-built_in">mv</span><br>绝对路径：由根目录写起 root@kali:~# <span class="hljs-built_in">cd</span> /var/www/html<br>相对路径：不是由根写起 root@kali:/var/www/html# <span class="hljs-built_in">cd</span> ../../log/<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="VIM编辑器"><a href="#VIM编辑器" class="headerlink" title="VIM编辑器"></a>VIM编辑器</h3><p>![image-20250418110606597](F:\new myblog\STUDY\source\img\image-20250418110606597.png)</p>
+<ol>
+<li>命令模式 用户刚刚启动 vi&#x2F;vim，便进入了命令模式。 此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字 符，i被当作了一个命令。 </li>
+<li>输入模式 进行VIM输入模式的方式是在命令模式状态下输入 i、I、a、A、o、O 等插入命令 在输入模式下，Vim 可以对文件执行写操作，类似于在 Windows 系统的文档中输入内容。 </li>
+<li>底线命令模式 在命令模式下按下 “:”(英文冒号)就进入了底线命令模式。 底线命令模式可以输入单个或多个字符的命令，可用的命令非常多。 在底线命令模式中，基本的命令有(已经省略了冒号)：  q 退出程序  w 保存文件  按ESC键可随时退出底线命令模式。</li>
+</ol>
+<h2 id="Docker操作"><a href="#Docker操作" class="headerlink" title="Docker操作"></a>Docker操作</h2><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一 个可移植的容器中,然后发布到任何流行的Linux机器或Windows 机器上,也可以实现 虚拟化,容器是完全使用沙箱机制,相互之间不会有任何接口</p>
+<h3 id="Docker-环境安装与基本操作整理"><a href="#Docker-环境安装与基本操作整理" class="headerlink" title="Docker 环境安装与基本操作整理"></a>Docker 环境安装与基本操作整理</h3><ol>
+<li><strong>安装 Docker</strong></li>
+</ol>
+<ul>
 <li><p><strong>添加 Docker PGP key</strong></p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -fsSL https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/docker-ce/</span>linux<span class="hljs-regexp">/debian/g</span>pg | sudo apt-key add -<br></code></pre></td></tr></table></figure>
 </li>
@@ -301,21 +323,32 @@
 <li><p><strong>设置 Docker 开机自动启动</strong></p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">systemctl <span class="hljs-built_in">enable</span> docker<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="2-安装-Docker-Compose"><a href="#2-安装-Docker-Compose" class="headerlink" title="2. 安装 Docker Compose"></a>2. <strong>安装 Docker Compose</strong></h4><ul>
+<ol start="2">
+<li><strong>安装 Docker Compose</strong></li>
+</ol>
+<ul>
 <li><p>下载并安装 Docker Compose</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -L https:<span class="hljs-regexp">//g</span>et.daocloud.io<span class="hljs-regexp">/docker/</span>compose<span class="hljs-regexp">/releases/</span>download<span class="hljs-regexp">/v2.1.0/</span>docker-compose-$(uname -s)-$(uname -m) &gt; <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>docker-compose<br>chmod +x <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/</span>docker-compose<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="3-Docker-镜像操作"><a href="#3-Docker-镜像操作" class="headerlink" title="3. Docker 镜像操作"></a>3. <strong>Docker 镜像操作</strong></h4><ul>
+<ol start="3">
+<li><strong>Docker 镜像操作</strong></li>
+</ol>
+<ul>
 <li><p><strong>列出镜像</strong></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">docker <span class="hljs-selector-tag">image</span> ls -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p><strong>拉取镜像</strong></p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">docker image pull hello-world<br></code></pre></td></tr></table></figure>
+<p>Docker维护了镜像仓库，分为共有和私有两种，共有的官方仓库Docker Hub(<a target="_blank" rel="noopener" href="https://hub.docker.com/)%E6%98%AF%E6%9C%80%E9%87%8D%E8%A6%81%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E3%80%82%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%EF%BC%88Private">https://hub.docker.com/)是最重要最常用的镜像仓库。私有仓库（Private</a> Registry）是开发者或者企业自建的镜像存储库，通常用来保存企业 内部的 Docker 镜像，用于内部开发流程和产品的发布、版本控制。</p>
+<p>要想获取某个镜像，我们可以使用pull命令，从仓库中拉取镜像到本地，如</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"> docker <span class="hljs-selector-tag">image</span> pull library/hello-world<br> <br> 上面代码中，docker <span class="hljs-selector-tag">image</span> pull是抓取 <span class="hljs-selector-tag">image</span> 文件的命令。library/hello-world是 <span class="hljs-selector-tag">image</span> 文件在仓库里面的位置，其中library是 <span class="hljs-selector-tag">image</span> 文件所在的组，hello-world是 <span class="hljs-selector-tag">image</span> 文件的名字。<br><br>由于 Docker 官方提供的 <span class="hljs-selector-tag">image</span> 文件，都放在library组里面，所以它的是默认组，可以省略。因此，上面的命令可以写成下面这样。<br> docker <span class="hljs-selector-tag">image</span> pull hello-world<br></code></pre></td></tr></table></figure>
 </li>
 <li><p><strong>删除镜像</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker image <span class="hljs-built_in">rm</span> 镜像名或镜像<span class="hljs-built_in">id</span><br>docker rmi 镜像名或镜像<span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="4-Docker-容器操作"><a href="#4-Docker-容器操作" class="headerlink" title="4. Docker 容器操作"></a>4. <strong>Docker 容器操作</strong></h4><ul>
+<ol start="4">
+<li><strong>Docker 容器操作</strong></li>
+</ol>
+<ul>
 <li><p><strong>创建容器</strong></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">docker run <span class="hljs-selector-attr">[options]</span> 镜像名 <span class="hljs-selector-attr">[命令]</span><br></code></pre></td></tr></table></figure>
 
@@ -368,38 +401,55 @@
 <li><p><strong>删除容器</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker container <span class="hljs-built_in">rm</span> 容器名或容器<span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="5-容器保存为镜像"><a href="#5-容器保存为镜像" class="headerlink" title="5. 容器保存为镜像"></a>5. <strong>容器保存为镜像</strong></h4><ul>
+<ol start="5">
+<li><strong>容器保存为镜像</strong></li>
+</ol>
+<ul>
 <li><p>保存容器为镜像</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">docker</span> commit 容器名 镜像名<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="6-镜像备份与迁移"><a href="#6-镜像备份与迁移" class="headerlink" title="6. 镜像备份与迁移"></a>6. <strong>镜像备份与迁移</strong></h4><ul>
+<ol start="6">
+<li><strong>镜像备份与迁移</strong></li>
+</ol>
+<ul>
 <li><p><strong>将镜像保存为文件</strong></p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">docker save -o <span class="hljs-string">./</span>镜像文件<span class="hljs-string">.tar</span> 镜像名<br></code></pre></td></tr></table></figure>
 </li>
 <li><p><strong>加载镜像文件</strong></p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">docker load -i <span class="hljs-string">./</span>镜像文件<span class="hljs-string">.tar</span><br></code></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="Docker-搭建漏洞靶场"><a href="#Docker-搭建漏洞靶场" class="headerlink" title="Docker 搭建漏洞靶场"></a>Docker 搭建漏洞靶场</h3><h4 id="1-VulHub"><a href="#1-VulHub" class="headerlink" title="1. VulHub"></a>1. <strong>VulHub</strong></h4><p>VulHub 提供了多个漏洞靶场的 Docker 镜像，涵盖了 Web 应用、网络服务等各种类型的漏洞。</p>
+<h3 id="Docker-搭建漏洞靶场"><a href="#Docker-搭建漏洞靶场" class="headerlink" title="Docker 搭建漏洞靶场"></a>Docker 搭建漏洞靶场</h3><ol>
+<li><strong>VulHub</strong></li>
+</ol>
+<p>VulHub 提供了多个漏洞靶场的 Docker 镜像，涵盖了 Web 应用、网络服务等各种类型的漏洞。</p>
 <ul>
 <li><strong>GitHub 仓库</strong>:<br><a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub">https://github.com/vulhub/vulhub</a></li>
 <li><strong>Docker Hub 镜像</strong>:<br><a target="_blank" rel="noopener" href="https://hub.docker.com/u/vulhub">https://hub.docker.com/u/vulhub</a></li>
 </ul>
 <p>使用方法：</p>
 <ol>
-<li>拉取并启动所需漏洞靶场镜像</li>
-<li>根据仓库中的文档配置并运行漏洞靶场。</li>
+<li><p>拉取并启动所需漏洞靶场镜像</p>
+</li>
+<li><p>根据仓库中的文档配置并运行漏洞靶场。</p>
+</li>
+<li><p><strong>VulApps</strong></p>
+</li>
 </ol>
-<h4 id="2-VulApps"><a href="#2-VulApps" class="headerlink" title="2. VulApps"></a>2. <strong>VulApps</strong></h4><p>VulApps 是一个轻量级的漏洞靶场项目，包含一些经典的漏洞场景，适合初学者进行漏洞研究。</p>
+<p>VulApps 是一个轻量级的漏洞靶场项目，包含一些经典的漏洞场景，适合初学者进行漏洞研究。</p>
 <ul>
 <li><strong>GitHub 仓库</strong>:<br><a target="_blank" rel="noopener" href="https://github.com/Medicean/VulApps">https://github.com/Medicean/VulApps</a></li>
 <li><strong>Docker Hub 镜像</strong>:<br><a target="_blank" rel="noopener" href="https://hub.docker.com/r/medicean/vulapps">https://hub.docker.com/r/medicean/vulapps</a></li>
 </ul>
 <p>使用方法：</p>
 <ol>
-<li>在 Docker 上启动 <code>vulapps</code> 镜像。</li>
-<li>根据需求选择相应的漏洞场景。</li>
+<li><p>在 Docker 上启动 <code>vulapps</code> 镜像。</p>
+</li>
+<li><p>根据需求选择相应的漏洞场景。</p>
+</li>
+<li><p><strong>VulFocus</strong></p>
+</li>
 </ol>
-<h4 id="3-VulFocus"><a href="#3-VulFocus" class="headerlink" title="3. VulFocus"></a>3. <strong>VulFocus</strong></h4><p>VulFocus 是一个漏洞靶场平台，提供了一系列 Web 漏洞模拟环境。用户可以通过平台选择不同的漏洞类型和版本进行测试。</p>
+<p>VulFocus 是一个漏洞靶场平台，提供了一系列 Web 漏洞模拟环境。用户可以通过平台选择不同的漏洞类型和版本进行测试。</p>
 <ul>
 <li><strong>GitHub 仓库</strong>:<br><a target="_blank" rel="noopener" href="https://github.com/fofapro/vulfocus">https://github.com/fofapro/vulfocus</a></li>
 <li><strong>平台网址</strong>:<br><a target="_blank" rel="noopener" href="http://vulfocus.fofa.so/#/">http://vulfocus.fofa.so/#/</a></li>
@@ -422,7 +472,7 @@
 <li><p><strong>配置漏洞环境</strong>：根据具体的漏洞靶场需求，进行配置调整。大多数漏洞靶场会提供文档，指导如何操作。</p>
 </li>
 </ol>
-<h2 id="内网靶场虚拟环境搭建"><a href="#内网靶场虚拟环境搭建" class="headerlink" title="内网靶场虚拟环境搭建"></a>内网靶场虚拟环境搭建</h2><h3 id="NAT-模式概述"><a href="#NAT-模式概述" class="headerlink" title="NAT 模式概述"></a>NAT 模式概述</h3><ul>
+<h2 id="内网靶场"><a href="#内网靶场" class="headerlink" title="内网靶场"></a>内网靶场</h2><h3 id="NAT-模式概述"><a href="#NAT-模式概述" class="headerlink" title="NAT 模式概述"></a>NAT 模式概述</h3><ul>
 <li><strong>NAT（Network Address Translation）模式</strong>允许虚拟机通过主机的网络连接上互联网。</li>
 <li><strong>适合场景</strong>：当网络 IP 资源紧缺，但虚拟机需要访问外部网络时，NAT 模式是理想的选择。虚拟机的 IP 地址由虚拟 DHCP 服务器分配。</li>
 </ul>
@@ -1145,8 +1195,33 @@
 <li><strong>冒充风险</strong>：第三方可以冒充合法网站（如银行或购物网站），引诱用户输入敏感信息，从而盗取用户财产。</li>
 </ol>
 <p>![image-20241114211604169](F:\new myblog\STUDY\source\img\image-20241114211604169.png)</p>
-<p>- </p>
-<h2 id="写电子笔记真是最傻逼的事情了，这种要记忆的用笔记啊"><a href="#写电子笔记真是最傻逼的事情了，这种要记忆的用笔记啊" class="headerlink" title="写电子笔记真是最傻逼的事情了，这种要记忆的用笔记啊"></a>写电子笔记真是最傻逼的事情了，这种要记忆的用笔记啊</h2>
+<h2 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h2><p>git clone <a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub.git">https://github.com/vulhub/vulhub.git</a><br>cd vulhub</p>
+<p>unbutu里cd vulstudy&#x2F;</p>
+<p>再cd DVWN&#x2F;改端口</p>
+<p>vi docker-compose.yml</p>
+<p>iptables -F</p>
+<p>systemctl start docker </p>
+<p>docker-compose up -d &#x2F;&#x2F;开启dvwa</p>
+<p>启动靶场</p>
+<p>在 <code>docker-compose.yml</code> 文件所在的目录，执行以下命令来启动靶场环境：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose up -d</span><br></code></pre></td></tr></table></figure>
+
+<p>这个命令会在后台启动所有定义的服务。你可以通过以下命令来查看容器的状态：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker ps</span><br></code></pre></td></tr></table></figure>
+
+<p> 访问靶场</p>
+<p>通常，Docker Compose 会为每个靶场分配一个端口，具体的端口号和访问方法会在 <code>docker-compose.yml</code> 文件中定义。</p>
+<p>例如，对于 DVWA，默认的端口是 <code>80</code>，你可以通过以下 URL 访问：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//localhost:80</span><br></code></pre></td></tr></table></figure>
+
+<p>根据不同的靶场，访问方式可能有所不同，请查看各个靶场目录中的文档或 <code>docker-compose.yml</code> 文件来获取详细的访问信息。</p>
+<p>停止和删除靶场</p>
+<p>当你完成靶场练习后，可以通过以下命令来停止容器：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose down</span><br></code></pre></td></tr></table></figure>
+
+<p>这将停止并删除所有启动的容器，但不会删除数据卷。如果你希望完全删除并清理数据，可以加上 <code>-v</code> 参数：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose down -v</span><br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -1207,6 +1282,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/04/14/%E5%A4%87%E5%BF%98%E5%BD%95/" title="备忘录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">备忘录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
